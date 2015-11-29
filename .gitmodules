@@ -1,0 +1,3 @@
+[submodule "bin"]
+	path = bin
+	url = git@bitbucket.org:hocprofessional/cotsbin.git
