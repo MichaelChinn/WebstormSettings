@@ -1,0 +1,29 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th class="coverage-single-fn-header-left">Type</th>
+        <th class="coverage-single-fn-header-left">General Information</th>
+        <!-- todo: tooltip with node.allRowsString -->
+        <th width="150px" ng-repeat="node in vm.nodes" ng-class="{'coverage-single-fn-header-done':node.done, 'coverage-single-fn-header':!node.done}">
+            <span >{{node.shortName}}</span>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in vm.items">
+        <td width="80px">{{vm.enums.itemTypeMapper[item.itemType]}}</td>
+        <td width="300px">
+            <a ng-click="vm.viewItem(item)">{{item.title}}</a><br/>
+            Created&nbsp;<i>{{item.creationDateTime | date }}</i>&nbsp; by <i>{{item.createdByDisplayName}}</i>
+            <!-- todo: show attached items for artifact-->
+        </td>
+        <td ng-repeat="node in item.nodes">
+                            <span ng-repeat-start="row in node.rows"
+                                  ng-class="{'badge': row.isEvaluated}">
+                               {{vm.rowMapper[row.id]}}
+                            </span>
+            <span ng-repeat-end ng-show="!$last">, </span>
+        </td>
+    </tr>
+    </tbody>
+</table>

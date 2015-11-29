@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="OrganizationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://tempuri.org/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <wsp:Policy wsu:Id="BasicHttpBinding_IOrganizationService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <http:NegotiateAuthentication xmlns:http="http://schemas.microsoft.com/ws/06/2004/policy/http"/>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false"/>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256/>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict/>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="https://services.tst.ospi.k12.wa.us/Organization/OrganizationService.svc?xsd=xsd0" namespace="http://tempuri.org/"/>
+      <xsd:import schemaLocation="https://services.tst.ospi.k12.wa.us/Organization/OrganizationService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
+      <xsd:import schemaLocation="https://services.tst.ospi.k12.wa.us/Organization/OrganizationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Organization"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IOrganizationService_GetOrganizationByCategoryTypeId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationByCategoryTypeId"/>
+  </wsdl:message>
+  <wsdl:message name="IOrganizationService_GetOrganizationByCategoryTypeId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationByCategoryTypeIdResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IOrganizationService_GetOrganizationWithParentByCategoryTypeId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationWithParentByCategoryTypeId"/>
+  </wsdl:message>
+  <wsdl:message name="IOrganizationService_GetOrganizationWithParentByCategoryTypeId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationWithParentByCategoryTypeIdResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IOrganizationService_GetOrganizationRelationshipByOSPILegacyCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationRelationshipByOSPILegacyCode"/>
+  </wsdl:message>
+  <wsdl:message name="IOrganizationService_GetOrganizationRelationshipByOSPILegacyCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationRelationshipByOSPILegacyCodeResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="IOrganizationService">
+    <wsdl:operation name="GetOrganizationByCategoryTypeId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrganizationService/GetOrganizationByCategoryTypeId" message="tns:IOrganizationService_GetOrganizationByCategoryTypeId_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrganizationService/GetOrganizationByCategoryTypeIdResponse" message="tns:IOrganizationService_GetOrganizationByCategoryTypeId_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationWithParentByCategoryTypeId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrganizationService/GetOrganizationWithParentByCategoryTypeId" message="tns:IOrganizationService_GetOrganizationWithParentByCategoryTypeId_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrganizationService/GetOrganizationWithParentByCategoryTypeIdResponse" message="tns:IOrganizationService_GetOrganizationWithParentByCategoryTypeId_OutputMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRelationshipByOSPILegacyCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrganizationService/GetOrganizationRelationshipByOSPILegacyCode" message="tns:IOrganizationService_GetOrganizationRelationshipByOSPILegacyCode_InputMessage"/>
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrganizationService/GetOrganizationRelationshipByOSPILegacyCodeResponse" message="tns:IOrganizationService_GetOrganizationRelationshipByOSPILegacyCode_OutputMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IOrganizationService" type="tns:IOrganizationService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IOrganizationService_policy"/>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetOrganizationByCategoryTypeId">
+      <soap:operation soapAction="http://tempuri.org/IOrganizationService/GetOrganizationByCategoryTypeId" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationWithParentByCategoryTypeId">
+      <soap:operation soapAction="http://tempuri.org/IOrganizationService/GetOrganizationWithParentByCategoryTypeId" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrganizationRelationshipByOSPILegacyCode">
+      <soap:operation soapAction="http://tempuri.org/IOrganizationService/GetOrganizationRelationshipByOSPILegacyCode" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrganizationService">
+    <wsdl:port name="BasicHttpBinding_IOrganizationService" binding="tns:BasicHttpBinding_IOrganizationService">
+      <soap:address location="https://services.tst.ospi.k12.wa.us/Organization/OrganizationService.svc"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

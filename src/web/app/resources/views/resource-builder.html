@@ -1,0 +1,70 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="tabs-container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <tabset>
+                        <tab heading="Resource">
+                            <div class="tab-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div></div>
+                                            <label>Title</label>
+                                            <input type="text" name="title" class="form-control"
+                                                   ng-model="vm.resource.title"
+                                                   placeholder="Enter Title" required>
+                                        </div>
+                                        <br/>
+
+                                        <div class="form-group">
+                                            <label>Context</label>
+
+                                            <p>Describe the setting, purpose, and background of the artifact</p>
+                                                <textarea rows="5" name="comments" class="form-control"
+                                                          ng-model="vm.resource.comments"
+                                                          placeholder="Enter Context"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                        <tab heading="Alignment">
+                            <div class="tab-body">
+                                <br/>
+                                <rubric-row-selector rubric-rows="vm.resource.alignedRubricRows"></rubric-row-selector>
+                                <br/>
+
+                                <br/>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <!--<div ng-repeat="row in vm.resource.alignedRubricRows">-->
+                                        <!--<div class="form-group">-->
+                                        <!--<label>rubric{{}}</label>-->
+                                        <!--<textarea type="text" rows="3" class="form-control" ng-model="vm."></textarea>-->
+                                        <!--</div>-->
+                                        <!--</div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+            <div class="row">
+                <br/>
+                <div class="col-lg-12">
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-outline btn-sm" ng-click="vm.back()">
+                            Cancel
+                        </button>
+                        <button class="btn btn-primary btn-sm" ng-click="vm.save(vm.resource)">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

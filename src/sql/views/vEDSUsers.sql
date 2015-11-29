@@ -1,0 +1,11 @@
+IF EXISTS ( SELECT  TABLE_NAME
+            FROM    INFORMATION_SCHEMA.VIEWS
+            WHERE   TABLE_NAME = N'vEDSUsers' ) 
+    DROP VIEW dbo.vEDSUsers
+GO
+
+CREATE VIEW dbo.vEDSUsers
+AS
+    SELECT  *
+	FROM EDSUsersV1
+ 

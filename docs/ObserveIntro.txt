@@ -1,0 +1,73 @@
+This document talks about the observe screen and why you want to use it; we also talk a bit about the application in general. 
+Some roles and definitions:
+
+
+State: governing body responsible for all of the districts
+School District: governing body responsible for all the schools in the district
+District Evaluator: someone at the district level responsible for the performance of principals
+Prinicpal: person in charge of a school; responsible for the performance of teachers
+Teacher: a teacher in a school
+Performance Level:: a measurement... i.e. Not Good, Okay, Good, Very GOod
+Rubric: an axis of measurement, and the observable characteristics defining the Performance Levels
+Framework: a collection of rubrics
+State Criteria: high level standards created by the state.
+Instructional Framework: a framework devised by an expert in the field, as
+
+
+
+
+The State wants to have all the teachers in all the schools teaching to the same standards.  The State has embodied those standards in eight criteria: the State Criteria
+
+
+The District needs to have its schools adhere to the standards that the state imposes.  The District can decide what observable characteristics would constitute fulfillment of the criteria.
+
+
+as a principal, you have between zero and forty or fifty teachers you may have to evaluate against as many as twenty seven rubrics.
+
+
+keeping all this straight is the reason the application was created. 
+
+
+In particular, the observe screen is typically used when a principal wants too 'observe's Teacher during a classroom session.
+
+
+during the observation, the principal can take freeform notes, and score the teacher against prerecorded rubrics, tailored to the district's specifications, yet aligned to the state's criteria.
+
+
+Green Bar: Note Taking...
+
+The screen opens on the notes-taking tab.  The scenario envisioned is where the principal is in the classroom, watching the teacher, laptop or tablet in hand, furiously typing stream of consciousness notes as they occur to him. He realizes that something he just typed would be evidence demonstrating the essence of one of  state criteria. He can highlight the passage, and hit one of the colored  icons to the right of the toolbar.  This well excerpt the passage, associating it with one of the eight criteria,  and keep track of it for easy retrieval later.The excerpts can be managed on the 'manage excerpts tab.
+
+Green Bar: Scoring...
+
+The pre-defined rubrics are can be found on either the State Rubrics or Instructional Rubrics tab.  The state rubrics tab first shows a set of eight bars, (each corresponding to one of the eight state criteria).  The bars expand to the rubrics (we call them 'rubric rows') aligned to the criteria.
+
+The instructional tab is similar; however what shows in opening bars are different.  
+
+What happens is that, although everyone will be required to submit scores aligned to the eight criteria, as was mentioned before, districts many times have their own criteria they wish to work from.  Similarly to the eight bars in the state tab, the bars in the Instructional tab also expands to rubric rows.
+
+Note that some of the rubric rows in the instructional tab can be seen in the state tab, and vice versa.  In fact, if you score these rubric rows in the one tab, the score will be visible on the other tab.  In this way, the schools can evaluate their people according to their own frameworks, and then easily align those scores to state criteria for reporting purposes.
+
+Top Gold Bar: Summary...
+
+Shows a summary of all the observations for a given teacher.  A report can be generated.
+
+Second Gold Bar: Pre-Conference Information...
+
+A pre-observation meeting may, or may not be held between the teacher and the principal.  In this section of the page, notes from both the teacher and the principal can be seen.  The 'Teacher Questions' have to do with questions that are asked of the teacher.  Questions are meant to be reflective in nature, and give the teacher an opportunity to highlight his strengths/explain challenges as it relates to his evalution.
+
+Note that a pre-observation meeting does not have to be held...  it's easy enough to start an observation.  the scenario envisioned is:  the principal is walking down the hall with his laptop in hand, and he has a period free.  He sees that a teacher is looking quite animated, interacting well with the students, and so decides to do an improptu evaluation.
+
+He logs into the application, clicks on 'Observe'/'Quick Start Observation', fills out some information, hits 'Observe', and starts observing.
+
+Random Features:
+
+Note that although we talk about the evaluation of a teacher by principal, principals must also be evaluated, and can be, by a District Evaluator.  In addition to this, a teacher or principal can also do a self evaluation, which also uses this screen.  
+
+To reiterate: a teacher can evaluate himself.  A principal can evaluate a teacher or himself.  The District Evaluator can evaluate a principal.
+
+The above should get you started on this page.  Please note the different roles; you see different things on the screen depending on who you are, and what you are doing.  If you have any questions, feel free to ask.
+
+It is of the most importance to us that you are able to discern the subtleties of the application, either by playing with it, or asking us, and then writing the test plan accordingly.
+
+good luck.

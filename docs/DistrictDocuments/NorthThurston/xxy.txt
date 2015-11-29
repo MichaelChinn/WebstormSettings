@@ -1,0 +1,19 @@
+ Volume in drive D is New Volume
+ Volume Serial Number is F68B-ED40
+
+ Directory of D:\dev\StateEval\docs\NorthThurston
+
+08/18/2011  10:52 PM    <DIR>          .
+08/18/2011  10:52 PM    <DIR>          ..
+08/18/2011  10:45 PM            27,658 Classroom Observation Report Template.dotx
+08/18/2011  10:45 PM            24,181 Collaborative Goal Setting Template.dotx
+08/18/2011  10:45 PM            37,007 Formal Observation Summary Template.dotx
+08/18/2011  10:46 PM           167,374 fwntpstpepteacherevaluationdocuments.zip
+08/18/2011  10:45 PM            23,655 Planning Conference Interview Protocol Template.dotx
+08/18/2011  10:45 PM            19,687 Reflection Conference Summary.dotx
+08/18/2011  10:45 PM            24,199 Summary of Evaluation Cycle Activities and Evidence.dotx
+08/18/2011  10:45 PM            21,195 Summative Evaluation Template.dotx
+08/18/2011  10:45 PM            20,825 Teacher Lesson Reflection Template.dotx
+08/18/2011  10:52 PM                 0 xxy.txt
+              10 File(s)        365,781 bytes
+               2 Dir(s)  386,465,787,904 bytes free

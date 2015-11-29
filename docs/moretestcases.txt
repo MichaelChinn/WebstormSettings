@@ -1,0 +1,7 @@
+
+From Observations page click on Settings in Pre-Conference grid to edit session
+From each page in the edit session there is a cancel and needs to return to Observations page
+
+in the edit session pages for evaluatee, each should have the correctly colored page header and wording
+appropriate to their role,i.e. teacher evaluatee vs principal evaluatee
+

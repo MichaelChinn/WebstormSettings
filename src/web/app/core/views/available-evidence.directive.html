@@ -1,0 +1,25 @@
+<div class="row" ng-if="vm.evidenceCollectionService.state.functionality">
+    <div class="col-lg-12">
+        <h3> Available Evidence</h3>
+
+        <p class="text-muted">Below is all of the available evidence associated with this rubric component</p>
+
+        <div ng-repeat="type in vm.enums.EvidenceTypeMapper">
+            <div ng-repeat="evidence in vm.row[type]">
+
+                <!--todo no selectproprty on evidence!!!!!!!!!-->
+
+                <table class="table" ng-init="select = {'state': false, 'evidence': evidence}">
+                    <tr >
+                        <td ng-click="vm.check(select)" ng-class="{'evidence-type-selected': select.state, 'evidence-type': !select.state}">
+                            {{type}}
+                        </td>
+                        <td ng-class="{'evidence-desc-selected': select.state, 'evidence-desc': !select.state}">
+                            <evidence-item-summary evidence="evidence"></evidence-item-summary>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

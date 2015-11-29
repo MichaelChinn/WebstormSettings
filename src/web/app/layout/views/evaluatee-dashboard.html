@@ -1,0 +1,59 @@
+<div class="tabs-container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--todo tab is wrong on reload-->
+            <tabset class="tabs-container" selected="vm.currentTab">
+                <tab heading="Notifications" ui-sref="evaluatee-notifications">
+                    <div class="tab-body">
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ui-view="notifications"></div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Recently Worked On" ui-sref="evaluatee-recent">
+                    <div class="tab-body">
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ui-view="recent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="General Info" ui-sref="evaluatee-general">
+                    <div class="tab-body">
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ui-view="general"></div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Coverage" ui-sref="evaluatee-coverage">
+                    <div class="tab-body">
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ui-view="coverage"></div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Framework View" ui-sref="evaluatee-framework">
+                    <div class="tab-body">
+                        <br/>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div ui-view="framework"></div>
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\RREdit.dll
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\RREdit.pdb
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\Elmah.dll
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\Hoc.DbUtils.dll
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\RRLib.dll
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\Telerik.Web.UI.dll
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\Hoc.DbUtils.pdb
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\RRLib.pdb
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\Elmah.pdb
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\Elmah.xml
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\bin\Telerik.Web.UI.xml
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\obj\Debug\ResolveAssemblyReference.cache
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\obj\Debug\RREdit.dll
+D:\dev\StateEval\src\tools\Prototypes\src\RREdit\obj\Debug\RREdit.pdb

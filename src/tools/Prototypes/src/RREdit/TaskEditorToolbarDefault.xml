@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <tools name="MainToolbar" dockable="true" enabled="true">
+    <tool name="Save" />
+    <tool separator="true" />
+    <tool name="FindAndReplace" />
+    <tool separator="true" />
+    <tool name="Undo" />
+    <tool name="Redo" />
+    <tool separator="true" />
+    <tool name="Cut" />
+    <tool name="Paste" />
+  </tools>
+  <tools name="Formatting" enabled="true" dockable="true">
+    <tool name="Bold" />
+    <tool name="Italic" />
+    <tool name="Underline" />
+    <tool name="InsertOrderedList" />
+    <tool name="InsertUnorderedList" />
+    <tool separator="true" />
+    <tool name="AjaxSpellCheck" shortcut="F7"/>
+    <tool separator="true"/>
+    <tool name="ToggleScreenMode" shortcut="F11"/>
+  </tools>
+</root>

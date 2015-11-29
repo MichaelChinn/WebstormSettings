@@ -1,0 +1,59 @@
+<div class="bg-grey ">
+    <table class="table">
+        <tr>
+            <td class="evidence-type-selected">
+                <p><strong>{{vm.enums.PerformanceLevels[vm.eval.performanceLevel - 1][0]}}</strong></p>
+                <p><strong>{{vm.enums.PerformanceLevels[vm.eval.performanceLevel - 1][1]}}</strong></p>
+                <p><strong>{{vm.enums.PerformanceLevels[vm.eval.performanceLevel - 1][2]}}</strong></p>
+            </td>
+            <td  class="evidence-desc-selected">
+                <p ng-bind-html="vm.getSafeHtml(vm.eval.rubricStatement)"></p>
+            </td>
+            <td width="50px" class="evidence-desc-selected">
+                <a ng-show="!vm.editMode && vm.evidenceCollectionService.state.functionality" ng-click="vm.editMode=!vm.editMode">
+                    <span class="fa fa-2x fa-edit greeniconcolor"></span>
+                </a>
+                <a ng-show="vm.editMode && vm.evidenceCollectionService.state.functionality"  ng-click="vm.saveEvaluation()">
+                    <span class="fa fa-2x fa-save greeniconcolor"></span>
+                </a>
+                <a ng-click="vm.deleteEvaluation()"
+                   ng-show="vm.evidenceCollectionService.state.functionality"
+                   confirm="Do you really want to delete this aligned evidence item?">
+                    <span class="fa fa-2x fa-times rediconcolor"></span>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <div ng-repeat="(key, value) in vm.alignedEvidence">
+        <div class="row">
+            <div class="col-sm-12">
+                <div ng-repeat="evidence in vm.alignedEvidence[key]">
+                    <table class="table">
+                        <tr >
+                            <td valign="top">
+                                {{ key}}
+                            </td>
+                            <td>
+                                <evidence-item-summary evidence="evidence.data"></evidence-item-summary>
+                            </td>
+                          </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div ng-show="vm.editMode">
+            <br/>
+            <strong>Additional Input:</strong>
+            <summernote config="vm.summernoteOptions" ng-model="rubricRowEvaluation.additionalInput" ></summernote>
+        </div>
+        <div ng-show="!vm.editMode && rubricRowEvaluation.additionalInput!=null">
+            <br/>
+            <strong>Additional Input:</strong>
+            <p ng-bind-html="vm.getSafeHtml(rubricRowEvaluation.additionalInput)"></p>
+        </div>
+    </div>
+</div>
+
+ 

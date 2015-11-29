@@ -1,0 +1,13 @@
+Every district needs a landing page with resources
+
+Have their forms exactly as they have submitted to us.
+Make a web-based form that models the form that each district has.
+
+THey would be able to create a web-based form.
+
+
+Going to need a final generated report to print and save. Configure what sections
+should be printed off.
+
+print out rubrics for no-connectivity observing.
+

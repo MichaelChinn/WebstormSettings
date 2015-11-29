@@ -1,0 +1,50 @@
+<div data-role="view" id="evaluateeDetailView" data-title="Evaluatee Detail" data-layout="main" data-model="App.models.observeEvaluatee" data-init="App.views.observeEvaluatee.onInit" data-show="App.views.observeEvaluatee.onShow">
+
+    <ul data-role="listview" data-style="inset">
+        <li class="subtoolbar" style="text-align: center;">
+            <span class="evaluateeTitle"></span>
+        </li>
+    </ul>
+
+    <ul data-role="listview" data-style="inset">
+        <li class="listtitle">
+            <span style="font-weight:bold">Observations</span>
+            <span style="padding-left:20px">
+                <a data-role="button" data-rel="modalview" href="#modalview-new-obs" data-align="right" id="modalview-open-button">Add New</a>
+            </span>
+        </li>
+    </ul>
+
+    <ul class="listview"></ul>
+
+    <div data-role="modalview" id="modalview-new-obs" style="width: 90%;" class="modalview">
+        <div data-role="header">
+            <div data-role="navbar">
+                <span>New</span>
+                <a data-click="closeModalView" data-role="button" data-align="right">
+                    <img width="24" src="images/close_btn.png" />
+                </a>
+            </div>
+        </div>
+
+        <ul data-role="listview" data-style="inset">
+            <li><span>Title: <input type="text" id="obsTitle" data-bind="value: newSessionTitle" /></span></li>
+        </ul>
+        <a data-bind="click: newSession" id="modalview-new-button" type="button" data-role="button" style="text-align: center;">Create Session</a>
+    </div>
+
+</div>
+<style scoped>
+    #modalview-new-button {
+        display: block;
+        text-align: center;
+        margin: .6em .8em;
+        font-size: 1.2em;
+    }
+</style>
+<script>
+    function closeModalView() {
+        $("#modalview-new-obs").kendoMobileModalView("close");
+    }
+</script>
+

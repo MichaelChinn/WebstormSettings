@@ -1,0 +1,15 @@
+<div class="row" ng-if="vm.artifactBundles.length>0">
+    <div class="col-lg-12">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <coverage-table items="vm.artifactBundles"></coverage-table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="vm.artifactBundles.length===0">
+    <div class="col-lg-12">
+        <nothing-here title="'Nothing here'" description="'There are no artifacts linked to this observation.'"></nothing-here>
+    </div>
+</div>

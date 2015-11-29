@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Overall Coverage</h2>
+        <br/>
+        <table class="framework-view table table-bordered">
+            <thead>
+            <tr>
+                <th colspan="2" width="300px">Name</th>
+                <th class="coverage-fn-header" width="150px" ng-repeat="fn in vm.context.framework.frameworkNodes">
+                    {{fn.shortName}}
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="person in vm.people" ng-click="vm.chooseSingle($index)">
+                <td width="20px" ng-class="{'coverage-checked':person.done, 'coverage': !person.done}"><span
+                        ng-show="person.done" class="fa fa-check"></span></td>
+                <td width="290px">
+                    {{person.name}}
+                </td>
+                <td class="coverage-cell" ng-repeat="nodeData in person.nodeData">
+                    <span ng-show="nodeData.done" class="fa fa-check"></span>
+                    <span ng-show="!nodeData.done">{{nodeData.whatsLeftShortNames}}</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

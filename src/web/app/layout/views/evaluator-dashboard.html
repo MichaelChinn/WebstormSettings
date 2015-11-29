@@ -1,0 +1,198 @@
+<div class="row">
+    <div class="col-lg-12">
+        <!--<ul class="nav nav-tabs">-->
+            <!--<li role="presentation" ng-init="selection = 0" ng-class="{active: selection = 0}">-->
+                <!--<a href="#">Home</a>-->
+            <!--</li>-->
+            <!--<li role="presentation" ng-click="selection = 1" ng-class="{active: selection = 0}">-->
+                <!--<a href="#">Profile</a>-->
+            <!--</li>-->
+            <!--<li role="presentation">-->
+                <!--<a href="#">Messages</a>-->
+            <!--</li>-->
+        <!--</ul>-->
+
+
+        <tabset class="tabs-container">
+            <!-- NOTE: this is necessary to work around problem with angular tab not allowing non-assignable
+                 expression for the value of 'active' property on tab.
+                 https://github.com/angular-ui/bootstrap/issues/611 -->
+            <span ng-init="showEvaluateeTabs = vm.evaluatee!=null"></span>
+            <tab heading="New Activity">
+                <div class="tab-body">
+                    <h3>New Activity</h3>
+
+                    <p>List of all of the activities that have been submitted to you or require your attention. </p>
+                    <br/>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Activity Type</th>
+                            <th>From</th>
+                            <th>From use in</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in vm.evaluateeToEvaluatorNotifications">
+                            <td>{{item.createDate|date:'MM/dd/yyyy'}}</td>
+                            <td>{{item.eventType}}</td>
+                            <td>{{vm.evaluateeDisplayName}}</td>
+                            <td>{{vm.fromUseIn(item)}}</td>
+                            <td>{{item.title}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" ng-click="vm.gotoNotificationTarget(item)">
+                                    Continue
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </tab>
+            <tab heading="Recently Worked On">
+                <div class="tab-body">
+                    <h3>Recently worked on</h3>
+                    <!-- todo: how long is recent?-->
+                    <p>List of items you have worked on in the past week </p>
+                    <br/>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in vm.getRecentActivities">
+                            <td>{{item.createDate|date:'MM/dd/yyyy'}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.title}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs" ng-click="vm.gotoActivity(item)">Continue
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </tab>
+            <!--   <tab heading="Yearly Status">
+                   <div class="tab-body">
+                       <h3>Yearly Status</h3>
+                       <p></p>
+                       <table class="table table-border">
+                           <tbody>
+                               <tr>
+                                   <th>{{vm.evaluateeTitle}}</th>
+                                   <th>Evaluator</th>
+                                   <th>Evaluation Type</th>
+                                   <th>Observations</th>
+                                   <th>Criteria</th>
+                                   <th>Status</th>
+                                   <th>OE</th>
+                                   <th>Summative Status</th>
+                                   <th>Action</th>
+                               </tr>
+                           </tbody>
+                           <tr ng-repeat="evaluatee in vm.evaluatees">
+                               <td>{{evaluatee.displayName}}</td>
+                               <td ng-bind-html="vm.getAssignedEvaluatorDisplayName(evaluatee)"> </td>
+                               <td ng-bind-html="vm.evaluateePlanType(evaluatee)"></td>
+                               <td>{{vm.observationsSummary(evaluatee)}}</td>
+                               <td>{{vm.observationCriteriaCoverage(evaluatee)}}</td>
+                               <td>Status</td>
+                               <td>OE</td>
+                               <td>Summative Status</td>
+                               <td><button class="btn btn-primary btn-sm" ng-click="vm.setActiveEvaluatee(evaluatee)">View</button></td>
+                           </tr>
+                       </table>
+                   </div>
+               </tab>
+               <tab heading="Coverage">
+                   <div class="tab-body">
+                       <h3>Coverage</h3>
+                       <p></p>
+                       <img src="images/mock-ups/coverage.png" />
+                   </div>
+               </tab>-->
+            <tab ng-show="vm.evaluatee!=null" active="showEvaluateeTabs"
+                 heading=" Status - {{vm.evaluatee.displayName}}">
+                <div class="tab-body">
+                    <h3>{{vm.evaluatee.displayName}}</h3>
+
+                    <p></p>
+                    <br/>
+                    <h4>New Activity</h4>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Activity Type</th>
+                            <th>From</th>
+                            <th>From use in</th>
+                            <th>Title</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in vm.evaluatorToEvaluateeNotifications">
+                            <td>{{item.createDate|date:'MM/dd/yyyy'}}</td>
+                            <td>{{item.eventType}}</td>
+                            <td>{{vm.evaluateeDisplayName}}</td>
+                            <td>{{vm.fromUseIn(item)}}</td>
+                            <td>{{item.title}}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" ng-click="vm.gotoNotificationTarget(item)">
+                                    Continue
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <h4>Recently worked on</h4>
+                    <br/>
+                    <h4>Observations</h4>
+
+                    <p></p>
+                    <br>
+                    <h4>Evidence</h4>
+                    <br/>
+                    <h4>Student Growth Goals</h4>
+
+                    <p></p>
+                </div>
+            </tab>
+            <tab heading="Coverage" active="true">
+                <div class="tab-body">
+                    <div ng-switch="vm.selection">
+                        <div ng-switch-when="all">
+                            <coverage choose-single="vm.chooseSingle"></coverage>
+                        </div>
+                        <div ng-switch-when="single">
+                            <coverage-single></coverage-single>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-lg-12" ng-show="vm.selection==='single'">
+                            <button class="btn btn-primary btn-sm pull-right" ng-click="vm.viewAll()">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </tab>
+            <!--<tab heading="Michael Test">-->
+                <!--<div class="tab-body">-->
+                    <!--<rubric-row row="vm.testRow" ></rubric-row>-->
+                <!--</div>-->
+            <!--</tab>-->
+        </tabset>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+﻿<label>
+# if (App.isActiveSchoolYear(schoolYear)) { #
+<input type="radio" name="sy" value="#= schoolYear #" checked  onchange="App.views.settings.onChangeYear(this);" >#= schoolYear-1 # - #=schoolYear #</input>
+# } else { #
+<input type="radio" name="sy" value="#= schoolYear #"  onchange="App.views.settings.onChangeYear(this);" >#= schoolYear-1 # - #=schoolYear #</input>
+# } #
+</label>

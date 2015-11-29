@@ -1,0 +1,26 @@
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Activity Type</th>
+        <th>From</th>
+        <th>From use in</th>
+        <th>Title</th>
+        <th>Aligned to</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="workflowEvent in vm.workflowEvents">
+        <td>{{vm.workflowEventDate(workflowEvent)}}</td>
+        <td>{{vm.workflowEventType(workflowEvent)}}</td>
+        <td>{{vm.workflowEventUser(workflowEvent)}}</td>
+        <td>{{vm.workflowEventTitle(workflowEvent)}}</td>
+        <td>{{vm.workflowEventLinkedObject(workflowEvent)}}</td>
+        <td>
+            <button class="btn btn-primary btn-sm" ng-click="vm.viewWorkflowEventItem(workflowEvent)">View</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

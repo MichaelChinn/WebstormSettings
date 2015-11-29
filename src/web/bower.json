@@ -1,0 +1,16 @@
+{
+  "name": "web-angular",
+  "version": "1.0",
+  "description": "stateeval angular web",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {},
+  "dependencies": {}
+}

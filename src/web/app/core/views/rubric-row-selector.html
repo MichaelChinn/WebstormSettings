@@ -1,0 +1,55 @@
+
+<div class="align-artifact-wrapper">
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="align-artifact-heading">Align to Rubric</label>
+        </div>
+        <div class="col-lg-9">
+            <div class="btn-toolbar pull-right">
+                <button ng-click="vm.clear()" class="btn btn-default btn-sm hide-when-read-only">Clear</button>
+                <button ng-click="vm.toggleEditMode()" class="btn btn-primary btn-sm  hide-when-read-only">
+                    {{vm.editModeBtnText }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div ng-show="vm.editMode" style="color: white">
+        <br />
+        <div kendo-tree-view="vm.treeOptions" k-data-source="vm.treeData">
+            <div k-template class="rubric-row-template" ng-click="vm.nodeClicked(dataItem, true)">
+                <span class="pull-left">
+                    {{dataItem.text}}
+                </span>
+                <span class="pull-right">
+                    <span ng-show="dataItem.hasChildren && dataItem.selectedCount>0" style="margin-right: 6px;">
+                        {{dataItem.selectedCount}}
+                    </span>
+                    <span ng-hide="dataItem.hasChildren">
+                        <input id="cb{{dataItem.id}}" type="checkbox" ng-model="dataItem.isChecked" ng-change="vm.nodeClicked(dataItem)" />
+                        <label for="cb{{dataItem.id}}"></label>
+                    </span>
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="!vm.editMode">
+        <br />
+        <table class="table align-artifact">
+            <tbody ng-repeat="frameworkNode in vm.framework.frameworkNodes">
+                <tr class="aligned-fn-ro" ng-show="vm.frameworkNodeIsAligned(frameworkNode)">
+                    <td colspan="2">{{frameworkNode.shortName}} {{frameworkNode.title}}</td>
+                    <td></td>
+                </tr>
+                <tr class="aligned-rr-ro" ng-repeat="rubricRow in frameworkNode.rubricRows" ng-show="vm.rubricRowIsAligned(rubricRow)">
+                    <td></td>
+                    <td>
+                        <div ng-click="vm.open(rubricRow)"> {{rubricRow.title}}</div>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

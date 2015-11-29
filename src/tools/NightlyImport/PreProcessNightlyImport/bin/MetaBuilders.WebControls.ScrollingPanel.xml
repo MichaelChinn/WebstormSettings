@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MetaBuilders.WebControls.ScrollingPanel</name>
+    </assembly>
+    <members>
+        <member name="T:MetaBuilders.WebControls.ScrollingPanel">
+            <summary>
+            A panel that includes scroll capabilities.
+            </summary>
+            <remarks>
+            The scrolling mechanisim is not guarenteed to to appear on all browsers.
+            Only browsers which support the W3C CSS "overflow" property will display the scrollbars.
+            </remarks>
+            <example>
+            The following example demonstrates how to use a scrolling panel.
+            <code>
+            <![CDATA[
+            <html>
+            	<body>
+            	<form runat="server">
+            		<mbsp:ScrollingPanel id="ScrollingPanel1" runat="server" Height="270px" Width="660px" ScrollbarVisibility="Visible">
+            		This text is inside a panel with a scrollbar.
+            		</mbsp:ScrollingPanel>
+            	</form>
+            	</body>
+            </html>
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanel.System#Web#UI#IPostBackDataHandler#LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Here I load the stored scroll position from the hidden inputs.
+            </summary>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanel.RegisterScript">
+            <summary>
+            Registers the script neccessary to maintain scroll positions across postbacks.
+            </summary>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanel.OnPreRender(System.EventArgs)">
+            <summary>
+            Overrides <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)"/>
+            </summary>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanel.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Adds to the specified writer those HTML attributes and styles that need to be rendered.
+            This method is primarily used by control developers.
+            </summary>
+            <param name="writer">The output stream that renders HTML content to the client.</param>
+            <remarks>
+            Overridden to set additional attributes.
+            </remarks>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanel.RenderBeginTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Overridden to give all browsers a html4 writer
+            </summary>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanel.RenderEndTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Overridden to give all browsers a html4 writer
+            </summary>
+        </member>
+        <member name="P:MetaBuilders.WebControls.ScrollingPanel.ScrollbarVisibility">
+            <summary>
+            Gets or sets the behavior of the scrollbars in the control.
+            </summary>
+        </member>
+        <member name="P:MetaBuilders.WebControls.ScrollingPanel.EnableClientScript">
+            <summary>
+            Gets or sets if client script will be used to persist the scrollbar position across postbacks.
+            </summary>
+        </member>
+        <member name="P:MetaBuilders.WebControls.ScrollingPanel.scrollXName">
+            <summary>
+            Gets the name of the hidden input which tracks the x scroll position.
+            </summary>
+        </member>
+        <member name="P:MetaBuilders.WebControls.ScrollingPanel.scrollYName">
+            <summary>
+            Gets the name of the hidden input which tracks the y scroll position.
+            </summary>
+        </member>
+        <member name="T:MetaBuilders.WebControls.ScrollingPanelDesigner">
+            <summary>
+            ScrollingPanelDesigner overrides the stock PanelDesigner to show the scrollbars in the designer.
+            </summary>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanelDesigner.MapPropertyToStyle(System.String,System.Object)">
+            <summary>
+            Overrides <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.MapPropertyToStyle(System.String,System.Object)"/>.
+            </summary>
+        </member>
+        <member name="M:MetaBuilders.WebControls.ScrollingPanelDesigner.OnBehaviorAttached">
+            <summary>
+            Overrides <see cref="M:System.Web.UI.Design.WebControls.PanelDesigner.OnBehaviorAttached"/>.
+            </summary>
+        </member>
+        <member name="T:MetaBuilders.WebControls.ScrollbarVisibilityStyles">
+            <summary>
+            The choices for determining the visibility of the scrollbars for a <see cref="T:MetaBuilders.WebControls.ScrollingPanel"/>.
+            </summary>
+        </member>
+        <member name="F:MetaBuilders.WebControls.ScrollbarVisibilityStyles.Auto">
+            <summary>
+            Scrollbars only appear when required by the text overflowing past the bounds of the panel.
+            </summary>
+        </member>
+        <member name="F:MetaBuilders.WebControls.ScrollbarVisibilityStyles.Visible">
+            <summary>
+            Scrollbars are always visible.
+            </summary>
+        </member>
+        <member name="F:MetaBuilders.WebControls.ScrollbarVisibilityStyles.None">
+            <summary>
+            Scrollbars are never visible.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,163 @@
+<div>
+    <tabset class="tabs-container">
+        <tab heading="Observations">
+            <div class="tab-body">
+                <div>
+                    <h3>Observations</h3>
+                    <p>list of Observation you have started</p>
+                    <div class="pull-right" ng-show="vm.isEvaluator">
+                        <button ng-click="vm.openObsSelectionWindow()" class="btn btn-primary btn-xs" type="button">
+                            <i class="fa fa-plus-circle"></i>&nbsp;Add Observation
+                        </button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Assigned To</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat-start="observation in vm.observationsInProgress">
+                                <td>
+                                    <a href="javascript:void(0)" ng-click="isCollapsed = !isCollapsed">
+                                        <span ng-class="{'fa fa-caret-right': !isCollapsed, 'fa fa-caret-down': isCollapsed}"></span>
+                                    </a>
+                                    {{isCollapsed}}
+                                </td>
+                                <td>{{observation.observeStartTime|date:'MM/dd/yyyy'}}</td>
+                                <td>{{observation.Focused?"Focused":"Formal"}}</td>
+                                <td style="width: 200px;">{{observation.title}}</td>
+                                <td>{{observation.rubricRowNames}}</td>
+                                <td>
+                                    <input type="button" value="Delete" class="btn btn-primary btn-xs" />
+                                    <input type="button" value="Summary  View" class="btn btn-primary btn-xs" />
+                                    <input type="button" value="Edit" class="btn btn-primary btn-xs" ng-click="vm.editObservation(observation.id)" />
+                                </td>
+                            </tr>
+                            <tr collapse="!isCollapsed" ng-repeat-end>
+                                <td colspan="7">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>
+                                                    Meeting Date
+                                                </th>
+                                                <th>
+                                                    Last Activity
+                                                </th>
+                                                <th>
+                                                    Questions-
+                                                </th>
+                                                <th>
+                                                    Use As evidence
+                                                </th>
+                                                <th>In Rubric</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </tab>
+        <tab heading="Completed Observations">
+            <div class="tab-body">
+                <h3>Completed Observations</h3>
+                <p>list of Observations that were completed, these will be available as part of the Summative Scoring process.</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Assigned To</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="observation in vm.observationsCompleted">
+                            <td>
+                                <a href="#" ng-click="isCollapsed = !isCollapsed">
+                                    <span ng-class="{'fa fa-caret-right': !isCollapsed, 'fa fa-caret-down': isCollapsed}"></span>
+                                </a>
+                            </td>
+                            <td>{{observation.observeStartTime|date:'MM/dd/yyyy'}}</td>
+                            <td>{{observation.Focused?"Focused":"Formal"}}</td>
+                            <td style="width: 200px;">{{observation.title}}</td>
+                            <td>{{observation.rubricRowNames}}</td>
+                            <td>
+                                <input type="button" value="Delete" class="btn btn-primary btn-xs" />
+                                <input type="button" value="Summary  View" class="btn btn-primary btn-xs" />
+                                <input type="button" value="Edit" class="btn btn-primary btn-xs" ng-click="vm.editObservation(observation.id)" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </tab>
+        <tab heading="Unlinked Evidence">
+            <div class="tab-body">
+                <h3>Unlinked Evidence</h3>
+                <p>Evidence items that are not yet linked to any Observation. Evidence aare both from Teacher and Evaluator.</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>For use in</th>
+                            <th>Source</th>
+                            <th>Aligned to</th>
+                            <th>Items</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="evidence in vm.unlinkedEvidences">
+                            <td>{{evidence.creationDateTime|date:'MM/dd/yyyy'}}</td>
+                            <td style="width: 200px;">{{evidence.title}}</td>
+                            <td>Obs</td>
+                            <td>{{evidence.source}}</td>
+                            <td>{{evidence.alignedTo}}</td>
+                            <td>{{evidence.alignedRubricRows.length}}</td>
+                            <td>
+                                <input type="button" value="Delete" class="btn btn-primary btn-xs" />
+                                <input type="button" value="Summary  View" class="btn btn-primary btn-xs" />
+                                <input type="button" value="Edit" class="btn btn-primary btn-xs" ng-click="vm.editObservation(observation.id)" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </tab>
+    </tabset>
+</div>
+
+<div kendo-window="vm.obsTypeSelectionWindow" k-visible="false" k-modal="true">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label> Which Observation type would you like to start?</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div style="text-align: center">
+                <input class="btn btn-default btn-sm" type="button" value="Close" ng-click="vm.obsTypeSelectionWindow.close();" />
+                <input class="btn btn-primary btn-sm" type="button" value="Informal" ng-click="vm.createNewObservation(1);" />
+                <input class="btn btn-primary btn-sm" type="button" value="Formal" ng-click="vm.createNewObservation(2);" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<label>{{vm.evaluateeTerm}} Assignments</label>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{{vm.assignmentsModel.evaluateeTerm}}</th>
+            <th>Evaluation Type</th>
+            <th>Evaluator</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="evaluatee in vm.assignmentsModel.evaluatees">
+            <td>{{evaluatee.displayName}}</td>
+            <td>
+                <div class="div-inline btn-toolbar">
+                    <button  class="btn btn-xs"
+                             ng-class="{ 'btn-default': vm.assignmentsModel.planTypes[evaluatee.id] !== vm.enums.EvaluationPlanType.COMPREHENSIVE,
+                                         'btn-primary': vm.assignmentsModel.planTypes[evaluatee.id] === vm.enums.EvaluationPlanType.COMPREHENSIVE}"
+                             ng-click="vm.assignmentsModel.setComprehensivePlanType(evaluatee)">COMPREHENSIVE
+                    </button>
+                    <button  class="btn btn-xs"
+                             ng-class="{ 'btn-default': vm.assignmentsModel.planTypes[evaluatee.id] !== vm.enums.EvaluationPlanType.FOCUSED,
+                                         'btn-primary': vm.assignmentsModel.planTypes[evaluatee.id] === vm.enums.EvaluationPlanType.FOCUSED}"
+                             ng-click="vm.assignmentsModel.setFocusedPlanType(evaluatee)">FOCUSED
+                    </button>
+                </div>
+                <div ng-show="vm.assignmentsModel.planTypes[evaluatee.id] === vm.enums.EvaluationPlanType.FOCUSED">
+                    <span ng-bind-html="vm.assignmentsModel.getFocusDisplayString(evaluatee)">
+                    </span>
+                    <span class="fa fa-edit greeniconcolor" ng-click="vm.assignmentsModel.modifyFocus(evaluatee)"></span>
+                </div>
+            </td>
+            <td>
+                <select ng-model="vm.assignmentsModel.assignedEvaluators[evaluatee.id]" ng-change="vm.assignmentsModel.assignEvaluator(evaluatee)"
+                        ng-options="evaluator.displayName for evaluator in vm.assignmentsModel.evaluatorOptionsForEvaluatee[evaluatee.id]">
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>

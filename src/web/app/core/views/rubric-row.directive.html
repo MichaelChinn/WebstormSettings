@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-3">
+                <strong>Rubric Alignment</strong>
+            </div>
+            <div class="col-lg-9">
+                <div class="pull-right" ng-init="evidenceVisible = false">
+                    <!-- todo: this needs to toggle whether the rubricrowevaluations are visible below the rubric directive -->
+                    <span>
+                        <button class="btn btn-outline btn-default btn-xs"
+                                ng-hide="vm.evidenceCollectionService.state.view === 'row'"
+                                ng-click="vm.show(vm.row.data.id)">
+                            {{vm.toggle[vm.row.data.id] ?'Hide Evidence': 'Show Evidence'}}
+                        </button>
+                        <score-button-group></score-button-group>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th ng-repeat="level in vm.enums.PerformanceLevels">
+                    <table class="table">
+                        <tr ng-click="scoreItem($index + 1)">
+                            <td width="25%" class="rubric-descriptor-header"
+                                ng-class="{ 'rubric-checked': vm.row.score.performanceLevel == ($index + 1)}">
+                                <!--todo rubricRowScores[0] FOR NOW-->
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        {{level}}
+                                    </div>
+                                    <div class="col-sm-3 ">
+                                            <span class="fa fa-check-circle-o greeniconcolor"
+                                                  ng-show="vm.row.score.performanceLevel == ($index + 1)"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td ng-repeat="level in vm.enums.PerformanceLevels" width="25%"
+                    ng-mouseup="vm.mouseUp(vm.row, $index + 1)"
+                    ng-bind-html="vm.getSafeHtml(vm.row[level].descriptor)">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,25 @@
+<div class="framework-highlight">
+    <div id="accordion" class="panel-group">
+        <div class="panel panel-default" framework-node-style  framework-node="frameworkNode" ng-repeat="frameworkNode in vm.framework.frameworkNodes" se-panel>
+            <div class="panel-heading">
+                <span class="node-name framework-node-{{frameworkNode.shortName}}" ng-click="vm.frameworkNodeClicked(frameworkNode)">{{frameworkNode.shortName}}</span>
+                <span class="node-description" title="{{frameworkNode.title}}" >
+                    {{frameworkNode.title.substring(0,48)}}
+                </span>
+            </div>
+            <div class="panel-collapse collapse" ng-class="{'in':vm.highlightNode.id==frameworkNode.id}">
+                <div class="panel-body">
+                    <div ng-repeat="rubricRow in frameworkNode.rubricRows" class="node-rubric-row" ng-click="vm.rubricRowClicked(rubricRow, frameworkNode)">
+                        <span class="node-name">
+                            {{rubricRow.shortName}}
+                        </span>
+                        <span title="{{rubricRow.title}}">
+                            {{rubricRow.title.split(':')[1].substring(0,35)}}
+                        </span>
+                        <span rubric-row-attatchment rubric-row="rubricRow" class="rubric-attatchment"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

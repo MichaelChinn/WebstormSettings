@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3>
+            Goals
+        </h3>
+        <p>List of Student Growth Goals you have started, but not yet shared with your evaluator</p>
+        <div class="pull-right">
+            <button ng-show="vm.settingsSubmitted" ui-sref="sg-bundle-setup({id:-1})" class="btn btn-primary btn-xs" type="button">
+                <i class="fa fa-plus-circle"></i>&nbsp;Add Goal
+            </button>
+        </div>
+        <br/><br/>
+        <div ng-show="vm.inProgressBundles.length==0">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-md-8 col-md-offset-2">
+                        <nothing-here ng-show="!vm.settingsSubmitted" title="'Your district has not yet finalized the student growth goal setup.'" description="''"></nothing-here>
+                        <nothing-here ng-show="vm.settingsSubmitted" title="'Nothing here'" description="'Click the Add Goal button to create a new goal.'"></nothing-here>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="vm.inProgressBundles.length>0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Course/Grade Level(s)</th>
+                    <th>Criteria</th>
+                    <th></th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr  ng-repeat-start="bundle in vm.inProgressBundles" >
+                    <td><a href="#" ng-click="isCollapsed = !isCollapsed">
+                        <span ng-class="{'fa fa-caret-right': !isCollapsed, 'fa fa-caret-down': isCollapsed}"></span></a>
+                    </td>
+                    <td>{{bundle.creationDateTime | date:'MM/dd/yyyy'}}</td>
+                    <td>{{bundle.title}}</td>
+                    <td>{{bundle.course}} {{bundle.grade}}</td>
+                    <td>{{vm.bundleCriteriaAlignmentAsString(bundle)}}</td>
+                    <td>
+                        <button class="btn btn-outline btn-default btn-xs"
+                                confirm="Are you sure you want to delete, {{bundle.title}}?"
+                                ng-click="vm.deleteBundle(bundle)">
+                            Delete
+                        </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary btn-xs" ng-click="vm.editBundle(bundle)">
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+                <tr collapse="!isCollapsed"  ng-repeat-end>
+                    <td colspan="8">
+                        <div ng-repeat="goal in bundle.goals">
+                            <div class="well" ng-show="goal.goalStatement">
+                                <b> {{goal.frameworkNodeShortName}} Goal </b>
+                                <br />
+                                <span ng-bind-html="vm.getSafeHtml(goal.goalStatement)" />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

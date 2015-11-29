@@ -1,0 +1,37 @@
+<div class="tabs-container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div >
+                <tabset>
+                    <tab heading="My Prompts" ng-show="vm.showEvaluatorPrompts" active="vm.evaluatorTabIsActive">
+                        <div class="tab-body">
+                            <h3>Pre-Conference Prompts</h3>
+                            <prompt-grid grid-option="vm.preConfEvaluatorGridOption"></prompt-grid>
+                            <br/><br/>
+                            <h3>Post-Conference Prompts</h3>
+                            <prompt-grid grid-option="vm.postConfEvaluatorGridOption"></prompt-grid>
+                        </div>
+                    </tab>
+                    <tab heading="School Prompts" ng-show="vm.showSchoolPrompts" active="vm.schoolTabIsActive">
+                        <div class="tab-body">
+                            <h3>Pre-Conference Prompts</h3>
+                            <prompt-grid grid-option="vm.preConfSchoolGridOption"></prompt-grid>
+                            <br/><br/>
+                            <h3>Post-Conference Prompts</h3>
+                            <prompt-grid grid-option="vm.postConfSchoolGridOption"></prompt-grid>
+                        </div>
+                    </tab>
+                    <tab heading="District Prompts" active="vm.districtTabIsActive">
+                        <div class="tab-body">
+                            <h3>Pre-Conference Prompts</h3>
+                            <prompt-grid grid-option="vm.preConfDistrictGridOption"></prompt-grid>
+                            <br/><br/>
+                            <h3>Post-Conference Prompts</h3>
+                            <prompt-grid grid-option="vm.postConfDistrictGridOption"></prompt-grid>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>

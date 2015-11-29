@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<call target="deploy_web_application_cleanup" />
+
+	<!-- DEPLOYMENT TASKS TARGETS -->
+	<target name="deploy_web_application_cleanup">
+		<property name="application.pool"			value="" />
+		<property name="deployment.dir"				value="" />
+		<property name="source.dir"					value="" />
+
+		<foreach item="String" in="1,2,3,4,5,6,7,8,9,10" delim="," property="index">
+			<property name="config.file.${index}" value=""/>
+		</foreach>		
+	</target>
+	
+	<target name="deploy_web_application">
+		<property name="application.pool"			value="${property::get-value(project.name + '.application.pool')}" />
+		<property name="deployment.dir"				value="${property::get-value(project.name + '.deployment.dir')}" />
+		<property name="source.dir"					value="${property::get-value(project.name + '.source.dir')}" />
+		<property name="include.cs"					value="${property::get-value(project.name + '.include.cs')}" />
+
+		<call target="stop_application_pools" />
+		<call target="backup_deployment_dir" />
+		<call target="activate_maintenance" />		
+		<call target="delete_deployment_dir" />
+		<call target="delete_deployment_dir_with_maitenance" />
+		<call target="copy_all_files" />
+		<call target="update_configs" />
+		<call target="deactivate_maintenance" />		
+		<call target="start_application_pools" />
+		
+		<call target="deploy_web_application_cleanup" />
+	</target>
+	
+	<target name="deploy_windows_service_cleanup">
+		<property name="service.name"				value="" />
+		<property name="deployment.dir"				value="" />
+		<property name="source.dir"					value="" />
+
+		<foreach item="String" in="1,2,3,4,5,6,7,8,9,10" delim="," property="index">
+			<property name="config.file.${index}" value=""/>
+		</foreach>		
+	</target>
+
+	<target name="deploy_windows_service">
+		<property name="service.name"				value="${property::get-value(project.name + '.service.name')}" />
+		<property name="service.file.name"			value="${property::get-value(project.name + '.service.file.name')}" />
+		<property name="deployment.dir"				value="${property::get-value(project.name + '.deployment.dir')}" />
+		<property name="source.dir"					value="${property::get-value(project.name + '.source.dir')}" />
+
+		<call target="stop_windows_service" />
+		<call target="backup_deployment_dir" />
+		<call target="delete_deployment_dir" />
+		<call target="copy_all_files" />
+		<call target="update_configs" />
+		<call target="install_windows_service" />
+		<call target="start_windows_service" />
+
+		<call target="deploy_windows_service_cleanup" />
+	</target>
+
+	<target name="install_windows_service" 	if="${do_install_windows_service}">
+		
+		<property name="binPath" value="${deployment.dir}\${service.file.name}"/>	
+		<property name="FullbinPath" value="${path::get-full-path(binPath)}"/>
+
+		<echo message="Installing Windows service ${service.name}" />
+		<property name="powershell.comand" value="		
+							$service = Get-Service -display ${service.name} -ErrorAction SilentlyContinue 
+							if ( ! $service ) 
+							{
+								New-Service -Name ${service.name} -BinaryPathName ${FullbinPath} -DisplayName ${service.name} -StartupType Automatic
+							};
+						" />
+
+		<call target="run_powershell_command" />
+	</target>
+
+	<target name="stop_windows_service" 	if="${do_stop_windows_service}">
+		<echo message="Stopping Windows service ${application.pool}" />
+
+		<servicecontroller action="Stop" service="${service.name}" failonerror="false" />
+	</target>
+
+	<target name="start_windows_service" 	if="${do_start_windows_service}">
+		<echo message="Starting Windows service ${application.pool}" />
+
+		<servicecontroller action="Start" service="${service.name}" failonerror="false" />
+	</target>
+
+	<target name="stop_application_pools" 	if="${do_stop_application_pool}">
+		<echo message="Stopping Application Pool ${application.pool}" />
+		<property name="powershell.comand" value="		
+							Set-ExecutionPolicy RemoteSigned -Force
+							if ([System.Version] (Get-ItemProperty -path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').CurrentVersion -ge [System.Version] '6.1') { 
+								Import-Module WebAdministration 
+							} else { 
+								Add-PSSnapin WebAdministration 
+							}; 
+							if ((Get-WebAppPoolState '${application.pool}').Value -eq 'Started') {Stop-WebAppPool '${application.pool}'}
+						" />
+
+		<call target="run_powershell_command" />
+	</target>
+	
+	<target name="start_application_pools" 	if="${do_start_application_pool}">
+		<echo message="Starting Application Pool ${application.pool}" />
+		<property name="powershell.comand" value="							
+							Set-ExecutionPolicy RemoteSigned -Force
+							if ([System.Version] (Get-ItemProperty -path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion').CurrentVersion -ge [System.Version] '6.1') { 
+								Import-Module WebAdministration 
+							} else { 
+								Add-PSSnapin WebAdministration 
+							}; 
+							if ((Get-WebAppPoolState '${application.pool}').Value -eq 'Stopped') {Start-WebAppPool '${application.pool}'}
+						" />
+
+		<call target="run_powershell_command" />
+	</target>
+	
+	<target name="backup_deployment_dir"	if="${do_backup_deployment_dir}">
+		<copy todir="${deployment.dir}_${build.date}">
+			<fileset basedir="${deployment.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="delete_deployment_dir"	if="${do_delete_deployment_dir}">
+		<delete dir="${deployment.dir}" />
+	</target>
+
+	<target name="delete_deployment_dir_with_maitenance"	if="${do_delete_deployment_dir_with_maitenance}">
+		<delete includeemptydirs="true">
+			<fileset basedir="${deployment.dir}">
+				<include name="**\*.*" />
+				<exclude name="App_Offline.htm" /> 
+			</fileset>
+		</delete>
+	</target>
+	
+	<target name="activate_maintenance"		if="${do_activate_maintenance}">
+		<copy file="${source.dir}\Maintenance\App_Offline.htm" todir="${deployment.dir}" />
+	</target>
+
+	<target name="deactivate_maintenance"	if="${do_deactivate_maintenance}">
+		<delete file="${deployment.dir}\App_Offline.htm" />
+	</target>
+
+	<target name="copy_all_files"			if="${do_copy_all_files}">
+		<copy todir="${deployment.dir}" >
+			<fileset basedir="${source.dir}">
+				<include name="**\*.*" />
+				<!-- exclude name="**\*.pdb" / -->
+				<exclude name="**\*.cs" 		unless="${include.cs}"/> 
+				<exclude name="**\*.csproj" />
+				<exclude name="obj\**" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="update_configs"			if="${do_update_configs}">
+		<foreach item="String" in="1,2,3,4,5,6,7,8,9,10" delim="," property="index">
+			<property name="config.file" value="${property::get-value( 'config.file.' + index )}" />
+			<if test="${string::get-length( config.file ) > 0}">
+				<property name="config.file.full.path" value="${path::combine( deployment.dir, config.file )}" />
+				<call target="update.${project.name}.${config.file}"/>
+			</if>	
+		</foreach>		
+	</target>
+	
+	<target name="backup_database"			if="${do_backup_database}" >
+
+		<echo message="Backing up database: ${database.name.full}" />
+		<exec program="sqlCmd">
+			<arg value="-S" />
+			<arg value="${database.server}" />
+			<arg value="-E" />
+			<arg value="-d" />
+			<arg value="${database.name.full}" />
+			<arg value="-Q" />
+			<arg value="BACKUP DATABASE [${database.name.full}] TO DISK = N'${database.backup.dir}\${database.name.full}_${build.date}.bak'" />
+		</exec>
+	</target>
+
+	<target name="update_database"			if="${do_update_database}" >
+		<echo message="Running update of the database: ${database.name.full}" />
+		
+		<echo message="Using database login: ${database.login.argument}" 			if="${database.login.argument != ''}"/>
+		<echo message="Using database customization: ${customization.argument}" 	if="${customization.argument != ''}" />
+		<echo message="Command: cscript.exe //B ${sql.dir}\build_db.wsf /run ${customization.argument} /quiet /summary_log:${root.dir}\summary_${database.name.full}.txt /server:${database.server} /db:${database.name.full} /sqldir:&quot;${sql.dir}&quot; ${database.login.argument}" />
+		
+		<exec program="cscript.exe">
+			<arg value="//B" />
+			<arg value="${sql.dir}\build_db.wsf" />
+			<arg value="/run" />
+			<arg value="${customization.argument}" />
+			<arg value="/quiet" />
+			<arg value="/summary_log:${root.dir}\summary_${database.name.full}.txt" />
+			<arg value="/server:${database.server}" />
+			<arg value="/db:${database.name.full}" />
+			<arg value="/sqldir:&quot;${sql.dir}&quot;" />
+			<arg value="/app_user:${database.user.name.for.application}" />
+			<arg value="/app_password:${database.user.password.for.application}" />
+			<arg line="${database.login.argument}" />
+		</exec>	
+	</target>
+	
+	<target name="rebuild_database"			if="${do_rebuild_database}" >
+		<echo message="Running rebuild of the database: ${database.name.full}" />
+		
+		<echo message="Using database login: ${database.login.argument}" 			if="${database.login.argument != ''}"/>
+		<echo message="Using database customization: ${customization.argument}" 	if="${customization.argument != ''}" />
+		<echo message="Command: cscript.exe //B ${sql.dir}\build_db.wsf /run ${rebuild.argument} ${customization.argument} /quiet /summary_log:${root.dir}\summary_${database.name.full}.txt /server:${database.server} /db:${database.name.full} /sqldir:&quot;${sql.dir}&quot; ${database.login.argument}" />
+		
+		<exec program="cscript.exe">
+			<arg value="//B" />
+			<arg value="${sql.dir}\build_db.wsf" />
+			<arg value="/run" />
+			<arg value="${rebuild.argument}" />
+			<arg value="${customization.argument}" />
+			<arg value="/quiet" />
+			<arg value="/summary_log:${root.dir}\summary_${database.name.full}.txt" />
+			<arg value="/server:${database.server}" />
+			<arg value="/db:${database.name.full}" />
+			<arg value="/sqldir:&quot;${sql.dir}&quot;" />
+			<arg value="/app_user:${database.user.name.for.application}" />
+			<arg value="/app_password:${database.user.password.for.application}" />
+			<arg line="${database.login.argument}" />
+		</exec>	
+	</target>
+	
+	<target name="run_powershell_command">
+		<property name="powershell.comand.with.try.catch" value="
+						&amp;{ #Try
+							${powershell.comand}
+						}
+						# CATCH
+						trap {
+							'Exception:     ' + $_.Exception.GetType().FullName
+							'Error message: ' +$_.Exception.Message 
+							exit -1
+						}
+						" />
+
+		<echo message="${powershell.comand.with.try.catch}" />
+
+		<property name="powershell.path" value="C:\Windows\SysNative\WindowsPowerShell\v1.0\" /> <!-- Path if nAnt is running as 32 bit process on 64 bit system -->
+		<!-- If C:\Windows\SysNative folder does not exist this means nAnt is running as 64 bit process on 64 bit system -->
+		<property name="powershell.path" value="C:\Windows\System32\WindowsPowerShell\v1.0\" unless="${directory::exists('C:\Windows\SysNative\')}"/> 
+		
+		<exec program="powershell.exe" basedir="${powershell.path}" >
+			<arg value="-NonInteractive" />
+			<arg value="-Command" />
+			<arg value="&quot;&amp;  {${powershell.comand.with.try.catch}}&quot;" />
+		</exec>
+		
+	</target>	
+
+</project>

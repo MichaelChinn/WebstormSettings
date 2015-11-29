@@ -1,0 +1,55 @@
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Left Navigation -->
+    <div ui-view="left-navbar"/>
+
+   <!-- Page wraper -->
+    <!-- ng-class with current state name give you the ability to extended customization your view -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}" style="min-height: 860px;">
+
+        <!-- Page wrapper -->
+        <div ng-include="'app/layout/views/top-navbar.html'"></div>
+
+        <!-- Page Header/Breadcrumbs -->
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-9">
+                <h2>{{ $state.current.data.title }}</h2>
+                <ui-breadcrumbs displayname-property="data.displayName"
+                                abstract-proxy-property="data.breadcrumbProxy"
+                                [template-url="" ]
+                                >
+                </ui-breadcrumbs>
+            </div>
+            <div class="col-lg-3">
+                <div ui-view="eval-profile" />
+            </div>
+        </div>
+
+
+        <!-- Main view  -->
+        <div class="wrapper wrapper-content">
+            <div ui-view="content"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>
+                <strong>Copyright</strong> 2011, 2012, 2013, 2014, 2015 WEA, OSPI and ESD 113 &copy; rev <%=SEVersion%>
+            </div>
+        </div>
+
+    </div>
+    <!-- End page wrapper-->
+    <!-- Right Sidebar -->
+    <div ng-include="'app/layout/views/right-sidebar.html'"></div>
+
+</div>
+<!-- End wrapper-->
+                
+
+
+
+
+
+

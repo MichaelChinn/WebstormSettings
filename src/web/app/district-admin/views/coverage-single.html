@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Overall Coverage for {{vm.context.evaluatee.displayName}}</h2>
+        <br/>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class="coverage-single-fn-header-left">Type</th>
+                <th class="coverage-single-fn-header-left">General Information</th>
+                <th width="150px" ng-repeat="node in vm.context.framework.frameworkNodes" ng-class="{'coverage-single-fn-header-done':vm.filledNodes[node.shortName], 'coverage-single-fn-header':!vm.filledNodes[node.shortName]}">
+                    <span >{{node.shortName}}</span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="source in vm.sources">
+                <td width="80px">{{vm.itemTypeMapper[source.itemType]}}</td>
+                <td width="300px">
+                   <a ui-sref="submitted-artifact-summary({artifactId:source.id})">{{source.title}}</a><br/>
+                    Created&nbsp;<i>{{source.creationDateTime | date }}</i>&nbsp; by <i>{{source.createdByDisplayName}}</i>
+                </td>
+                <td ng-repeat="node in vm.context.framework.frameworkNodes">
+                <span ng-repeat-start="row in source.nodes[node.shortName]"
+                      ng-class="{'badge': source.evaluated[row.id]}">
+                   {{vm.rowMapper[row.id]}}
+                </span>
+                    <span ng-repeat-end ng-show="!$last">, </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

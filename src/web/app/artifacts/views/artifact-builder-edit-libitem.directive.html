@@ -1,0 +1,73 @@
+
+    <div class="well">
+            <h4>Add {{vm.itemTypeToString(vm.item.itemType)}}:</h4>
+            <p ng-if="vm.item.itemType === vm.enums.ArtifactLibItemType.PROFPRACTICE">Professional Practice is a description of a non-observable
+                professional practice you would like to document.</p>
+            <br/>
+        <div >
+            <ng-form name="vm.editItemForm"  novalidate>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Title: (optional)</label>
+                            <input type="text" name="title" class="form-control" ng-model="vm.title" placeholder="Enter Title">
+                        </div>
+
+                        <div ng-if="vm.item.itemType === vm.enums.ArtifactLibItemType.FILE">
+                            <h2 ng-show="vm.waiting">Please wait for Upload...</h2>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-hide="vm.waiting" class="form-group">
+                                        <label>File:</label>
+                                        <div>
+                                            <a ng-href="http://www.ucarecdn.com/{{vm.fileUUID}}/">{{vm.fileName}}</a>
+                                            <input ng-show="vm.editItemForm.file.$invalid" type="text" ng-disabled="true" class="form-control" placeholder="Click Upload File to select a file" name="file" ng-model="vm.fileName" required/>
+                                        </div>
+
+                                        <div ng-messages="vm.editItemForm.file.$error">
+                                            <div ng-messages-include="app/core/views/validation-messages.html"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="vm.item.itemType === vm.enums.ArtifactLibItemType.WEB">
+                            <div class="form-group"  ng-class="{ 'has-error' : vm.editItemForm.url.$invalid && !vm.editItemForm.url.$pristine }">
+                                <label>Website URL:</label>
+                                <input type="url" name="url" ng-model="vm.webUrl" class="form-control" required
+                                       placeholder="Enter Website URL"/>
+
+                                <div ng-messages="vm.editItemForm.url.$error">
+                                    <div ng-messages-include="app/core/views/validation-messages.html"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="vm.item.itemType === vm.enums.ArtifactLibItemType.PROFPRACTICE">
+                            <div class="form-group"  ng-class="{ 'has-error' : vm.editItemForm.comments.$invalid && !vm.editItemForm.comments.$pristine }">
+                                <label>Describe the practice:</label>
+                                <textarea rows="5" name="comments" ng-model="vm.profPracticeNotes" class="form-control"
+                                  placeholder="Enter Notes" required/>
+                                <div ng-messages="vm.editItemForm.comments.$error">
+                                    <div ng-messages-include="app/core/views/validation-messages.html"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="pull-right button-toolbar">
+                            <button type="button" class="btn btn-outline btn-default btn-xs" ng-click="vm.cancelFcn()">Cancel</button>
+                            <button type="button" ng-if="vm.item.itemType === vm.enums.ArtifactLibItemType.FILE"
+                                    class="btn btn-primary btn-xs" ng-click="vm.uploadFile()">Choose File</button>
+                            <button type="submit" ng-click="vm.submitForm(vm.item)" ng-disabled="vm.editItemForm.$invalid" class="btn btn-primary btn-xs">Done</button>
+                        </div>
+                    </div>
+                </div>
+             </ng-form>
+        </div>
+    </div>
+
+

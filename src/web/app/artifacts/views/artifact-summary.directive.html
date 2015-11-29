@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default btn-outline btn-xs"
+                    ng-if="vm.artifact.rubricRowEvaluations.length>0"
+                    ng-click="vm.showSummary=!vm.showSummary">{{vm.showSummary?'Collapse':'Expand'}}
+            </button>
+        </div>
+    </div>
+    <br/>
+    <table class="table">
+        <tr>
+            <td><strong>Title:</strong></td>
+            <td>{{vm.artifact.title}}</td>
+        </tr>
+        <tr>
+            <td><strong>Date: </strong></td>
+            <td>{{vm.artifact.creationDateTime | date }}</td>
+        </tr>
+        <tr>
+            <td><strong>Created by:</strong></td>
+            <td>
+                {{vm.artifact.createdByDisplayName}} ( {{ vm.source }} )
+            </td>
+        </tr>
+    </table>
+    <div ng-show="vm.showSummary">
+        <table class="table" ng-if="vm.artifact.evidence">
+            <tr><td><strong>{{vm.evaluateeTerm}} reasoning for alignment choice(s):</strong></td></tr>
+            <tr>
+                <td>
+                    <div style="background-color: #e7eaec;" class="note-editor" ng-show="vm.artifact.evidence">
+                        <div class="selectable-area" rubric-coder artifact-bundle="vm.artifact" code-id="evidence"></div>
+                        <div style="margin:10px 10px 20px 10px; background-color: white; padding: 10px;" >
+                            <span class="code-area-evidence"  ng-bind-html="vm.getSafeHtml(vm.artifact.evidence)"></span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <table class="table">
+            <tr><td><strong>Attached Item(s):</strong></td></tr>
+            <tr>
+                <td>
+                    <table class="table">
+                        <tbody>
+                        <tr ng-repeat="item in vm.artifact.libItems">
+                            <td ng-show="item.itemType===vm.enums.ArtifactLibItemType.PROFPRACTICE">
+                                {{vm.itemTypeToString(item.itemType) + ': ' + (item.title?vm.itemDisplayName(item): '')}}<br/>
+                                <div style="background-color: #e7eaec;" class="note-editor" ng-show="vm.artifact.evidence">
+                                    <div class="selectable-area" rubric-coder artifact-bundle="vm.artifact" code-id="pp{{item.id}}"></div>
+                                    <div style="margin:10px 10px 20px 10px; background-color: white; padding: 10px;" >
+                                        <span class="code-area-pp{{item.id}}"  ng-bind-html="vm.getSafeHtml(item.profPracticeNotes)"></span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </td>
+                            <td ng-show="item.itemType!==vm.enums.ArtifactLibItemType.PROFPRACTICE">
+                                {{vm.itemTypeToString(item.itemType)}}: <a ng-click="vm.view(item)">{{vm.itemDisplayName(item)}}</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

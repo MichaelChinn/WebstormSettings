@@ -1,0 +1,17 @@
+<label>{{vm.evaluateeTerm}} Assignments</label>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>{{vm.vm.assignmentsModel.evaluateeTerm}}</th>
+            <th>Evaluation Type</th>
+            <th>Evaluator</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="evaluatee in vm.assignmentsModel.evaluatees">
+            <td>{{evaluatee.displayName}}</td>
+            <td>{{vm.assignmentsModel.planTypeDisplayString(evaluatee)}}</td>
+            <td ng-bind-html="vm.assignmentsModel.evaluatorDisplayName(evaluatee)"></td>
+        </tr>
+    </tbody>
+</table>
