@@ -162,10 +162,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EDSIntegrationLib\EDSIntegrationLib.csproj">
-      <Project>{bc90f4cb-55f6-4b95-85d8-0c0ff11ca94c}</Project>
-      <Name>EDSIntegrationLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StateEval.Core\StateEval.Core.csproj">
       <Project>{385ba36d-08e8-41cd-88e6-725003b7ce2d}</Project>
       <Name>StateEval.Core</Name>

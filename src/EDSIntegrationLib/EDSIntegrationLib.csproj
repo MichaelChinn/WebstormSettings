@@ -61,12 +61,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\dbUtils\DbUtils.csproj">
-      <Project>{50F99A2F-DBF4-4903-8E76-C1EBC14EBDAF}</Project>
-      <Name>DbUtils</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
