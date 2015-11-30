@@ -7,7 +7,22 @@
         <h3>Welcome to eVAL</h3>
         <form class="m-t" role="form">
             <div class="form-group">
-                <select class="form-control" ng-model="vm.username" >
+                <select class="form-control" ng-model="vm.district" ng-change="vm.changeDistrict()">
+                    <option value="ntps">Danielson SD</option>
+                    <option value="conway">Mazano SD</option>
+                    <option value="chehalis">CEL SD</option>
+                </select>
+                <br/>
+                 <select class="form-control" ng-if="vm.district==='ntps'" ng-model="vm.username" >
+                     <option ng-repeat="username in vm.norththurston_usernames" ng-value="username">{{username}}</option>
+                 </select>
+                <select class="form-control" ng-if="vm.district==='conway'" ng-model="vm.username" >
+                    <option ng-repeat="username in vm.conway_usernames" ng-value="username">{{username}}</option>
+                </select>
+                <select class="form-control" ng-if="vm.district==='chehalis'" ng-model="vm.username"  >
+                    <option ng-repeat="username in vm.chehalis_usernames" ng-value="username">{{username}}</option>
+                </select>
+             <!--   <select ng-show="" class="form-control" ng-model="vm.username" >
                     <option value="North Thurston High School AD">North Thurston High School AD</option>
                     <option value="North Thurston High School PRH">North Thurston High School PRH</option>
                     <option value="North Thurston High School PR1">North Thurston High School PR1</option>
@@ -25,7 +40,7 @@
                     <option value="North Thurston Public Schools DRM">North Thurston Public Schools DRM</option>
                     <option value="South Bay Elementary AD">South Bay Elementary AD</option>
                     <option value="achinn">Super Admin</option>
-                </select>
+                </select>-->
             </div>
             <button id="loginButton" ng-click="vm.login()" class="btn btn-primary block full-width m-b">Login</button>
             </form>
