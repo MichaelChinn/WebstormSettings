@@ -397,6 +397,7 @@
 		  if (g_rebuild) {
 		     do_script("init\\LoadTestData.sql");
 		     do_script("init\\LoadCustomTestData.sql");
+		     do_script("init\\InitEDSExportTables.sql");
 		  }
 
         /* TODO: get these to run before launch
