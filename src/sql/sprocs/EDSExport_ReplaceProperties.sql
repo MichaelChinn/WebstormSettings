@@ -99,8 +99,7 @@ AS
                 SELECT  REPLACE(roleString, ' ', '') ,
                         stagingId
                 FROM    dbo.EDSStaging
-                WHERE   firstEntry = 1
-                        AND roleString NOT LIKE '%;%';
+                WHERE   roleString NOT LIKE '%;%';
                         
 
 			-- now process multi location users
@@ -111,8 +110,7 @@ AS
                 SELECT  stagingId ,
                         REPLACE(roleString, ' ', '')
                 FROM    dbo.EDSStaging
-                WHERE   firstEntry = 1
-                        AND roleString LIKE '%;%';
+                WHERE   roleString LIKE '%;%';
                        
         
         DECLARE @nRows BIGINT ,
