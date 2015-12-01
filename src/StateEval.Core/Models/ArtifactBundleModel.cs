@@ -24,6 +24,7 @@ namespace StateEval.Core.Models
         public List<ArtifactLibItemModel> LibItems { get; set; }
         public List<RubricRowModel> AlignedRubricRows { get; set; }
 
+
         // only set when saving an artifact
         public List<EvalSessionModel> LinkedObservations { get; set; }
         public List<StudentGrowthGoalBundleModel> LinkedStudentGrowthGoalBundles { get; set; }

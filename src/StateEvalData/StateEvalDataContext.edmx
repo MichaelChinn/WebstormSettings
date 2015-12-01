@@ -277,6 +277,15 @@ warning 6002: The table/view 'stateeval.dbo.ProtoFrameworksToLoad' does not have
           <Property Name="ArtifactBundleID" Type="bigint" Nullable="false" />
           <Property Name="EvalSessionID" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="SEArtifactBundleEvidenceCollection">
+          <Key>
+            <PropertyRef Name="SEArtifactBundleEvidenceCollectionID" />
+          </Key>
+          <Property Name="SEArtifactBundleEvidenceCollectionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArtifactBundleID" Type="bigint" Nullable="false" />
+          <Property Name="EvidenceCollectionTypeID" Type="smallint" Nullable="false" />
+          <Property Name="EvidenceCollectionID" Type="bigint" />
+        </EntityType>
         <EntityType Name="SEArtifactBundleRejection">
           <Key>
             <PropertyRef Name="ArtifactBundleRejectionID" />
@@ -301,6 +310,8 @@ warning 6002: The table/view 'stateeval.dbo.ProtoFrameworksToLoad' does not have
           </Key>
           <Property Name="ArtifactBundleID" Type="bigint" Nullable="false" />
           <Property Name="RubricRowID" Type="bigint" Nullable="false" />
+          <Property Name="LinkedItemTypeID" Type="smallint" />
+          <Property Name="LinkedItemID" Type="bigint" />
         </EntityType>
         <EntityType Name="SEArtifactBundleStudentGrowthGoalBundle">
           <Key>
@@ -1735,6 +1746,18 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEArtifactBundleRubricRowAlignment">
               <PropertyRef Name="RubricRowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEArtifactBundleRubricRowAlignment_SELinkedItemType">
+          <End Role="SELinkedItemType" Type="Self.SELinkedItemType" Multiplicity="0..1" />
+          <End Role="SEArtifactBundleRubricRowAlignment" Type="Self.SEArtifactBundleRubricRowAlignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SELinkedItemType">
+              <PropertyRef Name="LinkedItemTypeID" />
+            </Principal>
+            <Dependent Role="SEArtifactBundleRubricRowAlignment">
+              <PropertyRef Name="LinkedItemTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3978,6 +4001,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySet Name="SEArtifactBundle" EntityType="Self.SEArtifactBundle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleArtifactLibItem" EntityType="Self.SEArtifactBundleArtifactLibItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleEvalSession" EntityType="Self.SEArtifactBundleEvalSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEArtifactBundleEvidenceCollection" EntityType="Self.SEArtifactBundleEvidenceCollection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleRejection" EntityType="Self.SEArtifactBundleRejection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleRejectionType" EntityType="Self.SEArtifactBundleRejectionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleRubricRowAlignment" EntityType="Self.SEArtifactBundleRubricRowAlignment" Schema="dbo" store:Type="Tables" />
@@ -4259,6 +4283,10 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           </AssociationSet>
           <AssociationSet Name="FK_SEArtifactBundleRubricRowAlignment_RubricRowID" Association="Self.FK_SEArtifactBundleRubricRowAlignment_RubricRowID">
             <End Role="SERubricRow" EntitySet="SERubricRow" />
+            <End Role="SEArtifactBundleRubricRowAlignment" EntitySet="SEArtifactBundleRubricRowAlignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEArtifactBundleRubricRowAlignment_SELinkedItemType" Association="Self.FK_SEArtifactBundleRubricRowAlignment_SELinkedItemType">
+            <End Role="SELinkedItemType" EntitySet="SELinkedItemType" />
             <End Role="SEArtifactBundleRubricRowAlignment" EntitySet="SEArtifactBundleRubricRowAlignment" />
           </AssociationSet>
           <AssociationSet Name="FK_SEArtifactBundleStudentGrowthGoalBundle_SEArtifactBundle" Association="Self.FK_SEArtifactBundleStudentGrowthGoalBundle_SEArtifactBundle">
@@ -7123,6 +7151,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SERubricRowScore" EntitySet="SERubricRowScores" />
           </AssociationSet>
+          <EntitySet Name="SEArtifactBundleEvidenceCollections" EntityType="StateEvalModel.SEArtifactBundleEvidenceCollection" />
           </EntityContainer>
         <EntityType Name="SEStudentGrowthProcessSetting">
           <Key>
@@ -9894,6 +9923,15 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SEArtifactBundleEvidenceCollection">
+          <Key>
+            <PropertyRef Name="SEArtifactBundleEvidenceCollectionID" />
+          </Key>
+          <Property Name="SEArtifactBundleEvidenceCollectionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArtifactBundleID" Type="Int64" Nullable="false" />
+          <Property Name="EvidenceCollectionTypeID" Type="Int16" Nullable="false" />
+          <Property Name="EvidenceCollectionID" Type="Int64" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -11403,6 +11441,16 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
                 <ScalarProperty Name="RubricRowID" ColumnName="RubricRowID" />
                 <ScalarProperty Name="EvaluationID" ColumnName="EvaluationID" />
                 <ScalarProperty Name="RubricRowScoreID" ColumnName="RubricRowScoreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEArtifactBundleEvidenceCollections">
+            <EntityTypeMapping TypeName="StateEvalModel.SEArtifactBundleEvidenceCollection">
+              <MappingFragment StoreEntitySet="SEArtifactBundleEvidenceCollection">
+                <ScalarProperty Name="EvidenceCollectionID" ColumnName="EvidenceCollectionID" />
+                <ScalarProperty Name="EvidenceCollectionTypeID" ColumnName="EvidenceCollectionTypeID" />
+                <ScalarProperty Name="ArtifactBundleID" ColumnName="ArtifactBundleID" />
+                <ScalarProperty Name="SEArtifactBundleEvidenceCollectionID" ColumnName="SEArtifactBundleEvidenceCollectionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

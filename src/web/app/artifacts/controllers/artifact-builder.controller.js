@@ -11,15 +11,12 @@
            activeUserContextService, rubricUtils, studentGrowthBuildService, observationService, $q) {
 
         var vm = this;
+        vm.enums = enums;
         vm.artifactService = artifactService;
 
         vm.artifactId = parseInt($stateParams.artifactId);
-
-        vm.goalBundles = [];
-        vm.observations = [];
-
-        vm.selectedRubricRow = null;
-         vm.itemToEdit = null;
+        vm.artifact = null;
+        vm.itemToEdit = null;
 
         vm.builderForm = {};
 
@@ -34,8 +31,6 @@
         vm.cancelItemEdit = cancelItemEdit;
         vm.editItem = editItem;
         vm.createItem = createItem;
-        vm.linkToObservation = linkToObservation;
-
         vm.newItem = false;
 
         ///////////////////////////////////////////
@@ -46,11 +41,10 @@
 
             if (vm.artifactId === 0) {
                 vm.artifact = artifactService.newArtifact();
-                loadGoalsAndObservations();
+
             } else {
                 artifactService.getArtifactById(vm.artifactId).then(function(artifact) {
                     vm.artifact = artifact;
-                    loadGoalsAndObservations();
                 })
             }
         }
@@ -76,84 +70,7 @@
             vm.itemToEdit = item;
         }
 
-        function linkToObservation(observation) {
-            artifactService.linkArtifactToObservation(vm.artifact, observation).then(function() {
-                observation.linked = true;
-            });
-        }
-
-        function linkToStudentGrowthGoalBundle(goalBundle) {
-            artifactService.linkArtifactToStudentGrowthGoalBundle(vm.artifact, goalBundle).then(function() {
-                goalBundle.linked = true;
-            });
-        }
-
-        function loadGoalsAndObservations() {
-            artifactService.getAttachableObservationsForEvaluation()
-                .then(function(observations) {
-                    vm.observations = observations;
-                    vm.observations.forEach(function(observation) {
-                        observation.linked = false;
-                    })
-
-                    if (vm.artifact.id !==0) {
-                        return artifactService.getLinkedObservationsForArtifact(vm.artifact.id);
-                    }
-                    else {
-                        return $q.when([]);
-                    }
-                }).then(function(linkedObservations) {
-
-                    linkedObservations.forEach(function(linkedObservation) {
-                        var match = _.find(vm.observations, {id: linkedObservation.id});
-                        match.linked = true;
-                    });
-
-                    return artifactService.getAttachableStudentGrowthGoalBundlesForEvaluation();
-
-                }).then(function(goalBundles) {
-                    vm.goalBundles = goalBundles;
-                    vm.goalBundles.forEach(function(goalBundle) {
-                        goalBundle.linked = false;
-                    })
-
-                    // set name to show in dropdown, includes goals so they have sg alignment when choosing their own alignment
-                    vm.goalBundles.forEach(function(bundle) {
-                        bundle.displayName = (bundle.title + ' - ' + studentGrowthBuildService.getBundleDisplayName(bundle));
-                    });
-
-                    if (vm.artifact.id !==0) {
-                        return artifactService.getLinkedStudentGrowthGoalBundlesForArtifact(vm.artifact.id);
-                    }
-                    else {
-                        return $q.when([]);
-                    }
-                }).then (function(linkedBundles) {
-                    linkedBundles.forEach(function(linkedBundle) {
-                        var match = _.find(vm.goalBundles, {id: linkedBundle.id});
-                        match.linked = true;
-                    });
-                })
-        }
-
-        function updateLinkedItems(artifact) {
-            artifact.linkedObservations = [];
-            vm.observations.forEach(function(observation) {
-                if (observation.linked) {
-                    artifact.linkedObservations.push(observation);
-                }
-            });
-
-            artifact.linkedStudentGrowthGoalBundles = [];
-            vm.goalBundles.forEach(function(goalBundle) {
-                if (goalBundle.linked) {
-                    artifact.linkedStudentGrowthGoalBundles.push(goalBundle);
-                }
-            })
-        }
-
         function save(artifact) {
-            updateLinkedItems(artifact);
             return artifactService.saveArtifact(artifact);
         }
 
@@ -175,7 +92,6 @@
 
         function submit(artifact) {
             if (vm.builderForm.$valid) {
-                updateLinkedItems(artifact);
                 artifactService.submitArtifact(artifact).then(function () {
                     $state.go('artifacts-submitted');
                 })

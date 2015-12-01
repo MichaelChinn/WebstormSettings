@@ -10,7 +10,7 @@
                 <span ng-init="otherEvidenceTabSelected = vm.selectedTab===2"></span>
                 <span ng-init="rejectedTabSelected = vm.selectedTab===3"></span>
                 <tabset>
-                    <tab heading="Private Artifacts (not submitted yet)" ui-sref="artifacts-private" active="privateTabSelected">
+                    <tab heading="My Artifacts" ui-sref="artifacts-private" active="privateTabSelected">
                         <div class="tab-body">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -19,7 +19,7 @@
                             </div>
                         </div>
                     </tab>
-                    <tab heading="Submitted Evidence" ui-sref="artifacts-submitted" active="submittedTabSelected">
+                   <!-- <tab heading="Submitted Evidence" ui-sref="artifacts-submitted" active="submittedTabSelected">
                         <div class="tab-body">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                    </tab>
+                    </tab>-->
                 </tabset>
             </div>
         </div>

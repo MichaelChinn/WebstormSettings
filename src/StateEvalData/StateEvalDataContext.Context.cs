@@ -137,5 +137,6 @@ namespace StateEvalData
         public virtual DbSet<SEStudentGrowthFormPrompt> SEStudentGrowthFormPrompts { get; set; }
         public virtual DbSet<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual DbSet<SERubricRowScore> SERubricRowScores { get; set; }
+        public virtual DbSet<SEArtifactBundleEvidenceCollection> SEArtifactBundleEvidenceCollections { get; set; }
     }
 }

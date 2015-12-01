@@ -314,6 +314,7 @@
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SELinkedItemType" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SERubricPerformanceLevel" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SEUser" />
+        <EntityTypeShape EntityType="StateEvalModel.SEArtifactBundleEvidenceCollection" Width="1.5" PointX="0.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

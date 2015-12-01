@@ -15,7 +15,6 @@
 
         var service = {
             mapAnnotationTypeToString: mapAnnotationTypeToString,
-            mapArtifactWfStateToString: mapArtifactWfStateToString,
             mapLibItemTypeToString: mapLibItemTypeToString,
             mapEvalRequestTypeToString: mapEvalRequestTypeToString,
             mapEvalRequestStatusToString: mapEvalRequestStatusToString,
@@ -79,22 +78,6 @@
                     return "Unknown AnnotationType: " + annotationType;
             }
         }
-        function mapArtifactWfStateToString(wfState) {
-            switch (wfState) {
-                case enums.WfState.ARTIFACT:
-                    return 'Uploaded';
-                    break;
-                case enums.WfState.ARTIFACT_REJECTED:
-                    return 'Needs further input';
-                    break;
-                case enums.WfState.ARTIFACT_SUBMITTED:
-                    return 'Submitted';
-                    break;
-                default:
-                    return 'Unknown';
-                    break;
-            }
-        }
 
         function mapLibItemTypeToString(itemType) {
             var string = '';
@@ -152,7 +135,7 @@
         }
 
         function mapLinkedItemTypeToFullString(type) {
-            switch(type){
+            switch(parseInt(type)){
                 case enums.LinkedItemType.ARTIFACT:
                     return "Other Evidence";
                 case enums.LinkedItemType.OBSERVATION:
