@@ -232,7 +232,7 @@
                 currentUserId: currentUserId,
                 rubricRowId: 0,
                 evalSessionId: 0,
-                StudentGrowthGoalBundleId: 0
+                studentGrowthGoalBundleId: 0
             }
         }
 

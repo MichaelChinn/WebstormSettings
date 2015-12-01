@@ -25,15 +25,12 @@
             getStudentGrowthRubricRows: getStudentGrowthRubricRows,
             getStudentGrowthRubricRowsForFrameworkNode: getStudentGrowthRubricRowsForFrameworkNode,
 
-
             mapPerformanceLevelToDisplayString: mapPerformanceLevelToDisplayString,
             mapPerformanceLevelToShortDisplayString: mapPerformanceLevelToShortDisplayString,
 
-            generateCollaborativeHighlightedRubricDescriptorTextFromEvidence: generateCollaborativeHighlightedRubricDescriptorTextFromEvidence,
             generateHighlightedRubricDescriptorTextFromEvaluations: generateHighlightedRubricDescriptorTextFromEvaluations,
 
             getRubricDescriptorText: getRubricDescriptorText,
-            newHighlightedRubricEvaluationDescriptorArray: newHighlightedRubricEvaluationDescriptorArray,
             newRubricEvaluationDescriptorArray: newRubricEvaluationDescriptorArray,
             getFrameworkTree: getFrameworkTree,
             mergeEvidenceToHtml: mergeEvidenceToHtml,
@@ -145,50 +142,6 @@
             }
 
             return list;
-        }
-
-
-        function newHighlightedRubricEvaluationDescriptorArray(rubricRow, rubricRowEvaluations, performanceLevel) {
-            var rubricDescriptors = [
-                {
-                    performanceLevel: enums.RubricPerformanceLevel.PL1,
-                    performanceLevelDisplayName: mapPerformanceLevelToDisplayString((enums.RubricPerformanceLevel.PL1)),
-                    descriptorText: '',
-                    checked: false
-                },
-                {
-                    performanceLevel: enums.RubricPerformanceLevel.PL2,
-                    performanceLevelDisplayName: mapPerformanceLevelToDisplayString((enums.RubricPerformanceLevel.PL2)),
-                    descriptorText: '',
-                    checked: false
-                },
-                {
-                    performanceLevel: enums.RubricPerformanceLevel.PL3,
-                    performanceLevelDisplayName: mapPerformanceLevelToDisplayString((enums.RubricPerformanceLevel.PL3)),
-                    descriptorText: '',
-                    checked: false
-                },
-                {
-                    performanceLevel: enums.RubricPerformanceLevel.PL4,
-                    performanceLevelDisplayName: mapPerformanceLevelToDisplayString((enums.RubricPerformanceLevel.PL4)),
-                    checked: false
-                }
-            ];
-
-            for (var i = 0; i < 4; ++i) {
-                var pl = i + 1;
-                rubricDescriptors[i].descriptorText =
-                    generateHighlightedRubricDescriptorTextFromEvaluations(
-                        pl,
-                        getRubricDescriptorText(rubricRow, pl),
-                        rubricRowEvaluations);
-            }
-
-            if (performanceLevel !== enums.RubricPerformanceLevel.UNDEFINED) {
-                rubricDescriptors[performanceLevel-1].checked = true;
-            }
-
-            return rubricDescriptors;
         }
 
         function newRubricEvaluationDescriptorArray(rubricRow) {
@@ -409,28 +362,6 @@
                     break;
             }
             return html;
-        }
-
-        function generateCollaborativeHighlightedRubricDescriptorTextFromEvidence(performanceLevel, rubricDescriptorText, torEvidenceArray, teeEvidenceArray) {
-            rubricDescriptorText = standardizeHtml(rubricDescriptorText);
-            var torCombinedBinaryString = createBinaryString(rubricDescriptorText);
-            var teeCombinedBinaryString = createBinaryString(rubricDescriptorText);
-            for (var i in torEvidenceArray) {
-
-                if (torEvidenceArray[i].statementPerformanceLevel === performanceLevel) {
-                    var torEvidenceBinaryString = createBinaryString(rubricDescriptorText, torEvidenceArray[i].rubricStatement);
-                    torCombinedBinaryString = mergeBinaryString(torCombinedBinaryString, torEvidenceBinaryString);
-                }
-            }
-            for (var i in teeEvidenceArray) {
-
-                if (teeEvidenceArray[i].statementPerformanceLevel === performanceLevel) {
-                    var teeEvidenceBinaryString = createBinaryString(rubricDescriptorText, teeEvidenceArray[i].rubricStatement);
-                    teeCombinedBinaryString = mergeBinaryString(teeCombinedBinaryString, teeEvidenceBinaryString);
-                }
-            }
-            var t = mergeToTrinaryString(teeCombinedBinaryString, torCombinedBinaryString);
-            return highlightFromTrinaryString(rubricDescriptorText, t);
         }
 
         function highlightFromTrinaryString(actualText, trinaryString) {
