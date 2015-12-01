@@ -3,7 +3,7 @@ module.exports = function(config) {
 
         basePath: '../../web/',
 
-        frameworks: ['jasmine', 'sinon'],
+        frameworks: ['jasmine'],
 
         files: [
             'lib/jquery/dist/jquery.js',
@@ -49,51 +49,27 @@ module.exports = function(config) {
             'app/core/services/startup.service.js',
             'app/core/services/work-area.service.js',
             'app/core/services/active-user-context.service.js',
-            'app/core/services/rubric.utils.service.js',
+            'app/core/services/rubric-utils.service.js',
             'app/core/services/utils.service.js',
             'app/core/services/location.service.js',
+            'app/core/services/evidenceCollection.service.js',
 
-            'app/assignments/assignments.module.js',
-            'app/assignments/services/assignments.service.js',
-            'app/assignments/services/assignments-model.service.js',
-            'app/assignments/services/assignments-model.service.spec.js',
-
-         /*
-            'app/blocks/exception/exception-handler.provider.spec.js',
-            'app/core/services/user.service.spec.js',*/
-
-
-            'app/**/*.html'
+            'app/core/services/rubric-utils.service.spec.js',
         ],
 
         exclude: [
         ],
 
         preprocessors: {
-            'src/**/*.html': ['ng-html2js'],
-            'src/**/!(*.mock|*.spec).js': ['coverage']
         },
 
-        ngHtml2JsPreprocessor: {
-            // strip this from the file path
-            stripPrefix: 'src/',
-            // create a single module that contains templates from all the files
-            moduleName: 'templates'
-        },
-
-        reporters: ['progress', 'coverage'],
-
-        coverageReporter: {
-            type : 'html',
-            // output coverage reports
-            dir : 'coverage/'
-        },
+        reporters: ['progress'],
 
         port: 9876,
 
         colors: true,
 
-        logLevel: config.LOG_DEBUG,
+        logLevel: config.LOG_INFO,
 
         autoWatch: true,
 
