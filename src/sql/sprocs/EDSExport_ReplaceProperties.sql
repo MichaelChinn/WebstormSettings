@@ -12,6 +12,7 @@ GO
 SET QUOTED_IDENTIFIER ON;
 GO
 CREATE PROCEDURE EDSExport_ReplaceProperties
+	@pDebug VARCHAR (20) = ''
 AS
     SET NOCOUNT ON; 
 
@@ -55,7 +56,7 @@ AS
                       SELECT    districtCode ,
                                 schoolCode ,
                                 CONVERT(VARCHAR(20), personID) + '_edsuser'
-                      FROM      EDSStaging
+                      FROM      dbo.EDSStaging
                     ) AS X;
 
     INSERT  #udsFlush
@@ -65,7 +66,7 @@ AS
             FROM    ( SELECT    districtCode ,
                                 schoolCode ,
                                 CONVERT(VARCHAR(20), personID) + '_edsuser' AS UserName
-                      FROM      EDSStaging
+                      FROM      dbo.EDSStaging
                       EXCEPT
                       SELECT    uds.DistrictCode ,
                                 uds.SchoolCode ,
@@ -74,7 +75,8 @@ AS
                                 JOIN dbo.SEUser u ON u.SEUserID = uds.SEUserID
                                 JOIN aspnet_Users au ON au.UserId = u.ASPNetUserID
                     ) AS X;
-
+	IF @pDebug = 'EmitUDSFlush'
+		SELECT 'UDSFLUSH...',* FROM #udsFlush
 		/******************************************************/
 		/*  Check in SEUserLocationRole for need to flush  */
 
@@ -162,6 +164,15 @@ AS
             END;
     
     END;
+
+	IF @pDebug = 'EmitUserRoles'
+	BEGIN
+		--SELECT * FROM dbo.EDSStaging
+
+		SELECT seRoleName, districtCode, schoolCode, personId
+		FROM #usernameClaims unc
+		JOIN dbo.edsstaging s ON s.stagingId = unc.stagingId
+	end
 	
 		--now, do we need to flush the ULR?
     CREATE TABLE #ulrFlush
@@ -176,7 +187,7 @@ AS
             FROM    ( SELECT    CONVERT(VARCHAR(50), s.personID) + '_edsuser' AS userName ,
                                 unc.seRoleName
                       FROM      #userNameClaims unc
-                                JOIN EDSStaging s ON s.stagingId = unc.stagingId
+                                JOIN dbo.EDSStaging s ON s.stagingId = unc.stagingId
                       EXCEPT
                       SELECT    UserName ,
                                 RoleName
@@ -194,7 +205,7 @@ AS
                       SELECT    CONVERT(VARCHAR(50), s.personID) + '_edsuser' AS userName ,
                                 unc.seRoleName
                       FROM      #userNameClaims unc
-                                JOIN EDSStaging s ON s.stagingId = unc.stagingId
+                                JOIN dbo.EDSStaging s ON s.stagingId = unc.stagingId
                     ) X;
 
 		/******************************************************/
@@ -229,7 +240,7 @@ AS
         DELETE  dbo.SEUserLocationRole
         WHERE   SEUserId IN (
                 SELECT  SEUserID
-                FROM    EDSStaging stage
+                FROM    dbo.EDSStaging stage
                         JOIN #ulrFlush f ON f.edsuserName = CONVERT(VARCHAR(50), personID)
                                             + '_edsUser'
                         JOIN aspnet_Users au ON au.UserName = f.edsuserName
@@ -245,15 +256,15 @@ AS
                   LastActiveRole ,
                   CreateDate
                 )
-                SELECT  su.SEUserID ,
+                SELECT  DISTINCT su.SEUserID ,
                         au.UserName ,
                         unc.seRoleName ,
                         r.RoleId ,
                         stage.districtCode ,
-                        stage.schoolCode ,
+                        ISNULL(stage.SchoolCode, ''),
 						NULL ,
                         GETDATE()
-                FROM    EDSStaging stage
+                FROM    dbo.EDSStaging stage
                         JOIN #ulrFlush f ON f.edsuserName = CONVERT(VARCHAR(50), personID)
                                             + '_edsUser'
                         JOIN aspnet_Users au ON au.UserName = f.edsuserName
@@ -264,7 +275,7 @@ AS
         DELETE  SEUserDistrictSchool
         WHERE   SEUserID IN (
                 SELECT  SEUserID
-                FROM    EDSStaging stage
+                FROM    dbo.EDSStaging stage
                         JOIN #udsFlush f ON f.EDSuserName = CONVERT(VARCHAR(50), personID)
                                             + '_edsUser'
                         JOIN aspnet_Users au ON au.UserName = f.EDSuserName
@@ -281,16 +292,43 @@ AS
                 SELECT  su.SEUserID ,
                         stage.schoolCode ,
                         stage.districtCode ,
-                        sn.SchoolName ,
-                        dn.DistrictName ,
+                        NULL ,
+                        NULL ,
                         NULL
-                FROM    EDSStaging stage
-                        JOIN #udsFlush f ON f.EDSuserName = CONVERT(VARCHAR(50), personID)
+                FROM    dbo.EDSStaging stage
+                        JOIN #udsFlush f ON f.EDSuserName = CONVERT(VARCHAR(50), stage.personID)
                                             + '_edsUser'
-                        JOIN vSchoolName sn ON sn.schoolCode = stage.schoolCode
-                        JOIN dbo.vDistrictName dn ON dn.districtCode = stage.schoolCode
                         JOIN aspnet_Users au ON au.UserName = f.EDSuserName
                         JOIN SEUser su ON su.ASPNetUserID = au.UserId;
+
+
+        UPDATE  dbo.SEUserDistrictSchool
+        SET     DistrictName = dn.DistrictName
+        FROM    dbo.SEUserDistrictSchool uds
+                JOIN SEUser su ON su.SEUserID = uds.SEUserID
+                JOIN aspnet_Users au ON au.UserId = su.ASPNetUserID
+                JOIN #udsFlush f ON f.EDSuserName = au.UserName
+                JOIN dbo.vDistrictName dn ON dn.districtCode = uds.DistrictCode;
+
+        UPDATE  dbo.SEUserDistrictSchool
+        SET     SchoolName = sn.schoolName
+        FROM    dbo.SEUserDistrictSchool uds
+                JOIN SEUser su ON su.SEUserID = uds.SEUserID
+                JOIN aspnet_Users au ON au.UserId = su.ASPNetUserID
+                JOIN #udsFlush f ON f.EDSuserName = au.UserName
+                JOIN dbo.vSchoolName sn ON sn.schoolCode = uds.SchoolCode
+				WHERE uds.schoolCode IS NOT null
+
+
+        IF @pDebug = 'EmitUDSFlush'
+            SELECT  *
+            FROM    dbo.EDSStaging stage
+                    JOIN #udsFlush f ON f.EDSuserName = CONVERT(VARCHAR(50), stage.personID)
+                                        + '_edsUser'
+                    JOIN vSchoolName sn ON sn.schoolCode = stage.schoolCode
+                    JOIN dbo.vDistrictName dn ON dn.districtCode = stage.districtCode
+                    JOIN aspnet_Users au ON au.UserName = f.EDSuserName
+                    JOIN SEUser su ON su.ASPNetUserID = au.UserId;
 
         UPDATE  dbo.SEUser
         SET     FirstName = eu.FirstName ,
@@ -303,6 +341,15 @@ AS
                 JOIN #userChange uc ON uc.EDSUserName = u.UserName
                 JOIN SEUser su ON su.ASPNetUserID = u.UserId
                 JOIN vEDSUsers eu ON CONVERT(VARCHAR(20), PersonId)
+                                     + '_edsUser' = u.UserName;
+
+		UPDATE  dbo.SEUser
+        SET     SchoolCode = st.schoolCode ,
+                DistrictCode = st.districtCode
+        FROM    aspnet_Users u
+                JOIN #userChange uc ON uc.EDSUserName = u.UserName
+                JOIN SEUser su ON su.ASPNetUserID = u.UserId
+                JOIN dbo.EDSStaging st ON CONVERT(VARCHAR(20), PersonId)
                                      + '_edsUser' = u.UserName;
 
         UPDATE  dbo.aspnet_Membership

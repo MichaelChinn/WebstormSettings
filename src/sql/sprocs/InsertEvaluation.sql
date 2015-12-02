@@ -58,8 +58,9 @@ IF (@pEvaluateeID IS NOT NULL)
 BEGIN
 	INSERT INTO #User(UserID, DistrictCode)
 	SELECT u.SEUserID
-	      ,u.DistrictCode
+	      ,uds.DistrictCode
 	  FROM dbo.SEUser u
+	  join dbo.SEUserDistrictSchool uds on uds.SEUserid = u.SEUserID
 	 WHERE u.SEUserID=@pEvaluateeID
 	   AND u.SEUserID NOT IN
 		   (SELECT EvaluateeID
