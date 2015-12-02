@@ -22,12 +22,12 @@ namespace StateEvalData
             this.SEResources = new HashSet<SEResource>();
             this.SEUserPrompts = new HashSet<SEUserPrompt>();
             this.SEStudentGrowthGoalBundles = new HashSet<SEStudentGrowthGoalBundle>();
-            this.SEEvalSessions = new HashSet<SEEvalSession>();
             this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
             this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SESummativeRubricRowScores = new HashSet<SESummativeRubricRowScore>();
             this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
+            this.SEEvalSessions = new HashSet<SEEvalSession>();
         }
     
         public long RubricRowID { get; set; }
@@ -51,11 +51,11 @@ namespace StateEvalData
         public virtual ICollection<SEResource> SEResources { get; set; }
         public virtual ICollection<SEUserPrompt> SEUserPrompts { get; set; }
         public virtual ICollection<SEStudentGrowthGoalBundle> SEStudentGrowthGoalBundles { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual ICollection<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
     }
 }

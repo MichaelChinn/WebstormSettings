@@ -85,7 +85,6 @@ namespace StateEvalData
         public virtual DbSet<SEStudentGrowthProcessSettingsFormPrompt> SEStudentGrowthProcessSettingsFormPrompts { get; set; }
         public virtual DbSet<SEArtifactBundleWfHistory> SEArtifactBundleWfHistories { get; set; }
         public virtual DbSet<SEArtifactLibItem> SEArtifactLibItems { get; set; }
-        public virtual DbSet<SELinkedItemType> SELinkedItemTypes { get; set; }
         public virtual DbSet<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
         public virtual DbSet<SEEventType> SEEventTypes { get; set; }
         public virtual DbSet<SEEvent> SEEvents { get; set; }
@@ -118,7 +117,6 @@ namespace StateEvalData
         public virtual DbSet<aspnet_Users> aspnet_Users { get; set; }
         public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
         public virtual DbSet<ClientApp> ClientApps { get; set; }
-        public virtual DbSet<SEEvalSession> SEEvalSessions { get; set; }
         public virtual DbSet<SEEvaluation> SEEvaluations { get; set; }
         public virtual DbSet<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
         public virtual DbSet<SEArtifactBundle> SEArtifactBundles { get; set; }
@@ -137,5 +135,8 @@ namespace StateEvalData
         public virtual DbSet<SEStudentGrowthFormPrompt> SEStudentGrowthFormPrompts { get; set; }
         public virtual DbSet<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual DbSet<SERubricRowScore> SERubricRowScores { get; set; }
+        public virtual DbSet<SEArtifactBundleEvidenceCollection> SEArtifactBundleEvidenceCollections { get; set; }
+        public virtual DbSet<SEEvalSession> SEEvalSessions { get; set; }
+        public virtual DbSet<SELinkedItemType> SELinkedItemTypes { get; set; }
     }
 }

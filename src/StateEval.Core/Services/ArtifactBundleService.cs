@@ -9,6 +9,7 @@ using StateEval.Core.Models;
 using StateEval.Core.RequestModel;
 using StateEval.Core.Constants;
 using StateEvalData;
+using System.Transactions;
 
 namespace StateEval.Core.Services
 {
@@ -129,7 +130,23 @@ namespace StateEval.Core.Services
             artifactBundleModel.MaptoSEArtifactBundle(this.EvalEntities, seArtifactBundle);
             seArtifactBundle.CreationDateTime = DateTime.Now;
             EvalEntities.SEArtifactBundles.Add(seArtifactBundle);
-            EvalEntities.SaveChanges();
+
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                SEEvaluation seEvaluation = EvalEntities.SEEvaluations
+                    .FirstOrDefault(x=>x.EvaluationID==artifactBundleModel.EvaluationId);
+
+                int count = EvalEntities.SEArtifactBundles
+                    .Where(x => x.EvaluationID == artifactBundleModel.EvaluationId).Count();
+
+                seArtifactBundle.ShortName = "Artifact " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
+                seArtifactBundle.Title = seArtifactBundle.ShortName;
+
+                EvalEntities.SaveChanges();
+
+                transaction.Complete();
+            }
+
 
             return new { Id = seArtifactBundle.ArtifactBundleID };
         }

@@ -7,6 +7,7 @@ namespace StateEval.Core.Models
     public class ArtifactBundleModel
     {
         public long Id { get; set; }
+        public string ShortName { get; set; }
         public long EvaluationId { get; set;}
         public long CreatedByUserId { get; set; }
         public string CreatedByDisplayName { get; set; }
@@ -23,6 +24,7 @@ namespace StateEval.Core.Models
 
         public List<ArtifactLibItemModel> LibItems { get; set; }
         public List<RubricRowModel> AlignedRubricRows { get; set; }
+
 
         // only set when saving an artifact
         public List<EvalSessionModel> LinkedObservations { get; set; }

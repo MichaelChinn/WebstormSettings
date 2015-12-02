@@ -200,10 +200,7 @@
         }
 
         function createBundleForEvaluation(bundle) {
-            if (bundle.title==='')
-            {
-                throw new Error("createBundleForEvaluation: goal title is required");
-            }
+
             var currentEvaluationId = activeUserContextService.context.evaluatee.evalData.id;
             var url = config.apiUrl + currentEvaluationId + '/sggoalbundles';
 

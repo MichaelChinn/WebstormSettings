@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="pull-right">
-            <button ng-click="vm.editArtifact()" class="btn btn-primary btn-xs" type="button">
+            <button ng-click="vm.editArtifact()" class="btn btn-primary btn-sm" type="button">
                 <i class="fa fa-plus-circle"></i>&nbsp;Add Artifact
             </button>
         </div>
@@ -16,43 +16,29 @@
     <div class="col-lg-12">
         <table class="table">
             <thead>
-            <tr>
- <!--               <th></th>
- -->
-                <th>General Information</th>
-                <th>Alignment</th>
-                <th>Items</th>
-                <th></th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Rubrics Selected</th>
+                    <th>Available In</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="artifact in vm.privateArtifacts">
-  <!--              <td><a class='expand' href="#" ng-click="isCollapsed = !isCollapsed">
-                    <span ng-class="{'fa fa-plus': !isCollapsed, 'fa fa-minus': isCollapsed}"></span></a>
-                </td>-->
-                <td>
-                    {{artifact.title}}<br/>
-                    Created&nbsp;<i>{{artifact.creationDateTime | date }}</i>
-                 </td>
-                <td>{{vm.artifactAlignment(artifact)}}</td>
-                <td>{{artifact.libItems.length}}</td>
-                <td align="right">
-                    <button class="btn btn-xs btn-default btn-outline"
-                            confirm="Are you sure you want to delete this artifact?"
-                            ng-click="vm.deleteArtifact(artifact)">Delete</button>
-                    <button ng-click="vm.editArtifact(artifact)" class="btn btn-xs btn-default btn-outline">Edit</button>
-
-                </td>
-                <td>
-                    <button ng-click="vm.submitArtifact(artifact)"class="btn btn-xs btn-primary">Submit as Evidence</button>
-                </td>
-            </tr>
-           <!-- <tr collapse="!isCollapsed" ng-repeat-end>
-                <td colspan="9">
-                    <artifact-libitems artifact="artifact"/>
-                </td>
-            </tr>-->
+                <tr ng-repeat="artifact in vm.privateArtifacts">
+                    <td>{{artifact.creationDateTime | date }}</td>
+                    <td>{{artifact.title}}</td>
+                    <td ng-bind-html="vm.getSafeHtml(vm.alignment[artifact.id])"></td>
+                    <td>Available In</td>
+                    <td ng-bind-html="vm.getSafeHtml(vm.wfState[artifact.id])"> </td>
+                    <td>
+                        <button class="btn btn-xs btn-default btn-outline"
+                                confirm="Are you sure you want to delete this artifact?"
+                                ng-click="vm.deleteArtifact(artifact)">Delete</button>
+                        <button ng-click="vm.editArtifact(artifact)" class="btn btn-xs btn-default btn-outline">Edit</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>

@@ -23,6 +23,7 @@ function sgGoalsPrivateController(studentGrowthBuildService, $q, $stateParams, a
     vm.submit = submit;
     vm.editBundle = editBundle;
     vm.deleteBundle = deleteBundle;
+    vm.createBundle = createBundle;
     vm.getSafeHtml = utils.getSafeHtml;
     vm.bundleCriteriaAlignmentAsString = bundleCriteriaAlignmentAsString;
     vm.evaluationType = null;
@@ -64,6 +65,13 @@ function sgGoalsPrivateController(studentGrowthBuildService, $q, $stateParams, a
 
     function editBundle(bundle) {
         $state.go('sg-bundle-setup', {id:bundle.id});
+    }
+
+    function createBundle() {
+        var bundle = studentGrowthBuildService.newBundle();
+        studentGrowthBuildService.createBundleForEvaluation(bundle).then(function() {
+            $state.go('sg-bundle-setup', {id:bundle.id});
+        })
     }
 
     function submit(bundle) {

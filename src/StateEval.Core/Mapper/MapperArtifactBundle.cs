@@ -21,6 +21,7 @@ namespace StateEval.Core.Mapper
             source.LibItems = source.LibItems ?? new List<ArtifactLibItemModel>();
             target.ArtifactBundleID = source.Id;
             target.EvaluationID = source.EvaluationId;
+            target.ShortName = source.ShortName;
             target.Title = source.Title;
             target.Context = source.Context;
             target.Evidence = source.Evidence;
@@ -105,6 +106,7 @@ namespace StateEval.Core.Mapper
             target.Id = source.ArtifactBundleID;
             target.CreationDateTime = source.CreationDateTime;
             target.EvaluationId = source.EvaluationID;
+            target.ShortName = source.ShortName;
             target.Title = source.Title;
             target.Context = source.Context;
             target.Evidence = source.Evidence;

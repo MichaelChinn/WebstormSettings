@@ -180,11 +180,15 @@ namespace StateEval.Core.Services
                                 }
                                 break;
                             case SEEvidenceTypeEnum.STUDENT_GROWTH_GOAL:
-                                goalBundle = EvalEntities.SEStudentGrowthGoalBundles.FirstOrDefault(y=>y.StudentGrowthGoalBundleID==requestModel.CollectionObjectId);
-                                if (goalBundle.SEStudentGrowthGoals.Select(y => y.StudentGrowthGoalID).Contains((long)x.StudentGrowthGoalID))
+                                if (requestModel.CollectionType == SEEvidenceCollectionTypeEnum.STUDENT_GROWTH_GOALS)
                                 {
-                                    evidences.Add(x.MapToAvailableEvidenceModel(EvalEntities));
+                                    goalBundle = EvalEntities.SEStudentGrowthGoalBundles.FirstOrDefault(y => y.StudentGrowthGoalBundleID == requestModel.CollectionObjectId);
+                                    if (goalBundle.SEStudentGrowthGoals.Select(y => y.StudentGrowthGoalID).Contains((long)x.StudentGrowthGoalID))
+                                    {
+                                        evidences.Add(x.MapToAvailableEvidenceModel(EvalEntities));
+                                    }
                                 }
+                        
                                 break;
                         }
                     });

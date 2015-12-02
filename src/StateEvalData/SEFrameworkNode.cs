@@ -21,8 +21,6 @@ namespace StateEvalData
             this.SERubricRowFrameworkNodes = new HashSet<SERubricRowFrameworkNode>();
             this.SETrainingProtocolFrameworkNodeAlignments = new HashSet<SETrainingProtocolFrameworkNodeAlignment>();
             this.SEStudentGrowthGoals = new HashSet<SEStudentGrowthGoal>();
-            this.SEEvalSessions = new HashSet<SEEvalSession>();
-            this.SEEvalSessions1 = new HashSet<SEEvalSession>();
             this.SEEvaluations = new HashSet<SEEvaluation>();
             this.SEEvaluations1 = new HashSet<SEEvaluation>();
             this.SEEvaluations2 = new HashSet<SEEvaluation>();
@@ -30,6 +28,8 @@ namespace StateEvalData
             this.SESummativeFrameworkNodeScores = new HashSet<SESummativeFrameworkNodeScore>();
             this.SEStudentGrowthFormPromptFrameworkNodes = new HashSet<SEStudentGrowthFormPromptFrameworkNode>();
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
+            this.SEEvalSessions = new HashSet<SEEvalSession>();
+            this.SEEvalSessions1 = new HashSet<SEEvalSession>();
         }
     
         public long FrameworkNodeID { get; set; }
@@ -51,8 +51,6 @@ namespace StateEvalData
         public virtual ICollection<SETrainingProtocolFrameworkNodeAlignment> SETrainingProtocolFrameworkNodeAlignments { get; set; }
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
         public virtual SEFramework SEFramework { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions1 { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations1 { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations2 { get; set; }
@@ -60,5 +58,7 @@ namespace StateEvalData
         public virtual ICollection<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual ICollection<SEStudentGrowthFormPromptFrameworkNode> SEStudentGrowthFormPromptFrameworkNodes { get; set; }
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions1 { get; set; }
     }
 }

@@ -18,12 +18,33 @@
         var service = {
             getEvaluationById: getEvaluationById,
             getEvaluationForUser: getEvaluationForUser,
-            getAllEvaluationsFORNOW: getAllEvaluationsFORNOW
+            getAllEvaluationsFORNOW: getAllEvaluationsFORNOW,
+            getAllObjectsForEvaluation: getAllObjectsForEvaluation
         };
 
         return service;
 
         ////////////////
+
+        function getAllObjectsForEvaluation() {
+            var list = [];
+            return evalSessionService.getObservationsForEvaluation()
+                .then(function (data) {
+                    for(var i in data) {
+                        data[i].linkedItemType = enums.LinkedItemType.OBSERVATION;
+                    }
+                    list = list.concat(data);
+                    return studentGrowthBuildService.getSubmittedBundlesForEvaluation();
+                })
+                .then(function (data) {
+                    for(var i in data) {
+                        data[i].linkedItemType = enums.LinkedItemType.STUDENT_GROWTH_GOAL;
+                    }
+                    return list.concat(data);
+                })
+        }
+
+
         function getAllEvaluationsFORNOW() {
             var list = [];
             return artifactService.getArtifactBundlesForEvaluation(artifactService.newArtifactBundleRequest(

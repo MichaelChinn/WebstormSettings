@@ -32,7 +32,7 @@
                 data: {
                     selectedTab: 0,
                     title: 'Artifacts',
-                    displayName: 'Private Artifacts'
+                    displayName: 'My Artifacts'
                 }
             })
             .state('artifacts-submitted', {

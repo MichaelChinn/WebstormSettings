@@ -8,6 +8,7 @@ namespace StateEval.Core.Models
     public class EvalSessionModel
     {
         public long Id { get; set; }
+        public string ShortName { get; set; }
         public string DistrictCode { get; set; }
         public string SchoolCode { get; set; }
         public string Title { get; set; }
@@ -25,7 +26,6 @@ namespace StateEval.Core.Models
         public long EvaluationId { get; set; }
         public string CreatedByDisplayName { get; set; }
 
-        public short? SessionKey { get; set; }
         public string RubricRowNames { get; set; }
         public Nullable<bool> PreConfIsPublic { get; set; }
         public Nullable<bool> PreConfIsComplete { get; set; }

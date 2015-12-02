@@ -21,10 +21,10 @@ namespace StateEvalData
             this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
             this.SEStudentGrowthGoals = new HashSet<SEStudentGrowthGoal>();
             this.SEArtifactLibItems = new HashSet<SEArtifactLibItem>();
-            this.SEEvalSessions = new HashSet<SEEvalSession>();
             this.SERubricRows = new HashSet<SERubricRow>();
             this.SEStudentGrowthGoalBundles = new HashSet<SEStudentGrowthGoalBundle>();
             this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
+            this.SEEvalSessions = new HashSet<SEEvalSession>();
         }
     
         public long ArtifactBundleID { get; set; }
@@ -38,6 +38,7 @@ namespace StateEvalData
         public Nullable<System.DateTime> RejectDateTime { get; set; }
         public long CreatedByUserID { get; set; }
         public Nullable<short> RejectionTypeID { get; set; }
+        public string ShortName { get; set; }
     
         public virtual SEUser SEUser { get; set; }
         public virtual SEArtifactBundleRejectionType SEArtifactBundleRejectionType { get; set; }
@@ -48,9 +49,9 @@ namespace StateEvalData
         public virtual ICollection<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
         public virtual ICollection<SEArtifactLibItem> SEArtifactLibItems { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
         public virtual ICollection<SEStudentGrowthGoalBundle> SEStudentGrowthGoalBundles { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
     }
 }

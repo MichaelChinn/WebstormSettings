@@ -21,14 +21,14 @@ namespace StateEvalData
             this.SEPracticeSessionParticipants = new HashSet<SEPracticeSessionParticipant>();
             this.SEPullQuotes = new HashSet<SEPullQuote>();
             this.SEReportPrintOptionEvalSessions = new HashSet<SEReportPrintOptionEvalSession>();
+            this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
+            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
+            this.SERubricRowEvaluations1 = new HashSet<SERubricRowEvaluation>();
             this.SELearningWalkSessionScores = new HashSet<SELearningWalkSessionScore>();
             this.SEUserPrompts = new HashSet<SEUserPrompt>();
             this.SEUserPromptResponses = new HashSet<SEUserPromptResponse>();
-            this.SERubricRows = new HashSet<SERubricRow>();
-            this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
-            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
-            this.SERubricRowEvaluations1 = new HashSet<SERubricRowEvaluation>();
+            this.SERubricRows = new HashSet<SERubricRow>();
         }
     
         public long EvalSessionID { get; set; }
@@ -65,7 +65,7 @@ namespace StateEvalData
         public Nullable<long> FocusedFrameworkNodeID { get; set; }
         public Nullable<long> FocusedSGFrameworkNodeID { get; set; }
         public Nullable<long> TrainingProtocolID { get; set; }
-        public Nullable<short> SessionKey { get; set; }
+        public string ShortName { get; set; }
         public Nullable<bool> IncludeInFinalReport { get; set; }
         public Nullable<System.DateTime> LockDateTime { get; set; }
         public Nullable<bool> isFormalObs { get; set; }
@@ -79,6 +79,7 @@ namespace StateEvalData
         public virtual SEAnchorType SEAnchorType { get; set; }
         public virtual ICollection<SEDistrictTrainingProtocolAnchor> SEDistrictTrainingProtocolAnchors { get; set; }
         public virtual SEFrameworkNode SEFrameworkNode { get; set; }
+        public virtual SEEvaluation SEEvaluation { get; set; }
         public virtual SEEvaluationScoreType SEEvaluationScoreType { get; set; }
         public virtual SERubricPerformanceLevel SERubricPerformanceLevel { get; set; }
         public virtual SESchoolYear SESchoolYear { get; set; }
@@ -91,14 +92,13 @@ namespace StateEvalData
         public virtual ICollection<SEPracticeSessionParticipant> SEPracticeSessionParticipants { get; set; }
         public virtual ICollection<SEPullQuote> SEPullQuotes { get; set; }
         public virtual ICollection<SEReportPrintOptionEvalSession> SEReportPrintOptionEvalSessions { get; set; }
+        public virtual ICollection<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations1 { get; set; }
         public virtual ICollection<SELearningWalkSessionScore> SELearningWalkSessionScores { get; set; }
         public virtual ICollection<SEUserPrompt> SEUserPrompts { get; set; }
         public virtual ICollection<SEUserPromptResponse> SEUserPromptResponses { get; set; }
-        public virtual ICollection<SERubricRow> SERubricRows { get; set; }
-        public virtual SEEvaluation SEEvaluation { get; set; }
-        public virtual ICollection<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations1 { get; set; }
+        public virtual ICollection<SERubricRow> SERubricRows { get; set; }
     }
 }
