@@ -7,7 +7,7 @@ DECLARE @cmd NVARCHAR(MAX);
 SET @cmd = 'ALTER DATABASE ' + QUOTENAME(DB_NAME()) + ' SET TRUSTWORTHY ON;';
 EXEC(@cmd);
 
-EXEC tSqlT.NewTestClass 'testEDSExport_ReplaceProperties';
+EXEC tSQLt.NewTestClass 'testEDSExport_ReplaceProperties';
 GO
 
 CREATE PROCEDURE [testEDSExport_ReplaceProperties].[test role csv to row for various user district and role combinations]
@@ -18,9 +18,8 @@ AS
 
         INSERT  INTO dbo.EDSStaging
                 ( stagingId, districtCode, schoolCode, roleString, personID )
-        VALUES  
-				--a user in two school locations, with one location having multiple roles and one having single role
-				( 1, '10000', '4000',
+        VALUES  --a user in two school locations, with one location having multiple roles and one having single role
+                ( 1, '10000', '4000',
                   'r1_527_4000;r2_527_4000;r3_527_4000;r4_527_4000', 527 ),
                 ( 2, '20000', '5000',
                   'r1_527_5000;r2_527_5000;r3_527_5000;r4_527_5000', 527 ),
@@ -33,19 +32,21 @@ AS
                 ( 4, '20000', '5000', 'r1_529_5000', 529 ),
 
 				--a user in a single district location, each district having a single role
-				(5, '20001', NULL, 'r1_500_NULL', 500),
+                ( 5, '20001', NULL, 'r1_500_NULL', 500 ),
 
 				--a user in a couple of districts, each district having a single role
-				(6, '20002', NULL, 'r1_501_NULL2', 501),
-				(7, '20003', NULL, 'r1_501_NULL3', 501),
+                ( 6, '20002', NULL, 'r1_501_NULL2', 501 ),
+                ( 7, '20003', NULL, 'r1_501_NULL3', 501 ),
 
 				--a user in a couple of districts, each district having multiple roles
-				(8, '20005', NULL, 'r1_502_NULL5', 502),
-				(9, '20006', NULL, 'r1_502_NULL6', 502),
+                ( 8, '20005', NULL, 'r1_502_NULL5', 502 ),
+                ( 9, '20006', NULL, 'r1_502_NULL6', 502 ),
 
 				--a user in multiple districts, each district having several roles
-				(10, '20008', NULL, 'r1_503_NULL8;r2_503_NULL8;r3_503_NULL8', 503),
-				(11, '20009', NULL, 'r1_503_NULL9;r2_503_NULL9;r3_503_NULL9', 503)
+                ( 10, '20008', NULL, 'r1_503_NULL8;r2_503_NULL8;r3_503_NULL8',
+                  503 ),
+                ( 11, '20009', NULL, 'r1_503_NULL9;r2_503_NULL9;r3_503_NULL9',
+                  503 );
 
 
 
@@ -89,7 +90,7 @@ AS
                 ( 'r3_503_NULL8', '20008', NULL, 503 ),
                 ( 'r1_503_NULL9', '20009', NULL, 503 ),
                 ( 'r2_503_NULL9', '20009', NULL, 503 ),
-                ( 'r3_503_NULL9', '20009', NULL, 503 )
+                ( 'r3_503_NULL9', '20009', NULL, 503 );
 
 
     
@@ -102,7 +103,7 @@ AS
                 )
                 EXEC dbo.EDSExport_ReplaceProperties @pDebug = 'EmitUserRoles';
 
-        EXEC tSqlT.AssertEqualsTable '#expected', '#actual';
+        EXEC tSQLt.AssertEqualsTable '#expected', '#actual';
 
     END;
 GO
@@ -113,25 +114,34 @@ AS
 
 
         EXEC tSQLt.FakeTable 'dbo.edsStaging';
-        EXEC tSqlT.FakeTable 'dbo.seUserLocationRole';
+        EXEC tSQLt.FakeTable 'dbo.seUserLocationRole';
+        EXEC tSQLt.FakeTable 'dbo.seUserDistrictSchool';
 
-		DECLARE @seUseIdOut bigint
+        DECLARE @seUseIdOut BIGINT;
+        DECLARE @user527 BIGINT ,
+            @user501 BIGINT;
+        
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @seUseIdOut; -- bigint
+        SELECT  @user527 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '527_edsUser';
 
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @seUseIdOut -- bigint
-		
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @seUseIdOut -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @seUseIdOut; -- bigint
+        SELECT  @user501 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '501_edsUser';
 		
 
 
@@ -143,8 +153,20 @@ AS
                   527 ),
                 ( 2, '21302', '1559', 'SESchoolPrincipal', 501 );
 		
-		CREATE TABLE #expected(username VARCHAR(50), roleName VARCHAR(50), districtCode varchar(10), schoolCode varchar(10))
-		CREATE TABLE #actual(username VARCHAR(50), roleName VARCHAR(50), districtCode varchar(10), schoolCode varchar(10))
+        CREATE TABLE #expected
+            (
+              username VARCHAR(50) ,
+              roleName VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10)
+            );
+        CREATE TABLE #actual
+            (
+              username VARCHAR(50) ,
+              roleName VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10)
+            );
 
         INSERT  #Expected
                 ( username, roleName, districtCode, schoolCode )
@@ -152,18 +174,31 @@ AS
                 ( '527_edsUser', 'SEDistrictAssignmentManager', '01147', '' ),
                 ( '527_edsUser', 'SEDistrictViewer', '01147', '' ),
                 ( '501_edsUser', 'SESchoolPrincipal', '21302', '1559' );
-
-        EXEC dbo.EDSExport_ReplaceProperties;
-
-		INSERT #Actual
-		        ( username ,
-		          roleName ,
-		          districtCode ,
-		          schoolCode
-		        )
+		
+		--SELECT @user501, @user527
+		--SELECT * FROM dbo.EDSStaging
+		--SELECT * FROM dbo.aspnet_users WHERE username IN ('527_edsUser', '501_edsUser')
+		--SELECT * FROM dbo.SEUser WHERE username IN ('527_edsUser', '501_edsUser')
+		
+        --SELECT  *
+        --FROM    dbo.SEUserDistrictSchool
+        --WHERE   SEUserID IN ( @user527, @user501 );
 		
 
-		SELECT UserName, roleName, DistrictCode, schoolCode FROM dbo.SEUserLocationRole
+
+       EXEC dbo.EDSExport_ReplaceProperties;
+
+        INSERT  #Actual
+                ( username ,
+                  roleName ,
+                  districtCode ,
+                  schoolCode
+		        )
+                SELECT  UserName ,
+                        RoleName ,
+                        DistrictCode ,
+                        SchoolCode
+                FROM    dbo.SEUserLocationRole;
 
         EXEC tSqlT.AssertEqualsTable '#expected', '#actual';
 
@@ -176,32 +211,38 @@ AS
 
 
         EXEC tSQLt.FakeTable 'dbo.edsStaging';
-        EXEC tSqlT.FakeTable 'dbo.seUserLocationRole';
+        EXEC tSQLt.FakeTable 'dbo.seUserLocationRole';
+		EXEC tSQLt.FakeTable 'dbo.seUserDistrictSchool'
 
-		DECLARE @user527 BIGINT, @user501 BIGINT	
+        DECLARE @user527 BIGINT ,
+            @user501 BIGINT;	
 
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user527 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user527; -- bigint
 
-		SELECT @user527 = seUserId FROM seuser WHERE username = '527_edsUser'
+        SELECT  @user527 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '527_edsUser';
 		
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user501 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user501; -- bigint
 
-		SELECT @user501 = seUserid FROM seUser WHERE username = '501_edsUser'
+        SELECT  @user501 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '501_edsUser';
 		
         INSERT  dbo.SEUserLocationRole
-                ( seuserId, UserName, RoleName )
+                ( SEUserId, UserName, RoleName )
         VALUES  ( @user527, '527_edsUser', 'A fake role for 527 user' ),
                 ( @user501, '501_edsUser', 'a fake role for 501 user' );
 
@@ -213,6 +254,17 @@ AS
                   527 ),
                 ( 2, '21302', '1559', 'SESchoolPrincipal', 501 );
 		
+        INSERT  dbo.SEUserDistrictSchool
+                ( SEUserID, SchoolCode, DistrictCode, IsPrimary )
+        VALUES  ( @user527, -- SEUserID - bigint
+                  '', -- SchoolCode - varchar(50)
+                  '01147', -- DistrictCode - varchar(50)
+                  1  -- IsPrimary - bit
+                  ),
+                ( @user501, '1559', -- SchoolCode - varchar(50)
+                  '21302', -- DistrictCode - varchar(50)
+                  1  -- IsPrimary - bit
+                  );
 
 		--SELECT @user501, @user527
 		--SELECT * FROM dbo.EDSStaging
@@ -222,8 +274,20 @@ AS
 		
 
 
-		CREATE TABLE #expected(username VARCHAR(50), roleName VARCHAR(50), districtCode varchar(10), schoolCode varchar(10))
-		CREATE TABLE #actual(username VARCHAR(50), roleName VARCHAR(50), districtCode varchar(10), schoolCode varchar(10))
+        CREATE TABLE #expected
+            (
+              username VARCHAR(50) ,
+              roleName VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10)
+            );
+        CREATE TABLE #actual
+            (
+              username VARCHAR(50) ,
+              roleName VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10)
+            );
 
         INSERT  #Expected
                 ( username, roleName, districtCode, schoolCode )
@@ -234,17 +298,19 @@ AS
 
         EXEC dbo.EDSExport_ReplaceProperties;
 
-		INSERT #Actual
-		        ( username ,
-		          roleName ,
-		          districtCode ,
-		          schoolCode
+        INSERT  #Actual
+                ( username ,
+                  roleName ,
+                  districtCode ,
+                  schoolCode
 		        )
-		
+                SELECT  UserName ,
+                        RoleName ,
+                        DistrictCode ,
+                        SchoolCode
+                FROM    dbo.SEUserLocationRole;
 
-		SELECT UserName, roleName, DistrictCode, schoolCode FROM dbo.SEUserLocationRole
-
-        EXEC tSqlT.AssertEqualsTable '#expected', '#actual';
+        EXEC tSQLt.AssertEqualsTable '#expected', '#actual';
 
     END;
 GO
@@ -255,29 +321,35 @@ AS
 
 
         EXEC tSQLt.FakeTable 'dbo.edsStaging';
-        EXEC tSqlT.FakeTable 'dbo.seUserLocationRole';
+        EXEC tSQLt.FakeTable 'dbo.seUserLocationRole';
+		EXEC tSQLt.FakeTable 'dbo.seUserDistrictSchool'
 
-		DECLARE @user527 BIGINT, @user501 BIGINT	
+        DECLARE @user527 BIGINT ,
+            @user501 BIGINT;	
 
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user527 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user527; -- bigint
 
-		SELECT @user527 = seUserId FROM seuser WHERE username = '527_edsUser'
+        SELECT  @user527 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '527_edsUser';
 		
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user501 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user501; -- bigint
 
-		SELECT @user501 = seUserid FROM seUser WHERE username = '501_edsUser'
+        SELECT  @user501 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '501_edsUser';
 		
         INSERT  dbo.SEUserLocationRole
                 ( SEUserId, UserName, RoleName, DistrictCode, SchoolCode )
@@ -301,8 +373,20 @@ AS
 		
 
 
-		CREATE TABLE #expected(username VARCHAR(50), roleName VARCHAR(50), districtCode varchar(10), schoolCode varchar(10))
-		CREATE TABLE #actual(username VARCHAR(50), roleName VARCHAR(50), districtCode varchar(10), schoolCode varchar(10))
+        CREATE TABLE #expected
+            (
+              username VARCHAR(50) ,
+              roleName VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10)
+            );
+        CREATE TABLE #actual
+            (
+              username VARCHAR(50) ,
+              roleName VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10)
+            );
 
         INSERT  #Expected
                 ( username, roleName, districtCode, schoolCode )
@@ -310,21 +394,24 @@ AS
                 ( '527_edsUser', 'SEDistrictAssignmentManager', '01147', '' ),
                 ( '527_edsUser', 'SEDistrictViewer', '01147', '' ),
                 ( '501_edsUser', 'SESchoolPrincipal', '21302', '1559' ),
-				( '200_edsUser', 'SESchoolPrincipal', '21302', '2027' ),
+                ( '200_edsUser', 'SESchoolPrincipal', '21302', '2027' ),
                 ( '201_edsUser', 'SESchoolTeacher', '01147', '3471' );
 
         EXEC dbo.EDSExport_ReplaceProperties;
 
-		INSERT #Actual
-		        ( username ,
-		          roleName ,
-		          districtCode ,
-		          schoolCode
+        INSERT  #Actual
+                ( username ,
+                  roleName ,
+                  districtCode ,
+                  schoolCode
 		        )
-		
-		SELECT UserName, roleName, DistrictCode, schoolCode FROM dbo.SEUserLocationRole
+                SELECT  UserName ,
+                        RoleName ,
+                        DistrictCode ,
+                        SchoolCode
+                FROM    dbo.SEUserLocationRole;
 
-        EXEC tSqlT.AssertEqualsTable '#expected', '#actual';
+        EXEC tSQLt.AssertEqualsTable '#expected', '#actual';
 
     END;
 GO
@@ -335,25 +422,25 @@ AS
 
 
         EXEC tSQLt.FakeTable 'dbo.edsStaging';
-        EXEC tSqlT.FakeTable 'dbo.seUserDistrictSchool';
+        EXEC tSQLt.FakeTable 'dbo.seUserDistrictSchool';
 
-		DECLARE @seUseIdOut bigint
+        DECLARE @seUseIdOut BIGINT;
 
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @seUseIdOut -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @seUseIdOut; -- bigint
 		
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @seUseIdOut -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @seUseIdOut; -- bigint
 		
         DECLARE @user527 BIGINT ,
             @user501 BIGINT;
@@ -373,13 +460,28 @@ AS
                   527 ),
                 ( 2, '21302', '1559', 'SESchoolPrincipal', 501 );
 		
-		CREATE TABLE #expected(username VARCHAR(50), districtCode varchar(10), schoolCode varchar(10), districtName VARCHAR(200), schoolName VARCHAR(200))
-		CREATE TABLE #actual(username VARCHAR(50), districtCode varchar(10), schoolCode varchar(10), districtName VARCHAR(200), schoolName VARCHAR(200))
+        CREATE TABLE #expected
+            (
+              username VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10) ,
+              districtName VARCHAR(200) ,
+              schoolName VARCHAR(200)
+            );
+        CREATE TABLE #actual
+            (
+              username VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10) ,
+              districtName VARCHAR(200) ,
+              schoolName VARCHAR(200)
+            );
 
         INSERT  #Expected
                 ( username, districtCode, schoolCode, districtName, schoolName )
-        VALUES  ( '527_edsUser', '01147', NULL, 'Othello School District', NULL ),
-				('501_edsUser', '21302', '1559', 'Chehalis School District','Lewis County Juvenile Detention')
+        VALUES  ( '527_edsUser', '01147', '', 'Othello School District', NULL ),
+                ( '501_edsUser', '21302', '1559', 'Chehalis School District',
+                  'Lewis County Juvenile Detention' );
 
 
 
@@ -390,9 +492,9 @@ AS
 		--SELECT * FROM seUserdistrictschool	
 
 
-        EXEC dbo.EDSExport_ReplaceProperties  --@pDebug='emitudsflush';
+        EXEC dbo.EDSExport_ReplaceProperties;  --@pDebug='emitudsflush';
 
-        INSERT  #actual
+        INSERT  #Actual
                 ( username ,
                   districtCode ,
                   schoolCode ,
@@ -407,7 +509,7 @@ AS
                 FROM    dbo.SEUserDistrictSchool uds
                         JOIN SEUser su ON su.SEUserID = uds.SEUserID;
 
-       EXEC tSqlT.AssertEqualsTable '#expected', '#actual';
+        EXEC tSQLt.AssertEqualsTable '#expected', '#actual';
 
     END;
 GO
@@ -418,27 +520,30 @@ AS
 
 
         EXEC tSQLt.FakeTable 'dbo.edsStaging';
-        EXEC tSqlT.FakeTable 'dbo.seUserDistrictSchool';
+        EXEC tSQLt.FakeTable 'dbo.seUserDistrictSchool';
 
-		DECLARE @user527 BIGINT, @user501 BIGINT	
+        DECLARE @user527 BIGINT ,
+            @user501 BIGINT;	
 
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user527 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user527; -- bigint
 
-		SELECT @user527 = seUserId FROM seuser WHERE username = '527_edsUser'
+        SELECT  @user527 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '527_edsUser';
 		
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user501 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user501; -- bigint
 
         SELECT  @user501 = SEUserID
         FROM    SEUser
@@ -452,16 +557,33 @@ AS
 
         INSERT  INTO dbo.EDSStaging
                 ( stagingId, districtCode, schoolCode, roleString, personID )
-        VALUES  ( 1, '01147', NULL,'SEDistrictEvaluator;SEDistrictAssignmentManager;SEDistrictViewer',527 ),
+        VALUES  ( 1, '01147', NULL,
+                  'SEDistrictEvaluator;SEDistrictAssignmentManager;SEDistrictViewer',
+                  527 ),
                 ( 2, '21302', '1559', 'SESchoolPrincipal', 501 );
 		
-		CREATE TABLE #expected(username VARCHAR(50), districtCode varchar(10), schoolCode varchar(10), districtName VARCHAR(200), schoolName VARCHAR(200))
-		CREATE TABLE #actual(username VARCHAR(50), districtCode varchar(10), schoolCode varchar(10), districtName VARCHAR(200), schoolName VARCHAR(200))
+        CREATE TABLE #expected
+            (
+              username VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10) ,
+              districtName VARCHAR(200) ,
+              schoolName VARCHAR(200)
+            );
+        CREATE TABLE #actual
+            (
+              username VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10) ,
+              districtName VARCHAR(200) ,
+              schoolName VARCHAR(200)
+            );
 
         INSERT  #Expected
                 ( username, districtCode, schoolCode, districtName, schoolName )
-        VALUES  ( '527_edsUser', '01147', NULL, 'Othello School District', NULL ),
-				('501_edsUser', '21302', '1559', 'Chehalis School District','Lewis County Juvenile Detention')
+        VALUES  ( '527_edsUser', '01147', '', 'Othello School District', NULL ),
+                ( '501_edsUser', '21302', '1559', 'Chehalis School District',
+                  'Lewis County Juvenile Detention' );
 
 
 
@@ -472,11 +594,11 @@ AS
 		--SELECT * FROM seUserdistrictschool	
 
 
-        EXEC dbo.EDSExport_ReplaceProperties -- @pDebug='emitudsflush';
+        EXEC dbo.EDSExport_ReplaceProperties; -- @pDebug='emitudsflush';
 
 		--SELECT * FROM dbo.SEUserDistrictSchool
 
-        INSERT  #actual
+        INSERT  #Actual
                 ( username ,
                   districtCode ,
                   schoolCode ,
@@ -491,7 +613,7 @@ AS
                 FROM    dbo.SEUserDistrictSchool uds
                         JOIN SEUser su ON su.SEUserID = uds.SEUserID;
 
-      EXEC tSqlT.AssertEqualsTable '#expected', '#actual';
+        EXEC tSQLt.AssertEqualsTable '#expected', '#actual';
 
     END;
 GO
@@ -502,27 +624,31 @@ AS
 
 
         EXEC tSQLt.FakeTable 'dbo.edsStaging';
-        EXEC tSqlT.FakeTable 'dbo.seUserDistrictSchool';
+        EXEC tSQLt.FakeTable 'dbo.seUserDistrictSchool';
 
-		DECLARE @user527 BIGINT, @user501 BIGINT, @user523	bigint
+        DECLARE @user527 BIGINT ,
+            @user501 BIGINT ,
+            @user523 BIGINT;
 
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user527 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user527; -- bigint
 
-		SELECT @user527 = seUserId FROM seuser WHERE username = '527_edsUser'
+        SELECT  @user527 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '527_edsUser';
 		
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user501 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user501; -- bigint
 
         SELECT  @user501 = SEUserID
         FROM    SEUser
@@ -545,23 +671,41 @@ AS
                 ( SEUserID, SchoolCode, DistrictCode, IsPrimary )
         VALUES  ( @user527, '2027', '21302', 1 ),
                 ( @user501, '4311', '21302', 1 ),
-				( @user523, '2799', '21302', 1 );
+                ( @user523, '2799', '21302', 1 );
 
 
 
         INSERT  INTO dbo.EDSStaging
                 ( stagingId, districtCode, schoolCode, roleString, personID )
-        VALUES  ( 1, '01147', NULL,'SEDistrictEvaluator;SEDistrictAssignmentManager;SEDistrictViewer',527 ),
+        VALUES  ( 1, '01147', '',
+                  'SEDistrictEvaluator;SEDistrictAssignmentManager;SEDistrictViewer',
+                  527 ),
                 ( 2, '21302', '1559', 'SESchoolPrincipal', 501 );
 		
-		CREATE TABLE #expected(username VARCHAR(50), districtCode varchar(10), schoolCode varchar(10), districtName VARCHAR(200), schoolName VARCHAR(200))
-		CREATE TABLE #actual  (username VARCHAR(50), districtCode varchar(10), schoolCode varchar(10), districtName VARCHAR(200), schoolName VARCHAR(200))
+        CREATE TABLE #expected
+            (
+              username VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10) ,
+              districtName VARCHAR(200) ,
+              schoolName VARCHAR(200)
+            );
+        CREATE TABLE #actual
+            (
+              username VARCHAR(50) ,
+              districtCode VARCHAR(10) ,
+              schoolCode VARCHAR(10) ,
+              districtName VARCHAR(200) ,
+              schoolName VARCHAR(200)
+            );
 
         INSERT  #Expected
                 ( username, districtCode, schoolCode, districtName, schoolName )
-        VALUES  ('527_edsUser', '01147', NULL, 'Othello School District', NULL ),
-				('501_edsUser', '21302', '1559', 'Chehalis School District','Lewis County Juvenile Detention'),
-				('523_edsUser', '21302', '2799', 'Chehalis School District','W F West High School');
+        VALUES  ( '527_edsUser', '01147', '', 'Othello School District', NULL ),
+                ( '501_edsUser', '21302', '1559', 'Chehalis School District',
+                  'Lewis County Juvenile Detention' ),
+                ( '523_edsUser', '21302', '2799', 'Chehalis School District',
+                  'W F West High School' );
 
 		--SELECT @user501, @user527
 		--SELECT * FROM dbo.EDSStaging
@@ -570,9 +714,9 @@ AS
 		--SELECT * FROM seUserdistrictschool	
 
 
-        EXEC dbo.EDSExport_ReplaceProperties -- @pDebug='emitudsflush';
+        EXEC dbo.EDSExport_ReplaceProperties; -- @pDebug='emitudsflush';
 
-        INSERT  #actual
+        INSERT  #Actual
                 ( username ,
                   districtCode ,
                   schoolCode ,
@@ -587,11 +731,10 @@ AS
                 FROM    dbo.SEUserDistrictSchool uds
                         JOIN SEUser su ON su.SEUserID = uds.SEUserID;
 
-      EXEC tSqlT.AssertEqualsTable '#expected', '#actual';
+        EXEC tSQLt.AssertEqualsTable '#expected', '#actual';
 	 
     END;
 GO
-
 
 CREATE PROCEDURE [testEDSExport_ReplaceProperties].[test that user info in seuser and aspnet_membership updated correctly]
 AS
@@ -599,29 +742,33 @@ AS
 
 
         EXEC tSQLt.FakeTable 'dbo.edsStaging';
-        EXEC tSqlT.FakeTable 'dbo.edsusersV1'
-		EXEC tSQLt.FakeTable 'dbo.seuserDistrictSchool'
+        EXEC tSQLt.FakeTable 'dbo.edsusersV1';
+        EXEC tSQLt.FakeTable 'dbo.seuserDistrictSchool';
 
 
-		DECLARE @user527 BIGINT, @user501 BIGINT, @user523	bigint
+        DECLARE @user527 BIGINT ,
+            @user501 BIGINT ,
+            @user523 BIGINT;
 
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user527 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '527_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user527; -- bigint
 
-		SELECT @user527 = seUserId FROM seuser WHERE username = '527_edsUser'
+        SELECT  @user527 = SEUserID
+        FROM    SEUser
+        WHERE   Username = '527_edsUser';
 		
-		EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
-		    @pFirstName = '', -- varchar(50)
-		    @pLastName = '', -- varchar(50)
-		    @pEMail = '', -- varchar(256)
-		    @pCertNo = '', -- varchar(20)
-		    @pHasMultipleLocations = 0, -- bit
-		    @pSEUserIdOutput = @user501 -- bigint
+        EXEC dbo.FindInsertUpdateSEUser @pUserName = '501_edsUser', -- varchar(256)
+            @pFirstName = '', -- varchar(50)
+            @pLastName = '', -- varchar(50)
+            @pEMail = '', -- varchar(256)
+            @pCertNo = '', -- varchar(20)
+            @pHasMultipleLocations = 0, -- bit
+            @pSEUserIdOutput = @user501; -- bigint
 
         SELECT  @user501 = SEUserID
         FROM    SEUser
@@ -641,7 +788,9 @@ AS
 
         INSERT  INTO dbo.EDSStaging
                 ( stagingId, districtCode, schoolCode, roleString, personID )
-        VALUES  ( 1, '01147', NULL,'SEDistrictEvaluator;SEDistrictAssignmentManager;SEDistrictViewer',527 ),
+        VALUES  ( 1, '01147', NULL,
+                  'SEDistrictEvaluator;SEDistrictAssignmentManager;SEDistrictViewer',
+                  527 ),
                 ( 2, '21302', '1559', 'SESchoolPrincipal', 501 );
 		
         INSERT  dbo.EDSUsersV1
@@ -675,7 +824,7 @@ AS
               memberShipEmail VARCHAR(500)
             );	
 
-        INSERT  #expected
+        INSERT  #Expected
                 ( firstName, lastName, userName, loweredUserName,
                   emailaddressAlternate, certificateNo, emailAddress,
                   memberShipEmail )
@@ -696,7 +845,7 @@ AS
         EXEC dbo.EDSExport_ReplaceProperties;
 		
 
-        INSERT  #actual
+        INSERT  #Actual
                 ( firstName ,
                   lastName ,
                   userName ,
@@ -715,8 +864,8 @@ AS
                         su.EmailAddress ,
                         m.Email
                 FROM    SEUser su
-                        JOIN dbo.aspnet_Membership m ON m.userid = su.ASPNetUserID
-				WHERE su.username IN ('501_edsUser','527_edsUser');
+                        JOIN dbo.aspnet_Membership m ON m.UserId = su.ASPNetUserID
+                WHERE   su.Username IN ( '501_edsUser', '527_edsUser' );
 
         EXEC tSQLt.AssertEqualsTable '#expected', '#actual';
 
@@ -725,4 +874,3 @@ GO
 
 
 EXEC tsqlt.runall;
-

@@ -11,8 +11,7 @@ PRINT '.. Creating sproc EDSExport_ReplaceProperties.';
 GO
 SET QUOTED_IDENTIFIER ON;
 GO
-CREATE PROCEDURE EDSExport_ReplaceProperties
-	@pDebug VARCHAR (20) = ''
+CREATE PROCEDURE EDSExport_ReplaceProperties @pDebug VARCHAR(20) = ''
 AS
     SET NOCOUNT ON; 
 
@@ -75,8 +74,10 @@ AS
                                 JOIN dbo.SEUser u ON u.SEUserID = uds.SEUserID
                                 JOIN aspnet_Users au ON au.UserId = u.ASPNetUserID
                     ) AS X;
-	IF @pDebug = 'EmitUDSFlush'
-		SELECT 'UDSFLUSH...',* FROM #udsFlush
+    IF @pDebug = 'EmitUDSFlush'
+        SELECT  'UDSFLUSH...' ,
+                *
+        FROM    #udsFlush;
 		/******************************************************/
 		/*  Check in SEUserLocationRole for need to flush  */
 
@@ -165,14 +166,17 @@ AS
     
     END;
 
-	IF @pDebug = 'EmitUserRoles'
-	BEGIN
+    IF @pDebug = 'EmitUserRoles'
+        BEGIN
 		--SELECT * FROM dbo.EDSStaging
 
-		SELECT seRoleName, districtCode, schoolCode, personId
-		FROM #usernameClaims unc
-		JOIN dbo.edsstaging s ON s.stagingId = unc.stagingId
-	end
+            SELECT  seRoleName ,
+                    districtCode ,
+                    schoolCode ,
+                    personID
+            FROM    #userNameClaims unc
+                    JOIN dbo.EDSStaging s ON s.stagingId = unc.stagingId;
+        END;
 	
 		--now, do we need to flush the ULR?
     CREATE TABLE #ulrFlush
@@ -211,7 +215,7 @@ AS
 		/******************************************************/
 		/*  Check for change in the userProperties  */
     
-	CREATE TABLE #userChange
+    CREATE TABLE #userChange
         (
           EDSUserName VARCHAR(50)
         );
@@ -256,13 +260,14 @@ AS
                   LastActiveRole ,
                   CreateDate
                 )
-                SELECT  DISTINCT su.SEUserID ,
+                SELECT  DISTINCT
+                        su.SEUserID ,
                         au.UserName ,
                         unc.seRoleName ,
                         r.RoleId ,
                         stage.districtCode ,
-                        ISNULL(stage.SchoolCode, ''),
-						NULL ,
+                        ISNULL(stage.schoolCode, '') ,
+                        NULL ,
                         GETDATE()
                 FROM    dbo.EDSStaging stage
                         JOIN #ulrFlush f ON f.edsuserName = CONVERT(VARCHAR(50), personID)
@@ -289,9 +294,10 @@ AS
                   DistrictName ,
                   IsPrimary
                 )
-                SELECT  su.SEUserID ,
-                        stage.schoolCode ,
-                        stage.districtCode ,
+                SELECT  DISTINCT
+                        su.SEUserID ,
+                        ISNULL(stage.schoolCode, '') ,
+                        ISNULL(stage.districtCode, '') ,
                         NULL ,
                         NULL ,
                         NULL
@@ -311,13 +317,13 @@ AS
                 JOIN dbo.vDistrictName dn ON dn.districtCode = uds.DistrictCode;
 
         UPDATE  dbo.SEUserDistrictSchool
-        SET     SchoolName = sn.schoolName
+        SET     SchoolName = sn.SchoolName
         FROM    dbo.SEUserDistrictSchool uds
                 JOIN SEUser su ON su.SEUserID = uds.SEUserID
                 JOIN aspnet_Users au ON au.UserId = su.ASPNetUserID
                 JOIN #udsFlush f ON f.EDSuserName = au.UserName
                 JOIN dbo.vSchoolName sn ON sn.schoolCode = uds.SchoolCode
-				WHERE uds.schoolCode IS NOT null
+        WHERE   uds.SchoolCode IS NOT NULL;
 
 
         IF @pDebug = 'EmitUDSFlush'
@@ -343,14 +349,14 @@ AS
                 JOIN vEDSUsers eu ON CONVERT(VARCHAR(20), PersonId)
                                      + '_edsUser' = u.UserName;
 
-		UPDATE  dbo.SEUser
+        UPDATE  dbo.SEUser
         SET     SchoolCode = st.schoolCode ,
                 DistrictCode = st.districtCode
         FROM    aspnet_Users u
                 JOIN #userChange uc ON uc.EDSUserName = u.UserName
                 JOIN SEUser su ON su.ASPNetUserID = u.UserId
-                JOIN dbo.EDSStaging st ON CONVERT(VARCHAR(20), PersonId)
-                                     + '_edsUser' = u.UserName;
+                JOIN dbo.EDSStaging st ON CONVERT(VARCHAR(20), personID)
+                                          + '_edsUser' = u.UserName;
 
         UPDATE  dbo.aspnet_Membership
         SET     Email = eu.Email
@@ -379,7 +385,9 @@ AS
 
 
         SELECT  @sql_error_message = '.... In: ' + @ProcName + '. '
-                + CONVERT(VARCHAR(20), @sql_error) + '>>>'
+                + CONVERT(VARCHAR(20), @sql_error) + '|'
+                + 'At line no (less offset)... '
+                + CONVERT(VARCHAR(20), ERROR_LINE()) + '>>>'
                 + ISNULL(@sql_error_message, '') + '<<<  ';
 
         RAISERROR(@sql_error_message, 15, 10);
