@@ -39,8 +39,6 @@ namespace StateEvalData
             this.SEUserPromptResponses = new HashSet<SEUserPromptResponse>();
             this.SEPracticeSessions = new HashSet<SEPracticeSession>();
             this.SEPracticeSessions1 = new HashSet<SEPracticeSession>();
-            this.SEEvalSessions = new HashSet<SEEvalSession>();
-            this.SEEvalSessions1 = new HashSet<SEEvalSession>();
             this.SEEvaluations = new HashSet<SEEvaluation>();
             this.SEEvaluations1 = new HashSet<SEEvaluation>();
             this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
@@ -52,6 +50,8 @@ namespace StateEvalData
             this.SEStudentGrowthFormPromptResponses = new HashSet<SEStudentGrowthFormPromptResponse>();
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
+            this.SEEvalSessions = new HashSet<SEEvalSession>();
+            this.SEEvalSessions1 = new HashSet<SEEvalSession>();
         }
     
         public long SEUserID { get; set; }
@@ -96,8 +96,6 @@ namespace StateEvalData
         public virtual ICollection<SEPracticeSession> SEPracticeSessions { get; set; }
         public virtual ICollection<SEPracticeSession> SEPracticeSessions1 { get; set; }
         public virtual aspnet_Users aspnet_Users { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions1 { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations1 { get; set; }
         public virtual SEEvaluation SEEvaluation { get; set; }
@@ -110,5 +108,7 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthFormPromptResponse> SEStudentGrowthFormPromptResponses { get; set; }
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions1 { get; set; }
     }
 }

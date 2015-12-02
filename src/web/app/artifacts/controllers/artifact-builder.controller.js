@@ -39,14 +39,9 @@
 
         function activate() {
 
-            if (vm.artifactId === 0) {
-                vm.artifact = artifactService.newArtifact();
-
-            } else {
-                artifactService.getArtifactById(vm.artifactId).then(function(artifact) {
-                    vm.artifact = artifact;
-                })
-            }
+            artifactService.getArtifactById(vm.artifactId).then(function(artifact) {
+                vm.artifact = artifact;
+            });
         }
 
         function doneItemEdit(item) {

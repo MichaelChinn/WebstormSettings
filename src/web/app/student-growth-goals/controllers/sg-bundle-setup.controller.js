@@ -46,27 +46,20 @@
             studentGrowthAdminService.getDistrictPrompts(activeUserContextService.context.evaluatee.evalData.evalType).then(function (prompts) {
                 vm.promptsByFrameworkNode = _.groupBy(prompts, 'frameworkNodeId');
 
-                if ($stateParams.id === "-1") {
-                    vm.new = true;
-                    vm.bundle = studentGrowthBuildService.newBundle();
+                studentGrowthBuildService.getBundleById($stateParams.id).then(function (bundle) {
+                    vm.bundle = bundle;
                     vm.submitted = (vm.bundle.wfState >= enums.WfState.GOAL_BUNDLE_PROCESS_SUBMITTED);
-                }
-                else {
-                    studentGrowthBuildService.getBundleById($stateParams.id).then(function (bundle) {
-                        vm.bundle = bundle;
-                        vm.submitted = (vm.bundle.wfState >= enums.WfState.GOAL_BUNDLE_PROCESS_SUBMITTED);
-                        buildActiveGoalList();
-                        setBundleDisplayName();
+                    buildActiveGoalList();
+                    setBundleDisplayName();
 
-                        if (vm.submitted) {
-                            vm.showCompleteScoringBtn = !vm.isEvaluatee &&
-                                                        vm.bundle.evalWfState == enums.WfState.GOAL_BUNDLE_NOT_SCORED;
+                    if (vm.submitted) {
+                        vm.showCompleteScoringBtn = !vm.isEvaluatee &&
+                                                    vm.bundle.evalWfState == enums.WfState.GOAL_BUNDLE_NOT_SCORED;
 
-                            vm.showReturnToNotScoredBtn = !vm.isEvaluatee &&
-                                                        vm.bundle.evalWfState >= enums.WfState.GOAL_BUNDLE_PROCESS_SCORED;
-                        }
-                    });
-                }
+                        vm.showReturnToNotScoredBtn = !vm.isEvaluatee &&
+                                                    vm.bundle.evalWfState >= enums.WfState.GOAL_BUNDLE_PROCESS_SCORED;
+                    }
+                });
             });
         }
 
@@ -154,28 +147,12 @@
             if (submit) {
                 vm.bundle.wfState = enums.WfState.GOAL_BUNDLE_PROCESS_SUBMITTED;
             }
-            if (vm.new) {
-                studentGrowthBuildService.createBundleForEvaluation(vm.bundle)
-                    .then(function()
-                    {
-                        vm.new = false;
-                        if (submit)
-                        {
-                            // todo: go to submitted view
-                            back();
-                        }
 
-                    });
-            }
-            else {
-                studentGrowthBuildService.updateBundleForEvaluation(vm.bundle)
-                    .then(function()
-                    {
-                        if (submit) {
-                            back();
-                        }
-                    });
-            }
+            studentGrowthBuildService.updateBundleForEvaluation(vm.bundle)
+                .then(function()
+                {
+                    back();
+                });
         }
     }
 

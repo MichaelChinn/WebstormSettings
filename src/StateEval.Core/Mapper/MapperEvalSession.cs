@@ -24,7 +24,7 @@ namespace StateEval.Core.Mapper
             target.Duration = source.Duration;
             target.WfState = System.Convert.ToInt16(source.WfStateID);
             target.EvaluationId = source.EvaluationID;
-            target.SessionKey = source.SessionKey;
+            target.ShortName = source.ShortName;
             target.PreConfStartTime = source.PreConfStartTime;
             target.PostConfStartTime = source.PostConfStartTime;
             
@@ -73,7 +73,7 @@ namespace StateEval.Core.Mapper
             target.EvaluationID = source.EvaluationId;
             target.Duration = source.Duration;
             target.WfStateID = source.WfState;
-            target.SessionKey = source.SessionKey;
+            target.ShortName = source.ShortName;
             target.ObserveNotes = source.ObserveNotes;
             target.ObserveStartTime = source.ObserveStartTime;
             target.PreConfStartTime = source.PreConfStartTime;

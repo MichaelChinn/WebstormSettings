@@ -9,6 +9,7 @@ using StateEval.Core.Mapper;
 using StateEval.Core.Models;
 using StateEval.Core.RequestModel;
 using StateEvalData;
+using System.Transactions;
 
 namespace StateEval.Core.Services
 {
@@ -103,8 +104,22 @@ namespace StateEval.Core.Services
                 seEvalSession.EvaluationScoreTypeID = 1;
                 EvalEntities.SEEvalSessions.Add(seEvalSession);
             }
+            
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                SEEvaluation seEvaluation = EvalEntities.SEEvaluations
+                    .FirstOrDefault(x => x.EvaluationID == evalSessionModel.EvaluationId);
 
-            EvalEntities.SaveChanges();
+                int count = EvalEntities.SEEvalSessions
+                    .Where(x => x.EvaluationID == evalSessionModel.EvaluationId).Count();
+
+                seEvalSession.ShortName = "Obs " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
+                seEvalSession.Title = seEvalSession.ShortName;
+
+                EvalEntities.SaveChanges();
+
+                transaction.Complete();
+            }
 
             if (evalSessionModel.Id == 0)
             {

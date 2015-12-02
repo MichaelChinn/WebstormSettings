@@ -88,7 +88,15 @@
         }
 
         function editArtifact(artifact) {
-            $state.go('artifact-builder', {artifactId: artifact?artifact.id:0});
+            if (!artifact) {
+                vm.artifact = artifactService.newArtifact();
+                artifactService.saveArtifact(vm.artifact).then(function() {
+                    $state.go('artifact-builder', {artifactId: vm.artifact.id});
+                });
+            }
+            else {
+                $state.go('artifact-builder', {artifactId: artifact.id});
+            }
         }
 
         function deleteArtifact(artifact) {

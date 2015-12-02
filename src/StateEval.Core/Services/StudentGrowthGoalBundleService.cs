@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StateEvalData;
+using System.Transactions;
 
 namespace StateEval.Core.Services
 {
@@ -127,6 +128,22 @@ namespace StateEval.Core.Services
             SEStudentGrowthGoalBundle seStudentGrowthGoalBundle = studentGrowthGoalBundleModel.MaptoSEStudentGrowthGoalBundle(EvalEntities);
             seStudentGrowthGoalBundle.CreationDateTime = DateTime.Now;
             EvalEntities.SEStudentGrowthGoalBundles.Add(seStudentGrowthGoalBundle);
+
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                SEEvaluation seEvaluation = EvalEntities.SEEvaluations
+                    .FirstOrDefault(x => x.EvaluationID == studentGrowthGoalBundleModel.EvaluationId);
+
+                int count = EvalEntities.SEStudentGrowthGoalBundles
+                    .Where(x => x.EvaluationID == studentGrowthGoalBundleModel.EvaluationId).Count();
+
+                seStudentGrowthGoalBundle.ShortName = "SG Goal " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
+                seStudentGrowthGoalBundle.Title = seStudentGrowthGoalBundle.ShortName;
+                EvalEntities.SaveChanges();
+
+                transaction.Complete();
+            }
+
             EvalEntities.SaveChanges();
 
             UpdateAvailableEvidence(seStudentGrowthGoalBundle);

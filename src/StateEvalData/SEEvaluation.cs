@@ -16,7 +16,6 @@ namespace StateEvalData
     {
         public SEEvaluation()
         {
-            this.SEEvalSessions = new HashSet<SEEvalSession>();
             this.SEEvaluationWfHistories = new HashSet<SEEvaluationWfHistory>();
             this.SEReportPrintOptionEvaluations = new HashSet<SEReportPrintOptionEvaluation>();
             this.SEStudentGrowthGoals = new HashSet<SEStudentGrowthGoal>();
@@ -29,6 +28,7 @@ namespace StateEvalData
             this.SEAvailableEvidences1 = new HashSet<SEAvailableEvidence>();
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
+            this.SEEvalSessions = new HashSet<SEEvalSession>();
         }
     
         public long EvaluationID { get; set; }
@@ -64,7 +64,6 @@ namespace StateEvalData
         public Nullable<bool> EvaluateeReflectionsIsPublic { get; set; }
         public Nullable<short> SubmissionCount { get; set; }
     
-        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual SEEvaluateePlanType SEEvaluateePlanType { get; set; }
         public virtual SEEvaluateePlanType SEEvaluateePlanType1 { get; set; }
         public virtual SEFrameworkNode SEFrameworkNode { get; set; }
@@ -89,5 +88,6 @@ namespace StateEvalData
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences1 { get; set; }
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
     }
 }

@@ -32,6 +32,7 @@ namespace StateEvalData
         public string Grade { get; set; }
         public long WfStateID { get; set; }
         public long EvalWfStateID { get; set; }
+        public string ShortName { get; set; }
     
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
         public virtual SEWfState SEWfState { get; set; }

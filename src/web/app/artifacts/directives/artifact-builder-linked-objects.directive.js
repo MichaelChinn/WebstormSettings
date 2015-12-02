@@ -61,6 +61,7 @@
                         var match = _.find(vm.artifact.linkedObservations, {id: observation.id});
                         if (!match) {
                             vm.unlinkedObservations.push(observation);
+                            vm.selectedObservation = observation;
                         }
                     })
                 });
@@ -76,6 +77,7 @@
                         var match = _.find(vm.artifact.linkedStudentGrowthGoalBundles, {id: goalBundle.id});
                         if (!match) {
                             vm.unlinkedGoalBundles.push(goalBundle);
+                            vm.selectedGoalBundle = goalBundle;
                         }
                     })
                 });

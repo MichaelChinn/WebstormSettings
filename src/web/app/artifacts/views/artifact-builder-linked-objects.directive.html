@@ -15,7 +15,7 @@
             <div ng-show="vm.editModeLinkObject===true && vm.linkObjectType===vm.enums.LinkedItemType.OBSERVATION">
                 <p>Select the Observation you would like to make this Artifact Available to:</p>
                 <select ng-model="vm.selectedObservation"
-                        ng-options="observation.sessionKey + ': ' + observation.title for observation in vm.unlinkedObservations">
+                        ng-options="observation.shortName + ': ' + observation.title for observation in vm.unlinkedObservations">
                 </select>
                 <div class="row">
                     <div class="col-lg-12">
@@ -29,7 +29,7 @@
             <div ng-show="vm.editModeLinkObject===true && vm.linkObjectType===vm.enums.LinkedItemType.STUDENT_GROWTH_GOAL">
                 <p>Select the Goal you would like to make this Artifact Available to:</p>
                 <select ng-model="vm.selectedGoalBundle"
-                        ng-options="goalBundle.sessionKey + ': ' + goalBundle.title for goalBundle in vm.unlinkedGoalBundles">
+                        ng-options="goalBundle.shortName + ': ' + goalBundle.title for goalBundle in vm.unlinkedGoalBundles">
                 </select>
                 <div class="row">
                     <div class="col-lg-12">

@@ -20,11 +20,11 @@ namespace StateEvalData
             this.SEWfTransitions = new HashSet<SEWfTransition>();
             this.SEWfTransitions1 = new HashSet<SEWfTransition>();
             this.SEStudentGrowthGoalBundles = new HashSet<SEStudentGrowthGoalBundle>();
-            this.SEEvalSessions = new HashSet<SEEvalSession>();
             this.SEEvaluations = new HashSet<SEEvaluation>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
             this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SEStudentGrowthGoalBundles1 = new HashSet<SEStudentGrowthGoalBundle>();
+            this.SEEvalSessions = new HashSet<SEEvalSession>();
         }
     
         public long WfStateID { get; set; }
@@ -34,10 +34,10 @@ namespace StateEvalData
         public virtual ICollection<SEWfTransition> SEWfTransitions { get; set; }
         public virtual ICollection<SEWfTransition> SEWfTransitions1 { get; set; }
         public virtual ICollection<SEStudentGrowthGoalBundle> SEStudentGrowthGoalBundles { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SEStudentGrowthGoalBundle> SEStudentGrowthGoalBundles1 { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
     }
 }

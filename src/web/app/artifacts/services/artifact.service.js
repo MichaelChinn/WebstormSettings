@@ -131,7 +131,9 @@
             if (artifact.id != 0) {
                 return $http.put(url, artifact);
             } else {
-                return $http.post(url, artifact);
+                return $http.post(url, artifact).then(function(response) {
+                    artifact.id = response.data.id;
+                });
             }
         }
 

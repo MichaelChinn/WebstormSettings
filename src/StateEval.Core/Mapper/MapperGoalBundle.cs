@@ -13,6 +13,7 @@ namespace StateEval.Core.Mapper
         {
             target = target ?? new SEStudentGrowthGoalBundle();
             target.EvaluationID = source.EvaluationId;
+            target.ShortName = source.ShortName;
             target.Title = source.Title;
             target.Comments = source.Comments;
             target.Course = source.Course;
@@ -62,6 +63,7 @@ namespace StateEval.Core.Mapper
             target.Id = source.StudentGrowthGoalBundleID;
             target.CreationDateTime = source.CreationDateTime;
             target.EvaluationId = source.EvaluationID;
+            target.ShortName = source.ShortName;
             target.Title = source.Title;
             target.Comments = source.Comments;
             target.Course = source.Course;

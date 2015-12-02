@@ -7,6 +7,7 @@ namespace StateEval.Core.Models
     public class ArtifactBundleModel
     {
         public long Id { get; set; }
+        public string ShortName { get; set; }
         public long EvaluationId { get; set;}
         public long CreatedByUserId { get; set; }
         public string CreatedByDisplayName { get; set; }

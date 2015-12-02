@@ -24,9 +24,9 @@ namespace StateEvalData
             this.SEStudentGrowthProcessSettings = new HashSet<SEStudentGrowthProcessSetting>();
             this.SEUserPromptResponses = new HashSet<SEUserPromptResponse>();
             this.SEPracticeSessions = new HashSet<SEPracticeSession>();
-            this.SEEvalSessions = new HashSet<SEEvalSession>();
             this.SEEvaluations = new HashSet<SEEvaluation>();
             this.SEStudentGrowthFormPromptFrameworkNodes = new HashSet<SEStudentGrowthFormPromptFrameworkNode>();
+            this.SEEvalSessions = new HashSet<SEEvalSession>();
         }
     
         public short SchoolYear { get; set; }
@@ -41,8 +41,8 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthProcessSetting> SEStudentGrowthProcessSettings { get; set; }
         public virtual ICollection<SEUserPromptResponse> SEUserPromptResponses { get; set; }
         public virtual ICollection<SEPracticeSession> SEPracticeSessions { get; set; }
-        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations { get; set; }
         public virtual ICollection<SEStudentGrowthFormPromptFrameworkNode> SEStudentGrowthFormPromptFrameworkNodes { get; set; }
+        public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
     }
 }
