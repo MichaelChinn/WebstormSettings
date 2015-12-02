@@ -102,6 +102,7 @@ namespace StateEval.Core.Services
             if (seEvalSession.EvalSessionID == 0)
             {
                 seEvalSession.EvaluationScoreTypeID = 1;
+                seEvalSession.CreationDateTime = DateTime.Now;
                 EvalEntities.SEEvalSessions.Add(seEvalSession);
             }
             

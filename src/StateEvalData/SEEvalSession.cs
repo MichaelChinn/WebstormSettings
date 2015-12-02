@@ -75,6 +75,7 @@ namespace StateEvalData
         public long WfStateID { get; set; }
         public Nullable<bool> IsSharedWithEvaluatee { get; set; }
         public Nullable<int> PreConfPromptState { get; set; }
+        public System.DateTime CreationDateTime { get; set; }
     
         public virtual SEAnchorType SEAnchorType { get; set; }
         public virtual ICollection<SEDistrictTrainingProtocolAnchor> SEDistrictTrainingProtocolAnchors { get; set; }

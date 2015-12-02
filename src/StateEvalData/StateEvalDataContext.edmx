@@ -250,7 +250,7 @@ warning 6002: The table/view 'stateeval.dbo.ProtoFrameworksToLoad' does not have
             <PropertyRef Name="ArtifactBundleID" />
           </Key>
           <Property Name="ArtifactBundleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ShortName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="EvaluationID" Type="bigint" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
@@ -502,7 +502,7 @@ warning 6002: The table/view 'stateeval.dbo.SEDistrictPRViewing' does not have a
           <Property Name="FocusedFrameworkNodeID" Type="bigint" />
           <Property Name="FocusedSGFrameworkNodeID" Type="bigint" />
           <Property Name="TrainingProtocolID" Type="bigint" />
-          <Property Name="ShortName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IncludeInFinalReport" Type="bit" />
           <Property Name="LockDateTime" Type="datetime" />
           <Property Name="isFormalObs" Type="bit" />
@@ -512,6 +512,7 @@ warning 6002: The table/view 'stateeval.dbo.SEDistrictPRViewing' does not have a
           <Property Name="WfStateID" Type="bigint" Nullable="false" />
           <Property Name="IsSharedWithEvaluatee" Type="bit" />
           <Property Name="PreConfPromptState" Type="int" />
+          <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SEEvalSessionLibraryVideo">
           <Key>
@@ -1099,7 +1100,7 @@ warning 6002: The table/view 'stateeval.dbo.SEReportPrintOptionUser' does not ha
             <PropertyRef Name="StudentGrowthGoalBundleID" />
           </Key>
           <Property Name="StudentGrowthGoalBundleID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ShortName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="EvaluationID" Type="bigint" Nullable="false" />
           <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
@@ -8181,7 +8182,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SERubricRowEvaluations" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle" FromRole="SEStudentGrowthGoalBundle" ToRole="SERubricRowEvaluation" />
           <Property Name="EvalWfStateID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="SEWfState1" Relationship="StateEvalModel.FK_SEStudentGrowthGoalBundle_SEWfState1" FromRole="SEStudentGrowthGoalBundle" ToRole="SEWfState" />
-          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_SEStudentGrowthGoal_SEStudentGrowthGoalBundle">
           <End Type="StateEvalModel.SEStudentGrowthGoalBundle" Role="SEStudentGrowthGoalBundle" Multiplicity="1" />
@@ -8620,7 +8621,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEStudentGrowthGoalBundles" Relationship="StateEvalModel.SEArtifactBundleStudentGrowthGoalBundle" FromRole="SEArtifactBundle" ToRole="SEStudentGrowthGoalBundle" />
           <NavigationProperty Name="SEAvailableEvidences" Relationship="StateEvalModel.FK_SEAvailableEvidence_SEArtifactBundle" FromRole="SEArtifactBundle" ToRole="SEAvailableEvidence" />
           <NavigationProperty Name="SEEvalSessions" Relationship="StateEvalModel.SEArtifactBundleEvalSession" FromRole="SEArtifactBundle" ToRole="SEEvalSession" />
-          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_SEArtifactBundle_CreatedByUserID">
           <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
@@ -9565,7 +9566,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="FocusedFrameworkNodeID" Type="Int64" />
           <Property Name="FocusedSGFrameworkNodeID" Type="Int64" />
           <Property Name="TrainingProtocolID" Type="Int64" />
-          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IncludeInFinalReport" Type="Boolean" />
           <Property Name="LockDateTime" Type="DateTime" Precision="3" />
           <Property Name="isFormalObs" Type="Boolean" />
@@ -9599,6 +9600,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEUserPromptResponses" Relationship="StateEvalModel.FK_SEUserPromptResponse_EvalSession" FromRole="SEEvalSession" ToRole="SEUserPromptResponse" />
           <NavigationProperty Name="SEArtifactBundles" Relationship="StateEvalModel.SEArtifactBundleEvalSession" FromRole="SEEvalSession" ToRole="SEArtifactBundle" />
           <NavigationProperty Name="SERubricRows" Relationship="StateEvalModel.SEEvalSessionRubricRowFocus" FromRole="SEEvalSession" ToRole="SERubricRow" />
+          <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <Association Name="FK_SEEvalSession_SEAnchorType">
           <End Type="StateEvalModel.SEAnchorType" Role="SEAnchorType" Multiplicity="0..1" />
@@ -11371,6 +11373,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySetMapping Name="SEEvalSessions">
             <EntityTypeMapping TypeName="StateEvalModel.SEEvalSession">
               <MappingFragment StoreEntitySet="SEEvalSession">
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
                 <ScalarProperty Name="PreConfPromptState" ColumnName="PreConfPromptState" />
                 <ScalarProperty Name="IsSharedWithEvaluatee" ColumnName="IsSharedWithEvaluatee" />
                 <ScalarProperty Name="WfStateID" ColumnName="WfStateID" />

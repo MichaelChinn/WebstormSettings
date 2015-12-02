@@ -27,6 +27,7 @@ namespace StateEval.Core.Mapper
             target.ShortName = source.ShortName;
             target.PreConfStartTime = source.PreConfStartTime;
             target.PostConfStartTime = source.PostConfStartTime;
+            target.CreationDateTime = source.CreationDateTime;
             
 
             target.EvaluatorPreConNotes = source.EvaluatorPreConNotes;
@@ -82,6 +83,7 @@ namespace StateEval.Core.Mapper
             target.EvaluateePreConNotes = source.EvaluateePreConNotes;
             target.IsSharedWithEvaluatee = source.IsSharedWithEvaluatee;
             target.PreConfPromptState = source.PreConfPromptState;
+            target.CreationDateTime = source.CreationDateTime;
          
             return target;
         }

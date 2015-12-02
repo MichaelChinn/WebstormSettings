@@ -25,6 +25,8 @@
         vm.submit = submit;
         vm.saveForLater = saveForLater;
 
+        vm.alignmentDone = alignmentDone;
+
         // functions for editing lib item
         // called from the directive
         vm.doneItemEdit = doneItemEdit;
@@ -32,6 +34,8 @@
         vm.editItem = editItem;
         vm.createItem = createItem;
         vm.newItem = false;
+
+        vm.deleteArtifact = deleteArtifact;
 
         ///////////////////////////////////////////
 
@@ -42,6 +46,16 @@
             artifactService.getArtifactById(vm.artifactId).then(function(artifact) {
                 vm.artifact = artifact;
             });
+        }
+
+        function deleteArtifact(artifact) {
+            artifactService.deleteArtifact(artifact).then(function() {
+                goBack();
+            })
+        }
+
+        function alignmentDone() {
+            artifactService.saveArtifact(vm.artifact);
         }
 
         function doneItemEdit(item) {

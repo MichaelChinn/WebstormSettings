@@ -9,6 +9,7 @@ namespace StateEval.Core.Models
     {
         public long Id { get; set; }
         public string ShortName { get; set; }
+        public DateTime CreationDateTime { get; set; }
         public string DistrictCode { get; set; }
         public string SchoolCode { get; set; }
         public string Title { get; set; }
