@@ -113,9 +113,6 @@
     <Compile Include="SEArtifactBundle.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="SEArtifactBundleEvidenceCollection.cs">
-      <DependentUpon>StateEvalDataContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="SEArtifactBundleRejection.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>

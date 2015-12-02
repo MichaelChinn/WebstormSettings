@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0cf8b19a117644718a96dc927b02f3b5" Name="Diagram1" ZoomLevel="53">
+      <Diagram DiagramId="0cf8b19a117644718a96dc927b02f3b5" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="StateEvalModel.EmailDeliveryType" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StateEvalModel.MessageType" Width="1.5" PointX="0.75" PointY="68.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StateEvalModel.MessageTypeRecipientConfig" Width="1.5" PointX="3" PointY="36.75" IsExpanded="true" />
@@ -285,7 +285,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_LearningWalkClassroomID" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SERubricPerformanceLevel" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SEUser" />
-        <EntityTypeShape EntityType="StateEvalModel.SEArtifactBundleEvidenceCollection" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="StateEvalModel.SEEvalSession" Width="1.5" PointX="42" PointY="71" />
         <AssociationConnector Association="StateEvalModel.FK_SEEvalSession_SEAnchorType" />
         <AssociationConnector Association="StateEvalModel.FK_SEDistrictTrainingProtocolAnchor_SEEvalSession" />
