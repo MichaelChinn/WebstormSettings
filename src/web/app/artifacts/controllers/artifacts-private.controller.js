@@ -32,6 +32,7 @@
                  vm.privateArtifacts = artifacts;
 
                 loadAlignment();
+                loadAttachments();
                 loadWfState();
             })
         }
@@ -84,6 +85,33 @@
                     alignment+= ")<br/>";
                 }
                 vm.alignment[artifact.id] = alignment;
+            })
+        }
+
+        function loadAttachments() {
+            vm.privateArtifacts.forEach(function(artifact) {
+                var attachments = "";
+                if (artifact.linkedObservations.length>0) {
+                    attachments+= "<b>Observations</b><br/>";
+                    for (var i=0; i<artifact.linkedObservations.length; ++i) {
+                        if (i>0) {
+                            attachments+= ", ";
+                        }
+                        attachments+= artifact.linkedObservations[i].title;
+                    }
+                    attachments+=  ")<br/>";
+                }
+                if (artifact.linkedStudentGrowthGoalBundles.length>0) {
+                    attachments+= "<b>Student Growth Goal Bundles</b><br/>";
+                    for (var i=0; i<artifact.linkedStudentGrowthGoalBundles.length; ++i) {
+                        if (i>0) {
+                            attachments+= ", ";
+                        }
+                        attachments+= artifact.linkedStudentGrowthGoalBundles[i].title;
+                    }
+                    attachments+=  ")<br/>";
+                }
+                vm.attachments[artifact.id] = attachments;
             })
         }
 

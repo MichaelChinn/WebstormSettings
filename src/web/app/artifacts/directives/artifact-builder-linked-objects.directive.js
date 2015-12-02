@@ -67,23 +67,15 @@
             artifactService.saveArtifact(vm.artifact);
         }
         function loadObservations() {
-            return artifactService.getLinkedObservationsForArtifact(vm.artifact.id)
-                .then(function (linkedObservations) {
-                    vm.artifact.linkedObservations = linkedObservations;
-                    return artifactService.getAttachableObservationsForEvaluation();
-                }).then(function (observations) {
-                    vm.observations = observations;
-                });
+            return artifactService.getAttachableObservationsForEvaluation().then(function(observations) {
+                vm.observations = observations;
+            })
         }
 
         function loadGoalBundles() {
-            return artifactService.getLinkedStudentGrowthGoalBundlesForArtifact(vm.artifact.id)
-                .then(function (linkedGoalBundles) {
-                    vm.artifact.linkedStudentGrowthGoalBundles = linkedGoalBundles;
-                    return artifactService.getAttachableStudentGrowthGoalBundlesForEvaluation();
-                }).then(function (goalBundles) {
-                    vm.goalBundles = goalBundles;
-                });
+            return artifactService.getAttachableStudentGrowthGoalBundlesForEvaluation().then(function (goalBundles) {
+                vm.goalBundles = goalBundles;
+            });
         }
     }
 

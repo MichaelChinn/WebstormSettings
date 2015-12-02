@@ -133,6 +133,24 @@ namespace StateEval.Core.Mapper
                 target.AlignedRubricRows = new List<RubricRowModel>();
             }
 
+            if (source != null && source.SEEvalSessions.Any())
+            {
+                target.LinkedObservations = source.SEEvalSessions.Select(x => x.MaptoEvalSessionModel()).ToList();
+            }
+            else
+            {
+                target.LinkedObservations = new List<EvalSessionModel>();
+            }
+
+            if (source != null && source.SEStudentGrowthGoalBundles.Any())
+            {
+                target.LinkedStudentGrowthGoalBundles = source.SEStudentGrowthGoalBundles.Select(x => x.MaptoStudentGrowthGoalBundleModel()).ToList();
+            }
+            else
+            {
+                target.LinkedStudentGrowthGoalBundles = new List<StudentGrowthGoalBundleModel>();
+            }
+
             return target;
         }
     }
