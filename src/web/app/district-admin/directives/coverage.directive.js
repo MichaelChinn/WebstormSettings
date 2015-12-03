@@ -41,7 +41,7 @@
                     load();
                 });
 
-            $rootScope.$on('change-fr amework', function () {
+            $rootScope.$on('change-framework', function () {
                 load();
             });
         }
