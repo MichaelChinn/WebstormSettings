@@ -35,7 +35,7 @@ namespace StateEval.Core.Mapper
             target.IsSharedWithEvaluatee = source.IsSharedWithEvaluatee;
             target.PreConfPromptState = source.PreConfPromptState;
 
-            target.CreatedByDisplayName = source.SEUser.FirstName + " " + source.SEUser.LastName;
+            target.CreatedByDisplayName = source.SEUser1.FirstName + " " + source.SEUser1.LastName;
             
             if (source.SchoolYear != null)
             {

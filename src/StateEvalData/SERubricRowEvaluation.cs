@@ -42,8 +42,8 @@ namespace StateEvalData
         public virtual SEWfState SEWfState { get; set; }
         public virtual SEEvidenceCollectionType SEEvidenceCollectionType { get; set; }
         public virtual ICollection<SEAlignedEvidence> SEAlignedEvidences { get; set; }
+        public virtual SELinkedItemType SELinkedItemType { get; set; }
         public virtual SEEvalSession SEEvalSession { get; set; }
         public virtual SEEvalSession SEEvalSession1 { get; set; }
-        public virtual SELinkedItemType SELinkedItemType { get; set; }
     }
 }

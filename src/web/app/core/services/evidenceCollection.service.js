@@ -21,6 +21,9 @@
 
             if(request.collectionType === enums.EvidenceCollectionType.SUMMATIVE) {
                 for(var i in enums.EvColTypeAccessor) {
+                    // this.associatedCollections['observations'] = array of observations
+                    // this.associatedCollections['studentGrowthGoalBundles'] = array of bundles
+                    // this.associatedCollections[linkedItemType][linkedItemId]: object
                     this.associatedCollections[enums.EvidenceCollectionType[i]] = data[enums.EvColTypeAccessor[i]] || [];
                     for(var j in this.associatedCollections) {
                        this.associatedCollections[j] = _.groupBy(this.associatedCollections[j], 'id');
