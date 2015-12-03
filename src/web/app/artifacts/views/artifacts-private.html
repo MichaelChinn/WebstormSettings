@@ -30,7 +30,7 @@
                     <td>{{artifact.creationDateTime | date }}</td>
                     <td>{{artifact.title}}</td>
                     <td ng-bind-html="vm.getSafeHtml(vm.alignment[artifact.id])"></td>
-                    <td>Available In</td>
+                    <td ng-bind-html="vm.getSafeHtml(vm.attachments[artifact.id])"></td>
                     <td ng-bind-html="vm.getSafeHtml(vm.wfState[artifact.id])"> </td>
                     <td>
                         <button class="btn btn-xs btn-default btn-outline"

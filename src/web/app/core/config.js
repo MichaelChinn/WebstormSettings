@@ -15,12 +15,32 @@
      }
      */
 
+    function getAPIUrl() {
+        var host = window.location.host;
+        if (host.indexOf("localhost")!=-1) {
+            return 'http://localhost/StateEvalWebAPI/api/';
+        }
+        else if (host.indexOf('test')!=-1) {
+            return 'http://test.eval-wa.org/StateEval_WebAPI_Test/api/';
+        }
+        else if (host.indexOf('sandbox')!=-1) {
+            return 'http://sandbox.eval-wa.org/StateEval_WebAPI_Sandbox/api/';
+        }
+        else if (host.indexOf('demo')!=-1) {
+            return 'http://test.eval-wa.org/StateEval_WebAPI_Demo/api/';
+        }
+        else if (host.indexOf('eval-wa.org')===0) {
+            return 'https://eval-wa.org/StateEval_WebAPI_WA_Prod/api/';
+        }
+    }
+
     // global constants
     var config = {
         appErrorPrefix: '[eval Error] ',
         appTitle: 'eval',
         // apiUrl: 'http://test.eval-wa.org/StateEval_WebAPI_Test/api/',
-        apiUrl:  'http://localhost/StateEvalWebAPI/api/',
+        // apiUrl:  'http://localhost/StateEvalWebAPI/api/',
+        apiUrl: getAPIUrl(),
         schoolYear: 2016,
         summernoteDefaultOptions: {
             height: 100,

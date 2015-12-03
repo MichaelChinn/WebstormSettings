@@ -13,6 +13,7 @@
 
         vm.privateArtifacts = null;
         vm.alignment = [];
+        vm.attachments = [];
         vm.wfState = [];
 
         vm.mapArtifactWfStateToString = mapArtifactWfStateToString;
@@ -99,7 +100,7 @@
                         }
                         attachments+= artifact.linkedObservations[i].title;
                     }
-                    attachments+=  ")<br/>";
+                    attachments+=  "<br/>";
                 }
                 if (artifact.linkedStudentGrowthGoalBundles.length>0) {
                     attachments+= "<b>Student Growth Goal Bundles</b><br/>";
@@ -109,7 +110,7 @@
                         }
                         attachments+= artifact.linkedStudentGrowthGoalBundles[i].title;
                     }
-                    attachments+=  ")<br/>";
+                    attachments+=  "<br/>";
                 }
                 vm.attachments[artifact.id] = attachments;
             })
