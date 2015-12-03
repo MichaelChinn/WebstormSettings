@@ -34,6 +34,7 @@
         vm.editItem = editItem;
         vm.createItem = createItem;
         vm.newItem = false;
+        vm.dirty = false;
 
         vm.deleteArtifact = deleteArtifact;
 
@@ -102,7 +103,7 @@
         function submit(artifact) {
             if (vm.builderForm.$valid) {
                 artifactService.submitArtifact(artifact).then(function () {
-                    $state.go('artifacts-submitted');
+                    $state.go('artifacts-private');
                 })
             }
         }

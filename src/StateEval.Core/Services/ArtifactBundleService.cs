@@ -255,6 +255,8 @@ namespace StateEval.Core.Services
 
             if (artifactBundle != null)
             {
+                EvalEntities.SEAvailableEvidences.RemoveRange(EvalEntities.SEAvailableEvidences.Where(x => x.ArtifactBundleID == id));
+
                 artifactBundle.SEArtifactLibItems.ToList().ForEach(rr => artifactBundle.SEArtifactLibItems.Remove(rr));
                 artifactBundle.SERubricRows.ToList().ForEach(rr => artifactBundle.SERubricRows.Remove(rr));
 
