@@ -187,9 +187,7 @@ update #allTwoRoles set l2Shortname = 's2' where lCode2 ='2902'
 update #allTwoRoles set l2Shortname = 's3' where lCode2 ='3010' 
 update #allTwoRoles set l2Shortname = 's4' where lCode2 ='2754' 
 
-
 UPDATE #allTwoRoles SET RoleString = lcode1 + '|' + r1 + ',' + lcode2 + '|' + r2
-
 
 UPDATE #allTwoRoles SET userCreateString =   'declare @UserIdOut bigint '
                         + 'EXEC dbo.FindInsertUpdateSeUser '
