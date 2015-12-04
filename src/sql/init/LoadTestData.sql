@@ -189,8 +189,7 @@ IF EXISTS ( SELECT  *
                         + ', @pseUserIdOutput = @UserIdOut OUTPUT'
                 FROM    #places p
                         JOIN #pType t ON 1 = 1
-                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'PRH', 'T1', 'T2', 'TMS',
-                               'PMS' )
+                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'PRH', 'T1', 'T2')
                         AND p.schoolCode <> '';
 
         INSERT  #cmd
@@ -237,18 +236,6 @@ IF EXISTS ( SELECT  *
                         AND p.schoolCode = '';
 
 
-	-- Teacher and principal in multiple schools account
-        INSERT  #cmd
-                ( sqlcmd
-                )
-                SELECT  'EXEC dbo.InsertUserReferenceTables @pUserName='''
-                        + placeName + ' ' + x + '''' + ', @pLRString = '''
-                        + p.schoolCode + '|' + t.roleString + ''''
-                FROM    #places p
-                        JOIN #pType t ON 1 = 1
-                WHERE   x IN ( 'TMS' )
-                        AND p.schoolCode IN ( '3010', '3015' );
-
 	-- multiple roled
 	--drop table #mrc
         CREATE TABLE #mrC
@@ -270,22 +257,6 @@ IF EXISTS ( SELECT  *
                         JOIN #pType t ON 1 = 1
                 WHERE   x IN ( 'PRH' )
                         AND p.schoolCode <> '';
-
-
-
-        INSERT  #mrC
-                ( userName ,
-                  locationCode ,
-                  roleString
-                )
-                SELECT  placeName + ' ' + x ,
-                        p.schoolCode ,
-                        ',' + t.roleString
-                FROM    #places p
-                        JOIN #pType t ON 1 = 1
-                WHERE   x IN ( 'PMS' )
-                        AND p.schoolCode IN ( '3015', '3010' );
-
 
 
         INSERT  #mrC
@@ -515,15 +486,5 @@ IF EXISTS ( SELECT  *
             END;
 	
 	
-        UPDATE  SEUser
-        SET     HasMultipleBuildings = 1
-        WHERE   ( FirstName LIKE '%PMS%'
-                  OR FirstName LIKE '%TMS%'
-                );
-
-
-
-
-
-    END;
+     END;
 
