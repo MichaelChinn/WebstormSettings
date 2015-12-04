@@ -24,6 +24,27 @@
     <Content Include=".abproject" />
     <Content Include=".debug.abproject" />
     <Content Include=".release.abproject" />
+    <Content Include="app\app.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\home.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\home\home.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\lib\ionic\css\ionic.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\lib\ionic\css\ionic.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\lib\ionic\js\ionic.bundle.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\observation\observation.html">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="App_Resources\WP8\SplashScreenImage.png">
       <SubType>Content</SubType>
     </Content>
@@ -221,6 +242,13 @@
     <Content Include="views\settings\settings.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\home\" />
+    <Folder Include="app\lib\" />
+    <Folder Include="app\lib\ionic\" />
+    <Folder Include="app\lib\ionic\css\" />
+    <Folder Include="app\lib\ionic\js\" />
+    <Folder Include="app\observation\" />
     <Folder Include="App_Resources\" />
     <Folder Include="App_Resources\Android\" />
     <Folder Include="App_Resources\Android\drawable-hdpi\" />
