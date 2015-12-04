@@ -317,6 +317,8 @@
             }
         }
 
+
+        console.log('first change');
         //CONSTRUCTOR -
 
         //    each work area gets an additional method called from the change-work-area controller
