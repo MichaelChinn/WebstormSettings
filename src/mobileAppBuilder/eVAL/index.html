@@ -8,8 +8,11 @@
     <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
     <script src="cordova.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/layout/container-controller.js"></script>
+    <script src="app/home/home-controller.js"></script>
 </head>
-    <body ng-app="evalMobile">
-        <ion-nav-view></ion-nav-view>
+    <body ng-app="evalMobile" ng-controller="containerController as container">                  
+        <ion-nav-view>            
+        </ion-nav-view>
     </body>
 </html>

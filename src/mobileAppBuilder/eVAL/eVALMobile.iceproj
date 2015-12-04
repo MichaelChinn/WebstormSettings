@@ -30,9 +30,12 @@
     <Content Include="app\home.html">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="app\home\home-controller.js" />
     <Content Include="app\home\home.html">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="app\layout\container-controller.js" />
+    <Content Include="app\layout\layout.html" />
     <Content Include="app\lib\ionic\css\ionic.css">
       <SubType>Content</SubType>
     </Content>
@@ -42,6 +45,8 @@
     <Content Include="app\lib\ionic\js\ionic.bundle.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="app\observation\observation-service.js" />
+    <Content Include="app\observation\observation-controller.js" />
     <Content Include="app\observation\observation.html">
       <SubType>Content</SubType>
     </Content>
@@ -248,6 +253,8 @@
     <Folder Include="app\lib\ionic\" />
     <Folder Include="app\lib\ionic\css\" />
     <Folder Include="app\lib\ionic\js\" />
+    <Folder Include="app\layout\" />
+    <Folder Include="app\Core\" />
     <Folder Include="app\observation\" />
     <Folder Include="App_Resources\" />
     <Folder Include="App_Resources\Android\" />
