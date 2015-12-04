@@ -147,10 +147,12 @@ namespace StateEval.Core.Services
                 transaction.Complete();
             }
 
-            EvalEntities.SaveChanges();
+            // Need to call update in case this is called with goals already attached.
+            // need to get the goals to have ids before we call update to set in availableevidence.
 
-            UpdateAvailableEvidence(seStudentGrowthGoalBundle);
-
+            // TODO: add interface for add/remove goals separately.
+            seStudentGrowthGoalBundle = EvalEntities.SEStudentGrowthGoalBundles.FirstOrDefault(x => x.StudentGrowthGoalBundleID == seStudentGrowthGoalBundle.StudentGrowthGoalBundleID);
+            UpdateStudentGrowthGoalBundle(seStudentGrowthGoalBundle.MaptoStudentGrowthGoalBundleModel());
             return new { Id = seStudentGrowthGoalBundle.StudentGrowthGoalBundleID };
         }
 
@@ -161,6 +163,14 @@ namespace StateEval.Core.Services
             {
                 foreach (SEStudentGrowthGoal g in EvalEntities.SEStudentGrowthGoals.Where(x => x.GoalBundleID == id))
                 {
+                    // we don't allow goals to be deleted that are in use as evidence
+
+                    List<SEAlignedEvidence> alignedEvidence = EvalEntities.SEAlignedEvidences.Where(x => x.AvailableEvidenceObjectID == g.StudentGrowthGoalID).ToList();
+                    if (alignedEvidence.Count > 0)
+                    {
+                        throw new Exception("This goal is in use as evidence and cannot be deleted.");
+                    }
+
                     EvalEntities.SEStudentGrowthFormPromptResponses.RemoveRange(g.SEStudentGrowthFormPromptResponses);
                 }
 

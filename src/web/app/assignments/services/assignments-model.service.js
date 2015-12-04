@@ -306,7 +306,7 @@
         function principalIsAHeadPrincipal(principal) {
             for (var i=0;i<principal.locationRoles.length; ++i) {
                 var isHeadPrincipalAtLocation =
-                    principal.locationRoles[i].roles.indexOf(enums.Roles.SESchoolHeadPrincipal) != -1;
+                    principal.locationRoles[i].roleName === enums.Roles.SESchoolHeadPrincipal;
                 if (isHeadPrincipalAtLocation) {
                     return true;
                 }
@@ -320,7 +320,7 @@
             principal.locationRoles.forEach(function(locationRole) {
                 service.model.headPrincipals.forEach(function(headPrincipal) {
                     var match = _.findWhere(headPrincipal.locationRoles, {schoolCode: locationRole.schoolCode});
-                    var isHeadPrincipalAtLocation = locationRole.roles.indexOf(enums.Roles.SESchoolHeadPrincipal) != -1;
+                    var isHeadPrincipalAtLocation = locationRole.roleName === enums.Roles.SESchoolHeadPrincipal;
                     if (match && !isHeadPrincipalAtLocation) {
                         matches.push(headPrincipal);
                     }

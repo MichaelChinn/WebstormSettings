@@ -62,10 +62,11 @@ namespace StateEval.Core.Test
 
         #region EvidenceCollection
 
-        public static List<AvailableEvidenceModel> GetAvailableEvidenceForEvaluation()
+        public static List<AvailableEvidenceModel> GetAvailableEvidenceForEvaluation(SEEvidenceCollectionTypeEnum collectionType, long collectionObjectId)
         {
             EvidenceCollectionRequestModel request = new EvidenceCollectionRequestModel();
-            request.CollectionType = SEEvidenceCollectionTypeEnum.OTHER_EVIDENCE;
+            request.CollectionType = collectionType;
+            request.CollectionObjectId = collectionObjectId;
             request.EvaluationId = DefaultTeacher.EvaluationId;
 
             EvidenceCollectionService service = new EvidenceCollectionService();
@@ -75,12 +76,22 @@ namespace StateEval.Core.Test
 
         #region RubricRowEvaluation
 
-        public static RubricRowEvaluationModel CreateRubricRowEvaluationModel(AvailableEvidenceModel availableEvidence, long rubricRowId)
+        public static RubricRowEvaluationModel CreateRubricRowEvaluationWithAlignedArtifact()
         {
+            RubricRowModel rr1a = TestHelper.GetDanielsonInstructionalRubricRow(SEEvaluationTypeEnum.TEACHER, "D1", "1a");
+            var artifactBandleService = new ArtifactBundleService();
+
+            ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundleAlignedToRubricRow("A1", rr1a);
+
+            List<AvailableEvidenceModel> availableEvidences = TestHelper.GetAvailableEvidenceForEvaluation(SEEvidenceCollectionTypeEnum.OTHER_EVIDENCE, 0);
+            Assert.AreEqual(1, availableEvidences.Count);
+            Assert.AreEqual(rr1a.Id, availableEvidences[0].RubricRowId);
+            AvailableEvidenceModel availableEvidence = availableEvidences[0];
+
             RubricRowEvaluationModel rrEvalModel = new RubricRowEvaluationModel
             {
                 Id = 0,
-                RubricRowId = rubricRowId,
+                RubricRowId = rr1a.Id,
                 EvaluationId = DefaultTeacher.EvaluationId,
                 RubricStatement = "Statement",
                 EvidenceCollectionType = SEEvidenceCollectionTypeEnum.OTHER_EVIDENCE,
@@ -97,10 +108,68 @@ namespace StateEval.Core.Test
             alignedEvidence.Data = availableEvidence;
             alignedEvidence.AvailableEvidenceObjectId = Convert.ToInt64(availableEvidence.ArtifactBundleId);
 
+            RubricRowEvaluationService rrEvalService = new RubricRowEvaluationService();
+
             rrEvalModel.AlignedEvidences.Add(alignedEvidence);
+            object val = rrEvalService.CreateRubricRowEvaluation(rrEvalModel);
+            rrEvalService = new RubricRowEvaluationService();
+            List<RubricRowEvaluationModel> rrEvals = rrEvalService.GetRubricRowEvaluationsForEvaluation(DefaultTeacher.EvaluationId);
+            Assert.AreEqual(1, rrEvals.Count);
 
+            PropertyInfo p = val.GetType().GetProperty("Id");
+            int id = Convert.ToInt32(p.GetValue(val));
+            rrEvalModel.Id = id;         
             return rrEvalModel;
+        }
 
+        public static RubricRowEvaluationModel CreateRubricRowEvaluationWithAlignedStudentGrowthGoal()
+        {
+            var studentGrowthGoalBundleService = new StudentGrowthGoalBundleService();
+
+            FrameworkModel framework = TestHelper.GetStateFramework(SEEvaluationTypeEnum.TEACHER);
+            RubricRowModel rr3_1 = TestHelper.GetDanielsonStateRubricRow(SEEvaluationTypeEnum.TEACHER, "C3", "SG 3.1");
+            RubricRowModel rr3_2 = TestHelper.GetDanielsonStateRubricRow(SEEvaluationTypeEnum.TEACHER, "C3", "SG 3.2");
+            StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1");
+
+            List<AvailableEvidenceModel> availableEvidences = TestHelper.GetAvailableEvidenceForEvaluation(SEEvidenceCollectionTypeEnum.STUDENT_GROWTH_GOALS, goalBundle.Id);
+            Assert.AreEqual(2, availableEvidences.Count);
+            Assert.AreEqual(rr3_1.Id, availableEvidences[0].RubricRowId);
+            Assert.AreEqual(rr3_2.Id, availableEvidences[1].RubricRowId);
+            AvailableEvidenceModel availableEvidence = availableEvidences[0];
+
+            RubricRowEvaluationModel rrEvalModel = new RubricRowEvaluationModel
+            {
+                Id = 0,
+                RubricRowId = rr3_1.Id,
+                EvaluationId = DefaultTeacher.EvaluationId,
+                RubricStatement = "Statement",
+                EvidenceCollectionType = SEEvidenceCollectionTypeEnum.STUDENT_GROWTH_GOALS,
+                LinkedItemType = Convert.ToInt16(SELinkedItemTypeEnum.STUDENT_GROWTH_GOAL),
+                LinkedStudentGrowthGoalBundleId = goalBundle.Id,
+                CreatedByUserId = DefaultPrincipal.UserId,
+                PerformanceLevel = Convert.ToInt16(SERubricPerformanceLevelEnum.PL1),
+                AlignedEvidences = new List<AlignedEvidenceModel>()
+            };
+
+            AlignedEvidenceModel alignedEvidence = new AlignedEvidenceModel();
+            alignedEvidence.EvidenceType = SEEvidenceTypeEnum.STUDENT_GROWTH_GOAL;
+            alignedEvidence.RubricRowEvaluationId = 0;
+            alignedEvidence.AvailableEvidenceId = availableEvidence.Id;
+            alignedEvidence.Data = availableEvidence;
+            alignedEvidence.AvailableEvidenceObjectId = Convert.ToInt64(goalBundle.Goals[0].Id);
+
+            RubricRowEvaluationService rrEvalService = new RubricRowEvaluationService();
+
+            rrEvalModel.AlignedEvidences.Add(alignedEvidence);
+            object val = rrEvalService.CreateRubricRowEvaluation(rrEvalModel);
+            rrEvalService = new RubricRowEvaluationService();
+            List<RubricRowEvaluationModel> rrEvals = rrEvalService.GetRubricRowEvaluationsForEvaluation(DefaultTeacher.EvaluationId);
+            Assert.AreEqual(1, rrEvals.Count);
+
+            PropertyInfo p = val.GetType().GetProperty("Id");
+            int id = Convert.ToInt32(p.GetValue(val));
+            rrEvalModel.Id = id;
+            return rrEvalModel;
         }
 
         public static RubricRowEvaluationModel CreateRubricRowEvaluation(RubricRowEvaluationModel rrModel)
@@ -161,6 +230,14 @@ namespace StateEval.Core.Test
         public static RubricRowModel GetDanielsonInstructionalRubricRow(SEEvaluationTypeEnum evalType, string fnShortName, string rrShortName)
         {
             FrameworkModel framework = TestHelper.GetInstructionalFramework(evalType);
+            FrameworkNodeModel frameworkNode = framework.FrameworkNodes.FirstOrDefault(x => x.ShortName == fnShortName);
+
+            return frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == rrShortName);
+        }
+
+        public static RubricRowModel GetDanielsonStateRubricRow(SEEvaluationTypeEnum evalType, string fnShortName, string rrShortName)
+        {
+            FrameworkModel framework = TestHelper.GetStateFramework(evalType);
             FrameworkNodeModel frameworkNode = framework.FrameworkNodes.FirstOrDefault(x => x.ShortName == fnShortName);
 
             return frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == rrShortName);
@@ -237,6 +314,14 @@ namespace StateEval.Core.Test
             };
         }
 
+        public static List<ArtifactBundleModel> GetArtifactBundlesForEvaluation(long evaluationId, long currentUserId) 
+        {
+            ArtifactBundleService artifactBundleService = new ArtifactBundleService();
+            ArtifactBundleRequestModel request = new ArtifactBundleRequestModel();
+            request.EvaluationId = DefaultTeacher.EvaluationId;
+            request.CurrentUserId = DefaultTeacher.UserId;
+            return artifactBundleService.GetArtifactBundlesForEvaluation(request);
+        }
         #endregion
 
         #region FormPrompts
@@ -330,10 +415,11 @@ namespace StateEval.Core.Test
             return model;
         }
         */
-        public static StudentGrowthGoalBundleModel CreateStudentGrowthGoalBundleModelWithC3Goal(string title, FrameworkModel framework)
+        public static StudentGrowthGoalBundleModel CreateStudentGrowthGoalBundleModelWithC3Goal(string title)
         {
             StudentGrowthGoalBundleModel bundleModel = CreateStudentGrowthGoalBundleModel(title, DefaultTeacher.EvaluationId);
 
+            FrameworkModel framework = GetStateFramework(SEEvaluationTypeEnum.TEACHER);
             FrameworkNodeModel frameworkNode = framework.FrameworkNodes.FirstOrDefault(x => x.ShortName == "C3");
             RubricRowModel rrSG31 = frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == "SG 3.1");
             RubricRowModel rrSG32 = frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == "SG 3.2");
@@ -347,7 +433,7 @@ namespace StateEval.Core.Test
             var val = studentGrowthGoalBundleService.CreateStudentGrowthGoalBundle(bundleModel);
             PropertyInfo p = val.GetType().GetProperty("Id");
             int id = Convert.ToInt32(p.GetValue(val));
-            bundleModel.Id = id;
+            bundleModel = studentGrowthGoalBundleService.GetStudentGrowthGoalBundleById(id);
             return bundleModel;
         }
 

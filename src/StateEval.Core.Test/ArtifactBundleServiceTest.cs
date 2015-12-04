@@ -269,36 +269,26 @@ namespace StateEval.Core.Test
         {
             using (TransactionScope transaction = new TransactionScope())
             {
-                var artifactBandleService = new ArtifactBundleService();
-                RubricRowModel rr1a = TestHelper.GetDanielsonInstructionalRubricRow(SEEvaluationTypeEnum.TEACHER, "D1", "1a");
-
-                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundleAlignedToRubricRow("A1", rr1a);
-
-                List<AvailableEvidenceModel> availableEvidence = TestHelper.GetAvailableEvidenceForEvaluation();
-                Assert.AreEqual(1, availableEvidence.Count);
-                Assert.AreEqual(rr1a.Id, availableEvidence[0].RubricRowId);
-
-                RubricRowEvaluationModel rrEvalModel = TestHelper.CreateRubricRowEvaluationModel(availableEvidence[0], rr1a.Id);
+                RubricRowEvaluationModel rrEvalModel = TestHelper.CreateRubricRowEvaluationWithAlignedArtifact();
                 RubricRowEvaluationService rrEvalService = new RubricRowEvaluationService();
-                rrEvalService.CreateRubricRowEvaluation(rrEvalModel);
-
-                rrEvalService = new RubricRowEvaluationService();
                 List<RubricRowEvaluationModel> rrEvals = rrEvalService.GetRubricRowEvaluationsForEvaluation(DefaultTeacher.EvaluationId);
                 Assert.AreEqual(1, rrEvals.Count);
 
-                artifactBundleModel = artifactBandleService.GetArtifactBundleById(artifactBundleModel.Id);
+                List<ArtifactBundleModel> artifacts = TestHelper.GetArtifactBundlesForEvaluation(DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
+                Assert.AreEqual(1, artifacts.Count);
 
-                artifactBandleService = new ArtifactBundleService();
+                ArtifactBundleService artifactBundleService = new ArtifactBundleService();
+
                 try
                 {
-                    artifactBandleService.DeleteArtifactBundle(artifactBundleModel.Id);
+                    artifactBundleService.DeleteArtifactBundle(artifacts[0].Id);
                 }
                 catch (Exception e)
                 {
                     Assert.AreEqual("This artifact is in use as evidence and cannot be deleted.", e.Message);
                 }
 
-                Assert.IsNotNull(artifactBandleService.GetArtifactBundleById(artifactBundleModel.Id));
+                Assert.IsNotNull(artifactBundleService.GetArtifactBundleById(artifacts[0].Id));
 
                 transaction.Dispose();
             }
