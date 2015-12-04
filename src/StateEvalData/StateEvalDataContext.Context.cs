@@ -120,15 +120,12 @@ namespace StateEvalData
         public virtual DbSet<SEEvaluation> SEEvaluations { get; set; }
         public virtual DbSet<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
         public virtual DbSet<SEArtifactBundle> SEArtifactBundles { get; set; }
-        public virtual DbSet<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual DbSet<EventTypeEmailRecipientConfig> EventTypeEmailRecipientConfigs { get; set; }
         public virtual DbSet<SEUserLocationRole> SEUserLocationRoles { get; set; }
         public virtual DbSet<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual DbSet<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
         public virtual DbSet<SEEvidenceCollectionType> SEEvidenceCollectionTypes { get; set; }
-        public virtual DbSet<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual DbSet<SEEvidenceType> SEEvidenceTypes { get; set; }
-        public virtual DbSet<SEAlignedEvidence> SEAlignedEvidences { get; set; }
         public virtual DbSet<SEStudentGrowthFormPromptResponse> SEStudentGrowthFormPromptResponses { get; set; }
         public virtual DbSet<SEStudentGrowthFormPromptFrameworkNode> SEStudentGrowthFormPromptFrameworkNodes { get; set; }
         public virtual DbSet<SEStudentGrowthFormPromptType> SEStudentGrowthFormPromptTypes { get; set; }
@@ -137,5 +134,9 @@ namespace StateEvalData
         public virtual DbSet<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual DbSet<SEEvalSession> SEEvalSessions { get; set; }
         public virtual DbSet<SELinkedItemType> SELinkedItemTypes { get; set; }
+        public virtual DbSet<SESelfAssessment> SESelfAssessments { get; set; }
+        public virtual DbSet<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
+        public virtual DbSet<SEAlignedEvidence> SEAlignedEvidences { get; set; }
+        public virtual DbSet<SEAvailableEvidence> SEAvailableEvidences { get; set; }
     }
 }

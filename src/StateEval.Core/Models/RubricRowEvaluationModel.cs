@@ -31,13 +31,11 @@ namespace StateEval.Core.Models
 
         public short LinkedItemType { get; set; }
         public long? LinkedObservationId { get; set; }
-        public long? LinkedArtifactBundleId { get; set; }
         public long? LinkedStudentGrowthGoalBundleId { get; set; }
         public long? LinkedSelfAssessmentId { get; set; }
         public long CreatedByUserId { get; set; }
 
         public string CreatedByUserDisplayName { get; set; }
-        public SEWfStateEnum WfState { get; set; }
         public DateTime CreationDateTime { get; set; }
 
         public List<AlignedEvidenceModel> AlignedEvidences { get; set; }

@@ -26,7 +26,8 @@ namespace StateEval.Core.Mapper
             target.Data = evalEntities.SEAvailableEvidences
                     .FirstOrDefault(x => x.AvailableEvidenceID == source.AvailableEvidenceID)
                     .MapToAvailableEvidenceModel(evalEntities);
-          
+
+            target.AvailableEvidenceObjectId = source.AvailableEvidenceObjectID;
          
             return target;
         }
@@ -39,6 +40,7 @@ namespace StateEval.Core.Mapper
             target.RubricRowEvaluationID = source.RubricRowEvaluationId;
             target.AvailableEvidenceID = source.AvailableEvidenceId;
             target.AdditionalInput = source.AdditionalInput;
+            target.AvailableEvidenceObjectID = source.AvailableEvidenceObjectId;
 
             return target;
         }

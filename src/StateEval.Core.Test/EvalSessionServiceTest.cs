@@ -22,8 +22,7 @@ namespace StateEval.Core.Test
         {
             using (TransactionScope transaction = new TransactionScope())
             {
-                var evalSessionModel = TestHelper.CreateEvalSessionModel(DefaultPrincipal.UserId, DefaultTeacher.UserId,
-                    SEEvaluationTypeEnum.TEACHER);
+                var evalSessionModel = TestHelper.CreateEvalSessionModel("S1", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId, SEEvaluationTypeEnum.TEACHER);
                 var evalSessionId = evalSessionService.SaveEvalSession(evalSessionModel);
                 evalSessionModel = null;
                 Assert.IsTrue(evalSessionId > 0);
@@ -42,7 +41,7 @@ namespace StateEval.Core.Test
             using (TransactionScope transaction = new TransactionScope())
             {
 
-                var evalSessionModel = TestHelper.CreateEvalSessionModel(DefaultPrincipal.UserId, DefaultTeacher.UserId,
+                var evalSessionModel = TestHelper.CreateEvalSessionModel("S1", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId,
                     SEEvaluationTypeEnum.TEACHER);
                 evalSessionService.SaveEvalSession(evalSessionModel);
 
@@ -67,7 +66,7 @@ namespace StateEval.Core.Test
         {
             using (TransactionScope transaction = new TransactionScope())
             {
-                var evalSessionModel = TestHelper.CreateEvalSessionModel(DefaultPrincipal.UserId, DefaultTeacher.UserId,
+                var evalSessionModel = TestHelper.CreateEvalSessionModel("S1", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId,
                     SEEvaluationTypeEnum.TEACHER);
                 var evalSessionId = evalSessionService.SaveEvalSession(evalSessionModel);
                 evalSessionModel = null;
@@ -83,7 +82,7 @@ namespace StateEval.Core.Test
         {
             using (TransactionScope transaction = new TransactionScope())
             {
-                var evalSessionModel = TestHelper.CreateEvalSessionModel(DefaultPrincipal.UserId, DefaultTeacher.UserId,
+                var evalSessionModel = TestHelper.CreateEvalSessionModel("S1", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId,
                     SEEvaluationTypeEnum.TEACHER);
                 evalSessionModel.ObserveNotes = "Test";
                 evalSessionModel.Id = evalSessionService.SaveEvalSession(evalSessionModel);
@@ -103,7 +102,7 @@ namespace StateEval.Core.Test
         {
             using (TransactionScope transaction = new TransactionScope())
             {
-                var evalSessionModel = TestHelper.CreateEvalSessionModel(DefaultPrincipal.UserId, DefaultTeacher.UserId,
+                var evalSessionModel = TestHelper.CreateEvalSessionModel("S3", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId,
                     SEEvaluationTypeEnum.TEACHER);
                 var evalSessionId = evalSessionService.SaveEvalSession(evalSessionModel);
                 evalSessionModel.Id = evalSessionId;

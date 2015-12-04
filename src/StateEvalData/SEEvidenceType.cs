@@ -16,14 +16,14 @@ namespace StateEvalData
     {
         public SEEvidenceType()
         {
-            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
             this.SEAlignedEvidences = new HashSet<SEAlignedEvidence>();
+            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
         }
     
         public short EvidenceTypeID { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual ICollection<SEAlignedEvidence> SEAlignedEvidences { get; set; }
+        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
     }
 }

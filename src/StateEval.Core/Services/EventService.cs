@@ -90,6 +90,17 @@ namespace StateEval.Core.Services
             return seEvent.EventId;
         }
 
+        public long SelfAssessmentSharedEvent(long selfAssessmentId, string selfAssessmentTitle, long evaluatorId, long evaluateeId)
+        {
+            var seEvent = CreateEvent("Self-Assessment Shared", selfAssessmentId,
+                                        EventTypeEnum.ArtifactRejected, evaluatorId);
+
+            CreateNotification(seEvent, selfAssessmentTitle, evaluateeId, evaluatorId);
+            EvalEntities.SaveChanges();
+
+            return seEvent.EventId;
+        }
+
 
         public long SaveEvent(EventModel eventModel)
         {

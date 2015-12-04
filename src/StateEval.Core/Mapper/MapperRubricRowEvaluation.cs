@@ -23,7 +23,6 @@ namespace StateEval.Core.Mapper
             target.LinkedStudentGrowthGoalBundleId = source.LinkedStudentGrowthGoalBundleID;
             target.PerformanceLevel = source.PerformanceLevelID;
             target.CreatedByUserId = source.CreatedByUserID;
-            target.WfState = (SEWfStateEnum)source.WfStateID;
             target.CreationDateTime = source.CreationDateTime;
             target.CreatedByUserDisplayName = source.SEUser.FirstName + " " + source.SEUser.LastName;
             target.RubricStatement = source.RubricStatement;
@@ -55,7 +54,6 @@ namespace StateEval.Core.Mapper
             target.LinkedStudentGrowthGoalBundleID = source.LinkedStudentGrowthGoalBundleId;
             target.PerformanceLevelID = source.PerformanceLevel;
             target.CreatedByUserID = source.CreatedByUserId;
-            target.WfStateID = (long)source.WfState;
             target.RubricStatement = source.RubricStatement;
             target.AdditionalInput = source.AdditionalInput;
 

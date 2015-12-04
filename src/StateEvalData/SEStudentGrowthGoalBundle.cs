@@ -39,7 +39,7 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals1 { get; set; }
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual SEWfState SEWfState1 { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
     }
 }

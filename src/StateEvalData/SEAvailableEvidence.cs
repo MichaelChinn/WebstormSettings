@@ -20,20 +20,20 @@ namespace StateEvalData
         }
     
         public long AvailableEvidenceID { get; set; }
+        public long EvaluationID { get; set; }
         public short EvidenceTypeID { get; set; }
         public long RubricRowID { get; set; }
         public Nullable<long> ArtifactBundleID { get; set; }
         public Nullable<long> RubricRowAnnotationID { get; set; }
         public Nullable<long> StudentGrowthGoalID { get; set; }
-        public long EvaluationID { get; set; }
     
+        public virtual ICollection<SEAlignedEvidence> SEAlignedEvidences { get; set; }
         public virtual SEArtifactBundle SEArtifactBundle { get; set; }
+        public virtual SEEvaluation SEEvaluation { get; set; }
+        public virtual SEEvaluation SEEvaluation1 { get; set; }
         public virtual SEEvidenceType SEEvidenceType { get; set; }
         public virtual SERubricRow SERubricRow { get; set; }
         public virtual SERubricRowAnnotation SERubricRowAnnotation { get; set; }
         public virtual SEStudentGrowthGoal SEStudentGrowthGoal { get; set; }
-        public virtual SEEvaluation SEEvaluation { get; set; }
-        public virtual SEEvaluation SEEvaluation1 { get; set; }
-        public virtual ICollection<SEAlignedEvidence> SEAlignedEvidences { get; set; }
     }
 }

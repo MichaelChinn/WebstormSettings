@@ -130,10 +130,10 @@ namespace StateEval.Core.Constants
         OBS_SUBMITTED_TOR,
         ARTIFACT_EVALUATED,
         GOAL_BUNDLE_EVALUATED,
-        RUBRICROWEVAL_NOT_STARTED,
-        RUBRICROWEVAL_IN_PROGRESS = 20,
+        RUBRICROWEVAL_NOT_STARTED_OBSOLETE,
+        RUBRICROWEVAL_IN_PROGRESS_OBSOLETE = 20,
 
-        RUBRICROWEVAL_DONE,
+        RUBRICROWEVAL_DONE_OBSOLELETE,
         USERPROMPT_IN_PROGRESS,
         USERPROMPT_FINALIZED,
         USERPROMPT_RETIRED,
@@ -333,15 +333,6 @@ namespace StateEval.Core.Constants
         POST_CONFERENCE
     }
 
-	public enum SEArtifactTypeEnum
-	{
-		UNDEFINED = 0,
-        STANDARD,
-        STUDENT_GROWTH_GOAL,
-        OBSERVATION,
-        NARRATIVE
-	}
-
 	public enum SEEvaluationRoleEnum
 	{
 		UNDEFINED = 0,
@@ -380,7 +371,8 @@ namespace StateEval.Core.Constants
     {
         ObservationCreated = 1,
         ArtifactSubmitted,
-        ArtifactRejected
+        ArtifactRejected,
+        SelfAssessmentShared
     }
 
     public enum SEClientApplicationTypes
