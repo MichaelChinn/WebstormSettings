@@ -23,8 +23,8 @@ namespace StateEvalData
             this.SEArtifactLibItems = new HashSet<SEArtifactLibItem>();
             this.SERubricRows = new HashSet<SERubricRow>();
             this.SEStudentGrowthGoalBundles = new HashSet<SEStudentGrowthGoalBundle>();
-            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
+            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
         }
     
         public long ArtifactBundleID { get; set; }
@@ -51,7 +51,7 @@ namespace StateEvalData
         public virtual ICollection<SEArtifactLibItem> SEArtifactLibItems { get; set; }
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
         public virtual ICollection<SEStudentGrowthGoalBundle> SEStudentGrowthGoalBundles { get; set; }
-        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
+        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
     }
 }

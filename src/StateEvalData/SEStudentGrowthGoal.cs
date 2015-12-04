@@ -17,8 +17,8 @@ namespace StateEvalData
         public SEStudentGrowthGoal()
         {
             this.SEStudentGrowthGoalBundles = new HashSet<SEStudentGrowthGoalBundle>();
-            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
             this.SEStudentGrowthFormPromptResponses = new HashSet<SEStudentGrowthFormPromptResponse>();
+            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
         }
     
         public long StudentGrowthGoalID { get; set; }
@@ -47,7 +47,7 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthGoalBundle> SEStudentGrowthGoalBundles { get; set; }
         public virtual SEEvaluation SEEvaluation { get; set; }
         public virtual SEArtifactBundle SEArtifactBundle { get; set; }
-        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual ICollection<SEStudentGrowthFormPromptResponse> SEStudentGrowthFormPromptResponses { get; set; }
+        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using StateEval.Core.Models;
 using StateEval.Core.Services;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using StateEval.Core.RequestModel;
 
 namespace StateEval.Core.Test
 {
@@ -25,20 +26,22 @@ namespace StateEval.Core.Test
 
     public static class DefaultDTE
     {
-        public const long UserId = 39;
+        public const long UserId = 169;
         public const string DistrictCode = DistrictCodes.NorthThurston;
     }
 
     public static class DefaultTeacher
     {
-        public const long UserId = 26;
+        public const long UserId = 92;
+        public const long EvaluationId = 51;
         public const string DistrictCode = DistrictCodes.NorthThurston;
         public const string SchoolCode = SchoolCodes.NorthThurston_NorthThurstonHighSchool;
     }
 
     public static class DefaultPrincipal
     {
-        public const long UserId = 24;
+        public const long UserId = 58;
+        public const long EvaluationId = 17;
         public const string DistrictCode = DistrictCodes.NorthThurston;
         public const string SchoolCode = SchoolCodes.NorthThurston_NorthThurstonHighSchool;
     }
@@ -48,56 +51,48 @@ namespace StateEval.Core.Test
         public static short DEFAULT_SCHOOLYEAR = Convert.ToInt16(SESchoolYearEnum.SY_2016);
         public static string DEFAULT_SCHOOLCODE = SchoolCodes.NorthThurston_NorthThurstonHighSchool;
         public static string DEFAULT_DISTRICTCODE = DistrictCodes.NorthThurston;
-        public static int DEFAULT_USER_PRINCIPAL_ID = 24;
 
-        #region RubricRowAnnotation
+        #region EvidenceCollection
 
-        public static RubricRowAnnotationModel CreateRubricRowAnnotation(long bundleId, long rrid, string annotation)
+        public static List<AvailableEvidenceModel> GetAvailableEvidenceForEvaluation()
         {
-            return new RubricRowAnnotationModel
-            {
-                RubricRowID = rrid,
-                ArtifactBundleID = bundleId,
-                Annotation = annotation,
-                UserID = DefaultPrincipal.UserId
-            };
+            EvidenceCollectionRequestModel request = new EvidenceCollectionRequestModel();
+            request.CollectionType = SEEvidenceCollectionTypeEnum.OTHER_EVIDENCE;
+            request.EvaluationId = DefaultTeacher.EvaluationId;
+
+            EvidenceCollectionService service = new EvidenceCollectionService();
+            return service.GetAvailableEvidencesForEvaluation(request);
         }
         #endregion
 
         #region RubricRowEvaluation
 
-        public static RubricRowEvaluationModel CreateRubricRowEvaluation(long rrId)
+        public static RubricRowEvaluationModel CreateRubricRowEvaluationModel(AvailableEvidenceModel availableEvidence, long rubricRowId)
         {
-            ArtifactBundleModel artifactModel = TestHelper.CreateArtifactBundle("A1");
-            RubricRowEvaluationModel rrModel = TestHelper.CreateRubricRowEvaluationModel(artifactModel, rrId);
-            return TestHelper.CreateRubricRowEvaluation(rrModel);
-        }
-
-        public static RubricRowEvaluationModel CreateRubricRowEvaluationModel(ArtifactBundleModel artifactBundleModel, long rubricRowId)
-        {
-            return new RubricRowEvaluationModel
+            RubricRowEvaluationModel rrEvalModel = new RubricRowEvaluationModel
             {
+                Id = 0,
                 RubricRowId = rubricRowId,
-                EvaluationId = 1,
-                LinkedArtifactBundleId = artifactBundleModel.Id,
+                EvaluationId = DefaultTeacher.EvaluationId,
+                RubricStatement = "Statement",
+                EvidenceCollectionType = SEEvidenceCollectionTypeEnum.OTHER_EVIDENCE,
                 LinkedItemType = Convert.ToInt16(SELinkedItemTypeEnum.ARTIFACT),
                 CreatedByUserId = DefaultPrincipal.UserId,
-                WfState = SEWfStateEnum.RUBRICROWEVAL_IN_PROGRESS,
-                PerformanceLevel = Convert.ToInt16(SERubricPerformanceLevelEnum.PL1)
+                PerformanceLevel = Convert.ToInt16(SERubricPerformanceLevelEnum.PL1),
+                AlignedEvidences = new List<AlignedEvidenceModel>()
             };
-        }
 
-        public static RubricRowEvaluationModel CreateRubricRowEvaluation(ArtifactBundleModel artifactBundleModel, long rubricRowId)
-        {
-            var rubricRowEvaluationService = new RubricRowEvaluationService();
+            AlignedEvidenceModel alignedEvidence = new AlignedEvidenceModel();
+            alignedEvidence.EvidenceType = SEEvidenceTypeEnum.ARTIFACT;
+            alignedEvidence.RubricRowEvaluationId = 0;
+            alignedEvidence.AvailableEvidenceId = availableEvidence.Id;
+            alignedEvidence.Data = availableEvidence;
+            alignedEvidence.AvailableEvidenceObjectId = Convert.ToInt64(availableEvidence.ArtifactBundleId);
 
-            RubricRowEvaluationModel rrModel = CreateRubricRowEvaluationModel(artifactBundleModel, rubricRowId);
+            rrEvalModel.AlignedEvidences.Add(alignedEvidence);
 
-            var val = rubricRowEvaluationService.CreateRubricRowEvaluation(rrModel);
-            PropertyInfo p = val.GetType().GetProperty("Id");
-            int id = Convert.ToInt32(p.GetValue(val));
-            rrModel.Id = id;
-            return rrModel;
+            return rrEvalModel;
+
         }
 
         public static RubricRowEvaluationModel CreateRubricRowEvaluation(RubricRowEvaluationModel rrModel)
@@ -155,6 +150,14 @@ namespace StateEval.Core.Test
                             (SEEvaluationTypeEnum)Convert.ToInt16(evalType)).InstructionalFramework;
         }
 
+        public static RubricRowModel GetDanielsonInstructionalRubricRow(SEEvaluationTypeEnum evalType, string fnShortName, string rrShortName)
+        {
+            FrameworkModel framework = TestHelper.GetInstructionalFramework(evalType);
+            FrameworkNodeModel frameworkNode = framework.FrameworkNodes.FirstOrDefault(x => x.ShortName == fnShortName);
+
+            return frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == rrShortName);
+        }
+
         public static RubricRowModel CreateRubricRowModel(long id, string title)
         {
             return new RubricRowModel
@@ -175,12 +178,12 @@ namespace StateEval.Core.Test
         {
             return new ArtifactBundleModel
             {
-                EvaluationId = 1,
+                EvaluationId = DefaultTeacher.EvaluationId,
                 CreatedByUserId = 1,
                 Title = title,
+                ShortName = title,
                 CreationDateTime = DateTime.Now,
                 WfState = (long)SEWfStateEnum.ARTIFACT,
-                ArtifactType = (short)SEArtifactTypeEnum.STANDARD,
                 LibItems = new List<ArtifactLibItemModel>(),
                 AlignedRubricRows = new List<RubricRowModel>()
             };
@@ -203,33 +206,25 @@ namespace StateEval.Core.Test
             return CreateArtifactBundle(model);
         }
 
+        public static ArtifactBundleModel CreateArtifactBundleAlignedToRubricRow(string title, RubricRowModel rubricRow)
+        {
+            ArtifactBundleService service = new ArtifactBundleService();
+            ArtifactBundleModel artifactBundleModel = CreateArtifactBundle(title);
+            artifactBundleModel.AlignedRubricRows.Add(rubricRow);
+            service.UpdateArtifactBundle(artifactBundleModel);
+            return service.GetArtifactBundleById(artifactBundleModel.Id);
+        }
+
         public static ArtifactLibItemModel CreateArtifactLibItemModel(string title)
         {
             return new ArtifactLibItemModel
             {
-                EvaluationId = 1,
-                CreatedByUserId = 1,
+                EvaluationId = DefaultTeacher.EvaluationId,
+                CreatedByUserId = DefaultTeacher.UserId,
                 Title = title,
                 CreationDateTime = DateTime.Now,
                 ItemType = Convert.ToInt16(SEArtifactLibItemType.FILE),
             };
-        }
-
-        public static ArtifactLibItemModel CreateArtifactLibItem(ArtifactLibItemModel artifactLibItemModel)
-        {
-            var artifactLibItemService = new ArtifactLibItemService();
-
-            var val = artifactLibItemService.CreateArtifactLibItem(artifactLibItemModel);
-            PropertyInfo p = val.GetType().GetProperty("Id");
-            int id = Convert.ToInt32(p.GetValue(val));
-            artifactLibItemModel.Id = id;
-            return artifactLibItemModel;
-        }
-
-        public static ArtifactLibItemModel CreateArtifactLibItem(string title)
-        {
-            ArtifactLibItemModel model = CreateArtifactLibItemModel(title);
-            return CreateArtifactLibItem(model);
         }
 
         #endregion
@@ -368,7 +363,7 @@ namespace StateEval.Core.Test
         {
             return new StudentGrowthGoalBundleModel
             {
-                EvaluationId = 1,
+                EvaluationId = DefaultTeacher.EvaluationId,
                 Title = "",
                 WfState = 1,
                 Comments = "",
@@ -383,7 +378,7 @@ namespace StateEval.Core.Test
         {
             return new StudentGrowthGoalModel
             {
-                EvaluationId = 1,
+                EvaluationId = DefaultTeacher.EvaluationId,
                 FrameworkNodeId = 1,
                 ProcessRubricRowId = 1,
                 ResultsRubricRowId = 1,
@@ -400,7 +395,7 @@ namespace StateEval.Core.Test
         {
             return new StudentGrowthGoalModel
             {
-                EvaluationId = 1,
+                EvaluationId = DefaultTeacher.EvaluationId,
                 FrameworkNodeId = frameworkNodeId,
                 ProcessRubricRowId = processRubricRowId,
                 ResultsRubricRowId = resultsRubricRowId,

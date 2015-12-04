@@ -19,7 +19,7 @@ BEGIN
 	-- Teacher Frameworks
 
 	-- 2015
---  insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(1, '01147', 'Othello School District', 4)
+    insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(1, '01147', 'Othello School District', 4)
 	-- Danielson
 	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(1, '34003', 'North Thurston Public Schools', 4)
 	-- Marzano
@@ -28,13 +28,13 @@ BEGIN
 	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(3, '21302', 'Chehalis School District', 4)
 
 	-- 2016
---	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(2, '01147', 'Othello School District', 4)
---	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(2, '34003', 'North Thurston Public Schools', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(2, '01147', 'Othello School District', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(2, '34003', 'North Thurston Public Schools', 4)
 
 	-- Principal Frameworks
 
 	-- 2015
-	--insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(9, '01147', 'Othello School District', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(9, '01147', 'Othello School District', 4)
 	-- Danielson
 	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(9, '34003', 'North Thurston Public Schools', 4)
 	-- Marzano
@@ -44,7 +44,7 @@ BEGIN
 	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(9, '21302', 'Chehalis School District', 4)
 
 	-- 2016
---	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(10, '01147', 'Othello School District', 4)
-	--insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(10, '34003', 'North Thurston Public Schools', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(10, '01147', 'Othello School District', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(10, '34003', 'North Thurston Public Schools', 4)
 	
 END

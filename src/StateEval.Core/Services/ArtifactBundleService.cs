@@ -255,7 +255,16 @@ namespace StateEval.Core.Services
 
             if (artifactBundle != null)
             {
-                EvalEntities.SEAvailableEvidences.RemoveRange(EvalEntities.SEAvailableEvidences.Where(x => x.ArtifactBundleID == id));
+                List<SEAlignedEvidence> alignedEvidence = EvalEntities.SEAlignedEvidences.Where(x=>x.AvailableEvidenceObjectID==artifactBundle.ArtifactBundleID).ToList();
+                if (alignedEvidence.Count>0)
+                {
+                    throw new Exception("This artifact is in use as evidence and cannot be deleted.");
+                }
+                
+                // we don't allow artifacts to be deleted that are in use as evidence
+                // EvalEntities.SEAlignedEvidences.RemoveRange(alignedEvidence);
+
+                artifactBundle.SEAvailableEvidences.Clear();
 
                 artifactBundle.SEArtifactLibItems.ToList().ForEach(rr => artifactBundle.SEArtifactLibItems.Remove(rr));
                 artifactBundle.SERubricRows.ToList().ForEach(rr => artifactBundle.SERubricRows.Remove(rr));

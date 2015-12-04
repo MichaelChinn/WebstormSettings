@@ -296,6 +296,9 @@
     <Compile Include="SESchoolYear.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="SESelfAssessment.cs">
+      <DependentUpon>StateEvalDataContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="SEStudentGrowthFormPrompt.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>

@@ -21,14 +21,15 @@ namespace StateEvalData
             this.SEStudentGrowthGoals = new HashSet<SEStudentGrowthGoal>();
             this.SEUsers = new HashSet<SEUser>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
-            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SESummativeFrameworkNodeScores = new HashSet<SESummativeFrameworkNodeScore>();
             this.SESummativeRubricRowScores = new HashSet<SESummativeRubricRowScore>();
-            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
-            this.SEAvailableEvidences1 = new HashSet<SEAvailableEvidence>();
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
+            this.SESelfAssessments = new HashSet<SESelfAssessment>();
+            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
+            this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
+            this.SEAvailableEvidences1 = new HashSet<SEAvailableEvidence>();
         }
     
         public long EvaluationID { get; set; }
@@ -81,13 +82,14 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
         public virtual ICollection<SEUser> SEUsers { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual ICollection<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
-        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
-        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences1 { get; set; }
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
+        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
+        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
+        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences1 { get; set; }
     }
 }

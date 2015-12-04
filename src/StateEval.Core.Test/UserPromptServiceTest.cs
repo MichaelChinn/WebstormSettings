@@ -29,7 +29,7 @@ namespace StateEval.Core.Test
                     PromptTypeID = SEUserPromptTypeEnum.PRE_CONFERENCE,
                     SchoolCode = TestHelper.DEFAULT_SCHOOLCODE,
                     SchoolYear = TestHelper.DEFAULT_SCHOOLYEAR,
-                    CreatedByUserID = TestHelper.DEFAULT_USER_PRINCIPAL_ID,
+                    CreatedByUserID = DefaultPrincipal.UserId,
                     DistrictCode = TestHelper.DEFAULT_DISTRICTCODE,
                     Published = true,
                     PublishedDate = DateTime.Now,

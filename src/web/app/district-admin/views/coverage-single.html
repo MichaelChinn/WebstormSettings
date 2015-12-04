@@ -7,21 +7,21 @@
             <tr>
                 <th class="coverage-single-fn-header-left">Type</th>
                 <th class="coverage-single-fn-header-left">General Information</th>
-                <th width="150px" ng-repeat="node in vm.context.framework.frameworkNodes" ng-class="{'coverage-single-fn-header-done':vm.filledNodes[node.shortName], 'coverage-single-fn-header':!vm.filledNodes[node.shortName]}">
+                <th width="150px" ng-repeat="node in vm.nodes" ng-class="{'coverage-single-fn-header-done':vm.filledNodes[node.shortName], 'coverage-single-fn-header':!vm.filledNodes[node.shortName]}">
                     <span >{{node.shortName}}</span>
                 </th>
             </tr>
             </thead>
-            <tbody>
-            <tr ng-repeat="source in vm.sources">
-                <td width="80px">{{vm.itemTypeMapper[source.itemType]}}</td>
+            <tbody ng-repeat="(key, value) in vm.enums.EvColTypeAccessor">
+            <tr ng-repeat="item in vm.evidenceCollection.associatedCollections[vm.enums.EvidenceCollectionType[key]]">
+                <td width="80px">{{key}}</td>
                 <td width="300px">
-                   <a ui-sref="submitted-artifact-summary({artifactId:source.id})">{{source.title}}</a><br/>
-                    Created&nbsp;<i>{{source.creationDateTime | date }}</i>&nbsp; by <i>{{source.createdByDisplayName}}</i>
+                   <a ui-sref="submitted-artifact-summary({artifactId:source.id})">{{item.title}}</a><br/>
+                    Created&nbsp;<i>{{item.creationDateTime | date }}</i>&nbsp; by <i>{{item.createdByDisplayName}}</i>
                 </td>
-                <td ng-repeat="node in vm.context.framework.frameworkNodes">
-                <span ng-repeat-start="row in source.nodes[node.shortName]"
-                      ng-class="{'badge': source.evaluated[row.id]}">
+                <td ng-repeat="node in vm.nodes">
+                <span ng-repeat-start="row in node.rubricRows"
+                      ng-class="{'badge': row.evaluations.length>0}">
                    {{vm.rowMapper[row.id]}}
                 </span>
                     <span ng-repeat-end ng-show="!$last">, </span>

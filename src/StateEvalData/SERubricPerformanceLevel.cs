@@ -21,12 +21,12 @@ namespace StateEvalData
             this.SEStudentGrowthGoals1 = new HashSet<SEStudentGrowthGoal>();
             this.SEFrameworkPerformanceLevels = new HashSet<SEFrameworkPerformanceLevel>();
             this.SEEvaluations = new HashSet<SEEvaluation>();
-            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SESummativeFrameworkNodeScores = new HashSet<SESummativeFrameworkNodeScore>();
             this.SESummativeRubricRowScores = new HashSet<SESummativeRubricRowScore>();
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
+            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
         }
     
         public short PerformanceLevelID { get; set; }
@@ -39,11 +39,11 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals1 { get; set; }
         public virtual ICollection<SEFrameworkPerformanceLevel> SEFrameworkPerformanceLevels { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual ICollection<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
     }
 }

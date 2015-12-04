@@ -19,6 +19,7 @@ namespace StateEvalData
         public short EvidenceTypeID { get; set; }
         public string AdditionalInput { get; set; }
         public long RubricRowEvaluationID { get; set; }
+        public long AvailableEvidenceObjectID { get; set; }
     
         public virtual SEAvailableEvidence SEAvailableEvidence { get; set; }
         public virtual SEEvidenceType SEEvidenceType { get; set; }

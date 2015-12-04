@@ -43,7 +43,6 @@ namespace StateEvalData
             this.SEEvaluations1 = new HashSet<SEEvaluation>();
             this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
-            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SEUserLocationRoles = new HashSet<SEUserLocationRole>();
             this.SESummativeFrameworkNodeScores = new HashSet<SESummativeFrameworkNodeScore>();
             this.SESummativeRubricRowScores = new HashSet<SESummativeRubricRowScore>();
@@ -52,6 +51,8 @@ namespace StateEvalData
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
             this.SEEvalSessions1 = new HashSet<SEEvalSession>();
+            this.SESelfAssessments = new HashSet<SESelfAssessment>();
+            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
         }
     
         public long SEUserID { get; set; }
@@ -101,7 +102,6 @@ namespace StateEvalData
         public virtual SEEvaluation SEEvaluation { get; set; }
         public virtual ICollection<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SEUserLocationRole> SEUserLocationRoles { get; set; }
         public virtual ICollection<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual ICollection<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
@@ -110,5 +110,7 @@ namespace StateEvalData
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions1 { get; set; }
+        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
     }
 }

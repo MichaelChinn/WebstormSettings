@@ -229,6 +229,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EmailRecipientConfigController.cs" />
+    <Compile Include="Controllers\SelfAssessmentController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\EvidenceCollectionController.cs" />
     <Compile Include="Controllers\ProtectedController.cs" />
@@ -245,7 +246,6 @@
     <Compile Include="Controllers\UserPromptController.cs" />
     <Compile Include="Controllers\StudentGrowthFormPromptController.cs" />
     <Compile Include="Controllers\StudentGrowthGoalBundlesController.cs" />
-    <Compile Include="Controllers\ArtifactLibItemsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\ArtifactBundlesController.cs" />
     <Compile Include="Controllers\EvaluationController.cs" />
