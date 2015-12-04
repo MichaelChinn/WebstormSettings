@@ -174,35 +174,33 @@ update #allTwoRoles set r2Shortname = 'T'    WHERE r2 =  'SESchoolTeacher'
 UPDATE #allTwoRoles SET r2ShortName = 'DAM'  WHERE r2 =  'SEDistrictAssignmentManager'
 
 
-update #allTwoRoles set l1Shortname = 'D1' where lCode1 ='01147'
-update #allTwoRoles set l1Shortname = 'D2' where lCode1 ='34003'
+update #allTwoRoles set l1Shortname = 'd1' where lCode1 ='01147'
+update #allTwoRoles set l1Shortname = 'd2' where lCode1 ='34003'
 update #allTwoRoles set l1Shortname = 's1' where lCode1 ='2961' 
 update #allTwoRoles set l1Shortname = 's2' where lCode1 ='2902' 
 update #allTwoRoles set l1Shortname = 's3' where lCode1 ='3010' 
 update #allTwoRoles set l1Shortname = 's4' where lCode1 ='2754' 
-update #allTwoRoles set l2Shortname = 'D1' where lCode2 ='01147'
-update #allTwoRoles set l2Shortname = 'D2' where lCode2 ='34003'
+update #allTwoRoles set l2Shortname = 'd1' where lCode2 ='01147'
+update #allTwoRoles set l2Shortname = 'd2' where lCode2 ='34003'
 update #allTwoRoles set l2Shortname = 's1' where lCode2 ='2961' 
 update #allTwoRoles set l2Shortname = 's2' where lCode2 ='2902' 
 update #allTwoRoles set l2Shortname = 's3' where lCode2 ='3010' 
 update #allTwoRoles set l2Shortname = 's4' where lCode2 ='2754' 
 
-
 UPDATE #allTwoRoles SET RoleString = lcode1 + '|' + r1 + ',' + lcode2 + '|' + r2
-
 
 UPDATE #allTwoRoles SET userCreateString =   'declare @UserIdOut bigint '
                         + 'EXEC dbo.FindInsertUpdateSeUser '
-                        + ' @pUserName=''' + l1ShortName + r1shortName + l2ShortName + r2shortName + ''''
-                        + ', @pFirstname=''' + r1ShortName + r2ShortName+ '''' + ', @pLastName='''
-                        + l1ShortName + l2ShortName + '''' + ', @pEmail=''' + l1ShortName + r1shortName + l2ShortName + r2shortName + '@'
-                        + l1ShortName + l2ShortName + '.edu''' + ', @pCertNo = '''''
+                        + ' @pUserName=''' + l1ShortName +'_'+ r1shortName +'_'+ l2ShortName +'_'+ r2shortName + ''''
+                        + ', @pFirstname=''' + r1ShortName +'_'+ r2ShortName+ '''' 
+						+ ', @pLastName='''  + l1ShortName +'_'+ l2ShortName + '''' 
+						+ ', @pEmail=''' + l1ShortName +'_'+ r1shortName +'_'+ l2ShortName +'_'+ r2shortName + '@' + l1ShortName +'_'+ l2ShortName + '.edu''' + ', @pCertNo = '''''
                         + ', @pHasMultipleLocations = 0'
                         + ', @pseUserIdOutput = @UserIdOut OUTPUT'
 				
 
                 UPDATE #allTwoRoles SET refTableString =   'EXEC dbo.InsertUserReferenceTables '
-                         + ' @pUserName=''' + l1ShortName + r1shortName + l2ShortName + r2shortName + ''''
+                         + ' @pUserName=''' + l1ShortName +'_'+ r1shortName +'_'+ l2ShortName +'_'+ r2shortName + ''''
                          + ', @pLRString = ''' + roleString + ''''
                 FROM    #allTwoRoles;
 				

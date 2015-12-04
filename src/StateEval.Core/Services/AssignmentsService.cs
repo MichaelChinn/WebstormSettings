@@ -16,8 +16,7 @@ namespace StateEval.Core.Services
         public IEnumerable<UserModel> GetPrincipalsForAssignment(SESchoolYearEnum schoolYear, string districtCode)
         {
             IQueryable<SEUser> users = EvalEntities.SEUsers
-                .Where(u => u.aspnet_Users.aspnet_Roles.Any(r => r.RoleName == RoleName.SESchoolPrincipal))
-                .Where(u => u.SEUserDistrictSchools.Any(d => d.DistrictCode == districtCode && d.SchoolCode != ""))
+                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == RoleName.SESchoolPrincipal && r.DistrictCode == districtCode))
                 .Where(u => u.SEEvaluations.Any(e => e.EvaluateeID == u.SEUserID
                                 && e.SchoolYear == (short)schoolYear
                                 && e.EvaluationTypeID == (short)SEEvaluationTypeEnum.PRINCIPAL
@@ -30,8 +29,7 @@ namespace StateEval.Core.Services
         public IEnumerable<UserModel> GetTeachersForAssignment(SESchoolYearEnum schoolYear, string districtCode, string schoolCode)
         {
             IQueryable<SEUser> users = EvalEntities.SEUsers
-                .Where(u => u.aspnet_Users.aspnet_Roles.Any(r => r.RoleName == RoleName.SESchoolTeacher))
-                .Where(u => u.SEUserDistrictSchools.Any(d => d.DistrictCode == districtCode && d.SchoolCode == schoolCode))
+                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == RoleName.SESchoolTeacher && r.DistrictCode == districtCode && r.SchoolCode == schoolCode))
                 .Where(u => u.SEEvaluations.Any(e => e.EvaluateeID == u.SEUserID
                                 && e.SchoolYear == (short)schoolYear
                                 && e.EvaluationTypeID == (short)SEEvaluationTypeEnum.TEACHER
@@ -107,8 +105,7 @@ namespace StateEval.Core.Services
             short evalType = Convert.ToInt16(SEEvaluationTypeEnum.TEACHER);
 
             IQueryable<SEUser> users = EvalEntities.SEUsers
-                .Where(u => u.aspnet_Users.aspnet_Roles.Any(r => r.RoleName == RoleName.SESchoolTeacher))
-                .Where(u => u.SEUserDistrictSchools.Any(d => d.DistrictCode == districtCode && d.SchoolCode == schoolCode))
+                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == RoleName.SESchoolTeacher && r.DistrictCode == districtCode && r.SchoolCode == schoolCode))
                 .Where(u => u.SEEvaluations.Any(e => e.EvaluateeID == u.SEUserID
                                                 && e.SchoolYear == schoolYear
                                                 && e.EvaluationTypeID == evalType

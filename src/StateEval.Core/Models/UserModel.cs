@@ -15,7 +15,7 @@ namespace StateEval.Core.Models
         public string EMailAddress { get; set; }
         public string CertificateNumber { get; set; }
         public string EMailAddressAlternate { get; set; }
-        public List<LocationRoleModel> LocationRoles { get; set; }
+        public List<UserLocationRoleModel> LocationRoles { get; set; }
         public EvaluationModel EvalData { get; set; }
         public List<UserOrientationModel> UserOrientations { get; set; }
 

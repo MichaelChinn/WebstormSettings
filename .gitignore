@@ -14,4 +14,4 @@ StyleCop.Cache
 *.orig
 src/sql/cmd.txt
 src/sql/summary.txt
-src/.idea/workspace.xml
+src/.idea/**
