@@ -50,18 +50,6 @@ namespace WebAPI.Controllers
             return artifactBundleService.GetAttachableObservationsForEvaluation(evaluationId);
         }
 
-        [Route("api/{bundleId}/linkedobservations")]
-        public IEnumerable<EvalSessionModel> GetLinkedObservations(long bundleId)
-        {
-            return artifactBundleService.GetLinkedObservations(bundleId);
-        }
-
-        [Route("api/{bundleId}/linkedsggoalbundles")]
-        public IEnumerable<StudentGrowthGoalBundleModel> GetLinkedStudentGrowthGoalBundles(long bundleId)
-        {
-            return artifactBundleService.GetLinkedStudentGrowthGoalBundles(bundleId);
-        }
-
         [Route("api/{evaluationId}/attachablesggoalbundles")]
         public IEnumerable<StudentGrowthGoalBundleModel> GetAttachableStudentGrowthGoalBundlesForEvaluation(long evaluationId)
         {
@@ -73,12 +61,6 @@ namespace WebAPI.Controllers
         {
             return artifactBundleService.GetArtifactBundlesForEvaluation(requestModel);
         } 
-
-        [Route("api/{evaluationId}/artifactbundles/{wfState}")]
-        public IEnumerable<ArtifactBundleModel> GetArtifactBundlesForEvaluation(long evaluationId, short wfState)
-        {
-            return artifactBundleService.GetArtifactBundlesForEvaluation(evaluationId, wfState);
-        }        
 
         [Route("api/artifactbundles/{id}")]
         public ArtifactBundleModel GetArtifactBundleById(long id)

@@ -113,9 +113,6 @@
     <Compile Include="SEArtifactBundle.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="SEArtifactBundleEvidenceCollection.cs">
-      <DependentUpon>StateEvalDataContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="SEArtifactBundleRejection.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
@@ -297,6 +294,9 @@
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="SESchoolYear.cs">
+      <DependentUpon>StateEvalDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SESelfAssessment.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="SEStudentGrowthFormPrompt.cs">

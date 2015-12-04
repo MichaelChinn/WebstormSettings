@@ -22,13 +22,13 @@ namespace StateEvalData
             this.SEPullQuotes = new HashSet<SEPullQuote>();
             this.SEReportPrintOptionEvalSessions = new HashSet<SEReportPrintOptionEvalSession>();
             this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
-            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
-            this.SERubricRowEvaluations1 = new HashSet<SERubricRowEvaluation>();
             this.SELearningWalkSessionScores = new HashSet<SELearningWalkSessionScore>();
             this.SEUserPrompts = new HashSet<SEUserPrompt>();
             this.SEUserPromptResponses = new HashSet<SEUserPromptResponse>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
             this.SERubricRows = new HashSet<SERubricRow>();
+            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
+            this.SERubricRowEvaluations1 = new HashSet<SERubricRowEvaluation>();
         }
     
         public long EvalSessionID { get; set; }
@@ -75,6 +75,7 @@ namespace StateEvalData
         public long WfStateID { get; set; }
         public Nullable<bool> IsSharedWithEvaluatee { get; set; }
         public Nullable<int> PreConfPromptState { get; set; }
+        public System.DateTime CreationDateTime { get; set; }
     
         public virtual SEAnchorType SEAnchorType { get; set; }
         public virtual ICollection<SEDistrictTrainingProtocolAnchor> SEDistrictTrainingProtocolAnchors { get; set; }
@@ -93,12 +94,12 @@ namespace StateEvalData
         public virtual ICollection<SEPullQuote> SEPullQuotes { get; set; }
         public virtual ICollection<SEReportPrintOptionEvalSession> SEReportPrintOptionEvalSessions { get; set; }
         public virtual ICollection<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations1 { get; set; }
         public virtual ICollection<SELearningWalkSessionScore> SELearningWalkSessionScores { get; set; }
         public virtual ICollection<SEUserPrompt> SEUserPrompts { get; set; }
         public virtual ICollection<SEUserPromptResponse> SEUserPromptResponses { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations1 { get; set; }
     }
 }

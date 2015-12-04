@@ -18,7 +18,6 @@ namespace StateEval.Core.Mapper
             target = target ?? new RubricRowAnnotationModel();
             target.Annotation = source.Annotation;
             target.EvalSessionID = source.EvalSessionID;
-            target.ArtifactBundleID = source.ArtifactBundleID;
             target.Id = source.RubricRowAnnotationID;
             target.UserID = source.UserID;
             target.RubricRowID = source.RubricRowID;
@@ -34,9 +33,6 @@ namespace StateEval.Core.Mapper
             target = target ?? new SERubricRowAnnotation();
             target.EvaluationID = source.EvaluationID;
             target.EvalSessionID = source.EvalSessionID;
-            target.ArtifactBundleID = source.ArtifactBundleID;
-            target.StudentGrowthGoalBundleID = source.StudentGrowthGoalBundleID;
-            target.LinkedItemTypeID = (short)source.LinkedItemType;
             target.Annotation = source.Annotation;
             target.RubricRowAnnotationID = source.Id;
             target.UserID = source.UserID;

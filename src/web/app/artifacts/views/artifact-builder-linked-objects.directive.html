@@ -1,78 +1,65 @@
-<div class="row">
-    <div class="col-lg-12">
-        <label>Link to Observations, Goals, or Self-Assessments</label>
-        <div class="well">
-            <div class="row" ng-show="!vm.editModeLinkObject">
-                <div class="col-lg-12">
-                    <div>
-                        <p>You may link to one or more multiple objects, or leave the Artifact unlinked and it will be visible through the Other Evidence Collection</p>
-                        <button class="btn btn-xs btn-primary" ng-click="vm.editModeLinkObject=true;vm.linkObjectType=vm.enums.LinkedItemType.OBSERVATION">Link to Observation</button>
-                        <button ng-hide="true" class="btn btn-xs btn-primary" ng-click="vm.editModeLinkObject=true;vm.linkObjectType=vm.enums.LinkedItemType.SELF_ASSESSMENT">Link to Self-Assessment</button>
-                        <button class="btn btn-xs btn-primary" ng-click="vm.editModeLinkObject=true;vm.linkObjectType=vm.enums.LinkedItemType.STUDENT_GROWTH_GOAL">Link to Student Growth Goal</button>
-                    </div>
-                </div>
-            </div>
-            <div ng-show="vm.editModeLinkObject===true && vm.linkObjectType===vm.enums.LinkedItemType.OBSERVATION">
-                <p>Select the Observation you would like to make this Artifact Available to:</p>
-                <select ng-model="vm.selectedObservation"
-                        ng-options="observation.shortName + ': ' + observation.title for observation in vm.unlinkedObservations">
-                </select>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="pull-right button-toolbar">
-                            <button type="button" class="btn btn-outline btn-default btn-xs" ng-click="vm.cancelLinkObject()">Cancel</button>
-                            <button type="button" ng-click="vm.doneLinkObject()" class="btn btn-primary btn-xs">Done</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div ng-show="vm.editModeLinkObject===true && vm.linkObjectType===vm.enums.LinkedItemType.STUDENT_GROWTH_GOAL">
-                <p>Select the Goal you would like to make this Artifact Available to:</p>
-                <select ng-model="vm.selectedGoalBundle"
-                        ng-options="goalBundle.shortName + ': ' + goalBundle.title for goalBundle in vm.unlinkedGoalBundles">
-                </select>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="pull-right button-toolbar">
-                            <button type="button" class="btn btn-outline btn-default btn-xs" ng-click="vm.cancelLinkObject()">Cancel</button>
-                            <button type="button" ng-click="vm.doneLinkObject()" class="btn btn-primary btn-xs">Done</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div ng-show="vm.editModeLinkObject===false && (vm.artifact.linkedObservations.length>0 || vm.artifact.linkedStudentGrowthGoals.length>0)">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <table class="table">
-                            <tbody>
-                            <tr ng-repeat="item in vm.artifact.linkedObservations">
-                                <td>Observation</td>
-                                <td>{{item.title}}</td>
-                                <td></td>
-                                <td align="right">
-                                    <button class="btn btn-outline btn-default btn-xs" confirm="Are you sure you want to remove the link to this observation?"
-                                            ng-click="vm.removeLinkedObservation(item)">
-                                        Remove
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr ng-repeat="item in vm.artifact.linkedStudentGrowthGoals">
-                                <td>Goal</td>
-                                <td>{{item.title}}</td>
-                                <td></td>
-                                <td align="right">
-                                    <button class="btn btn-outline btn-default btn-xs" confirm="Are you sure you want to remove the link to this goal?"
-                                            ng-click="vm.removeLinkedStudentGrowthGoal(item)">
-                                        Remove
-                                    </button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
 
-                    </div>
-                </div>
+<div class="align-artifact-wrapper">
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="align-artifact-heading">Make available to eVAL Evidence Collections</label>
+        </div>
+        <div class="col-lg-6">
+            <div class="btn-toolbar pull-right">
+                <button ng-click="vm.clear()" class="btn btn-default btn-sm hide-when-read-only">Clear</button>
+                <button ng-click="vm.toggleEditMode()" class="btn btn-primary btn-sm  hide-when-read-only">
+                    {{vm.editModeBtnText }}
+                </button>
             </div>
         </div>
+    </div>
+    <div ng-show="vm.editMode" style="color: white">
+        <br />
+        <table class="table align-artifact">
+            <tbody>
+                <tr><td colspan="3">Observations</td></tr>
+                <tr ng-repeat="observation in vm.observations">
+                    <td>{{observation.creationDateTime | date}}</td>
+                    <td>{{observation.title}}</td>
+                    <td>
+                        <input type="checkbox" data-checklist-model="vm.artifact.linkedObservations" data-checklist-value="observation">
+                    </td>
+                </tr>
+                <tr><td colspan="3">Student Growth Goals</td></tr>
+                <tr ng-repeat="goalBundle in vm.goalBundles">
+                    <td>{{goalBundle.creationDateTime | date}}</td>
+                    <td>{{goalBundle.title}}</td>
+                    <td>
+                        <input type="checkbox" data-checklist-model="vm.artifact.linkedStudentGrowthGoalBundles" data-checklist-value="goalBundle">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-show="!vm.editMode">
+        <br />
+        <table class="table align-artifact">
+            <tbody>
+            <tr ng-show="vm.artifact.linkedObservations.length>0" class="aligned-fn-ro">
+                <td colspan="2">Observations</td>
+                <td></td>
+            </tr>
+            <tr class="aligned-rr-ro"  ng-repeat="observation in vm.artifact.linkedObservations">
+                <td></td>
+                <td width="100px">{{observation.creationDateTime | date}}</td>
+                <td>{{observation.title}}</td>
+            </tr>
+            <tr ng-show="vm.artifact.linkedStudentGrowthGoalBundles.length>0" class="aligned-fn-ro">
+                <td colspan="2">Student Growth Goals</td>
+                <td></td>
+            </tr>
+            <tr class="aligned-rr-ro"  ng-repeat="goalBundle in vm.artifact.linkedStudentGrowthGoalBundles">
+                <td></td>
+                <td width="100px">{{goalBundle.creationDateTime | date}}</td>
+                <td>{{goalBundle.title}}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>

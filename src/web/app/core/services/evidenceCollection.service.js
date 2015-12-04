@@ -21,6 +21,9 @@
 
             if(request.collectionType === enums.EvidenceCollectionType.SUMMATIVE) {
                 for(var i in enums.EvColTypeAccessor) {
+                    // this.associatedCollections['observations'] = array of observations
+                    // this.associatedCollections['studentGrowthGoalBundles'] = array of bundles
+                    // this.associatedCollections[linkedItemType][linkedItemId]: object
                     this.associatedCollections[enums.EvidenceCollectionType[i]] = data[enums.EvColTypeAccessor[i]] || [];
                     for(var j in this.associatedCollections) {
                        this.associatedCollections[j] = _.groupBy(this.associatedCollections[j], 'id');
@@ -196,7 +199,6 @@
                 evaluationId: activeUserContextService.context.evaluatee.evalData.id,
                 evidenceCollectionType: collection.request.collectionType,
                 createdByUserId: activeUserContextService.user.id,
-                wfState: enums.WfState.RREVAL_NOT_STARTED,
                 rubricStatement: rubricStatement,
                 performanceLevel: performanceLevel,
                 alignedEvidences: alignedEvidence,
@@ -241,14 +243,29 @@
         return service;
 
         function newAlignedEvidence(availableEvidence) {
-            return {
+            var alignedEvidence = {
                 rubricRowEvaluationId: 0,
                 alignedEvidenceId: 0,
                 data: availableEvidence,
                 availableEvidenceId: availableEvidence.id,
                 additionalInput: '',
-                evidenceType: availableEvidence.evidenceType
+                evidenceType: availableEvidence.evidenceType,
+                availableEvidenceObjectId: 0
+            };
+
+            switch (availableEvidence.evidenceType) {
+                case enums.EvidenceType.ARTIFACT:
+                    alignedEvidence.availableEvidenceObjectId = availableEvidence.artifactBundleId;
+                    break;
+                case enums.EvidenceType.STUDENT_GROWTH_GOAL:
+                    alignedEvidence.availableEvidenceObjectId = availableEvidence.studentGrowthGoalBundleId;
+                    break;
+                default:
+                    alignedEvidence.availableEvidenceObjectId = availableEvidence.rubricRowAnnotationId;
+                    break;
             }
+
+            return alignedEvidence;
         }
 
         function newEvidenceCollection(name, request, data) {

@@ -12,7 +12,8 @@
             restrict: 'E',
             scope: {
                 evaluationType: '=',
-                rubricRows: '='
+                rubricRows: '=',
+                doneFcn: '='
             },
             templateUrl: 'app/core/views/rubric-row-selector.html',
             link: function (scope, elm, attrs) {
@@ -35,6 +36,7 @@
         vm.editModeBtnText = 'Done';
         vm.framework = null;
         vm.rubricRows = $scope.rubricRows;
+        vm.doneFcn = $scope.doneFcn;
         vm.treeOptions = {
         };
 
@@ -70,6 +72,9 @@
             vm.editModeBtnText = vm.editMode?"Done":"Edit";
             if (vm.editMode) {
                 populateTree();
+            }
+            else if (vm.doneFcn) {
+                vm.doneFcn();
             }
         }
 

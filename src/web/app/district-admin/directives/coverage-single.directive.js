@@ -21,10 +21,10 @@
     }
 
     coverageSingleController.$inject = ['activeUserContextService', 'rubricRowEvaluationService', 'rubricUtils',
-        'enums', '$scope', '$q', 'evaluationService', '$rootScope'];
+        'enums', '$scope', '$q', 'evaluationService', '$rootScope', 'evidenceCollectionService'];
 
     function coverageSingleController(activeUserContextService, rubricRowEvaluationsService, rubricUtils,
-          enums, $scope, $q, evaluationService, $rootScope) {
+          enums, $scope, $q, evaluationService, $rootScope, evidenceCollectionService) {
 
         var vm = this;
 
@@ -45,6 +45,25 @@
         }
 
         function load() {
+            return evidenceCollectionService.getEvidenceCollection("SUMMATIVE", enums.EvidenceCollectionType.SUMMATIVE)
+                .then(function (evidenceCollection) {
+                    vm.evidenceCollection = evidenceCollection;
+
+                    // evidenceCollection.associatedCollections['observations'] = array of observations
+                    // evidenceCollection.associatedCollections['studentGrowthGoalBundles'] = array of bundles
+                    // evidenceCollection.associatedCollections[linkedItemType][linkedItemId]: object
+
+                    for (var frameworkNode in activeUserContextService.getActiveFramework().frameworkNodes) {
+                        var node = evidenceCollection.getNode(frameworkNode.shortName);
+                        for (var row in node.rows) {
+
+                        }
+                    }
+
+                })
+        }
+
+        function loadOld() {
             vm.context = activeUserContextService.context;
             var nodeMapper = rubricUtils.getFrameworkMapper(vm.context.framework);
             vm.rowMapper = rubricUtils.getRowMapper(vm.context.framework);

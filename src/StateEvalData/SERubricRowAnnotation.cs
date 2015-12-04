@@ -33,7 +33,7 @@ namespace StateEvalData
         public virtual SERubricRow SERubricRow { get; set; }
         public virtual SEUser SEUser { get; set; }
         public virtual SEArtifactBundle SEArtifactBundle { get; set; }
-        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual SEEvalSession SEEvalSession { get; set; }
+        public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
     }
 }

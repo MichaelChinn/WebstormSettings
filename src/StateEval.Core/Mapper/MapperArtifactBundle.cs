@@ -23,7 +23,6 @@ namespace StateEval.Core.Mapper
             target.EvaluationID = source.EvaluationId;
             target.ShortName = source.ShortName;
             target.Title = source.Title;
-            target.Context = source.Context;
             target.Evidence = source.Evidence;
             target.WfStateID = Convert.ToInt16(source.WfState);
             target.EvaluationID = source.EvaluationId;
@@ -108,7 +107,6 @@ namespace StateEval.Core.Mapper
             target.EvaluationId = source.EvaluationID;
             target.ShortName = source.ShortName;
             target.Title = source.Title;
-            target.Context = source.Context;
             target.Evidence = source.Evidence;
             target.WfState = Convert.ToInt16(source.WfStateID);
             target.CreatedByUserId = source.CreatedByUserID;
@@ -131,6 +129,24 @@ namespace StateEval.Core.Mapper
             else
             {
                 target.AlignedRubricRows = new List<RubricRowModel>();
+            }
+
+            if (source != null && source.SEEvalSessions.Any())
+            {
+                target.LinkedObservations = source.SEEvalSessions.Select(x => x.MaptoEvalSessionModel()).ToList();
+            }
+            else
+            {
+                target.LinkedObservations = new List<EvalSessionModel>();
+            }
+
+            if (source != null && source.SEStudentGrowthGoalBundles.Any())
+            {
+                target.LinkedStudentGrowthGoalBundles = source.SEStudentGrowthGoalBundles.Select(x => x.MaptoStudentGrowthGoalBundleModel()).ToList();
+            }
+            else
+            {
+                target.LinkedStudentGrowthGoalBundles = new List<StudentGrowthGoalBundleModel>();
             }
 
             return target;

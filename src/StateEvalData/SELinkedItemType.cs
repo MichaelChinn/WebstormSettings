@@ -17,15 +17,15 @@ namespace StateEvalData
         public SELinkedItemType()
         {
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
-            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
+            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
         }
     
         public short LinkedItemTypeID { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
-        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
     }
 }

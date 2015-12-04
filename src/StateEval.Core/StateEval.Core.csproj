@@ -64,6 +64,7 @@
     <Compile Include="Constants\RoleName.cs" />
     <Compile Include="Event\BaseEvent.cs" />
     <Compile Include="Event\ObservationCreatedEvent.cs" />
+    <Compile Include="Mapper\MapperSelfAssessment.cs" />
     <Compile Include="Mapper\MapperAvailableEvidence.cs" />
     <Compile Include="Mapper\MapperAlignedEvidence.cs" />
     <Compile Include="Mapper\MapperEDSError.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Models\EDSUserLocationRoleModel.cs" />
     <Compile Include="Models\EmailDeliveryTypeModel.cs" />
     <Compile Include="Models\EmailRecipientConfigModel.cs" />
+    <Compile Include="Models\SelfAssessmentModel.cs" />
     <Compile Include="Models\EvalSessionModel.cs" />
     <Compile Include="Models\EvaluationModel.cs" />
     <Compile Include="Models\EventTypeModel.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserPromptModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestModel\SelfAssessmentRequestModel.cs" />
     <Compile Include="RequestModel\ArtifactBundleRequestModel.cs" />
     <Compile Include="RequestModel\StudentGrowthFormPromptRequestModel.cs" />
     <Compile Include="RequestModel\CoreRequestModel.cs" />
@@ -172,8 +175,8 @@
     <Compile Include="RequestModel\EvidenceCollectionRequestModel.cs" />
     <Compile Include="RequestModel\RubricRowEvaluationsRequestModel.cs" />
     <Compile Include="RequestModel\UserPromptRequestModel.cs" />
+    <Compile Include="Services\SelfAssessmentService.cs" />
     <Compile Include="Services\ArtifactBundleService.cs" />
-    <Compile Include="Services\ArtifactLibItemService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\EDSImportInfoService.cs" />
     <Compile Include="Services\EmailRecipientConfigService.cs" />

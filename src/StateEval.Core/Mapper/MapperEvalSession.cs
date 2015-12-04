@@ -27,6 +27,7 @@ namespace StateEval.Core.Mapper
             target.ShortName = source.ShortName;
             target.PreConfStartTime = source.PreConfStartTime;
             target.PostConfStartTime = source.PostConfStartTime;
+            target.CreationDateTime = source.CreationDateTime;
             
 
             target.EvaluatorPreConNotes = source.EvaluatorPreConNotes;
@@ -34,7 +35,7 @@ namespace StateEval.Core.Mapper
             target.IsSharedWithEvaluatee = source.IsSharedWithEvaluatee;
             target.PreConfPromptState = source.PreConfPromptState;
 
-            target.CreatedByDisplayName = source.SEUser.FirstName + " " + source.SEUser.LastName;
+            target.CreatedByDisplayName = source.SEUser1.FirstName + " " + source.SEUser1.LastName;
             
             if (source.SchoolYear != null)
             {
@@ -82,6 +83,7 @@ namespace StateEval.Core.Mapper
             target.EvaluateePreConNotes = source.EvaluateePreConNotes;
             target.IsSharedWithEvaluatee = source.IsSharedWithEvaluatee;
             target.PreConfPromptState = source.PreConfPromptState;
+            target.CreationDateTime = source.CreationDateTime;
          
             return target;
         }

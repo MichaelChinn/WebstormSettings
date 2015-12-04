@@ -12,5 +12,6 @@ namespace StateEval.Core.Models
         public SEEvidenceTypeEnum EvidenceType { get; set; }
         public string AdditionalInput { get; set; }
         public AvailableEvidenceModel Data { get; set; }
+        public long AvailableEvidenceObjectId { get; set; }
     }
 }

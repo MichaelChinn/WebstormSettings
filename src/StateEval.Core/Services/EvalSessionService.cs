@@ -102,6 +102,7 @@ namespace StateEval.Core.Services
             if (seEvalSession.EvalSessionID == 0)
             {
                 seEvalSession.EvaluationScoreTypeID = 1;
+                seEvalSession.CreationDateTime = DateTime.Now;
                 EvalEntities.SEEvalSessions.Add(seEvalSession);
             }
             
@@ -114,7 +115,10 @@ namespace StateEval.Core.Services
                     .Where(x => x.EvaluationID == evalSessionModel.EvaluationId).Count();
 
                 seEvalSession.ShortName = "Obs " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
-                seEvalSession.Title = seEvalSession.ShortName;
+                if (seEvalSession.Title == "")
+                {
+                    seEvalSession.Title = seEvalSession.ShortName;
+                }
 
                 EvalEntities.SaveChanges();
 

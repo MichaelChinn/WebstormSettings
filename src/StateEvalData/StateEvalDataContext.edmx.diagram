@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0cf8b19a117644718a96dc927b02f3b5" Name="Diagram1" ZoomLevel="53">
+      <Diagram DiagramId="0cf8b19a117644718a96dc927b02f3b5" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="StateEvalModel.EmailDeliveryType" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StateEvalModel.MessageType" Width="1.5" PointX="0.75" PointY="68.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StateEvalModel.MessageTypeRecipientConfig" Width="1.5" PointX="3" PointY="36.75" IsExpanded="true" />
@@ -223,13 +223,6 @@
         <AssociationConnector Association="StateEvalModel.SEArtifactBundleArtifactLibItem" />
         <AssociationConnector Association="StateEvalModel.SEArtifactBundleRubricRowAlignment" />
         <AssociationConnector Association="StateEvalModel.SEArtifactBundleStudentGrowthGoalBundle" />
-        <EntityTypeShape EntityType="StateEvalModel.SERubricRowEvaluation" Width="1.5" PointX="41.375" PointY="64.125" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvaluation" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SERubricPerformanceLevel" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SERubricRow" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEUser" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEWfState" />
         <EntityTypeShape EntityType="StateEvalModel.EventTypeEmailRecipientConfig" Width="1.5" PointX="6.75" PointY="106.375" />
         <AssociationConnector Association="StateEvalModel.FK_EventTypeEmailRecipientConfig_SEEventType" />
         <EntityTypeShape EntityType="StateEvalModel.SEUserLocationRole" Width="1.5" PointX="3" PointY="44.375" />
@@ -246,20 +239,7 @@
         <AssociationConnector Association="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SESummativeRubricRowScore_SEUser" />
         <EntityTypeShape EntityType="StateEvalModel.SEEvidenceCollectionType" Width="1.5" PointX="0.75" PointY="3.875" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvidenceCollectionType" />
-        <EntityTypeShape EntityType="StateEvalModel.SEAvailableEvidence" Width="1.5" PointX="46.25" PointY="62.125" />
         <EntityTypeShape EntityType="StateEvalModel.SEEvidenceType" Width="1.5" PointX="44" PointY="61.75" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEArtifactBundle" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEEvidenceType" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRow" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRowAnnotation" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEStudentGrowthGoal" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEEvaluation" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEEvaluation1" />
-        <EntityTypeShape EntityType="StateEvalModel.SEAlignedEvidence" Width="1.5" PointX="48.5" PointY="64.625" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAlignedEvidence_SEAvailableEvidence" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAlignedEvidence_SEEvidenceType" />
-        <AssociationConnector Association="StateEvalModel.FK_SEAlignedEvidence_SERubricRowEvaluation" />
         <EntityTypeShape EntityType="StateEvalModel.SEStudentGrowthFormPromptResponse" Width="1.5" PointX="34.25" PointY="73.5" />
         <AssociationConnector Association="StateEvalModel.FK_SEFormPromptResponse_SEStudentGrowthGoal1" />
         <AssociationConnector Association="StateEvalModel.FK_SEFormPromptResponse_SEUser1" />
@@ -285,7 +265,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_LearningWalkClassroomID" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SERubricPerformanceLevel" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SEUser" />
-        <EntityTypeShape EntityType="StateEvalModel.SEArtifactBundleEvidenceCollection" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="StateEvalModel.SEEvalSession" Width="1.5" PointX="42" PointY="71" />
         <AssociationConnector Association="StateEvalModel.FK_SEEvalSession_SEAnchorType" />
         <AssociationConnector Association="StateEvalModel.FK_SEDistrictTrainingProtocolAnchor_SEEvalSession" />
@@ -304,8 +283,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SEPullQuote_SEEvalSession" />
         <AssociationConnector Association="StateEvalModel.FK_SEReportPrintOptionEvalSession_SEEvalSession" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowAnnotation_SEEvalSession" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession1" />
         <AssociationConnector Association="StateEvalModel.FK_SessionID" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserPrompt_SEEvalSession" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserPromptResponse_EvalSession" />
@@ -313,8 +290,34 @@
         <AssociationConnector Association="StateEvalModel.SEEvalSessionRubricRowFocus" />
         <EntityTypeShape EntityType="StateEvalModel.SELinkedItemType" Width="1.5" PointX="5.375" PointY="7.875" />
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkNodeScore_SELinkedItemType" />
-        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SELinkedItemType" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SELinkedItemType" />
+        <EntityTypeShape EntityType="StateEvalModel.SESelfAssessment" Width="1.5" PointX="14.25" PointY="76.75" />
+        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluation" />
+        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluationType" />
+        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEUser" />
+        <AssociationConnector Association="StateEvalModel.SESelfAssessmentRubricRowFocus" />
+        <EntityTypeShape EntityType="StateEvalModel.SERubricRowEvaluation" Width="1.5" PointX="44.25" PointY="41.875" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession1" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvaluation" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvidenceCollectionType" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SELinkedItemType" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SERubricPerformanceLevel" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SERubricRow" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEUser" />
+        <EntityTypeShape EntityType="StateEvalModel.SEAlignedEvidence" Width="1.5" PointX="48.5" PointY="52.625" />
+        <EntityTypeShape EntityType="StateEvalModel.SEAvailableEvidence" Width="1.5" PointX="46.25" PointY="62.375" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAlignedEvidence_SEAvailableEvidence" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAlignedEvidence_SEEvidenceType" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAlignedEvidence_SERubricRowEvaluation" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEArtifactBundle" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEEvaluation" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEEvaluation1" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEEvidenceType" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRow" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRowAnnotation" />
+        <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEStudentGrowthGoal" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
