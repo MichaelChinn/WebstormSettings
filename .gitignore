@@ -12,3 +12,6 @@ StyleCop.Cache
 **/FakesAssemblies/
 *.GhostDoc.xml
 *.orig
+src/sql/cmd.txt
+src/sql/summary.txt
+src/.idea/workspace.xml

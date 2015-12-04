@@ -47,11 +47,11 @@
         var daDashboard = NavLink('Dashboard', 'da-dashboard', 'fa fa-th-large');
         var dvDashboard = NavLink('Dashboard', 'dv-dashboard', 'fa fa-th-large');
 
-        var teeNav =    [evaluateeDashboard, artifacts, otherEvidence, sgGrowthGoalsTee, observations, summativeEval, evaluateeReports];
-        var pr_trNav =  [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_TR];
-        var pr_prNav =  [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_PR];
-        var de_prNav =  [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DE];
-        var dteNav =    [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DTE];
+        var teeNav = [evaluateeDashboard, artifacts, otherEvidence, sgGrowthGoalsTee, observations, summativeEval, evaluateeReports];
+        var pr_trNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_TR];
+        var pr_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_PR];
+        var de_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DE];
+        var dteNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DTE];
 
         //AREAS
 
@@ -104,6 +104,12 @@
         var CST = new WorkArea('CST', 'Customer Support', evalU, noAdditionalInfoWorkArea,
             []);
 
+        var IMP = new WorkArea('IMP', 'View Evaluations', evalU, noAdditionalInfoWorkArea,
+            []);
+
+        var NMP = new WorkArea('NMP', 'Go Back', evalU, noAdditionalInfoWorkArea,
+            []);
+
 
         var roleAreaMapper = {
             SESuperAdmin: [SUPER],
@@ -125,9 +131,9 @@
 
         WorkArea.prototype.isEvaluatorWorkArea = function () {
             var wa = this;
-          return !!_.find(evaluators, function (n) {
-              return n.tag === wa.tag;
-          })
+            return !!_.find(evaluators, function (n) {
+                return n.tag === wa.tag;
+            })
         };
 
         var service = {
@@ -148,6 +154,8 @@
             DV_TR: DV_TR,
             RS: RS,
             VL: VL,
+            IMP: IMP,
+            NMP: NMP,
             roleAreaMapper: roleAreaMapper,
             getAreaById: getAreaById,
             showOnImpersonate: showOnImpersonate,
@@ -180,6 +188,7 @@
         function getSingleTagOfRole(role, evaluationType) {
             return _.findWhere(roleAreaMapper[role], {'evaluationType': evaluationType}).tag;
         }
+
         function isEvaluator(workAreaTag) {
             return !!_.find(evaluators, function (n) {
                 return workAreaTag === n.tag;
@@ -207,8 +216,8 @@
                     return evalData.evaluatorId;
                 })
                 .then(function (id) {
-                    if (id !=null) {
-                        return userService.getUserById(id).then(function(evaluator) {
+                    if (id != null) {
+                        return userService.getUserById(id).then(function (evaluator) {
                             context.evaluator = evaluator;
                         })
                     }
@@ -217,6 +226,7 @@
                     }
                 })
         }
+
         //Loads evaluator and evaluation for Principal
         function getEvaluationForUserPrincipal(activeUserContextService) {
             activeUserContextService.context.evaluatees = null;
@@ -267,10 +277,18 @@
                 })
         }
 
+        function impersonate(activeUserContextService) {
+
+        }
+
+        function stopImpersonation() {
+
+        }
+
         //For workAreas that do not need any information to be loaded
         //Reminder, this service does not have direct access to the ActiveUserContextService
         function noAdditionalInfoWorkArea(activeUserContextService) {
-            if(activeUserContextService.context) {
+            if (activeUserContextService.context) {
                 activeUserContextService.context.evaluatees = null;
             }
             console.log('No special information is loaded for this work area');
@@ -312,7 +330,7 @@
             this.initializeWorkArea = function (activeUserContextService, hasOrientation) {
                 var context = activeUserContextService.context;
                 var nav = context.navOptions;
-                if(hasOrientation) {
+                if (hasOrientation) {
                     context.orientation = activeUserContextService.getOrientationWithNav(0, context.orientationOptions, nav);
                 } else {
                     context.orientation.workAreaTag = context.navOptions.workAreaTag;
@@ -324,7 +342,7 @@
                 return enterWorkArea(activeUserContextService, this)
                     .then(function () {
                         return loadInformation(activeUserContextService).then(function () {
-                            if(activeUserContextService.context.evaluatees) {
+                            if (activeUserContextService.context.evaluatees) {
                                 activeUserContextService.context.evaluatee = activeUserContextService.context.evaluatees[0];
                             }
                         });

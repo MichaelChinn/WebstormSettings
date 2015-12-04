@@ -106,20 +106,9 @@
             user.evalData = loginUserData.evalData;
             activeUserContextService.user = user;
             activeUserContextService.context = context;
-            //activeUserContextService.user = new User();
-            //activeUserContextService.context = new Context();
-            //
-            //for(var i in user) {
-            //    activeUserContextService['user'][i] = user[i];
-            //}
-            //for(var j in context) {
-            //    activeUserContextService['context'][j] = context[j];
-            //}
+
             activeUserContextService.save();
-            return context.workArea().initializeWorkArea(activeUserContextService, true)
-                .then(function () {
-                    //evidenceCollectionService.startupFrameworks(context);
-                });
+            return context.workArea().initializeWorkArea(activeUserContextService, true);
         }
 
         function load() {
