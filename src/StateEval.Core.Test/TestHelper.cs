@@ -38,6 +38,14 @@ namespace StateEval.Core.Test
         public const string SchoolCode = SchoolCodes.NorthThurston_NorthThurstonHighSchool;
     }
 
+    public static class DefaultTeacher2
+    {
+        public const long UserId = 109;
+        public const long EvaluationId = 68;
+        public const string DistrictCode = DistrictCodes.NorthThurston;
+        public const string SchoolCode = SchoolCodes.NorthThurston_NorthThurstonHighSchool;
+    }
+
     public static class DefaultPrincipal
     {
         public const long UserId = 58;
@@ -174,18 +182,20 @@ namespace StateEval.Core.Test
         #endregion
 
         #region Artifacts
-        public static ArtifactBundleModel CreateArtifactBundleModel(string title)
+        public static ArtifactBundleModel CreateArtifactBundleModel(string title, long evaluationId, long createdByUserId)
         {
             return new ArtifactBundleModel
             {
-                EvaluationId = DefaultTeacher.EvaluationId,
-                CreatedByUserId = 1,
+                EvaluationId = evaluationId,
+                CreatedByUserId = createdByUserId,
                 Title = title,
                 ShortName = title,
                 CreationDateTime = DateTime.Now,
                 WfState = (long)SEWfStateEnum.ARTIFACT,
                 LibItems = new List<ArtifactLibItemModel>(),
-                AlignedRubricRows = new List<RubricRowModel>()
+                AlignedRubricRows = new List<RubricRowModel>(),
+                LinkedObservations = new List<EvalSessionModel>(),
+                LinkedStudentGrowthGoalBundles = new List<StudentGrowthGoalBundleModel>()
             };
         }
 
@@ -200,16 +210,16 @@ namespace StateEval.Core.Test
             return artifactBundleModel;
         }
 
-        public static ArtifactBundleModel CreateArtifactBundle(string title)
+        public static ArtifactBundleModel CreateArtifactBundle(string title, long evaluationId, long createdByUserId)
         {
-            ArtifactBundleModel model = CreateArtifactBundleModel(title);
+            ArtifactBundleModel model = CreateArtifactBundleModel(title, evaluationId, createdByUserId);
             return CreateArtifactBundle(model);
         }
 
         public static ArtifactBundleModel CreateArtifactBundleAlignedToRubricRow(string title, RubricRowModel rubricRow)
         {
             ArtifactBundleService service = new ArtifactBundleService();
-            ArtifactBundleModel artifactBundleModel = CreateArtifactBundle(title);
+            ArtifactBundleModel artifactBundleModel = CreateArtifactBundle(title, DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
             artifactBundleModel.AlignedRubricRows.Add(rubricRow);
             service.UpdateArtifactBundle(artifactBundleModel);
             return service.GetArtifactBundleById(artifactBundleModel.Id);
@@ -322,7 +332,7 @@ namespace StateEval.Core.Test
         */
         public static StudentGrowthGoalBundleModel CreateStudentGrowthGoalBundleModelWithC3Goal(string title, FrameworkModel framework)
         {
-            StudentGrowthGoalBundleModel bundleModel = CreateStudentGrowthGoalBundleModel();
+            StudentGrowthGoalBundleModel bundleModel = CreateStudentGrowthGoalBundleModel(title, DefaultTeacher.EvaluationId);
 
             FrameworkNodeModel frameworkNode = framework.FrameworkNodes.FirstOrDefault(x => x.ShortName == "C3");
             RubricRowModel rrSG31 = frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == "SG 3.1");
@@ -352,20 +362,22 @@ namespace StateEval.Core.Test
             return model;
         }
       
-        public static StudentGrowthGoalBundleModel CreateStudentGrowthGoalBundle(string title)
+        public static StudentGrowthGoalBundleModel CreateStudentGrowthGoalBundle(string title, long evaluationId)
         {
-            StudentGrowthGoalBundleModel bundleModel = CreateStudentGrowthGoalBundleModel();
+            StudentGrowthGoalBundleModel bundleModel = CreateStudentGrowthGoalBundleModel(title, evaluationId);
 
             return CreateStudentGrowthGoalBundle(bundleModel);
         }
 
-        public static StudentGrowthGoalBundleModel CreateStudentGrowthGoalBundleModel()
+        public static StudentGrowthGoalBundleModel CreateStudentGrowthGoalBundleModel(string title, long evaluationId)
         {
             return new StudentGrowthGoalBundleModel
             {
-                EvaluationId = DefaultTeacher.EvaluationId,
-                Title = "",
-                WfState = 1,
+                EvaluationId = evaluationId,
+                Title = title,
+                ShortName = "shortName",
+                WfState = (short)SEWfStateEnum.GOAL_BUNDLE_IN_PROGRESS,
+                EvalWfState = (short)SEWfStateEnum.GOAL_BUNDLE_NOT_SCORED,
                 Comments = "",
                 Course = "",
                 Grade = "",
@@ -412,7 +424,7 @@ namespace StateEval.Core.Test
 
         #region EvalSession
 
-        public static EvalSessionModel CreateEvalSessionModel(long evaluatorId, long evaluateeId, SEEvaluationTypeEnum evaluationType)
+        public static EvalSessionModel CreateEvalSessionModel(string title, long evaluationId, long evaluatorId, long evaluateeId, SEEvaluationTypeEnum evaluationType)
         {
             var evalSessionModel = new EvalSessionModel
             {
@@ -426,12 +438,23 @@ namespace StateEval.Core.Test
                 EvaluatorNotes = "Note",
                 SchoolYear = (SESchoolYearEnum) DEFAULT_SCHOOLYEAR,
                 EvaluationType = evaluationType,
-                Title = "Title",
-                EvaluationId = 23,
+                Title = title, 
+                ShortName = "ShortName",
+                EvaluationId = evaluationId,
                 WfState = (short)SEWfStateEnum.OBS_IN_PROGRESS_TOR
             };
 
             return evalSessionModel;
+        }
+
+        public static EvalSessionModel CreateEvalSession(string title, long evaluationId, long evaluatorId, long evaluateeId, SEEvaluationTypeEnum evalType)
+        {
+            EvalSessionModel model = CreateEvalSessionModel(title, evaluationId, evaluatorId, evaluateeId, evalType);
+            var evalSessionService = new EvalSessionService();
+            var evalSessionId = evalSessionService.SaveEvalSession(model);
+
+            evalSessionService = new EvalSessionService();
+            return evalSessionService.GetEvalSessionById(evalSessionId);
         }
 
         #endregion

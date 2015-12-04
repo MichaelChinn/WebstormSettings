@@ -21,7 +21,7 @@ namespace StateEval.Core.Test
         {
             using (TransactionScope transactionScope = new TransactionScope())
             {
-                var evalSessionModel = TestHelper.CreateEvalSessionModel(DefaultPrincipal.UserId, DefaultTeacher.UserId,
+                var evalSessionModel = TestHelper.CreateEvalSessionModel("S1", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId,
                       SEEvaluationTypeEnum.TEACHER);
 
                 var eventId = eventService.SaveObservationCreatedEvent(evalSessionModel);

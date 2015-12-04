@@ -15,58 +15,6 @@ namespace StateEval.Core.Services
 {
     public class ArtifactBundleService : BaseService
     {
-        public IEnumerable<StudentGrowthGoalBundleModel> GetAttachableStudentGrowthGoalBundlesForEvaluation(long evaluationId)
-        {
-            IQueryable<SEStudentGrowthGoalBundle> bundles = EvalEntities.SEStudentGrowthGoalBundles
-                    .Where(x => x.EvaluationID == evaluationId ||
-                              x.WfStateID >= (short)SEWfStateEnum.GOAL_BUNDLE_PROCESS_SUBMITTED);
-
-            return bundles.ToList().Select(x => x.MaptoStudentGrowthGoalBundleModel());
-        }
-
-        public IEnumerable<EvalSessionModel> GetAttachableObservationsForEvaluation(long evaluationId)
-        {
-            IQueryable<SEEvalSession> observations = EvalEntities.SEEvalSessions
-                    .Where(x => x.EvaluationID == evaluationId ||
-                              x.WfStateID == (short)SEWfStateEnum.OBS_IN_PROGRESS_TOR);
-
-            return observations.ToList().Select(x => x.MaptoEvalSessionModel());
-        }
-
-        public IEnumerable<ArtifactBundleModel> GetArtifactBundlesForEvaluation(ArtifactBundleRequestModel bundleRequestModel)
-        {
-            IQueryable<SEArtifactBundle> bundles = EvalEntities.SEArtifactBundles
-                .Where(x=>x.EvaluationID==bundleRequestModel.EvaluationId);
-
-            // Can never see artifacts owned by someone else that are not yet submitted 
-            bundles = bundles.Where(x => x.CreatedByUserID == bundleRequestModel.CurrentUserId ||
-                             x.WfStateID > (short)SEWfStateEnum.ARTIFACT);
-
-            if (bundleRequestModel.WfState!=(short)SEWfStateEnum.UNDEFINED)
-            {
-                bundles = bundles.Where(x=>x.WfStateID == bundleRequestModel.WfState);
-            }
-
-            if (bundleRequestModel.CreatedByUserId!=0) 
-            {
-                bundles = bundles.Where(x=>x.CreatedByUserID==bundleRequestModel.CreatedByUserId);
-            }
-
-            if (bundleRequestModel.RubricRowId != 0)
-            {
-                bundles = bundles.Where(x => x.SERubricRows.Select(y => y.RubricRowID).Contains(bundleRequestModel.RubricRowId));
-            }
-
-            return bundles.ToList().Select(x => x.MaptoArtifactBundleModel());
-        }
-
-        public IEnumerable<ArtifactBundleModel> GetArtifactBundlesForEvaluation(long evaluationId, short wfState)
-        {
-            IQueryable<SEArtifactBundle> bundles = EvalEntities.SEArtifactBundles.Where(
-                x => x.EvaluationID == evaluationId && (x.WfStateID == wfState || wfState == 0));
-            return bundles.ToList().Select(x => x.MaptoArtifactBundleModel());
-        }
-
         public ArtifactBundleModel GetArtifactBundleById(long id)
         {
             SEArtifactBundle artifactBundle =
@@ -77,6 +25,52 @@ namespace StateEval.Core.Services
             }
 
             return null;
+        }
+
+        public List<ArtifactBundleModel> GetArtifactBundlesForEvaluation(ArtifactBundleRequestModel bundleRequestModel)
+        {
+            IQueryable<SEArtifactBundle> bundles = EvalEntities.SEArtifactBundles
+                .Where(x => x.EvaluationID == bundleRequestModel.EvaluationId);
+
+            // Can never see artifacts owned by someone else that are not yet submitted 
+            bundles = bundles.Where(x => x.CreatedByUserID == bundleRequestModel.CurrentUserId ||
+                             x.WfStateID > (short)SEWfStateEnum.ARTIFACT);
+
+            if (bundleRequestModel.WfState != (short)SEWfStateEnum.UNDEFINED)
+            {
+                bundles = bundles.Where(x => x.WfStateID == bundleRequestModel.WfState);
+            }
+
+            if (bundleRequestModel.CreatedByUserId != 0)
+            {
+                bundles = bundles.Where(x => x.CreatedByUserID == bundleRequestModel.CreatedByUserId);
+            }
+
+            if (bundleRequestModel.RubricRowId != 0)
+            {
+                bundles = bundles.Where(x => x.SERubricRows.Select(y => y.RubricRowID).Contains(bundleRequestModel.RubricRowId));
+            }
+
+            return bundles.ToList().Select(x => x.MaptoArtifactBundleModel()).ToList();
+        }
+
+
+        public IEnumerable<StudentGrowthGoalBundleModel> GetAttachableStudentGrowthGoalBundlesForEvaluation(long evaluationId)
+        {
+            IQueryable<SEStudentGrowthGoalBundle> bundles = EvalEntities.SEStudentGrowthGoalBundles
+                    .Where(x => x.EvaluationID == evaluationId &&
+                              x.WfStateID >= (short)SEWfStateEnum.GOAL_BUNDLE_PROCESS_SUBMITTED);
+
+            return bundles.ToList().Select(x => x.MaptoStudentGrowthGoalBundleModel());
+        }
+
+        public IEnumerable<EvalSessionModel> GetAttachableObservationsForEvaluation(long evaluationId)
+        {
+            IQueryable<SEEvalSession> observations = EvalEntities.SEEvalSessions
+                    .Where(x => x.EvaluationID == evaluationId &&
+                              x.WfStateID == (short)SEWfStateEnum.OBS_IN_PROGRESS_TOR);
+
+            return observations.ToList().Select(x => x.MaptoEvalSessionModel());
         }
 
         public void UpdateArtifactBundle(ArtifactBundleModel artifactBundleModel)
@@ -98,19 +92,9 @@ namespace StateEval.Core.Services
             SEArtifactBundle seArtifactBundle = null;
             artifactBundleModel.WfState = Convert.ToInt64(SEWfStateEnum.ARTIFACT_SUBMITTED);
 
-            if (artifactBundleModel.Id == 0)
-            {
-                object retval = CreateArtifactBundle(artifactBundleModel);
-                PropertyInfo p = retval.GetType().GetProperty("Id");
-                long id = Convert.ToInt64(p.GetValue(retval));
-                seArtifactBundle = EvalEntities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == id);
-            }
-            else 
-            {
-                seArtifactBundle = EvalEntities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == artifactBundleModel.Id);
-                artifactBundleModel.MaptoSEArtifactBundle(this.EvalEntities, seArtifactBundle);
-            }
-
+            seArtifactBundle = EvalEntities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == artifactBundleModel.Id);
+            artifactBundleModel.MaptoSEArtifactBundle(this.EvalEntities, seArtifactBundle);
+   
             if (seArtifactBundle != null)
             { 
                 SEEvaluation seEval = EvalEntities.SEEvaluations.FirstOrDefault(x => x.EvaluationID == artifactBundleModel.EvaluationId);
@@ -140,13 +124,15 @@ namespace StateEval.Core.Services
                     .Where(x => x.EvaluationID == artifactBundleModel.EvaluationId).Count();
 
                 seArtifactBundle.ShortName = "Artifact " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
-                seArtifactBundle.Title = seArtifactBundle.ShortName;
+                if (seArtifactBundle.Title == "")
+                {
+                    seArtifactBundle.Title = seArtifactBundle.ShortName;
+                }
 
                 EvalEntities.SaveChanges();
 
                 transaction.Complete();
             }
-
 
             return new { Id = seArtifactBundle.ArtifactBundleID };
         }
@@ -224,29 +210,6 @@ namespace StateEval.Core.Services
 
             return null;
         }
-
-        public List<EvalSessionModel> GetLinkedObservations(long bundleId)
-        {
-            var artifactBundle = EvalEntities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == bundleId);
-            if (artifactBundle != null)
-            {
-                return artifactBundle.SEEvalSessions.Select(x => x.MaptoEvalSessionModel()).ToList();
-            }
-
-            return null;
-        }
-
-        public List<StudentGrowthGoalBundleModel> GetLinkedStudentGrowthGoalBundles(long bundleId)
-        {
-            var artifactBundle = EvalEntities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == bundleId);
-            if (artifactBundle != null)
-            {
-                return artifactBundle.SEStudentGrowthGoalBundles.Select(x => x.MaptoStudentGrowthGoalBundleModel()).ToList();
-            }
-
-            return null;
-        }
-
 
         public void DeleteArtifactBundle(long id)
         {

@@ -34,9 +34,6 @@
             getArtifactRejectionForArtifact: getArtifactRejectionForArtifact,
             submitArtifact: submitArtifact,
             saveRubricRowAnnotation: saveRubricRowAnnotation,
-            getLinkedObservationsForArtifact: getLinkedObservationsForArtifact,
-            getLinkedStudentGrowthGoalBundlesForArtifact: getLinkedStudentGrowthGoalBundlesForArtifact,
-
             alignmentToString: alignmentToString,
             artifactAlignmentWithEval: artifactAlignmentWithEval,
             itemTypeToString: utils.mapLibItemTypeToString,
@@ -47,20 +44,6 @@
         };
 
         /////////////////////////////////
-
-        function getLinkedObservationsForArtifact(artifactId) {
-             var url = config.apiUrl + artifactId + '/linkedobservations';
-            return $http.get(url).then(function (response) {
-                return response.data;
-            });
-        }
-
-        function getLinkedStudentGrowthGoalBundlesForArtifact(artifactId) {
-            var url = config.apiUrl + artifactId + '/linkedsggoalbundles';
-            return $http.get(url).then(function (response) {
-                return response.data;
-            });
-        }
 
         function getAttachableStudentGrowthGoalBundlesForEvaluation() {
             var evaluationid = activeUserContextService.context.evaluatee.evalData.id;
@@ -232,9 +215,7 @@
                 wfState: wfState,
                 createdByUserId: createdByUserId,
                 currentUserId: currentUserId,
-                rubricRowId: 0,
-                evalSessionId: 0,
-                studentGrowthGoalBundleId: 0
+                rubricRowId: 0
             }
         }
 

@@ -333,15 +333,6 @@ namespace StateEval.Core.Constants
         POST_CONFERENCE
     }
 
-	public enum SEArtifactTypeEnum
-	{
-		UNDEFINED = 0,
-        STANDARD,
-        STUDENT_GROWTH_GOAL,
-        OBSERVATION,
-        NARRATIVE
-	}
-
 	public enum SEEvaluationRoleEnum
 	{
 		UNDEFINED = 0,

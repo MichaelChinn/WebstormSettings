@@ -65,11 +65,53 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="evidenceCollection.service.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="evidenceCollection.service.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/app/core/services/evidenceCollection.service.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8333333">
-              <caret line="267" column="35" selection-start-line="267" selection-start-column="35" selection-end-line="267" selection-end-column="35" />
+            <state vertical-scroll-proportion="-11.448276">
+              <caret line="263" column="39" selection-start-line="263" selection-start-column="39" selection-end-line="263" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.route.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/layout/layout.route.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="37" column="47" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="artifact-builder-linked-objects.directive.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/artifacts/directives/artifact-builder-linked-objects.directive.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#41#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="artifacts-rejected.controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/app/artifacts/controllers/artifacts-rejected.controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="artifact.service.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/app/artifacts/services/artifact.service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.30451867">
+              <caret line="45" column="41" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -122,7 +164,6 @@
         <option value="$PROJECT_DIR$/Client-Side-Testing/unit/SpecRunner.html" />
         <option value="$PROJECT_DIR$/web/app/core/services/rubric-utils.service.js" />
         <option value="$PROJECT_DIR$/web/app/core/services/rubric-utils.service.spec.js" />
-        <option value="$PROJECT_DIR$/web/app/artifacts/services/artifact.service.js" />
         <option value="$PROJECT_DIR$/web/app/student-growth-goals/views/goals-private.html" />
         <option value="$PROJECT_DIR$/web/app/student-growth-goals/services/student-growth-build.service.js" />
         <option value="$PROJECT_DIR$/web/app/student-growth-goals/controllers/sg-goals-private.controller.js" />
@@ -139,6 +180,7 @@
         <option value="$PROJECT_DIR$/web/app/district-admin/directives/coverage-single.directive.js" />
         <option value="$PROJECT_DIR$/web/app/core/config.js" />
         <option value="$PROJECT_DIR$/web/app/core/services/evidenceCollection.service.js" />
+        <option value="$PROJECT_DIR$/web/app/artifacts/services/artifact.service.js" />
       </list>
     </option>
   </component>
@@ -474,21 +516,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.83441556">
-          <caret line="251" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client-Side-Testing/unit/karma.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="2" selection-start-line="27" selection-start-column="2" selection-end-line="27" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client-Side-Testing/unit/test-helpers/mock-data.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -671,24 +698,6 @@
         <state vertical-scroll-proportion="-10.461538">
           <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="17" selection-end-column="38" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/app/artifacts/services/artifact.service.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3559719">
-          <caret line="64" column="26" selection-start-line="64" selection-start-column="17" selection-end-line="64" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/app/artifacts/directives/artifact-builder-linked-objects.directive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34309134">
-          <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -880,8 +889,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/app/core/services/evidenceCollection.service.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8333333">
-          <caret line="267" column="35" selection-start-line="267" selection-start-column="35" selection-end-line="267" selection-end-column="35" />
+        <state vertical-scroll-proportion="-11.448276">
+          <caret line="263" column="39" selection-start-line="263" selection-start-column="39" selection-end-line="263" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/layout/layout.route.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="47" selection-start-line="37" selection-start-column="47" selection-end-line="37" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/artifacts/directives/artifact-builder-linked-objects.directive.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/artifacts/controllers/artifacts-rejected.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app/artifacts/services/artifact.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30451867">
+          <caret line="45" column="41" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
           <folding />
         </state>
       </provider>

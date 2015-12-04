@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StateEval.Core.Constants;
 using StateEval.Core.Models;
 using StateEval.Core.Services;
+using StateEval.Core.RequestModel;
 using StateEvalData;
 using System.Transactions;
 
@@ -23,7 +24,7 @@ namespace StateEval.Core.Test
             using (TransactionScope transaction = new TransactionScope())
             {
                 var artifactBundleService = new ArtifactBundleService();
-                ArtifactBundleModel bundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel bundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
 
                 artifactBundleService = new ArtifactBundleService();
                 bundleModel = artifactBundleService.GetArtifactBundleById(bundleModel.Id);
@@ -88,7 +89,7 @@ namespace StateEval.Core.Test
             {
                 var artifactBundleService = new ArtifactBundleService();
 
-                ArtifactBundleModel artifactBundleModel1 = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel artifactBundleModel1 = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 ArtifactBundleModel  artifactBundleModel2 = artifactBundleService.GetArtifactBundleById(artifactBundleModel1.Id);
                 Assert.IsNotNull(artifactBundleModel2);
                 Assert.AreEqual(0, artifactBundleModel2.AlignedRubricRows.Count);
@@ -105,13 +106,9 @@ namespace StateEval.Core.Test
             using (TransactionScope transaction = new TransactionScope())
             {
                 var artifactBundleService = new ArtifactBundleService();
-                List<RubricRowModel> rubricRows = new List<RubricRowModel>();
-                FrameworkModel framework = TestHelper.GetInstructionalFramework(SEEvaluationTypeEnum.TEACHER);
-                FrameworkNodeModel frameworkNode = framework.FrameworkNodes.FirstOrDefault(x => x.ShortName == "D1");
+                RubricRowModel rr1a = TestHelper.GetDanielsonInstructionalRubricRow(SEEvaluationTypeEnum.TEACHER, "D1", "1a");
 
-                RubricRowModel rr1a = frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == "1a");
-
-                ArtifactBundleModel bundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel bundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 bundleModel.AlignedRubricRows.Add(rr1a);
                 artifactBundleService.UpdateArtifactBundle(bundleModel);
 
@@ -135,7 +132,7 @@ namespace StateEval.Core.Test
 
                 // Create bundle first, then add libitem and then udpate
 
-                ArtifactBundleModel bundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel bundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 bundleModel = artifactBundleService.GetArtifactBundleById(bundleModel.Id);
 
                 ArtifactLibItemModel libItemModel1 = TestHelper.CreateArtifactLibItemModel("L1");
@@ -169,7 +166,7 @@ namespace StateEval.Core.Test
                 RubricRowModel rr1c = frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == "1c");
 
 
-                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 artifactBundleModel.AlignedRubricRows.Add(rr1a);
                 artifactBandleService.UpdateArtifactBundle(artifactBundleModel);
 
@@ -224,7 +221,7 @@ namespace StateEval.Core.Test
                 ArtifactLibItemModel li2 = TestHelper.CreateArtifactLibItemModel("L2");
                 ArtifactLibItemModel li3 = TestHelper.CreateArtifactLibItemModel("L3");
 
-                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 artifactBundleModel.LibItems.Add(li1);
                 artifactBundleModel.LibItems.Add(li2);
                 artifactBandleService.UpdateArtifactBundle(artifactBundleModel);
@@ -323,7 +320,7 @@ namespace StateEval.Core.Test
                 RubricRowModel rr1b = frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == "1b");
                 RubricRowModel rr1c = frameworkNode.RubricRows.FirstOrDefault(x => x.ShortName == "1c");
 
-                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 artifactBundleModel.AlignedRubricRows.Add(rr1a);
                 artifactBundleModel.AlignedRubricRows.Add(rr1b);
                 artifactBandleService.UpdateArtifactBundle(artifactBundleModel);
@@ -350,7 +347,7 @@ namespace StateEval.Core.Test
                 ArtifactLibItemModel li1 = TestHelper.CreateArtifactLibItemModel("L1");
                 ArtifactLibItemModel li2 = TestHelper.CreateArtifactLibItemModel("L2");
 
-                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 artifactBundleModel.LibItems.Add(li1);
                 artifactBundleModel.LibItems.Add(li2);
                 artifactBandleService.UpdateArtifactBundle(artifactBundleModel);
@@ -366,6 +363,33 @@ namespace StateEval.Core.Test
             }
         }
 
+        // Create an artifact and then attach it to an observation and a goal.
+        // It should be able to be deleted as long as there are no alignedevidences using it
+        [TestMethod]
+        public void DeleteLinkedArtifactBundle()
+        {
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                var artifactBandleService = new ArtifactBundleService();
+                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
+
+                var goalModel = TestHelper.CreateStudentGrowthGoalBundle("G1", DefaultTeacher.EvaluationId);
+                var evalSessionModel = TestHelper.CreateEvalSession("S1", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId,
+                                                SEEvaluationTypeEnum.TEACHER);
+
+                artifactBundleModel.LinkedObservations.Add(evalSessionModel);
+                artifactBandleService.UpdateArtifactBundle(artifactBundleModel);
+
+                artifactBundleModel = artifactBandleService.GetArtifactBundleById(artifactBundleModel.Id);
+
+                artifactBandleService = new ArtifactBundleService();
+                artifactBandleService.DeleteArtifactBundle(artifactBundleModel.Id);
+                Assert.IsNull(artifactBandleService.GetArtifactBundleById(artifactBundleModel.Id));
+
+                transaction.Dispose();
+            }
+        }
+
         // Reject an artifact bundle
         [TestMethod]
         public void RejectArtifactBundle()
@@ -374,7 +398,7 @@ namespace StateEval.Core.Test
             {
                 var artifactBundleService = new ArtifactBundleService();
 
-                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1");
+                ArtifactBundleModel artifactBundleModel = TestHelper.CreateArtifactBundle("A1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
                 artifactBundleModel = artifactBundleService.GetArtifactBundleById(artifactBundleModel.Id);
                 Assert.IsNotNull(artifactBundleModel);
 
@@ -411,6 +435,121 @@ namespace StateEval.Core.Test
                 Assert.AreEqual(2, rejectionModel.Communications.Count);
                 Assert.AreEqual("TR Message", rejectionModel.Communications[1].Message);
                 Assert.AreEqual(DefaultTeacher.UserId, rejectionModel.Communications[1].CreatedByUserId);
+            }
+        }
+
+        // Create an artifact and make sure it isn't available to anyone but the teacher when it is in private workstate
+        [TestMethod]
+        public void ArtifactBundleRequestPrivate()
+        {
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                var artifactBundleService = new ArtifactBundleService();
+
+                ArtifactBundleModel artifactBundleModelT1 = TestHelper.CreateArtifactBundle("A1T1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
+
+                Assert.AreEqual((long)SEWfStateEnum.ARTIFACT, artifactBundleModelT1.WfState);
+
+                // teacher can see her own when it's private
+                ArtifactBundleRequestModel request = new ArtifactBundleRequestModel();
+                request.EvaluationId = DefaultTeacher.EvaluationId;
+                request.CurrentUserId = DefaultTeacher.UserId;
+                List<ArtifactBundleModel> bundles = artifactBundleService.GetArtifactBundlesForEvaluation(request);
+                Assert.AreEqual(1, bundles.Count);
+                Assert.AreEqual(DefaultTeacher.EvaluationId, bundles[0].EvaluationId);
+
+                // Principal can't see it because it hasn't been submitted yet
+                request.EvaluationId = DefaultTeacher.EvaluationId;
+                request.CurrentUserId = DefaultPrincipal.UserId;
+                bundles = artifactBundleService.GetArtifactBundlesForEvaluation(request);
+                Assert.AreEqual(0, bundles.Count);
+
+                // It's now submitted so principal can see it
+                artifactBundleModelT1.WfState = (long)SEWfStateEnum.ARTIFACT_SUBMITTED;
+                artifactBundleService.UpdateArtifactBundle(artifactBundleModelT1);
+                bundles = artifactBundleService.GetArtifactBundlesForEvaluation(request);
+                Assert.AreEqual(1, bundles.Count);
+            }
+        }
+
+        // Create two artifacts in different evaluations and make sure the request only gets from the user's evaluation
+        [TestMethod]
+        public void ArtifactBundleRequestEvaluationId()
+        {
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                var artifactBundleService = new ArtifactBundleService();
+
+                ArtifactBundleModel artifactBundleModelT1 = TestHelper.CreateArtifactBundle("A1T1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
+                ArtifactBundleModel artifactBundleModelT2 = TestHelper.CreateArtifactBundle("A1T2", DefaultTeacher2.EvaluationId, DefaultTeacher2.UserId);
+
+                ArtifactBundleRequestModel request = new ArtifactBundleRequestModel();
+                request.EvaluationId = DefaultTeacher.EvaluationId;
+                request.CurrentUserId = DefaultTeacher.UserId;
+                List<ArtifactBundleModel> bundles = artifactBundleService.GetArtifactBundlesForEvaluation(request);
+                Assert.AreEqual(1, bundles.Count);
+                Assert.AreEqual(DefaultTeacher.EvaluationId, bundles[0].EvaluationId);
+
+            }
+        }
+
+        [TestMethod]
+        public void ArtifactBundleRequestWfState()
+        {
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                var artifactBundleService = new ArtifactBundleService();
+
+                ArtifactBundleModel artifactBundleModel1 = TestHelper.CreateArtifactBundle("A1T1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
+                ArtifactBundleModel artifactBundleModel2 = TestHelper.CreateArtifactBundle("A2T1", DefaultTeacher.EvaluationId, DefaultTeacher.UserId);
+
+                artifactBundleModel1.WfState = (long)SEWfStateEnum.ARTIFACT_SUBMITTED;
+                artifactBundleService.UpdateArtifactBundle(artifactBundleModel1);
+
+                ArtifactBundleRequestModel request = new ArtifactBundleRequestModel();
+                request.EvaluationId = DefaultTeacher.EvaluationId;
+                request.CurrentUserId = DefaultTeacher.UserId;
+                request.WfState = (long)SEWfStateEnum.ARTIFACT_SUBMITTED;
+                List<ArtifactBundleModel> bundles = artifactBundleService.GetArtifactBundlesForEvaluation(request);
+                Assert.AreEqual(1, bundles.Count);
+                Assert.AreEqual((long)SEWfStateEnum.ARTIFACT_SUBMITTED, bundles[0].WfState);
+
+            }
+        }
+
+        // Make sure attachable objects are from the same evaluation
+        [TestMethod]
+        public void ArtifactBundleAttachableObjects()
+        {
+            using (TransactionScope transaction = new TransactionScope())
+            {
+                var artifactBundleService = new ArtifactBundleService();
+
+                var goalModel = TestHelper.CreateStudentGrowthGoalBundle("G1", DefaultTeacher.EvaluationId);
+                var evalSessionModel = TestHelper.CreateEvalSession("S1", DefaultTeacher.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher.UserId,
+                                                SEEvaluationTypeEnum.TEACHER);
+
+                goalModel = TestHelper.CreateStudentGrowthGoalBundle("G2", DefaultTeacher2.EvaluationId);
+                evalSessionModel = TestHelper.CreateEvalSession("S2", DefaultTeacher2.EvaluationId, DefaultPrincipal.UserId, DefaultTeacher2.UserId,
+                                                SEEvaluationTypeEnum.TEACHER);
+
+                List<EvalSessionModel> observations = artifactBundleService.GetAttachableObservationsForEvaluation(DefaultTeacher.EvaluationId).ToList();
+                Assert.AreEqual(1, observations.Count);
+                Assert.AreEqual("S1", observations[0].Title);
+
+                // Can't attach until it has been shared
+                List<StudentGrowthGoalBundleModel> goalBundles = artifactBundleService.GetAttachableStudentGrowthGoalBundlesForEvaluation(DefaultTeacher.EvaluationId).ToList();
+                Assert.AreEqual(0, goalBundles.Count);
+
+                StudentGrowthGoalBundleService goalBundleService = new StudentGrowthGoalBundleService();
+                goalModel.WfState = (short)SEWfStateEnum.GOAL_BUNDLE_PROCESS_SUBMITTED;
+                goalBundleService.UpdateStudentGrowthGoalBundle(goalModel);
+
+                artifactBundleService = new ArtifactBundleService();
+                goalBundles = artifactBundleService.GetAttachableStudentGrowthGoalBundlesForEvaluation(DefaultTeacher2.EvaluationId).ToList();
+                Assert.AreEqual(1, goalBundles.Count);
+                Assert.AreEqual("G2", goalBundles[0].Title);
+
             }
         }
     }
