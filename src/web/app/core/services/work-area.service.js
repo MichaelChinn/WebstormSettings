@@ -5,9 +5,9 @@
         .module('stateeval.core')
         .factory('workAreaService', WorkAreaService);
 
-    WorkAreaService.$inject = ['enums', '$state', 'frameworkService', 'userService', 'evaluationService', 'config', '_', '$q'];
+    WorkAreaService.$inject = ['enums', '$state', 'frameworkService', 'userService', 'evaluationService', 'config', '_', '$q', '$modal'];
 
-    function WorkAreaService(enums, $state, frameworkService, userService, evaluationService, config, _, $q) {
+    function WorkAreaService(enums, $state, frameworkService, userService, evaluationService, config, _, $q, $modal) {
 
         var nextWorkAreaId = 1;
         var evalT = enums.EvaluationType.TEACHER;
@@ -104,17 +104,19 @@
         var CST = new WorkArea('CST', 'Customer Support', evalU, noAdditionalInfoWorkArea,
             []);
 
-        var IMP = new WorkArea('IMP', 'View Evaluations', evalU, noAdditionalInfoWorkArea,
+        var IMP_TR = new WorkArea('IMP_TR', 'Impersonate TR', evalT, impersonateTR,
+            []);
+        var IMP_PR = new WorkArea('IMP_PR', 'Impersonate PR', evalP, impersonatePR,
             []);
 
-        var NMP = new WorkArea('NMP', 'Go Back', evalU, noAdditionalInfoWorkArea,
+        var NMP = new WorkArea('NMP', 'Go Back', evalU, stopImpersonation,
             []);
 
 
         var roleAreaMapper = {
             SESuperAdmin: [SUPER],
-            SEDistrictAdmin: [DA_TR, DA_PR],
-            SEDistrictViewer: [DV_TR, DV_PR],
+            SEDistrictAdmin: [DA_TR, DA_PR, IMP_TR, IMP_PR],
+            SEDistrictViewer: [DV_TR, DV_PR, IMP_TR, IMP_PR],
             SESchoolAdmin: [SA_TR, SA_PR],
             SESchoolPrincipal: [PR_TR, PR_ME],
             SESchoolTeacher: [TR_ME],
@@ -154,7 +156,8 @@
             DV_TR: DV_TR,
             RS: RS,
             VL: VL,
-            IMP: IMP,
+            IMP_TR: IMP_TR,
+            IMP_PR: IMP_PR,
             NMP: NMP,
             roleAreaMapper: roleAreaMapper,
             getAreaById: getAreaById,
@@ -195,12 +198,8 @@
             });
         }
 
-        function getTagsOfRole(role) {
-            var list = [];
-            for (var i in roleAreaMapper[role]) {
-                list.push(roleAreaMapper[role][i].tag);
-            }
-            return list;
+        function getTagsOfRole(role, evaluationType) {
+            return _.filter(roleAreaMapper[role], {'evaluationType': evaluationType})
         }
 
         //GOTO WORKAREA FUNCTIONS
@@ -277,8 +276,32 @@
                 })
         }
 
-        function impersonate(activeUserContextService) {
+        function impersonatePR(activeUserContextService) {
+            var district = activeUserContextService.context.orientation.districtCode;
+            var context = activeUserContextService.context;
+            context.impersonatees = [];
+            return userService.getUsersInRoleAtDistrict(district, enums.Roles.SEDistrictEvaluator)
+                .then(function (data) {
+                    context.impersonatees = context.impersonatees.concat(data);
+                    $modal.open({
+                        templateUrl: 'app/layout/views/impersonate-setup-modal.html',
+                        controller: 'impersonateSettingsModalController as vm'
+                    }).result
+                        .then(function (chosenImpersonatee) {
+                            startupService.c
+                        })
+                });
+        }
 
+        function impersonateTR(activeUserContextService) {
+            var district = activeUserContextService.context.orientation.districtCode;
+            var context = activeUserContextService.context;
+            context.impersonatees = [];
+            return userService.getPrincipalsInDistrict(district)
+                .then(function (data) {
+                    context.impersonatees = context.impersonatees.concat(data);
+                    return 'EHYE';
+                });
         }
 
         function stopImpersonation() {
@@ -317,10 +340,7 @@
             }
         }
 
-
-        console.log('first change');
         //CONSTRUCTOR -
-
         //    each work area gets an additional method called from the change-work-area controller
         //    to initialize the workArea and load appropriate information
         function WorkArea(tag, title, evaluationType, loadInformation, navbar) {
@@ -337,22 +357,21 @@
                 } else {
                     context.orientation.workAreaTag = context.navOptions.workAreaTag;
                 }
-                // initialize items that change based on work-area and may not be reset
-
-                //var role2 = findRole(this);
                 //todo set evaluatees/ framework/other loaded info to 0 before init WA
-                return enterWorkArea(activeUserContextService, this)
+                var that = this;
+                return enterWorkArea(activeUserContextService, that)
                     .then(function () {
-                        return loadInformation(activeUserContextService).then(function () {
+                        return loadInformation(activeUserContextService, that)
+                            .then(function () {
                             if (activeUserContextService.context.evaluatees) {
                                 activeUserContextService.context.evaluatee = activeUserContextService.context.evaluatees[0];
                             }
+                            //return defaultLink || service[context.orientation.workAreaTag].navbar[0].state;
                         });
                     })
                     .then(function () {
                         activeUserContextService.save();
-                        var link = service[context.orientation.workAreaTag].navbar[0];
-                        $state.go(link.state, {}, {reload: true});
+                        $state.go(service[context.orientation.workAreaTag].navbar[0].state, {}, {reload: true});
                         console.log('Initializing Work Area: ', context.orientation.workAreaTag, context);
                     })
             }
