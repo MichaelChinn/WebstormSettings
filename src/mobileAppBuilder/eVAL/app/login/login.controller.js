@@ -2,7 +2,7 @@
 (function() {
 
     angular
-        .module('stateeval.login')
+        .module('stateeval.mobile.login')
         .controller('loginController', loginController);
 
     loginController.$inject = ['$location', 'authenticationService', 'startupService', '$state', 'activeUserContextService'];

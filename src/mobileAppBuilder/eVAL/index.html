@@ -69,11 +69,21 @@
     <script src="cordova.js"></script>
     <script src="app/app.js"></script>
     <script src="app/layout/container-controller.js"></script>
+    
+    <script src="app/home/home.module.js"></script>
     <script src="app/home/home-controller.js"></script>
+
+    <script src="app/login/login.module.js"></script>
     <script src="app/login/login.controller.js"></script>
+
+    <script src="app/observation/observation.module.js"></script>
+    <script src="app/observation/observation.route.js"></script>
+    <script src="app/observation/services/observation-service.js"></script>
+    <script src="app/observation/controllers/observation-controller.js"></script>
+
 </head>
-    <body ng-app="evalMobile" ng-controller="containerController as container">                  
-        <ion-nav-view>            
-        </ion-nav-view>
-    </body>
+<body ng-app="stateeval.mobile" ng-controller="containerController as container">
+    <ion-nav-view>
+    </ion-nav-view>
+</body>
 </html>

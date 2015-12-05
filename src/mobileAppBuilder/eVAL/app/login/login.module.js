@@ -5,6 +5,6 @@
 (function() {
     'use strict';
 
-    angular.module('stateeval.login', ['stateeval.core']);
+    angular.module('stateeval.mobile.login', ['stateeval.core']);
 })();
 

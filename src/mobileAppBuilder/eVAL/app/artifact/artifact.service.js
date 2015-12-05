@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('stateeval.artifact')
+    angular.module('stateeval.mobile.artifact')
         .factory('artifactService', artifactService);
 
     artifactService.$inject = ['$http', 'config', 'enums', '_', '$q', '$sce',

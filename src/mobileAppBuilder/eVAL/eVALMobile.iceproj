@@ -69,6 +69,7 @@
     <Content Include="app\home.html">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="app\home\home.module.js" />
     <Content Include="app\home\home-controller.js" />
     <Content Include="app\home\home.html">
       <SubType>Content</SubType>
@@ -103,9 +104,12 @@
     <Content Include="app\login\login.controller.js" />
     <Content Include="app\login\login.html" />
     <Content Include="app\login\login.module.js" />
-    <Content Include="app\observation\observation-service.js" />
-    <Content Include="app\observation\observation-controller.js" />
-    <Content Include="app\observation\observation.html">
+    <Content Include="app\observation\observation.module.js" />
+    <Content Include="app\observation\observation.route.js" />
+    <Content Include="app\observation\views\select-evaluatee.html" />
+    <Content Include="app\observation\services\observation-service.js" />
+    <Content Include="app\observation\controllers\observation-controller.js" />
+    <Content Include="app\observation\views\observation.html">
       <SubType>Content</SubType>
     </Content>
     <Content Include="App_Resources\WP8\SplashScreenImage.png">
@@ -328,6 +332,9 @@
     <Folder Include="app\login\" />
     <Folder Include="app\artifact\" />
     <Folder Include="app\observation\" />
+    <Folder Include="app\observation\controllers\" />
+    <Folder Include="app\observation\views\" />
+    <Folder Include="app\observation\services\" />
     <Folder Include="App_Resources\" />
     <Folder Include="App_Resources\Android\" />
     <Folder Include="App_Resources\Android\drawable-hdpi\" />

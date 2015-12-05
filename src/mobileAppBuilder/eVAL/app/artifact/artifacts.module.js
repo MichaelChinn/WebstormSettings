@@ -1,6 +1,6 @@
 (function() {
     'use strict';
 
-    angular.module('stateeval.artifact', ['stateeval.core']);
+    angular.module('stateeval.mobile.artifact', ['stateeval.core']);
 
 }) ();

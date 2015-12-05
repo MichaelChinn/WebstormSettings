@@ -1,5 +1,5 @@
 (function() {
-    angular.module("evalMobile").controller("containerController", containerController);
+    angular.module("stateeval.mobile").controller("containerController", containerController);
 
     function containerController() {
         var vm = this;

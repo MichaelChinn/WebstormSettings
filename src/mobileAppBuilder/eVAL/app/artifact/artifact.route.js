@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('stateeval.artifact')
+    angular.module('stateeval.mobile.artifact')
         .config(configureRoutes);
 
     configureRoutes.$inject = ['$stateProvider', '$urlRouterProvider'];

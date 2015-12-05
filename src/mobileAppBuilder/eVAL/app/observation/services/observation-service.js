@@ -1,5 +1,5 @@
 (function() {
-    angular.module("evalMobile").controller("observationService", observationService);
+    angular.module("stateeval.mobile.observation").service("observationService", observationService);
 
     function observationService() {
         var vm = this;

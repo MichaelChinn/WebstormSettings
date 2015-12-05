@@ -1,5 +1,5 @@
 (function() {
-    angular.module("evalMobile").controller("homeController", homeController);
+    angular.module("stateeval.mobile.home").controller("homeController", homeController);
 
     function homeController() {
         var vm = this;
