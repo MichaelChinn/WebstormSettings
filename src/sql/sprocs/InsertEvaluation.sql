@@ -96,26 +96,7 @@ DECLARE @EvalID BIGINT
 INSERT dbo.SEEvaluation(EvaluateeID, EvaluatorID, EvaluationTypeID, SchoolYear, DistrictCode, WfStateID) 
 SELECT u.UserID, NULL, @pEvaluationTypeID, @SchoolYear, @pDistrictCode, 1
   FROM dbo.#User u
-  
 
-
-UPDATE u2
-   SET u2.EvaluationID=e.EvaluationID
-  FROM dbo.SEUser u2
-  JOIN dbo.SEEvaluation e ON u2.SEUserID=e.EvaluateeID
-  JOIN dbo.#User u ON e.EvaluateeID=u.UserID
- WHERE u.DistrictCode=e.DistrictCode
-   AND e.SchoolYear=@SchoolYear
-   AND e.EvaluationTypeID=@pEvaluationTypeID
- 
-SELECT @sql_error = @@ERROR
-IF @sql_error <> 0
-BEGIN
-	SELECT @sql_error_message = 'Could not update SEUser.EvaluationID failed. In: ' 
-		+ @ProcName
-		+ ' >>>' + ISNULL(@sql_error_message, '')
-	GOTO ErrorHandler
-END
 
 -------------------
 -- Handle errors --
