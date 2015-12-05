@@ -1,26 +1,29 @@
-var evalMobileApp = angular.module('evalMobile', ['ionic', 'ui.router']);
+(function () {
+    var evalMobileApp = angular.module('evalMobile', ['ionic', 'ui.router', 'stateeval.core']);
 
-evalMobileApp.config(function ($stateProvider, $urlRouterProvider) {
+    evalMobileApp.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/app/home');
+        $urlRouterProvider.otherwise('/app/home');
 
-    $stateProvider.state('app', {
+        $stateProvider.state('app', {
             url: '/app',
             templateUrl: 'app/layout/layout.html',
             abstract: true
         })
-        .state('home',
-        {
-            url: "/home",
-            parent: 'app',
-            views:
+            .state('home',
             {
-                menuContent:
+                url: "/home",
+                parent: 'app',
+                views:
                 {
-                    templateUrl: 'app/home/home.html'
+                    menuContent:
+                    {
+                        templateUrl: 'app/home/home.html'
+                    }
                 }
-            }
-            
-        });
 
-})
+            });
+
+    });
+
+})();

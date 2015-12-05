@@ -1,9 +1,11 @@
-angular.module("evalMobile").controller("containerController", containerController);
+(function() {
+    angular.module("evalMobile").controller("containerController", containerController);
 
-function containerController() {
-    var vm = this;
-    vm.initialize = function() { 
-    };
+    function containerController() {
+        var vm = this;
+        vm.initialize = function() {
+        };
 
-    vm.initialize();
-}
+        vm.initialize();
+    }
+})();
