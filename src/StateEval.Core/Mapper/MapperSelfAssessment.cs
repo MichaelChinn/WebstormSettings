@@ -22,7 +22,6 @@ namespace StateEval.Core.Mapper
             target.Title = source.Title;
             target.PerformanceLevelID = source.PerformanceLevel;
             target.EvaluateeID = source.EvaluateeId;
-            target.EvaluationTypeID = (short)source.EvaluationType;
             target.IsSharedWithEvaluator = source.IsSharedWithEvaluator;
             target.IncludeInFinalReport = source.IncludeInFinalReport;
             target.FocusedFrameworkNodeID = source.FocusedFrameworkNodeId;
@@ -46,11 +45,12 @@ namespace StateEval.Core.Mapper
             this SESelfAssessment source, SelfAssessmentModel target = null)
         {
             target = target ?? new SelfAssessmentModel();
+            target.Id = source.SelfAssessmentID;
             target.EvaluationId = source.EvaluationID;
+            target.Title = source.Title;
             target.ShortName = source.ShortName;
             target.PerformanceLevel = (short)source.PerformanceLevelID;
             target.EvaluateeId = source.EvaluateeID;
-            target.EvaluationType = (SEEvaluationTypeEnum)source.EvaluationTypeID;
             target.IsSharedWithEvaluator = source.IsSharedWithEvaluator;
             target.IncludeInFinalReport = source.IncludeInFinalReport;
             target.FocusedFrameworkNodeId = source.FocusedFrameworkNodeID;

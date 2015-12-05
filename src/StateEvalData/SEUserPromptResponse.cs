@@ -28,9 +28,9 @@ namespace StateEvalData
         public string DistrictCode { get; set; }
     
         public virtual SESchoolYear SESchoolYear { get; set; }
-        public virtual SEUser SEUser { get; set; }
         public virtual SEUserPrompt SEUserPrompt { get; set; }
         public virtual ICollection<SEUserPromptResponseEntry> SEUserPromptResponseEntries { get; set; }
         public virtual SEEvalSession SEEvalSession { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

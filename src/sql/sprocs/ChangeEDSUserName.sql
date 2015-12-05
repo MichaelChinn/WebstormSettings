@@ -172,7 +172,7 @@ AS
             GOTO ErrorHandler
         END
 
-    UPDATE  LocationRoleClaim
+    UPDATE  dbo.SEUserLocationRole
     SET     userName = @pCurrentEDSUserName
     WHERE   userName = @oldUserName
             

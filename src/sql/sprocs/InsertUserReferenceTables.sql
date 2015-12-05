@@ -157,37 +157,6 @@ GO
             FROM    #cmdBlock;
         END;
 /******************************************************/
-/*  Check SEUserDistrictSchool for need to flush */
-
-
-    SELECT  @fCount = COUNT(*)
-    FROM    ( SELECT    DistrictCode ,
-                        SchoolCode
-              FROM      dbo.SEUserDistrictSchool
-              WHERE     SEUserID = @seuserId
-              EXCEPT
-              SELECT    districtCode ,
-                        schoolcode
-              FROM      #lr
-            ) AS X;
-
-    SELECT  @rCount = COUNT(*)
-    FROM    ( SELECT    districtCode ,
-                        schoolcode
-              FROM      #lr
-              EXCEPT
-              SELECT    DistrictCode ,
-                        SchoolCode
-              FROM      dbo.SEUserDistrictSchool
-              WHERE     SEUserID = @seuserId
-            ) AS Y;
-
-
-    IF ( ( @fCount > 0 )
-         OR ( @rCount > 0 )
-       )
-        SELECT  @flushUDS = 1;
-/******************************************************/
 /*  Check in SEUserLocationRole for need to flush  */
     SELECT  @fCount = COUNT(*)
     FROM    ( SELECT    DistrictCode ,
@@ -223,8 +192,7 @@ GO
 
 
     IF @pDebug = 1
-        SELECT  @flushUDS AS UDS ,
-                @flushULR AS ULR;
+        SELECT @flushULR AS ULR;
 
 /**********************************************************/
 /*  Now go do the work */
@@ -232,32 +200,6 @@ GO
     IF @tran_count = 0
         BEGIN TRANSACTION;
     BEGIN TRY
-
-        IF ( @flushUDS = 1 )
-            BEGIN
-                SELECT  @sql_error_message = 'Need to remove SEUserDistrictSchool for SEUserID'; 
-               
-                DELETE  dbo.SEUserDistrictSchool
-                WHERE   SEUserID = @seuserId;
-        
-                SELECT  @sql_error_message = 'inserting new seUserDistrictSchool';
-
-                INSERT  dbo.SEUserDistrictSchool
-                        ( SEUserID ,
-                          SchoolCode ,
-                          DistrictCode ,
-                          SchoolName ,
-                          DistrictName ,
-                          IsPrimary
-                        )
-                        SELECT  DISTINCT @seuserId ,
-                                schoolcode ,
-                                districtCode ,
-                                schoolName ,
-                                districtName ,
-                                1	--bogus value
-                        FROM    #lr;
-            END;
 
         IF ( @flushULR = 1 )
             BEGIN
@@ -274,6 +216,8 @@ GO
 						  SEUserid ,
                           SchoolCode ,
                           DistrictCode ,
+						  DistrictName ,
+						  SchoolName ,
                           RoleName ,
                           RoleId ,
                           CreateDate 
@@ -282,6 +226,8 @@ GO
 								@seuserId ,
                                 schoolcode ,
                                 districtCode ,
+								districtName ,
+								schoolName,
                                 roleName ,
                                 roleId ,
                                 GETDATE()

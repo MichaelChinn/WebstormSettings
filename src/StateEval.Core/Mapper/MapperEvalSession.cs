@@ -8,7 +8,7 @@ namespace StateEval.Core.Mapper
 {
     public static partial class Mapper
     {
-        public static EvalSessionModel MaptoEvalSessionModel(this SEEvalSession source, EvalSessionModel target = null)
+        public static EvalSessionModel MaptoEvalSessionModel(this SEEvalSession source, StateEvalEntities EvalEntities, EvalSessionModel target = null)
         {
             target = target ?? new EvalSessionModel();
             target.Id = source.EvalSessionID;
@@ -35,7 +35,8 @@ namespace StateEval.Core.Mapper
             target.IsSharedWithEvaluatee = source.IsSharedWithEvaluatee;
             target.PreConfPromptState = source.PreConfPromptState;
 
-            target.CreatedByDisplayName = source.SEUser1.FirstName + " " + source.SEUser1.LastName;
+            SEUser seUser = EvalEntities.SEUsers.FirstOrDefault(x => x.SEUserID == source.EvaluatorUserID);
+            target.CreatedByDisplayName = seUser.FirstName + " " + seUser.LastName;
             
             if (source.SchoolYear != null)
             {

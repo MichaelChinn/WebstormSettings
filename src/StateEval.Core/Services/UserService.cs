@@ -80,7 +80,7 @@ namespace StateEval.Core.Services
         public IEnumerable<UserModel> GetUsersInRoleInDistrictBuildings(string districtCode, string roleName)
         {
             IQueryable<SEUser> users = EvalEntities.SEUsers
-                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == roleName && r.SchoolCode == "" && r.DistrictCode == districtCode))
+                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == roleName && r.SchoolCode != "" && r.DistrictCode == districtCode))
                 .OrderBy(u => new { u.LastName, u.FirstName });
 
 
@@ -347,6 +347,7 @@ namespace StateEval.Core.Services
             return null;
         }
 
+        /* TODO: ac: remove since we have removed SEUserDistrictSchool
         public IEnumerable<UserDistrictSchoolModel> GetDistrictSchoolsForUser(long seUserID)
         {
             IQueryable<SEUserDistrictSchool> uds = EvalEntities.SEUserDistrictSchools
@@ -355,5 +356,6 @@ namespace StateEval.Core.Services
             return uds.ToList().Select(x => x.MaptoUserDistrictSchoolModel(null));
 
         }
+         */
     }
 }

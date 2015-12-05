@@ -250,7 +250,7 @@ namespace StateEval.Core.Services
                     case SEEvidenceCollectionTypeEnum.SELF_ASSESSMENT:
                     case SEEvidenceCollectionTypeEnum.STUDENT_GROWTH_GOALS:
                         scores = EvalEntities.SERubricRowScores
-                            .Where(x => x.LinkedItemTypeID == requestModel.CollectionObjectId)
+                            .Where(x => x.LinkedItemID == requestModel.CollectionObjectId)
                             .ToList().Select(x => x.MaptoRubricRowScoreModel()).ToList();
                         break;
                 }
@@ -323,7 +323,7 @@ namespace StateEval.Core.Services
 
                 collectionModel.Observations = EvalEntities.SEEvalSessions
                     .Where(x => x.EvaluationID == collectionRequest.EvaluationId && x.IsSelfAssess == false)
-                    .ToList().Select(x => x.MaptoEvalSessionModel()).ToList();
+                    .ToList().Select(x => x.MaptoEvalSessionModel(EvalEntities)).ToList();
 
                 collectionModel.StudentGrowthGoalBundles = EvalEntities.SEStudentGrowthGoalBundles
                     .Where(x => x.EvaluationID == collectionRequest.EvaluationId)
@@ -357,7 +357,19 @@ namespace StateEval.Core.Services
             if (collectionRequest.CollectionType == SEEvidenceCollectionTypeEnum.OBSERVATION)
             {
                 SEEvalSession session = EvalEntities.SEEvalSessions.FirstOrDefault(x => x.EvalSessionID == collectionRequest.CollectionObjectId);
-                collectionModel.Observation = session.MaptoEvalSessionModel();
+                collectionModel.Observation = session.MaptoEvalSessionModel(EvalEntities);
+            }
+
+            if (collectionRequest.CollectionType == SEEvidenceCollectionTypeEnum.SELF_ASSESSMENT)
+            {
+                SESelfAssessment assessment = EvalEntities.SESelfAssessments.FirstOrDefault(x => x.SelfAssessmentID == collectionRequest.CollectionObjectId);
+                collectionModel.SelfAssessment = assessment.MaptoSelfAssessmentModel();
+            }
+
+            if (collectionRequest.CollectionType == SEEvidenceCollectionTypeEnum.STUDENT_GROWTH_GOALS)
+            {
+                SEStudentGrowthGoalBundle goalBundle = EvalEntities.SEStudentGrowthGoalBundles.FirstOrDefault(x => x.StudentGrowthGoalBundleID == collectionRequest.CollectionObjectId);
+                collectionModel.StudentGrowthGoalBundle = goalBundle.MaptoStudentGrowthGoalBundleModel();
             } 
 
             return collectionModel;

@@ -21,6 +21,7 @@
         var sgGrowthGoalsTee = NavLink('Student Growth Goals', 'sg-goals-private', 'fa fa-child');
         var sgGrowthGoalsTor = NavLink('Student Growth Goals', 'sg-goals-submitted', 'fa fa-child');
         var observations = NavLink('Observations', 'observations', 'fa fa-eye');
+        var selfAssessments = NavLink('Self-Assessments', 'self-assessments', 'fa fa-coffee');
         var summativeEval = NavLink('Summative Evaluation', 'summative-eval', 'fa fa-table');
 
 
@@ -47,11 +48,19 @@
         var daDashboard = NavLink('Dashboard', 'da-dashboard', 'fa fa-th-large');
         var dvDashboard = NavLink('Dashboard', 'dv-dashboard', 'fa fa-th-large');
 
+<<<<<<< HEAD
         var teeNav = [evaluateeDashboard, artifacts, otherEvidence, sgGrowthGoalsTee, observations, summativeEval, evaluateeReports];
         var pr_trNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_TR];
         var pr_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_PR];
         var de_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DE];
         var dteNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DTE];
+=======
+        var teeNav =    [evaluateeDashboard, artifacts, otherEvidence, sgGrowthGoalsTee, observations, selfAssessments, summativeEval, evaluateeReports];
+        var pr_trNav =  [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_PR_TR];
+        var pr_prNav =  [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_PR_PR];
+        var de_prNav =  [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_DE];
+        var dteNav =    [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_DTE];
+>>>>>>> f24d82ac3b7c2456195f0b451218eca51fb1e5d0
 
         //AREAS
 

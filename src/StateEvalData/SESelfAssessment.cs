@@ -17,6 +17,8 @@ namespace StateEvalData
         public SESelfAssessment()
         {
             this.SERubricRows = new HashSet<SERubricRow>();
+            this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
+            this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
         }
     
         public long SelfAssessmentID { get; set; }
@@ -24,7 +26,6 @@ namespace StateEvalData
         public long EvaluateeID { get; set; }
         public string ShortName { get; set; }
         public string Title { get; set; }
-        public short EvaluationTypeID { get; set; }
         public Nullable<short> PerformanceLevelID { get; set; }
         public bool IsSharedWithEvaluator { get; set; }
         public bool IsFocused { get; set; }
@@ -34,8 +35,9 @@ namespace StateEvalData
         public System.DateTime CreationDateTime { get; set; }
     
         public virtual SEEvaluation SEEvaluation { get; set; }
-        public virtual SEEvaluationType SEEvaluationType { get; set; }
         public virtual SEUser SEUser { get; set; }
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
+        public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
+        public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
     }
 }

@@ -19,20 +19,20 @@ namespace StateEval.Core.Services
         {
             IQueryable<SEEvalSession> sessions = EvalEntities.SEEvalSessions.Where(
                 x => x.EvaluationID == evaluationId);
-            return sessions.ToList().Select(x => x.MaptoEvalSessionModel()).ToList();
+            return sessions.ToList().Select(x => x.MaptoEvalSessionModel(EvalEntities)).ToList();
         }
 
         public EvalSessionModel GetEvalSessionById(long evalSessionId)
         {
             SEEvalSession seEvalSession = EvalEntities.SEEvalSessions.FirstOrDefault(x => x.EvalSessionID == evalSessionId);
-            return seEvalSession == null ? null : seEvalSession.MaptoEvalSessionModel();
+            return seEvalSession == null ? null : seEvalSession.MaptoEvalSessionModel(EvalEntities);
         }
 
         public List<EvalSessionModel> GetEvalSessionForSchool(short schoolYear, string schoolCode)
         {
             var seEvalSessions = EvalEntities.SEEvalSessions
                 .Where(x => x.SchoolYear == schoolYear
-                            && x.SchoolCode==schoolCode).ToList().Select(x => x.MaptoEvalSessionModel()).ToList();
+                            && x.SchoolCode==schoolCode).ToList().Select(x => x.MaptoEvalSessionModel(EvalEntities)).ToList();
 
             return seEvalSessions;
         }
@@ -50,7 +50,7 @@ namespace StateEval.Core.Services
                                 && x.EvaluationID == evalSessionRequestModel.EvaluationId
                                 && x.EvaluationScoreTypeID == 1)
                     .ToList()
-                    .Select(x => x.MaptoEvalSessionModel())
+                    .Select(x => x.MaptoEvalSessionModel(EvalEntities))
                     .ToList();
             }
             else
@@ -61,7 +61,7 @@ namespace StateEval.Core.Services
                         ///&& x.EvaluationID == evalSessionRequestModel.EvaluationId
                                 && x.EvaluationScoreTypeID == 1)
                     .ToList()
-                    .Select(x => x.MaptoEvalSessionModel())
+                    .Select(x => x.MaptoEvalSessionModel(EvalEntities))
                     .ToList();
             }
 
@@ -115,7 +115,7 @@ namespace StateEval.Core.Services
                     .Where(x => x.EvaluationID == evalSessionModel.EvaluationId).Count();
 
                 seEvalSession.ShortName = "Obs " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
-                if (seEvalSession.Title == "")
+                if (seEvalSession.Title == null)
                 {
                     seEvalSession.Title = seEvalSession.ShortName;
                 }
@@ -171,7 +171,7 @@ namespace StateEval.Core.Services
             var evalSession = EvalEntities.SEEvalSessions.FirstOrDefault(x => x.EvalSessionID == evalSessionId);
             if (evalSession != null)
             {
-                return evalSession.SEArtifactBundles.Select(x => x.MaptoArtifactBundleModel()).ToList();
+                return evalSession.SEArtifactBundles.Select(x => x.MaptoArtifactBundleModel(EvalEntities)).ToList();
             }
             return null;
         }

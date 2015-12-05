@@ -304,6 +304,14 @@ warning 6002: The table/view 'stateeval.dbo.ProtoFrameworksToLoad' does not have
           <Property Name="ArtifactBundleID" Type="bigint" Nullable="false" />
           <Property Name="RubricRowID" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="SEArtifactBundleSelfAssessment">
+          <Key>
+            <PropertyRef Name="ArtifactBundleID" />
+            <PropertyRef Name="SelfAssessmentID" />
+          </Key>
+          <Property Name="ArtifactBundleID" Type="bigint" Nullable="false" />
+          <Property Name="SelfAssessmentID" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="SEArtifactBundleStudentGrowthGoalBundle">
           <Key>
             <PropertyRef Name="ArtifactBundleID" />
@@ -1035,7 +1043,6 @@ warning 6002: The table/view 'stateeval.dbo.SEReportPrintOptionUser' does not ha
           <Property Name="EvaluateeID" Type="bigint" Nullable="false" />
           <Property Name="ShortName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="250" />
-          <Property Name="EvaluationTypeID" Type="smallint" Nullable="false" />
           <Property Name="PerformanceLevelID" Type="smallint" />
           <Property Name="IsSharedWithEvaluator" Type="bit" Nullable="false" />
           <Property Name="IsFocused" Type="bit" Nullable="false" />
@@ -1280,8 +1287,6 @@ warning 6002: The table/view 'stateeval.dbo.SETrainingProtocolLabelAssignment' d
           <Property Name="SEUserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="50" />
-          <Property Name="SchoolCode" Type="varchar" MaxLength="20" />
-          <Property Name="DistrictCode" Type="varchar" MaxLength="20" />
           <Property Name="ASPNetUserID" Type="uniqueidentifier" />
           <Property Name="HasMultipleBuildings" Type="bit" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="256" />
@@ -1291,7 +1296,6 @@ warning 6002: The table/view 'stateeval.dbo.SETrainingProtocolLabelAssignment' d
           <Property Name="EmailAddressAlternate" Type="varchar" MaxLength="256" />
           <Property Name="CertificateNumber" Type="varchar" MaxLength="20" />
           <Property Name="MobileAccessKey" Type="uniqueidentifier" />
-          <Property Name="EvaluationID" Type="bigint" />
           <Property Name="EmailAddress" Type="varchar" MaxLength="256" Nullable="false" />
           <Property Name="OTPW" Type="varchar" MaxLength="1000" />
         </EntityType>
@@ -1313,18 +1317,6 @@ warning 6002: The table/view 'stateeval.dbo.SETrainingProtocolLabelAssignment' d
           <Property Name="ObjectId" Type="bigint" />
           <Property Name="ObjectType" Type="nvarchar" MaxLength="500" />
           <Property Name="ActivityData" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="SEUserDistrictSchool">
-          <Key>
-            <PropertyRef Name="UserDistrictSchoolID" />
-          </Key>
-          <Property Name="UserDistrictSchoolID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SEUserID" Type="bigint" Nullable="false" />
-          <Property Name="SchoolCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DistrictCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SchoolName" Type="varchar" MaxLength="100" />
-          <Property Name="DistrictName" Type="varchar" MaxLength="100" />
-          <Property Name="IsPrimary" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SEUserLocationRole">
           <Key>
@@ -1458,20 +1450,19 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Key>
             <PropertyRef Name="FrameworkContextID" />
             <PropertyRef Name="SchoolYear" />
-            <PropertyRef Name="UserDistrictSchoolID" />
+            <PropertyRef Name="UserLocationRoleID" />
             <PropertyRef Name="DistrictCode" />
-            <PropertyRef Name="SchoolCode" />
             <PropertyRef Name="EvaluationTypeID" />
             <PropertyRef Name="RoleId" />
             <PropertyRef Name="RoleName" />
             <PropertyRef Name="SEUserID" />
-            
+            <PropertyRef Name="SchoolName" />
           </Key>
           <Property Name="FrameworkContextID" Type="bigint" Nullable="false" />
           <Property Name="SchoolYear" Type="smallint" Nullable="false" />
-          <Property Name="UserDistrictSchoolID" Type="bigint" Nullable="false" />
+          <Property Name="UserLocationRoleID" Type="bigint" Nullable="false" />
           <Property Name="DistrictCode" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="SchoolCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SchoolCode" Type="nvarchar" MaxLength="25" />
           <Property Name="EvaluationTypeID" Type="smallint" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
@@ -1764,6 +1755,30 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEArtifactBundleRubricRowAlignment">
               <PropertyRef Name="RubricRowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEArtifactBundleSelfAssessment_SEArtifactBundle">
+          <End Role="SEArtifactBundle" Type="Self.SEArtifactBundle" Multiplicity="1" />
+          <End Role="SEArtifactBundleSelfAssessment" Type="Self.SEArtifactBundleSelfAssessment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEArtifactBundle">
+              <PropertyRef Name="ArtifactBundleID" />
+            </Principal>
+            <Dependent Role="SEArtifactBundleSelfAssessment">
+              <PropertyRef Name="ArtifactBundleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEArtifactBundleSelfAssessment_SESelfAssessment">
+          <End Role="SESelfAssessment" Type="Self.SESelfAssessment" Multiplicity="1" />
+          <End Role="SEArtifactBundleSelfAssessment" Type="Self.SEArtifactBundleSelfAssessment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESelfAssessment">
+              <PropertyRef Name="SelfAssessmentID" />
+            </Principal>
+            <Dependent Role="SEArtifactBundleSelfAssessment">
+              <PropertyRef Name="SelfAssessmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2979,18 +2994,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SERubricRowEvaluation_SEEvalSession1">
-          <End Role="SEEvalSession" Type="Self.SEEvalSession" Multiplicity="0..1" />
-          <End Role="SERubricRowEvaluation" Type="Self.SERubricRowEvaluation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEEvalSession">
-              <PropertyRef Name="EvalSessionID" />
-            </Principal>
-            <Dependent Role="SERubricRowEvaluation">
-              <PropertyRef Name="LinkedSelfAssessmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SERubricRowEvaluation_SEEvaluation">
           <End Role="SEEvaluation" Type="Self.SEEvaluation" Multiplicity="1" />
           <End Role="SERubricRowEvaluation" Type="Self.SERubricRowEvaluation" Multiplicity="*" />
@@ -3048,6 +3051,18 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SERubricRowEvaluation">
               <PropertyRef Name="RubricRowID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERubricRowEvaluation_SESelfAssessment">
+          <End Role="SESelfAssessment" Type="Self.SESelfAssessment" Multiplicity="0..1" />
+          <End Role="SERubricRowEvaluation" Type="Self.SERubricRowEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESelfAssessment">
+              <PropertyRef Name="SelfAssessmentID" />
+            </Principal>
+            <Dependent Role="SERubricRowEvaluation">
+              <PropertyRef Name="LinkedSelfAssessmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3168,18 +3183,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SESelfAssessment">
               <PropertyRef Name="EvaluationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SESelfAssessment_SEEvaluationType">
-          <End Role="SEEvaluationType" Type="Self.SEEvaluationType" Multiplicity="1" />
-          <End Role="SESelfAssessment" Type="Self.SESelfAssessment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEEvaluationType">
-              <PropertyRef Name="EvaluationTypeID" />
-            </Principal>
-            <Dependent Role="SESelfAssessment">
-              <PropertyRef Name="EvaluationTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3735,30 +3738,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEUser_SEEvaluation">
-          <End Role="SEEvaluation" Type="Self.SEEvaluation" Multiplicity="0..1" />
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEEvaluation">
-              <PropertyRef Name="EvaluationID" />
-            </Principal>
-            <Dependent Role="SEUser">
-              <PropertyRef Name="EvaluationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEUserDistrictSchool_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEUserDistrictSchool" Type="Self.SEUserDistrictSchool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserDistrictSchool">
-              <PropertyRef Name="SEUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SEUserID">
           <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
           <End Role="SELearningWalkSessionScore" Type="Self.SELearningWalkSessionScore" Multiplicity="*" />
@@ -4058,6 +4037,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySet Name="SEArtifactBundleRejection" EntityType="Self.SEArtifactBundleRejection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleRejectionType" EntityType="Self.SEArtifactBundleRejectionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleRubricRowAlignment" EntityType="Self.SEArtifactBundleRubricRowAlignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEArtifactBundleSelfAssessment" EntityType="Self.SEArtifactBundleSelfAssessment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleStudentGrowthGoalBundle" EntityType="Self.SEArtifactBundleStudentGrowthGoalBundle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactBundleWfHistory" EntityType="Self.SEArtifactBundleWfHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEArtifactLibItem" EntityType="Self.SEArtifactLibItem" Schema="dbo" store:Type="Tables" />
@@ -4139,7 +4119,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySet Name="SETrainingProtocolRatingStatusType" EntityType="Self.SETrainingProtocolRatingStatusType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUser" EntityType="Self.SEUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserActivity" EntityType="Self.SEUserActivity" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SEUserDistrictSchool" EntityType="Self.SEUserDistrictSchool" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserLocationRole" EntityType="Self.SEUserLocationRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserPrompt" EntityType="Self.SEUserPrompt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserPromptConferenceDefault" EntityType="Self.SEUserPromptConferenceDefault" Schema="dbo" store:Type="Tables" />
@@ -4233,7 +4212,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <DefiningQuery>SELECT 
     [vUserOrientation].[FrameworkContextID] AS [FrameworkContextID], 
     [vUserOrientation].[SchoolYear] AS [SchoolYear], 
-    [vUserOrientation].[UserDistrictSchoolID] AS [UserDistrictSchoolID], 
+    [vUserOrientation].[UserLocationRoleID] AS [UserLocationRoleID], 
     [vUserOrientation].[DistrictCode] AS [DistrictCode], 
     [vUserOrientation].[SchoolCode] AS [SchoolCode], 
     [vUserOrientation].[EvaluationTypeID] AS [EvaluationTypeID], 
@@ -4339,6 +4318,14 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_SEArtifactBundleRubricRowAlignment_RubricRowID" Association="Self.FK_SEArtifactBundleRubricRowAlignment_RubricRowID">
             <End Role="SERubricRow" EntitySet="SERubricRow" />
             <End Role="SEArtifactBundleRubricRowAlignment" EntitySet="SEArtifactBundleRubricRowAlignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEArtifactBundleSelfAssessment_SEArtifactBundle" Association="Self.FK_SEArtifactBundleSelfAssessment_SEArtifactBundle">
+            <End Role="SEArtifactBundle" EntitySet="SEArtifactBundle" />
+            <End Role="SEArtifactBundleSelfAssessment" EntitySet="SEArtifactBundleSelfAssessment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEArtifactBundleSelfAssessment_SESelfAssessment" Association="Self.FK_SEArtifactBundleSelfAssessment_SESelfAssessment">
+            <End Role="SESelfAssessment" EntitySet="SESelfAssessment" />
+            <End Role="SEArtifactBundleSelfAssessment" EntitySet="SEArtifactBundleSelfAssessment" />
           </AssociationSet>
           <AssociationSet Name="FK_SEArtifactBundleStudentGrowthGoalBundle_SEArtifactBundle" Association="Self.FK_SEArtifactBundleStudentGrowthGoalBundle_SEArtifactBundle">
             <End Role="SEArtifactBundle" EntitySet="SEArtifactBundle" />
@@ -4744,10 +4731,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEEvalSession" EntitySet="SEEvalSession" />
             <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluation" />
           </AssociationSet>
-          <AssociationSet Name="FK_SERubricRowEvaluation_SEEvalSession1" Association="Self.FK_SERubricRowEvaluation_SEEvalSession1">
-            <End Role="SEEvalSession" EntitySet="SEEvalSession" />
-            <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluation" />
-          </AssociationSet>
           <AssociationSet Name="FK_SERubricRowEvaluation_SEEvaluation" Association="Self.FK_SERubricRowEvaluation_SEEvaluation">
             <End Role="SEEvaluation" EntitySet="SEEvaluation" />
             <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluation" />
@@ -4766,6 +4749,10 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           </AssociationSet>
           <AssociationSet Name="FK_SERubricRowEvaluation_SERubricRow" Association="Self.FK_SERubricRowEvaluation_SERubricRow">
             <End Role="SERubricRow" EntitySet="SERubricRow" />
+            <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERubricRowEvaluation_SESelfAssessment" Association="Self.FK_SERubricRowEvaluation_SESelfAssessment">
+            <End Role="SESelfAssessment" EntitySet="SESelfAssessment" />
             <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluation" />
           </AssociationSet>
           <AssociationSet Name="FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle" Association="Self.FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle">
@@ -4806,10 +4793,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           </AssociationSet>
           <AssociationSet Name="FK_SESelfAssessment_SEEvaluation" Association="Self.FK_SESelfAssessment_SEEvaluation">
             <End Role="SEEvaluation" EntitySet="SEEvaluation" />
-            <End Role="SESelfAssessment" EntitySet="SESelfAssessment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SESelfAssessment_SEEvaluationType" Association="Self.FK_SESelfAssessment_SEEvaluationType">
-            <End Role="SEEvaluationType" EntitySet="SEEvaluationType" />
             <End Role="SESelfAssessment" EntitySet="SESelfAssessment" />
           </AssociationSet>
           <AssociationSet Name="FK_SESelfAssessment_SEUser" Association="Self.FK_SESelfAssessment_SEUser">
@@ -4995,14 +4978,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_SEUser_aspnet_Users" Association="Self.FK_SEUser_aspnet_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="SEUser" EntitySet="SEUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUser_SEEvaluation" Association="Self.FK_SEUser_SEEvaluation">
-            <End Role="SEEvaluation" EntitySet="SEEvaluation" />
-            <End Role="SEUser" EntitySet="SEUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUserDistrictSchool_SEUser" Association="Self.FK_SEUserDistrictSchool_SEUser">
-            <End Role="SEUser" EntitySet="SEUser" />
-            <End Role="SEUserDistrictSchool" EntitySet="SEUserDistrictSchool" />
           </AssociationSet>
           <AssociationSet Name="FK_SEUserID" Association="Self.FK_SEUserID">
             <End Role="SEUser" EntitySet="SEUser" />
@@ -5197,9 +5172,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEEvalAssignmentRequestStatusType" Relationship="Self.FK_SEEvalAssignmentRequest_SEEvalAssignmentRequestStatusType" FromRole="SEEvalAssignmentRequest" ToRole="SEEvalAssignmentRequestStatusType" />
           <NavigationProperty Name="SEEvalAssignmentRequestType" Relationship="Self.FK_SEEvalAssignmentRequest_SEEvalAssignmentRequestType" FromRole="SEEvalAssignmentRequest" ToRole="SEEvalAssignmentRequestType" />
           <NavigationProperty Name="SESchoolYear" Relationship="Self.FK_SEEvalAssignmentRequest_SESchoolYear" FromRole="SEEvalAssignmentRequest" ToRole="SESchoolYear" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEEvalAssignmentRequest_SEUser" FromRole="SEEvalAssignmentRequest" ToRole="SEUser" />
-          <NavigationProperty Name="SEUser1" Relationship="Self.FK_SEEvalAssignmentRequest_SEUser1" FromRole="SEEvalAssignmentRequest" ToRole="SEUser" />
-        </EntityType>
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEEvalAssignmentRequest_SEUser" FromRole="SEEvalAssignmentRequest" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEEvalAssignmentRequest_SEUser1" FromRole="SEEvalAssignmentRequest" ToRole="SEUser" />
+          </EntityType>
         <EntityType Name="SEEvalAssignmentRequestStatusType">
           <Key>
             <PropertyRef Name="EvalAssignmentRequestStatusTypeID" />
@@ -5253,7 +5228,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEStudentGrowthProcessSettings" Relationship="StateEvalModel.FK_SEStudentGrowthProcessSettings_SEEvaluationType" FromRole="SEEvaluationType" ToRole="SEStudentGrowthProcessSetting" />
           <NavigationProperty Name="SEEvaluations" Relationship="StateEvalModel.FK_SEEvaluation_SEEvaluationType" FromRole="SEEvaluationType" ToRole="SEEvaluation" />
           <NavigationProperty Name="SEStudentGrowthFormPromptFrameworkNodes" Relationship="StateEvalModel.FK_SEStudentGrowthFormPromptFrameworkNode_SEEvaluationType" FromRole="SEEvaluationType" ToRole="SEStudentGrowthFormPromptFrameworkNode" />
-          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.FK_SESelfAssessment_SEEvaluationType" FromRole="SEEvaluationType" ToRole="SESelfAssessment" />
         </EntityType>
         <EntityType Name="SEEvaluationWfHistory">
           <Key>
@@ -5265,9 +5239,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="Timestamp" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEEvaluationWfHistory_SEUser1" FromRole="SEEvaluationWfHistory" ToRole="SEUser" />
           <NavigationProperty Name="SEWfTransition" Relationship="Self.FK_SEEvaluationWfHistory_SEWfTransition" FromRole="SEEvaluationWfHistory" ToRole="SEWfTransition" />
           <NavigationProperty Name="SEEvaluation" Relationship="StateEvalModel.FK_SEEvaluationWfHistory_SEEvaluation" FromRole="SEEvaluationWfHistory" ToRole="SEEvaluation" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEEvaluationWfHistory_SEUser1" FromRole="SEEvaluationWfHistory" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SEFrameworkNode">
           <Key>
@@ -5341,9 +5315,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="PerformanceLevelID" Type="Int16" Nullable="false" />
           <Property Name="SEUserID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="SELearningWalkClassRoom" Relationship="Self.FK_ClassroomID" FromRole="SELearningWalkSessionScore" ToRole="SELearningWalkClassRoom" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEUserID" FromRole="SELearningWalkSessionScore" ToRole="SEUser" />
           <NavigationProperty Name="SERubricPerformanceLevel" Relationship="StateEvalModel.FK_PerformanceLevelID" FromRole="SELearningWalkSessionScore" ToRole="SERubricPerformanceLevel" />
           <NavigationProperty Name="SEEvalSession" Relationship="StateEvalModel.FK_SessionID" FromRole="SELearningWalkSessionScore" ToRole="SEEvalSession" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserID" FromRole="SELearningWalkSessionScore" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SEPracticeSessionParticipant">
           <Key>
@@ -5353,9 +5327,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="PracticeSessionID" Type="Int64" Nullable="false" />
           <Property Name="EvalSessionID" Type="Int64" Nullable="false" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEPracticeSessionParticipant_SEUser" FromRole="SEPracticeSessionParticipant" ToRole="SEUser" />
           <NavigationProperty Name="SEPracticeSession" Relationship="StateEvalModel.FK_SEPracticeSessionParticipant_PracticeSession" FromRole="SEPracticeSessionParticipant" ToRole="SEPracticeSession" />
           <NavigationProperty Name="SEEvalSession" Relationship="StateEvalModel.FK_SEPracticeSessionParticipant_SEEvalSession" FromRole="SEPracticeSessionParticipant" ToRole="SEEvalSession" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEPracticeSessionParticipant_SEUser" FromRole="SEPracticeSessionParticipant" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SEPracticeSessionType">
           <Key>
@@ -5557,7 +5531,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="TrainingProtocolID" Type="Int64" Nullable="false" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="SETrainingProtocol" Relationship="Self.FK_SETrainingProtocolPlaylist_SETrainingProtocol" FromRole="SETrainingProtocolPlaylist" ToRole="SETrainingProtocol" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SETrainingProtocolPlaylist_SEUser" FromRole="SETrainingProtocolPlaylist" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SETrainingProtocolPlaylist_SEUser" FromRole="SETrainingProtocolPlaylist" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SETrainingProtocolRating">
           <Key>
@@ -5572,7 +5546,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="IsAnnonymous" Type="Boolean" Nullable="false" />
           <Property Name="Status" Type="Int16" Nullable="false" />
           <NavigationProperty Name="SETrainingProtocol" Relationship="Self.FK_SETrainingProtocolRating_SETrainingProtocol" FromRole="SETrainingProtocolRating" ToRole="SETrainingProtocol" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SETrainingProtocolRating_SEUser" FromRole="SETrainingProtocolRating" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SETrainingProtocolRating_SEUser" FromRole="SETrainingProtocolRating" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SETrainingProtocolRatingStatusType">
           <Key>
@@ -5581,67 +5555,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="TrainingProtocolRatingStatusTypeID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <EntityType Name="SEUser">
-          <Key>
-            <PropertyRef Name="SEUserID" />
-          </Key>
-          <Property Name="SEUserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DistrictCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ASPNetUserID" Type="Guid" />
-          <Property Name="HasMultipleBuildings" Type="Boolean" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="loweredUsername" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="MessageEmailOverride" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="LoginName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="EmailAddressAlternate" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="CertificateNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MobileAccessKey" Type="Guid" />
-          <NavigationProperty Name="SEEvalAssignmentRequests" Relationship="Self.FK_SEEvalAssignmentRequest_SEUser" FromRole="SEUser" ToRole="SEEvalAssignmentRequest" />
-          <NavigationProperty Name="SEEvalAssignmentRequests1" Relationship="Self.FK_SEEvalAssignmentRequest_SEUser1" FromRole="SEUser" ToRole="SEEvalAssignmentRequest" />
-          <NavigationProperty Name="SEEvaluationWfHistories" Relationship="Self.FK_SEEvaluationWfHistory_SEUser1" FromRole="SEUser" ToRole="SEEvaluationWfHistory" />
-          <NavigationProperty Name="SELearningWalkSessionScores" Relationship="Self.FK_SEUserID" FromRole="SEUser" ToRole="SELearningWalkSessionScore" />
-          <NavigationProperty Name="SEPracticeSessionParticipants" Relationship="Self.FK_SEPracticeSessionParticipant_SEUser" FromRole="SEUser" ToRole="SEPracticeSessionParticipant" />
-          <NavigationProperty Name="SETrainingProtocolPlaylists" Relationship="Self.FK_SETrainingProtocolPlaylist_SEUser" FromRole="SEUser" ToRole="SETrainingProtocolPlaylist" />
-          <NavigationProperty Name="SETrainingProtocolRatings" Relationship="Self.FK_SETrainingProtocolRating_SEUser" FromRole="SEUser" ToRole="SETrainingProtocolRating" />
-          <NavigationProperty Name="SEDistrictPRViewings" Relationship="Self.FK_SEDAPRViewing_DAUserID" FromRole="SEUser" ToRole="SEDistrictPRViewing" />
-          <NavigationProperty Name="SEReportPrintOptionUsers" Relationship="Self.FK_SEReportPrintOptionUser_SEUser" FromRole="SEUser" ToRole="SEReportPrintOptionUser" />
-          <NavigationProperty Name="SEUserPrompts" Relationship="Self.FK_SEUserPrompt_CreatedByUserID" FromRole="SEUser" ToRole="SEUserPrompt" />
-          <NavigationProperty Name="SEUserPrompts1" Relationship="Self.FK_SEUserPrompt_SEUser" FromRole="SEUser" ToRole="SEUserPrompt" />
-          <NavigationProperty Name="SEUserPromptResponseEntries" Relationship="Self.FK_SEUserPromptResponseEntry_SEUser" FromRole="SEUser" ToRole="SEUserPromptResponseEntry" />
-          <NavigationProperty Name="SEUserPromptConferenceDefaults" Relationship="Self.FKSEUserPromptConferenceDefault_SEUser" FromRole="SEUser" ToRole="SEUserPromptConferenceDefault" />
-          <Property Name="EvaluationID" Type="Int64" />
-          <NavigationProperty Name="SEArtifactLibItems" Relationship="StateEvalModel.FK_SEArtifactLibItem_CreatedByUserID" FromRole="SEUser" ToRole="SEArtifactLibItem" />
-          <NavigationProperty Name="SECommunications" Relationship="StateEvalModel.FK_SECommunication_SEUser" FromRole="SEUser" ToRole="SECommunication" />
-          <NavigationProperty Name="SENotifications" Relationship="StateEvalModel.FK_SENotification_SEUser" FromRole="SEUser" ToRole="SENotification" />
-          <NavigationProperty Name="SENotifications1" Relationship="StateEvalModel.FK_SENotification_SEUser1" FromRole="SEUser" ToRole="SENotification" />
-          <NavigationProperty Name="SEArtifactBundleRejections" Relationship="StateEvalModel.FK_SEArtifactBundleRejection_SEUser" FromRole="SEUser" ToRole="SEArtifactBundleRejection" />
-          <NavigationProperty Name="SEUserActivities" Relationship="StateEvalModel.FK_UserActivity_SEUser" FromRole="SEUser" ToRole="SEUserActivity" />
-          <NavigationProperty Name="SEUserDistrictSchools" Relationship="StateEvalModel.FK_SEUserDistrictSchool_SEUser" FromRole="SEUser" ToRole="SEUserDistrictSchool" />
-          <NavigationProperty Name="SEUserPromptResponses" Relationship="StateEvalModel.FK_SEUserPromptResponse_SEUser" FromRole="SEUser" ToRole="SEUserPromptResponse" />
-          <NavigationProperty Name="SEPracticeSessions" Relationship="StateEvalModel.FK_SEPracticeSession_CreatedByUserID" FromRole="SEUser" ToRole="SEPracticeSession" />
-          <NavigationProperty Name="SEPracticeSessions1" Relationship="StateEvalModel.FK_SEPracticeSession_EvaluateeUserID" FromRole="SEUser" ToRole="SEPracticeSession" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
-          <Property Name="OTPW" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnet_Users" Relationship="StateEvalModel.FK_SEUser_aspnet_Users" FromRole="SEUser" ToRole="aspnet_Users" />
-          <NavigationProperty Name="SEEvaluations" Relationship="StateEvalModel.FK_SEEvaluation_SEUser" FromRole="SEUser" ToRole="SEEvaluation" />
-          <NavigationProperty Name="SEEvaluations1" Relationship="StateEvalModel.FK_SEEvaluation_SEUser1" FromRole="SEUser" ToRole="SEEvaluation" />
-          <NavigationProperty Name="SEEvaluation" Relationship="StateEvalModel.FK_SEUser_SEEvaluation" FromRole="SEUser" ToRole="SEEvaluation" />
-          <NavigationProperty Name="SERubricRowAnnotations" Relationship="StateEvalModel.FK_SERubricRowAnnotation_SEUserID" FromRole="SEUser" ToRole="SERubricRowAnnotation" />
-          <NavigationProperty Name="SEArtifactBundles" Relationship="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID" FromRole="SEUser" ToRole="SEArtifactBundle" />
-          <NavigationProperty Name="SEUserLocationRoles" Relationship="StateEvalModel.FK_SEUserLocationRole_SEUser" FromRole="SEUser" ToRole="SEUserLocationRole" />
-          <NavigationProperty Name="SESummativeFrameworkNodeScores" Relationship="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEUserID" FromRole="SEUser" ToRole="SESummativeFrameworkNodeScore" />
-          <NavigationProperty Name="SESummativeRubricRowScores" Relationship="StateEvalModel.FK_SESummativeRubricRowScore_SEUser" FromRole="SEUser" ToRole="SESummativeRubricRowScore" />
-          <NavigationProperty Name="SEStudentGrowthFormPromptResponses" Relationship="StateEvalModel.FK_SEFormPromptResponse_SEUser1" FromRole="SEUser" ToRole="SEStudentGrowthFormPromptResponse" />
-          <NavigationProperty Name="SEFrameworkNodeScores" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SEUser" FromRole="SEUser" ToRole="SEFrameworkNodeScore" />
-          <NavigationProperty Name="SERubricRowScores" Relationship="StateEvalModel.FK_SERubricRowScore_SEUser" FromRole="SEUser" ToRole="SERubricRowScore" />
-          <NavigationProperty Name="SEEvalSessions" Relationship="StateEvalModel.FK_SEEvalSession_SEUser" FromRole="SEUser" ToRole="SEEvalSession" />
-          <NavigationProperty Name="SEEvalSessions1" Relationship="StateEvalModel.FK_SEEvalSession_SEUser1" FromRole="SEUser" ToRole="SEEvalSession" />
-          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.FK_SESelfAssessment_SEUser" FromRole="SEUser" ToRole="SESelfAssessment" />
-          <NavigationProperty Name="SERubricRowEvaluations" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEUser" FromRole="SEUser" ToRole="SERubricRowEvaluation" />
-          </EntityType>
         <EntityType Name="SEUserPrompt">
           <Key>
             <PropertyRef Name="UserPromptID" />
@@ -5666,8 +5579,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="GUID" Type="Guid" />
           <NavigationProperty Name="SEEvaluationType" Relationship="Self.FK_SEUserPrompt_SEEvaluationType" FromRole="SEUserPrompt" ToRole="SEEvaluationType" />
           <NavigationProperty Name="SESchoolYear" Relationship="Self.FK_SEUserPrompt_SESchoolYear" FromRole="SEUserPrompt" ToRole="SESchoolYear" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEUserPrompt_CreatedByUserID" FromRole="SEUserPrompt" ToRole="SEUser" />
-          <NavigationProperty Name="SEUser1" Relationship="Self.FK_SEUserPrompt_SEUser" FromRole="SEUserPrompt" ToRole="SEUser" />
           <NavigationProperty Name="SEUserPromptType" Relationship="Self.FK_SEUserPrompt_SEUserPromptType" FromRole="SEUserPrompt" ToRole="SEUserPromptType" />
           <NavigationProperty Name="SEUserPromptConferenceDefaults" Relationship="Self.FKSEUserPromptConferenceDefault_SEUserPrompt" FromRole="SEUserPrompt" ToRole="SEUserPromptConferenceDefault" />
           <Property Name="WfStateID" Type="Int64" />
@@ -5675,7 +5586,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEWfState" Relationship="StateEvalModel.FK_SEUserPrompt_SEWfState" FromRole="SEUserPrompt" ToRole="SEWfState" />
           <NavigationProperty Name="SERubricRows" Relationship="StateEvalModel.SEUserPromptRubricRowAlignment" FromRole="SEUserPrompt" ToRole="SERubricRow" />
           <NavigationProperty Name="SEEvalSession" Relationship="StateEvalModel.FK_SEUserPrompt_SEEvalSession" FromRole="SEUserPrompt" ToRole="SEEvalSession" />
-        </EntityType>
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserPrompt_CreatedByUserID" FromRole="SEUserPrompt" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEUserPrompt_SEUser" FromRole="SEUserPrompt" ToRole="SEUser" />
+          </EntityType>
         <EntityType Name="SEUserPromptConferenceDefault">
           <Key>
             <PropertyRef Name="SEUserPromptConferenceDefaultID" />
@@ -5686,9 +5599,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="EvaluateeID" Type="Int64" Nullable="false" />
           <Property Name="DistrictCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PK_SEUserPromptConferenceDefault" Type="Int64" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FKSEUserPromptConferenceDefault_SEUser" FromRole="SEUserPromptConferenceDefault" ToRole="SEUser" />
           <NavigationProperty Name="SEUserPrompt" Relationship="Self.FKSEUserPromptConferenceDefault_SEUserPrompt" FromRole="SEUserPromptConferenceDefault" ToRole="SEUserPrompt" />
           <NavigationProperty Name="SEUserPromptType" Relationship="Self.FKSEUserPromptConferenceDefault_SEUserPromptType" FromRole="SEUserPromptConferenceDefault" ToRole="SEUserPromptType" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FKSEUserPromptConferenceDefault_SEUser" FromRole="SEUserPromptConferenceDefault" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SEUserPromptResponseEntry">
           <Key>
@@ -5699,8 +5612,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="Response" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEUserPromptResponseEntry_SEUser" FromRole="SEUserPromptResponseEntry" ToRole="SEUser" />
           <NavigationProperty Name="SEUserPromptResponse" Relationship="StateEvalModel.FK_SEUserPromptResponseEntry_SEUserPromptResponse" FromRole="SEUserPromptResponseEntry" ToRole="SEUserPromptResponse" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserPromptResponseEntry_SEUser" FromRole="SEUserPromptResponseEntry" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SEUserPromptType">
           <Key>
@@ -5796,7 +5709,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="SchoolCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SchoolYear" Type="Int16" Nullable="false" />
           <NavigationProperty Name="SESchoolYear" Relationship="Self.FK_SEDAPRViewing_SchoolYear" FromRole="SEDistrictPRViewing" ToRole="SESchoolYear" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEDAPRViewing_DAUserID" FromRole="SEDistrictPRViewing" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEDAPRViewing_DAUserID" FromRole="SEDistrictPRViewing" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SEReportPrintOptionUser">
           <Key>
@@ -5805,7 +5718,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           </Key>
           <Property Name="ReportPrintOptionID" Type="Int64" Nullable="false" />
           <Property Name="UserID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="SEUser" Relationship="Self.FK_SEReportPrintOptionUser_SEUser" FromRole="SEReportPrintOptionUser" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEReportPrintOptionUser_SEUser" FromRole="SEReportPrintOptionUser" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SETrainingProtocolFrameworkNodeAlignment">
           <Key>
@@ -5879,30 +5792,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEEvalAssignmentRequest_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEEvalAssignmentRequest" Type="Self.SEEvalAssignmentRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEEvalAssignmentRequest">
-              <PropertyRef Name="EvaluatorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEEvalAssignmentRequest_SEUser1">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEEvalAssignmentRequest" Type="Self.SEEvalAssignmentRequest" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEEvalAssignmentRequest">
-              <PropertyRef Name="EvaluateeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SEUserPrompt_SEEvaluationType">
           <End Role="SEEvaluationType" Type="Self.SEEvaluationType" Multiplicity="1" />
           <End Role="SEUserPrompt" Type="Self.SEUserPrompt" Multiplicity="*" />
@@ -5912,18 +5801,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEUserPrompt">
               <PropertyRef Name="EvaluationTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEEvaluationWfHistory_SEUser1">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEEvaluationWfHistory" Type="Self.SEEvaluationWfHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEEvaluationWfHistory">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5996,30 +5873,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SELearningWalkSessionScore">
               <PropertyRef Name="ClassroomID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEUserID">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SELearningWalkSessionScore" Type="Self.SELearningWalkSessionScore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SELearningWalkSessionScore">
-              <PropertyRef Name="SEUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEPracticeSessionParticipant_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEPracticeSessionParticipant" Type="Self.SEPracticeSessionParticipant" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEPracticeSessionParticipant">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6179,102 +6032,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SETrainingProtocolPlaylist_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SETrainingProtocolPlaylist" Type="Self.SETrainingProtocolPlaylist" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SETrainingProtocolPlaylist">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SETrainingProtocolRating_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SETrainingProtocolRating" Type="Self.SETrainingProtocolRating" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SETrainingProtocolRating">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEDAPRViewing_DAUserID">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEDistrictPRViewing" Type="Self.SEDistrictPRViewing" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEDistrictPRViewing">
-              <PropertyRef Name="DistrictUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEReportPrintOptionUser_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEReportPrintOptionUser" Type="Self.SEReportPrintOptionUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEReportPrintOptionUser">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEUserPrompt_CreatedByUserID">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEUserPrompt" Type="Self.SEUserPrompt" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserPrompt">
-              <PropertyRef Name="CreatedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEUserPrompt_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="0..1" />
-          <End Role="SEUserPrompt" Type="Self.SEUserPrompt" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserPrompt">
-              <PropertyRef Name="EvaluateeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEUserPromptResponseEntry_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEUserPromptResponseEntry" Type="Self.SEUserPromptResponseEntry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserPromptResponseEntry">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FKSEUserPromptConferenceDefault_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEUserPromptConferenceDefault" Type="Self.SEUserPromptConferenceDefault" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserPromptConferenceDefault">
-              <PropertyRef Name="EvaluateeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SEUserPrompt_SEUserPromptType">
           <End Role="SEUserPromptType" Type="Self.SEUserPromptType" Multiplicity="1" />
           <End Role="SEUserPrompt" Type="Self.SEUserPrompt" Multiplicity="*" />
@@ -6362,7 +6119,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySet Name="SETrainingProtocolPlaylists" EntityType="Self.SETrainingProtocolPlaylist" />
           <EntitySet Name="SETrainingProtocolRatings" EntityType="Self.SETrainingProtocolRating" />
           <EntitySet Name="SETrainingProtocolRatingStatusTypes" EntityType="Self.SETrainingProtocolRatingStatusType" />
-          <EntitySet Name="SEUsers" EntityType="Self.SEUser" />
           <EntitySet Name="SEUserPrompts" EntityType="Self.SEUserPrompt" />
           <EntitySet Name="SEUserPromptConferenceDefaults" EntityType="Self.SEUserPromptConferenceDefault" />
           <EntitySet Name="SEUserPromptResponseEntries" EntityType="Self.SEUserPromptResponseEntry" />
@@ -6396,21 +6152,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SESchoolYear" EntitySet="SESchoolYears" />
             <End Role="SEEvalAssignmentRequest" EntitySet="SEEvalAssignmentRequests" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEEvalAssignmentRequest_SEUser" Association="Self.FK_SEEvalAssignmentRequest_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEEvalAssignmentRequest" EntitySet="SEEvalAssignmentRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEEvalAssignmentRequest_SEUser1" Association="Self.FK_SEEvalAssignmentRequest_SEUser1">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEEvalAssignmentRequest" EntitySet="SEEvalAssignmentRequests" />
-          </AssociationSet>
           <AssociationSet Name="FK_SEUserPrompt_SEEvaluationType" Association="Self.FK_SEUserPrompt_SEEvaluationType">
             <End Role="SEEvaluationType" EntitySet="SEEvaluationTypes" />
             <End Role="SEUserPrompt" EntitySet="SEUserPrompts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEEvaluationWfHistory_SEUser1" Association="Self.FK_SEEvaluationWfHistory_SEUser1">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEEvaluationWfHistory" EntitySet="SEEvaluationWfHistories" />
           </AssociationSet>
           <AssociationSet Name="FK_SEEvaluationWfHistory_SEWfTransition" Association="Self.FK_SEEvaluationWfHistory_SEWfTransition">
             <End Role="SEWfTransition" EntitySet="SEWfTransitions" />
@@ -6435,14 +6179,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_ClassroomID" Association="Self.FK_ClassroomID">
             <End Role="SELearningWalkClassRoom" EntitySet="SELearningWalkClassRooms" />
             <End Role="SELearningWalkSessionScore" EntitySet="SELearningWalkSessionScores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUserID" Association="Self.FK_SEUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SELearningWalkSessionScore" EntitySet="SELearningWalkSessionScores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEPracticeSessionParticipant_SEUser" Association="Self.FK_SEPracticeSessionParticipant_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEPracticeSessionParticipant" EntitySet="SEPracticeSessionParticipants" />
           </AssociationSet>
           <AssociationSet Name="FK_SEReportPrintOption_SEReportPrintOptionType" Association="Self.FK_SEReportPrintOption_SEReportPrintOptionType">
             <End Role="SEReportPrintOptionType" EntitySet="SEReportPrintOptionTypes" />
@@ -6496,38 +6232,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SETrainingProtocolLabelGroup" EntitySet="SETrainingProtocolLabelGroups" />
             <End Role="SETrainingProtocolLabel" EntitySet="SETrainingProtocolLabels" />
           </AssociationSet>
-          <AssociationSet Name="FK_SETrainingProtocolPlaylist_SEUser" Association="Self.FK_SETrainingProtocolPlaylist_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SETrainingProtocolPlaylist" EntitySet="SETrainingProtocolPlaylists" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SETrainingProtocolRating_SEUser" Association="Self.FK_SETrainingProtocolRating_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SETrainingProtocolRating" EntitySet="SETrainingProtocolRatings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEDAPRViewing_DAUserID" Association="Self.FK_SEDAPRViewing_DAUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEDistrictPRViewing" EntitySet="SEDistrictPRViewings" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEReportPrintOptionUser_SEUser" Association="Self.FK_SEReportPrintOptionUser_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEReportPrintOptionUser" EntitySet="SEReportPrintOptionUsers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUserPrompt_CreatedByUserID" Association="Self.FK_SEUserPrompt_CreatedByUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserPrompt" EntitySet="SEUserPrompts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUserPrompt_SEUser" Association="Self.FK_SEUserPrompt_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserPrompt" EntitySet="SEUserPrompts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUserPromptResponseEntry_SEUser" Association="Self.FK_SEUserPromptResponseEntry_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserPromptResponseEntry" EntitySet="SEUserPromptResponseEntries" />
-          </AssociationSet>
-          <AssociationSet Name="FKSEUserPromptConferenceDefault_SEUser" Association="Self.FKSEUserPromptConferenceDefault_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserPromptConferenceDefault" EntitySet="SEUserPromptConferenceDefaults" />
-          </AssociationSet>
           <AssociationSet Name="FK_SEUserPrompt_SEUserPromptType" Association="Self.FK_SEUserPrompt_SEUserPromptType">
             <End Role="SEUserPromptType" EntitySet="SEUserPromptTypes" />
             <End Role="SEUserPrompt" EntitySet="SEUserPrompts" />
@@ -6568,10 +6272,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEArtifactLibItemType" EntitySet="SEArtifactLibItemTypes" />
             <End Role="SEArtifactLibItem" EntitySet="SEArtifactLibItems" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEArtifactLibItem_CreatedByUserID" Association="StateEvalModel.FK_SEArtifactLibItem_CreatedByUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEArtifactLibItem" EntitySet="SEArtifactLibItems" />
-          </AssociationSet>
           <EntitySet Name="SEStudentGrowthGoals" EntityType="StateEvalModel.SEStudentGrowthGoal" />
           <AssociationSet Name="FK_SEStudentGrowthGoal_SEFrameworkNode" Association="StateEvalModel.FK_SEStudentGrowthGoal_SEFrameworkNode">
             <End Role="SEFrameworkNode" EntitySet="SEFrameworkNodes" />
@@ -6593,10 +6293,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEArtifactBundleRejectionType" EntitySet="SEArtifactBundleRejectionTypes" />
             <End Role="SEArtifactBundleRejection" EntitySet="SEArtifactBundleRejections" />
           </AssociationSet>
-          <AssociationSet Name="FK_SECommunication_SEUser" Association="StateEvalModel.FK_SECommunication_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SECommunication" EntitySet="SECommunications" />
-          </AssociationSet>
           <EntitySet Name="SEResourceItemTypes" EntityType="StateEvalModel.SEResourceItemType" />
           <EntitySet Name="SEResources" EntityType="StateEvalModel.SEResource" />
           <AssociationSet Name="FK_SEResource_ItemType" Association="StateEvalModel.FK_SEResource_ItemType">
@@ -6608,28 +6304,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEEvent" EntitySet="SEEvents" />
             <End Role="SENotification" EntitySet="SENotifications" />
           </AssociationSet>
-          <AssociationSet Name="FK_SENotification_SEUser" Association="StateEvalModel.FK_SENotification_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SENotification" EntitySet="SENotifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SENotification_SEUser1" Association="StateEvalModel.FK_SENotification_SEUser1">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SENotification" EntitySet="SENotifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEArtifactBundleRejection_SEUser" Association="StateEvalModel.FK_SEArtifactBundleRejection_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEArtifactBundleRejection" EntitySet="SEArtifactBundleRejections" />
-          </AssociationSet>
           <EntitySet Name="SEUserActivities" EntityType="StateEvalModel.SEUserActivity" />
-          <AssociationSet Name="FK_UserActivity_SEUser" Association="StateEvalModel.FK_UserActivity_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserActivity" EntitySet="SEUserActivities" />
-          </AssociationSet>
-          <EntitySet Name="SEUserDistrictSchools" EntityType="StateEvalModel.SEUserDistrictSchool" />
-          <AssociationSet Name="FK_SEUserDistrictSchool_SEUser" Association="StateEvalModel.FK_SEUserDistrictSchool_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserDistrictSchool" EntitySet="SEUserDistrictSchools" />
-          </AssociationSet>
           <EntitySet Name="SERubricPerformanceLevels" EntityType="StateEvalModel.SERubricPerformanceLevel" />
           <EntitySet Name="SEUserPromptResponses" EntityType="StateEvalModel.SEUserPromptResponse" />
           <AssociationSet Name="FK_PerformanceLevelID" Association="StateEvalModel.FK_PerformanceLevelID">
@@ -6646,10 +6321,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           </AssociationSet>
           <AssociationSet Name="FK_SEUserPromptResponse_SESchoolYear" Association="StateEvalModel.FK_SEUserPromptResponse_SESchoolYear">
             <End Role="SESchoolYear" EntitySet="SESchoolYears" />
-            <End Role="SEUserPromptResponse" EntitySet="SEUserPromptResponses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUserPromptResponse_SEUser" Association="StateEvalModel.FK_SEUserPromptResponse_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SEUserPromptResponse" EntitySet="SEUserPromptResponses" />
           </AssociationSet>
           <AssociationSet Name="FK_SEUserPromptResponse_SEUserPrompt" Association="StateEvalModel.FK_SEUserPromptResponse_SEUserPrompt">
@@ -6669,14 +6340,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_SELearningWalkClassroomLabel_SEPracticeSession" Association="StateEvalModel.FK_SELearningWalkClassroomLabel_SEPracticeSession">
             <End Role="SEPracticeSession" EntitySet="SEPracticeSessions" />
             <End Role="SELearningWalkClassroomLabel" EntitySet="SELearningWalkClassroomLabels" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEPracticeSession_CreatedByUserID" Association="StateEvalModel.FK_SEPracticeSession_CreatedByUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEPracticeSession" EntitySet="SEPracticeSessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEPracticeSession_EvaluateeUserID" Association="StateEvalModel.FK_SEPracticeSession_EvaluateeUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEPracticeSession" EntitySet="SEPracticeSessions" />
           </AssociationSet>
           <AssociationSet Name="FK_SEPracticeSession_PracticeSessionTypeID" Association="StateEvalModel.FK_SEPracticeSession_PracticeSessionTypeID">
             <End Role="SEPracticeSessionType" EntitySet="SEPracticeSessionTypes" />
@@ -6731,7 +6394,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEFramework" EntitySet="SEFrameworks" />
             <End Role="SEFrameworkPerformanceLevel" EntitySet="SEFrameworkPerformanceLevels" />
           </AssociationSet>
-          <EntitySet Name="vUserOrientations" EntityType="StateEvalModel.vUserOrientation" />
           <EntitySet Name="vPrototypeFrameworkContexts" EntityType="StateEvalModel.vPrototypeFrameworkContext" />
           <EntitySet Name="ELMAH_Error" EntityType="StateEvalModel.ELMAH_Error" />
           <EntitySet Name="SERubricRows" EntityType="StateEvalModel.SERubricRow" />
@@ -6778,10 +6440,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEUser_aspnet_Users" Association="StateEvalModel.FK_SEUser_aspnet_Users">
-            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-            <End Role="SEUser" EntitySet="SEUsers" />
-          </AssociationSet>
           <EntitySet Name="RefreshTokens" EntityType="StateEvalModel.RefreshToken" />
           <EntitySet Name="ClientApps" EntityType="StateEvalModel.ClientApp" />
           <AssociationSet Name="FK_RefreshToken_ClientApp" Association="StateEvalModel.FK_RefreshToken_ClientApp">
@@ -6821,14 +6479,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SESchoolYear" EntitySet="SESchoolYears" />
             <End Role="SEEvaluation" EntitySet="SEEvaluations" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEEvaluation_SEUser" Association="StateEvalModel.FK_SEEvaluation_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEEvaluation" EntitySet="SEEvaluations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEEvaluation_SEUser1" Association="StateEvalModel.FK_SEEvaluation_SEUser1">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEEvaluation" EntitySet="SEEvaluations" />
-          </AssociationSet>
           <AssociationSet Name="FK_SEEvaluation_SEWfState" Association="StateEvalModel.FK_SEEvaluation_SEWfState">
             <End Role="SEWfState" EntitySet="SEWfStates" />
             <End Role="SEEvaluation" EntitySet="SEEvaluations" />
@@ -6849,24 +6499,12 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEEvaluation" EntitySet="SEEvaluations" />
             <End Role="SEStudentGrowthGoal" EntitySet="SEStudentGrowthGoals" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEUser_SEEvaluation" Association="StateEvalModel.FK_SEUser_SEEvaluation">
-            <End Role="SEEvaluation" EntitySet="SEEvaluations" />
-            <End Role="SEUser" EntitySet="SEUsers" />
-          </AssociationSet>
           <EntitySet Name="SERubricRowAnnotations" EntityType="StateEvalModel.SERubricRowAnnotation" />
           <AssociationSet Name="FK_SERubricRowAnnotation_SERubricRow" Association="StateEvalModel.FK_SERubricRowAnnotation_SERubricRow">
             <End Role="SERubricRow" EntitySet="SERubricRows" />
             <End Role="SERubricRowAnnotation" EntitySet="SERubricRowAnnotations" />
           </AssociationSet>
-          <AssociationSet Name="FK_SERubricRowAnnotation_SEUserID" Association="StateEvalModel.FK_SERubricRowAnnotation_SEUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SERubricRowAnnotation" EntitySet="SERubricRowAnnotations" />
-          </AssociationSet>
           <EntitySet Name="SEArtifactBundles" EntityType="StateEvalModel.SEArtifactBundle" />
-          <AssociationSet Name="FK_SEArtifactBundle_CreatedByUserID" Association="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEArtifactBundle" EntitySet="SEArtifactBundles" />
-          </AssociationSet>
           <AssociationSet Name="FK_SEArtifactBundle_SEArtifactBundleRejectionType" Association="StateEvalModel.FK_SEArtifactBundle_SEArtifactBundleRejectionType">
             <End Role="SEArtifactBundleRejectionType" EntitySet="SEArtifactBundleRejectionTypes" />
             <End Role="SEArtifactBundle" EntitySet="SEArtifactBundles" />
@@ -6917,10 +6555,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
             <End Role="SEUserLocationRole" EntitySet="SEUserLocationRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEUserLocationRole_SEUser" Association="StateEvalModel.FK_SEUserLocationRole_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserLocationRole" EntitySet="SEUserLocationRoles" />
-          </AssociationSet>
           <EntitySet Name="SESummativeFrameworkNodeScores" EntityType="StateEvalModel.SESummativeFrameworkNodeScore" />
           <EntitySet Name="SESummativeRubricRowScores" EntityType="StateEvalModel.SESummativeRubricRowScore" />
           <AssociationSet Name="FK_SESummativeFrameworkNodeScore_SEEvaluation" Association="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEEvaluation">
@@ -6947,23 +6581,11 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SERubricRow" EntitySet="SERubricRows" />
             <End Role="SESummativeRubricRowScore" EntitySet="SESummativeRubricRowScores" />
           </AssociationSet>
-          <AssociationSet Name="FK_SESummativeFrameworkNodeScore_SEUserID" Association="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEUserID">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SESummativeFrameworkNodeScore" EntitySet="SESummativeFrameworkNodeScores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SESummativeRubricRowScore_SEUser" Association="StateEvalModel.FK_SESummativeRubricRowScore_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SESummativeRubricRowScore" EntitySet="SESummativeRubricRowScores" />
-          </AssociationSet>
           <EntitySet Name="SEEvidenceCollectionTypes" EntityType="StateEvalModel.SEEvidenceCollectionType" />
           <EntitySet Name="SEEvidenceTypes" EntityType="StateEvalModel.SEEvidenceType" />
           <EntitySet Name="SEStudentGrowthFormPromptResponses" EntityType="StateEvalModel.SEStudentGrowthFormPromptResponse" />
           <AssociationSet Name="FK_SEFormPromptResponse_SEStudentGrowthGoal1" Association="StateEvalModel.FK_SEFormPromptResponse_SEStudentGrowthGoal1">
             <End Role="SEStudentGrowthGoal" EntitySet="SEStudentGrowthGoals" />
-            <End Role="SEStudentGrowthFormPromptResponse" EntitySet="SEStudentGrowthFormPromptResponses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEFormPromptResponse_SEUser1" Association="StateEvalModel.FK_SEFormPromptResponse_SEUser1">
-            <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SEStudentGrowthFormPromptResponse" EntitySet="SEStudentGrowthFormPromptResponses" />
           </AssociationSet>
           <EntitySet Name="SEStudentGrowthFormPromptFrameworkNodes" EntityType="StateEvalModel.SEStudentGrowthFormPromptFrameworkNode" />
@@ -7023,20 +6645,12 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SERubricPerformanceLevel" EntitySet="SERubricPerformanceLevels" />
             <End Role="SEFrameworkNodeScore" EntitySet="SEFrameworkNodeScores" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEFrameworkNodeScore_SEUser" Association="StateEvalModel.FK_SEFrameworkNodeScore_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEFrameworkNodeScore" EntitySet="SEFrameworkNodeScores" />
-          </AssociationSet>
           <AssociationSet Name="FK_SERubricRowScore_LearningWalkClassroomID" Association="StateEvalModel.FK_SERubricRowScore_LearningWalkClassroomID">
             <End Role="SELearningWalkClassRoom" EntitySet="SELearningWalkClassRooms" />
             <End Role="SERubricRowScore" EntitySet="SERubricRowScores" />
           </AssociationSet>
           <AssociationSet Name="FK_SERubricRowScore_SERubricPerformanceLevel" Association="StateEvalModel.FK_SERubricRowScore_SERubricPerformanceLevel">
             <End Role="SERubricPerformanceLevel" EntitySet="SERubricPerformanceLevels" />
-            <End Role="SERubricRowScore" EntitySet="SERubricRowScores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SERubricRowScore_SEUser" Association="StateEvalModel.FK_SERubricRowScore_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SERubricRowScore" EntitySet="SERubricRowScores" />
           </AssociationSet>
           <EntitySet Name="SEEvalSessions" EntityType="StateEvalModel.SEEvalSession" />
@@ -7070,14 +6684,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           </AssociationSet>
           <AssociationSet Name="FK_SEEvalSession_SETrainingProtocol" Association="StateEvalModel.FK_SEEvalSession_SETrainingProtocol">
             <End Role="SETrainingProtocol" EntitySet="SETrainingProtocols" />
-            <End Role="SEEvalSession" EntitySet="SEEvalSessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEEvalSession_SEUser" Association="StateEvalModel.FK_SEEvalSession_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEEvalSession" EntitySet="SEEvalSessions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEEvalSession_SEUser1" Association="StateEvalModel.FK_SEEvalSession_SEUser1">
-            <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SEEvalSession" EntitySet="SEEvalSessions" />
           </AssociationSet>
           <AssociationSet Name="FK_SEEvalSession_SEWfState" Association="StateEvalModel.FK_SEEvalSession_SEWfState">
@@ -7137,23 +6743,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SELinkedItemType" EntitySet="SELinkedItemTypes" />
             <End Role="SERubricRowScore" EntitySet="SERubricRowScores" />
           </AssociationSet>
-          <EntitySet Name="SESelfAssessments" EntityType="StateEvalModel.SESelfAssessment" />
-          <AssociationSet Name="FK_SESelfAssessment_SEEvaluation" Association="StateEvalModel.FK_SESelfAssessment_SEEvaluation">
-            <End Role="SEEvaluation" EntitySet="SEEvaluations" />
-            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SESelfAssessment_SEEvaluationType" Association="StateEvalModel.FK_SESelfAssessment_SEEvaluationType">
-            <End Role="SEEvaluationType" EntitySet="SEEvaluationTypes" />
-            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SESelfAssessment_SEUser" Association="StateEvalModel.FK_SESelfAssessment_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
-          </AssociationSet>
-          <AssociationSet Name="SESelfAssessmentRubricRowFocus" Association="StateEvalModel.SESelfAssessmentRubricRowFocus">
-            <End Role="SERubricRow" EntitySet="SERubricRows" />
-            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
-          </AssociationSet>
           <EntitySet Name="SERubricRowEvaluations" EntityType="StateEvalModel.SERubricRowEvaluation" />
           <AssociationSet Name="FK_SERubricRowEvaluation_SEEvalSession" Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession">
             <End Role="SEEvalSession" EntitySet="SEEvalSessions" />
@@ -7185,10 +6774,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           </AssociationSet>
           <AssociationSet Name="FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle" Association="StateEvalModel.FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle">
             <End Role="SEStudentGrowthGoalBundle" EntitySet="SEStudentGrowthGoalBundles" />
-            <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SERubricRowEvaluation_SEUser" Association="StateEvalModel.FK_SERubricRowEvaluation_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluations" />
           </AssociationSet>
           <EntitySet Name="SEAlignedEvidences" EntityType="StateEvalModel.SEAlignedEvidence" />
@@ -7232,6 +6817,173 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_SEAvailableEvidence_SEStudentGrowthGoal" Association="StateEvalModel.FK_SEAvailableEvidence_SEStudentGrowthGoal">
             <End Role="SEStudentGrowthGoal" EntitySet="SEStudentGrowthGoals" />
             <End Role="SEAvailableEvidence" EntitySet="SEAvailableEvidences" />
+          </AssociationSet>
+          <EntitySet Name="SEUsers" EntityType="StateEvalModel.SEUser" />
+          <AssociationSet Name="FK_SEUser_aspnet_Users" Association="StateEvalModel.FK_SEUser_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="SEUser" EntitySet="SEUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEArtifactBundle_CreatedByUserID" Association="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEArtifactBundle" EntitySet="SEArtifactBundles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEArtifactBundleRejection_SEUser" Association="StateEvalModel.FK_SEArtifactBundleRejection_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEArtifactBundleRejection" EntitySet="SEArtifactBundleRejections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEArtifactLibItem_CreatedByUserID" Association="StateEvalModel.FK_SEArtifactLibItem_CreatedByUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEArtifactLibItem" EntitySet="SEArtifactLibItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECommunication_SEUser" Association="StateEvalModel.FK_SECommunication_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SECommunication" EntitySet="SECommunications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEEvalAssignmentRequest_SEUser" Association="StateEvalModel.FK_SEEvalAssignmentRequest_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEEvalAssignmentRequest" EntitySet="SEEvalAssignmentRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEEvalAssignmentRequest_SEUser1" Association="StateEvalModel.FK_SEEvalAssignmentRequest_SEUser1">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEEvalAssignmentRequest" EntitySet="SEEvalAssignmentRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEEvalSession_SEUser" Association="StateEvalModel.FK_SEEvalSession_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEEvalSession" EntitySet="SEEvalSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEEvalSession_SEUser1" Association="StateEvalModel.FK_SEEvalSession_SEUser1">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEEvalSession" EntitySet="SEEvalSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEEvaluation_SEUser" Association="StateEvalModel.FK_SEEvaluation_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEEvaluation" EntitySet="SEEvaluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEEvaluation_SEUser1" Association="StateEvalModel.FK_SEEvaluation_SEUser1">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEEvaluation" EntitySet="SEEvaluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEEvaluationWfHistory_SEUser1" Association="StateEvalModel.FK_SEEvaluationWfHistory_SEUser1">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEEvaluationWfHistory" EntitySet="SEEvaluationWfHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEFrameworkNodeScore_SEUser" Association="StateEvalModel.FK_SEFrameworkNodeScore_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEFrameworkNodeScore" EntitySet="SEFrameworkNodeScores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEUserID" Association="StateEvalModel.FK_SEUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SELearningWalkSessionScore" EntitySet="SELearningWalkSessionScores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SENotification_SEUser" Association="StateEvalModel.FK_SENotification_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SENotification" EntitySet="SENotifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SENotification_SEUser1" Association="StateEvalModel.FK_SENotification_SEUser1">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SENotification" EntitySet="SENotifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEPracticeSession_CreatedByUserID" Association="StateEvalModel.FK_SEPracticeSession_CreatedByUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEPracticeSession" EntitySet="SEPracticeSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEPracticeSession_EvaluateeUserID" Association="StateEvalModel.FK_SEPracticeSession_EvaluateeUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEPracticeSession" EntitySet="SEPracticeSessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEPracticeSessionParticipant_SEUser" Association="StateEvalModel.FK_SEPracticeSessionParticipant_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEPracticeSessionParticipant" EntitySet="SEPracticeSessionParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERubricRowAnnotation_SEUserID" Association="StateEvalModel.FK_SERubricRowAnnotation_SEUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SERubricRowAnnotation" EntitySet="SERubricRowAnnotations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERubricRowEvaluation_SEUser" Association="StateEvalModel.FK_SERubricRowEvaluation_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERubricRowScore_SEUser" Association="StateEvalModel.FK_SERubricRowScore_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SERubricRowScore" EntitySet="SERubricRowScores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEFormPromptResponse_SEUser" Association="StateEvalModel.FK_SEFormPromptResponse_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEStudentGrowthFormPromptResponse" EntitySet="SEStudentGrowthFormPromptResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SESummativeFrameworkNodeScore_SEUserID" Association="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SESummativeFrameworkNodeScore" EntitySet="SESummativeFrameworkNodeScores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SESummativeRubricRowScore_SEUser" Association="StateEvalModel.FK_SESummativeRubricRowScore_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SESummativeRubricRowScore" EntitySet="SESummativeRubricRowScores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETrainingProtocolPlaylist_SEUser" Association="StateEvalModel.FK_SETrainingProtocolPlaylist_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SETrainingProtocolPlaylist" EntitySet="SETrainingProtocolPlaylists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETrainingProtocolRating_SEUser" Association="StateEvalModel.FK_SETrainingProtocolRating_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SETrainingProtocolRating" EntitySet="SETrainingProtocolRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEDAPRViewing_DAUserID" Association="StateEvalModel.FK_SEDAPRViewing_DAUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEDistrictPRViewing" EntitySet="SEDistrictPRViewings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEReportPrintOptionUser_SEUser" Association="StateEvalModel.FK_SEReportPrintOptionUser_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEReportPrintOptionUser" EntitySet="SEReportPrintOptionUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEUserLocationRole_SEUser" Association="StateEvalModel.FK_SEUserLocationRole_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEUserLocationRole" EntitySet="SEUserLocationRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEUserPrompt_CreatedByUserID" Association="StateEvalModel.FK_SEUserPrompt_CreatedByUserID">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEUserPrompt" EntitySet="SEUserPrompts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEUserPrompt_SEUser" Association="StateEvalModel.FK_SEUserPrompt_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEUserPrompt" EntitySet="SEUserPrompts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEUserPromptResponse_SEUser" Association="StateEvalModel.FK_SEUserPromptResponse_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEUserPromptResponse" EntitySet="SEUserPromptResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEUserPromptResponseEntry_SEUser" Association="StateEvalModel.FK_SEUserPromptResponseEntry_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEUserPromptResponseEntry" EntitySet="SEUserPromptResponseEntries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserActivity_SEUser" Association="StateEvalModel.FK_UserActivity_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEUserActivity" EntitySet="SEUserActivities" />
+          </AssociationSet>
+          <AssociationSet Name="FKSEUserPromptConferenceDefault_SEUser" Association="StateEvalModel.FKSEUserPromptConferenceDefault_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SEUserPromptConferenceDefault" EntitySet="SEUserPromptConferenceDefaults" />
+          </AssociationSet>
+          <EntitySet Name="vUserOrientations" EntityType="StateEvalModel.vUserOrientation" />
+          <EntitySet Name="SESelfAssessments" EntityType="StateEvalModel.SESelfAssessment" />
+          <AssociationSet Name="FK_SESelfAssessment_SEEvaluation" Association="StateEvalModel.FK_SESelfAssessment_SEEvaluation">
+            <End Role="SEEvaluation" EntitySet="SEEvaluations" />
+            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SESelfAssessment_SEUser" Association="StateEvalModel.FK_SESelfAssessment_SEUser">
+            <End Role="SEUser" EntitySet="SEUsers" />
+            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
+          </AssociationSet>
+          <AssociationSet Name="SESelfAssessmentRubricRowFocus" Association="StateEvalModel.SESelfAssessmentRubricRowFocus">
+            <End Role="SERubricRow" EntitySet="SERubricRows" />
+            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SERubricRowEvaluation_SESelfAssessment" Association="StateEvalModel.FK_SERubricRowEvaluation_SESelfAssessment">
+            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
+            <End Role="SERubricRowEvaluation" EntitySet="SERubricRowEvaluations" />
+          </AssociationSet>
+          <AssociationSet Name="SEArtifactBundleSelfAssessment" Association="StateEvalModel.SEArtifactBundleSelfAssessment">
+            <End Role="SEArtifactBundle" EntitySet="SEArtifactBundles" />
+            <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="SEStudentGrowthProcessSetting">
@@ -7323,8 +7075,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="FileName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SEArtifactLibItemType" Relationship="StateEvalModel.FK_SEArtifactLibItem_ItemType" FromRole="SEArtifactLibItem" ToRole="SEArtifactLibItemType" />
           <Property Name="CreatedByUserID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEArtifactLibItem_CreatedByUserID" FromRole="SEArtifactLibItem" ToRole="SEUser" />
           <NavigationProperty Name="SEArtifactBundles" Relationship="StateEvalModel.SEArtifactBundleArtifactLibItem" FromRole="SEArtifactLibItem" ToRole="SEArtifactBundle" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEArtifactLibItem_CreatedByUserID" FromRole="SEArtifactLibItem" ToRole="SEUser" />
         </EntityType>
         <Association Name="FK_SEArtifactLibItem_ItemType">
           <End Type="StateEvalModel.SEArtifactLibItemType" Role="SEArtifactLibItemType" Multiplicity="1" />
@@ -7335,18 +7087,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEArtifactLibItem">
               <PropertyRef Name="ItemTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEArtifactLibItem_CreatedByUserID">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEArtifactLibItem" Role="SEArtifactLibItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEArtifactLibItem">
-              <PropertyRef Name="CreatedByUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7490,8 +7230,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="CommunicationSessionKey" Type="Guid" Nullable="false" />
           <NavigationProperty Name="SEArtifactBundleRejectionType" Relationship="StateEvalModel.FK_SEArtifactBundleRejection_SEArtifactBundleRejectionType" FromRole="SEArtifactBundleRejection" ToRole="SEArtifactBundleRejectionType" />
           <Property Name="CreatedByUserID" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEArtifactBundleRejection_SEUser" FromRole="SEArtifactBundleRejection" ToRole="SEUser" />
           <NavigationProperty Name="SEArtifactBundle" Relationship="StateEvalModel.FK_SEArtifactBundleRejection_SEArtifactBundle" FromRole="SEArtifactBundleRejection" ToRole="SEArtifactBundle" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEArtifactBundleRejection_SEUser" FromRole="SEArtifactBundleRejection" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SEArtifactBundleRejectionType">
           <Key>
@@ -7522,18 +7262,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEArtifactBundleRejection">
               <PropertyRef Name="RejectionTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SECommunication_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SECommunication" Role="SECommunication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SECommunication">
-              <PropertyRef Name="CreatedByUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7599,7 +7327,7 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEEvent" Relationship="StateEvalModel.FK_SENotification_SEEvent" FromRole="SENotification" ToRole="SEEvent" />
           <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SENotification_SEUser" FromRole="SENotification" ToRole="SEUser" />
           <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SENotification_SEUser1" FromRole="SENotification" ToRole="SEUser" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK_SENotification_SEEvent">
           <End Type="StateEvalModel.SEEvent" Role="SEEvent" Multiplicity="0..1" />
           <End Type="StateEvalModel.SENotification" Role="SENotification" Multiplicity="*" />
@@ -7609,42 +7337,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SENotification">
               <PropertyRef Name="EventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SENotification_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SENotification" Role="SENotification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SENotification">
-              <PropertyRef Name="ReceiverUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SENotification_SEUser1">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SENotification" Role="SENotification" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SENotification">
-              <PropertyRef Name="CreatedByUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEArtifactBundleRejection_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEArtifactBundleRejection" Role="SEArtifactBundleRejection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEArtifactBundleRejection">
-              <PropertyRef Name="CreatedByUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7668,43 +7360,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="ActivityData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_UserActivity_SEUser" FromRole="SEUserActivity" ToRole="SEUser" />
         </EntityType>
-        <Association Name="FK_UserActivity_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEUserActivity" Role="SEUserActivity" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserActivity">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="SEUserDistrictSchool">
-          <Key>
-            <PropertyRef Name="UserDistrictSchoolID" />
-          </Key>
-          <Property Name="UserDistrictSchoolID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SEUserID" Type="Int64" Nullable="false" />
-          <Property Name="SchoolCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DistrictCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DistrictName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserDistrictSchool_SEUser" FromRole="SEUserDistrictSchool" ToRole="SEUser" />
-        </EntityType>
-        <Association Name="FK_SEUserDistrictSchool_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEUserDistrictSchool" Role="SEUserDistrictSchool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserDistrictSchool">
-              <PropertyRef Name="SEUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SERubricPerformanceLevel">
           <Key>
             <PropertyRef Name="PerformanceLevelID" />
@@ -7737,10 +7392,10 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="ArtifactID" Type="Int64" />
           <Property Name="DistrictCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SESchoolYear" Relationship="StateEvalModel.FK_SEUserPromptResponse_SESchoolYear" FromRole="SEUserPromptResponse" ToRole="SESchoolYear" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserPromptResponse_SEUser" FromRole="SEUserPromptResponse" ToRole="SEUser" />
           <NavigationProperty Name="SEUserPrompt" Relationship="StateEvalModel.FK_SEUserPromptResponse_SEUserPrompt" FromRole="SEUserPromptResponse" ToRole="SEUserPrompt" />
           <NavigationProperty Name="SEUserPromptResponseEntries" Relationship="StateEvalModel.FK_SEUserPromptResponseEntry_SEUserPromptResponse" FromRole="SEUserPromptResponse" ToRole="SEUserPromptResponseEntry" />
           <NavigationProperty Name="SEEvalSession" Relationship="StateEvalModel.FK_SEUserPromptResponse_EvalSession" FromRole="SEUserPromptResponse" ToRole="SEEvalSession" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserPromptResponse_SEUser" FromRole="SEUserPromptResponse" ToRole="SEUser" />
         </EntityType>
         <Association Name="FK_PerformanceLevelID">
           <End Type="StateEvalModel.SERubricPerformanceLevel" Role="SERubricPerformanceLevel" Multiplicity="1" />
@@ -7790,18 +7445,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEUserPromptResponse_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEUserPromptResponse" Role="SEUserPromptResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserPromptResponse">
-              <PropertyRef Name="EvaluateeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SEUserPromptResponse_SEUserPrompt">
           <End Type="StateEvalModel.SEUserPrompt" Role="SEUserPrompt" Multiplicity="1" />
           <End Type="StateEvalModel.SEUserPromptResponse" Role="SEUserPromptResponse" Multiplicity="*" />
@@ -7844,14 +7487,14 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="RandomDigits" Type="Int16" Nullable="false" />
           <NavigationProperty Name="SELearningWalkClassRooms" Relationship="StateEvalModel.FK_SELearningWalkClassRoom_PracticeSessionID" FromRole="SEPracticeSession" ToRole="SELearningWalkClassRoom" />
           <NavigationProperty Name="SELearningWalkClassroomLabels" Relationship="StateEvalModel.FK_SELearningWalkClassroomLabel_SEPracticeSession" FromRole="SEPracticeSession" ToRole="SELearningWalkClassroomLabel" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEPracticeSession_CreatedByUserID" FromRole="SEPracticeSession" ToRole="SEUser" />
-          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEPracticeSession_EvaluateeUserID" FromRole="SEPracticeSession" ToRole="SEUser" />
           <NavigationProperty Name="SEPracticeSessionType" Relationship="StateEvalModel.FK_SEPracticeSession_PracticeSessionTypeID" FromRole="SEPracticeSession" ToRole="SEPracticeSessionType" />
           <NavigationProperty Name="SESchoolYear" Relationship="StateEvalModel.FK_SEPracticeSession_SchoolYear" FromRole="SEPracticeSession" ToRole="SESchoolYear" />
           <NavigationProperty Name="SETrainingProtocol" Relationship="StateEvalModel.FK_SEPracticeSession_TrainingProtocolID" FromRole="SEPracticeSession" ToRole="SETrainingProtocol" />
           <NavigationProperty Name="SEPracticeSessionParticipants" Relationship="StateEvalModel.FK_SEPracticeSessionParticipant_PracticeSession" FromRole="SEPracticeSession" ToRole="SEPracticeSessionParticipant" />
           <NavigationProperty Name="SEEvalSession" Relationship="StateEvalModel.FK_SEPracticeSession_AnchorSessionID" FromRole="SEPracticeSession" ToRole="SEEvalSession" />
-        </EntityType>
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEPracticeSession_CreatedByUserID" FromRole="SEPracticeSession" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEPracticeSession_EvaluateeUserID" FromRole="SEPracticeSession" ToRole="SEUser" />
+          </EntityType>
         <EntityType Name="SEWfState">
           <Key>
             <PropertyRef Name="WfStateID" />
@@ -7888,30 +7531,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SELearningWalkClassroomLabel">
               <PropertyRef Name="PracticeSessionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEPracticeSession_CreatedByUserID">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEPracticeSession" Role="SEPracticeSession" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEPracticeSession">
-              <PropertyRef Name="CreatedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEPracticeSession_EvaluateeUserID">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEPracticeSession" Role="SEPracticeSession" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEPracticeSession">
-              <PropertyRef Name="EvaluateeUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8130,30 +7749,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vUserOrientation">
-          <Key>
-            <PropertyRef Name="FrameworkContextID" />
-            <PropertyRef Name="SchoolYear" />
-            <PropertyRef Name="UserDistrictSchoolID" />
-            <PropertyRef Name="DistrictCode" />
-            <PropertyRef Name="SchoolCode" />
-            <PropertyRef Name="EvaluationTypeID" />
-            <PropertyRef Name="RoleId" />
-            <PropertyRef Name="RoleName" />
-            <PropertyRef Name="SEUserID" />
-          </Key>
-          <Property Name="FrameworkContextID" Type="Int64" Nullable="false" />
-          <Property Name="SchoolYear" Type="Int16" Nullable="false" />
-          <Property Name="UserDistrictSchoolID" Type="Int64" Nullable="false" />
-          <Property Name="DistrictCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EvaluationTypeID" Type="Int16" Nullable="false" />
-          <Property Name="RoleId" Type="Guid" Nullable="false" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="SEUserID" Type="Int64" Nullable="false" />
-          <Property Name="DistrictName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="vPrototypeFrameworkContext">
           <Key>
             <PropertyRef Name="FrameworkContextID" />
@@ -8210,9 +7805,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEArtifactBundles" Relationship="StateEvalModel.SEArtifactBundleRubricRowAlignment" FromRole="SERubricRow" ToRole="SEArtifactBundle" />
           <NavigationProperty Name="SESummativeRubricRowScores" Relationship="StateEvalModel.FK_SESummativeRubricRowScore_SERubricRow" FromRole="SERubricRow" ToRole="SESummativeRubricRowScore" />
           <NavigationProperty Name="SEEvalSessions" Relationship="StateEvalModel.SEEvalSessionRubricRowFocus" FromRole="SERubricRow" ToRole="SEEvalSession" />
-          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.SESelfAssessmentRubricRowFocus" FromRole="SERubricRow" ToRole="SESelfAssessment" />
           <NavigationProperty Name="SERubricRowEvaluations" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SERubricRow" FromRole="SERubricRow" ToRole="SERubricRowEvaluation" />
           <NavigationProperty Name="SEAvailableEvidences" Relationship="StateEvalModel.FK_SEAvailableEvidence_SERubricRow" FromRole="SERubricRow" ToRole="SEAvailableEvidence" />
+          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.SESelfAssessmentRubricRowFocus" FromRole="SERubricRow" ToRole="SESelfAssessment" />
           </EntityType>
         <Association Name="FK_SERubricRowFrameworkNode_SERubricRow">
           <End Type="StateEvalModel.SERubricRow" Role="SERubricRow" Multiplicity="1" />
@@ -8342,18 +7937,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <End Type="StateEvalModel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
           <End Type="StateEvalModel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
         </Association>
-        <Association Name="FK_SEUser_aspnet_Users">
-          <End Type="StateEvalModel.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aspnet_Users">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="SEUser">
-              <PropertyRef Name="ASPNetUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="RefreshToken">
           <Key>
             <PropertyRef Name="RefreshTokenId" />
@@ -8435,24 +8018,23 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEFrameworkNode2" Relationship="StateEvalModel.FK_SEEvaluation_SEFrameworkNode4" FromRole="SEEvaluation" ToRole="SEFrameworkNode" />
           <NavigationProperty Name="SERubricPerformanceLevel" Relationship="StateEvalModel.FK_SEEvaluation_SERubricPerformanceLevel" FromRole="SEEvaluation" ToRole="SERubricPerformanceLevel" />
           <NavigationProperty Name="SESchoolYear" Relationship="StateEvalModel.FK_SEEvaluation_SESchoolYear" FromRole="SEEvaluation" ToRole="SESchoolYear" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEEvaluation_SEUser" FromRole="SEEvaluation" ToRole="SEUser" />
-          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEEvaluation_SEUser1" FromRole="SEEvaluation" ToRole="SEUser" />
           <NavigationProperty Name="SEWfState" Relationship="StateEvalModel.FK_SEEvaluation_SEWfState" FromRole="SEEvaluation" ToRole="SEWfState" />
           <NavigationProperty Name="SEFrameworkNode3" Relationship="StateEvalModel.FK_SEEvaluation_SGFrameworkNode" FromRole="SEEvaluation" ToRole="SEFrameworkNode" />
           <NavigationProperty Name="SEEvaluationWfHistories" Relationship="StateEvalModel.FK_SEEvaluationWfHistory_SEEvaluation" FromRole="SEEvaluation" ToRole="SEEvaluationWfHistory" />
           <NavigationProperty Name="SEReportPrintOptionEvaluations" Relationship="StateEvalModel.FK_SEReportPrintOptionEvaluation_SEEvaluation" FromRole="SEEvaluation" ToRole="SEReportPrintOptionEvaluation" />
           <NavigationProperty Name="SEStudentGrowthGoals" Relationship="StateEvalModel.FK_SEStudentGrowthGoal_SEEvaluation" FromRole="SEEvaluation" ToRole="SEStudentGrowthGoal" />
-          <NavigationProperty Name="SEUsers" Relationship="StateEvalModel.FK_SEUser_SEEvaluation" FromRole="SEEvaluation" ToRole="SEUser" />
           <NavigationProperty Name="SEArtifactBundles" Relationship="StateEvalModel.FK_SEArtifactBundle_SEEvaluation" FromRole="SEEvaluation" ToRole="SEArtifactBundle" />
           <NavigationProperty Name="SESummativeFrameworkNodeScores" Relationship="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEEvaluation" FromRole="SEEvaluation" ToRole="SESummativeFrameworkNodeScore" />
           <NavigationProperty Name="SESummativeRubricRowScores" Relationship="StateEvalModel.FK_SESummativeRubricRowScore_SEEvaluation" FromRole="SEEvaluation" ToRole="SESummativeRubricRowScore" />
           <NavigationProperty Name="SEFrameworkNodeScores" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SEEvaluation" FromRole="SEEvaluation" ToRole="SEFrameworkNodeScore" />
           <NavigationProperty Name="SERubricRowScores" Relationship="StateEvalModel.FK_SERubricRowScore_SEEvaluation" FromRole="SEEvaluation" ToRole="SERubricRowScore" />
           <NavigationProperty Name="SEEvalSessions" Relationship="StateEvalModel.FK_SEEvalSession_SEEvaluation" FromRole="SEEvaluation" ToRole="SEEvalSession" />
-          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.FK_SESelfAssessment_SEEvaluation" FromRole="SEEvaluation" ToRole="SESelfAssessment" />
           <NavigationProperty Name="SERubricRowEvaluations" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEEvaluation" FromRole="SEEvaluation" ToRole="SERubricRowEvaluation" />
           <NavigationProperty Name="SEAvailableEvidences" Relationship="StateEvalModel.FK_SEAvailableEvidence_SEEvaluation" FromRole="SEEvaluation" ToRole="SEAvailableEvidence" />
           <NavigationProperty Name="SEAvailableEvidences1" Relationship="StateEvalModel.FK_SEAvailableEvidence_SEEvaluation1" FromRole="SEEvaluation" ToRole="SEAvailableEvidence" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEEvaluation_SEUser" FromRole="SEEvaluation" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEEvaluation_SEUser1" FromRole="SEEvaluation" ToRole="SEUser" />
+          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.FK_SESelfAssessment_SEEvaluation" FromRole="SEEvaluation" ToRole="SESelfAssessment" />
           </EntityType>
         <Association Name="FK_SEEvaluation_SEEvaluateePlanType">
           <End Type="StateEvalModel.SEEvaluateePlanType" Role="SEEvaluateePlanType" Multiplicity="0..1" />
@@ -8550,30 +8132,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEEvaluation_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEEvaluation">
-              <PropertyRef Name="EvaluateeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEEvaluation_SEUser1">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEEvaluation">
-              <PropertyRef Name="EvaluatorID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SEEvaluation_SEWfState">
           <End Type="StateEvalModel.SEWfState" Role="SEWfState" Multiplicity="0..1" />
           <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="*" />
@@ -8634,18 +8192,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEUser_SEEvaluation">
-          <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEEvaluation">
-              <PropertyRef Name="EvaluationID" />
-            </Principal>
-            <Dependent Role="SEUser">
-              <PropertyRef Name="EvaluationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SERubricRowAnnotation">
           <Key>
             <PropertyRef Name="RubricRowAnnotationID" />
@@ -8661,10 +8207,10 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="EvaluationID" Type="Int64" Nullable="false" />
           <Property Name="LinkedItemTypeID" Type="Int16" Nullable="false" />
           <NavigationProperty Name="SERubricRow" Relationship="StateEvalModel.FK_SERubricRowAnnotation_SERubricRow" FromRole="SERubricRowAnnotation" ToRole="SERubricRow" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SERubricRowAnnotation_SEUserID" FromRole="SERubricRowAnnotation" ToRole="SEUser" />
           <NavigationProperty Name="SEArtifactBundle" Relationship="StateEvalModel.FK_SERubricRowAnnotation_SEArtifactBundle" FromRole="SERubricRowAnnotation" ToRole="SEArtifactBundle" />
           <NavigationProperty Name="SEEvalSession" Relationship="StateEvalModel.FK_SERubricRowAnnotation_SEEvalSession" FromRole="SERubricRowAnnotation" ToRole="SEEvalSession" />
           <NavigationProperty Name="SEAvailableEvidences" Relationship="StateEvalModel.FK_SEAvailableEvidence_SERubricRowAnnotation" FromRole="SERubricRowAnnotation" ToRole="SEAvailableEvidence" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SERubricRowAnnotation_SEUserID" FromRole="SERubricRowAnnotation" ToRole="SEUser" />
         </EntityType>
         <Association Name="FK_SERubricRowAnnotation_SERubricRow">
           <End Type="StateEvalModel.SERubricRow" Role="SERubricRow" Multiplicity="1" />
@@ -8675,18 +8221,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SERubricRowAnnotation">
               <PropertyRef Name="RubricRowID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SERubricRowAnnotation_SEUserID">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SERubricRowAnnotation" Role="SERubricRowAnnotation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SERubricRowAnnotation">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8705,7 +8239,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="RejectDateTime" Type="DateTime" Precision="3" />
           <Property Name="CreatedByUserID" Type="Int64" Nullable="false" />
           <Property Name="RejectionTypeID" Type="Int16" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID" FromRole="SEArtifactBundle" ToRole="SEUser" />
           <NavigationProperty Name="SEArtifactBundleRejectionType" Relationship="StateEvalModel.FK_SEArtifactBundle_SEArtifactBundleRejectionType" FromRole="SEArtifactBundle" ToRole="SEArtifactBundleRejectionType" />
           <NavigationProperty Name="SEEvaluation" Relationship="StateEvalModel.FK_SEArtifactBundle_SEEvaluation" FromRole="SEArtifactBundle" ToRole="SEEvaluation" />
           <NavigationProperty Name="SEWfState" Relationship="StateEvalModel.FK_SEArtifactBundle_SEWfState" FromRole="SEArtifactBundle" ToRole="SEWfState" />
@@ -8719,19 +8252,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEEvalSessions" Relationship="StateEvalModel.SEArtifactBundleEvalSession" FromRole="SEArtifactBundle" ToRole="SEEvalSession" />
           <Property Name="ShortName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SEAvailableEvidences" Relationship="StateEvalModel.FK_SEAvailableEvidence_SEArtifactBundle" FromRole="SEArtifactBundle" ToRole="SEAvailableEvidence" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID" FromRole="SEArtifactBundle" ToRole="SEUser" />
+          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.SEArtifactBundleSelfAssessment" FromRole="SEArtifactBundle" ToRole="SESelfAssessment" />
         </EntityType>
-        <Association Name="FK_SEArtifactBundle_CreatedByUserID">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEArtifactBundle" Role="SEArtifactBundle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEArtifactBundle">
-              <PropertyRef Name="CreatedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SEArtifactBundle_SEArtifactBundleRejectionType">
           <End Type="StateEvalModel.SEArtifactBundleRejectionType" Role="SEArtifactBundleRejectionType" Multiplicity="0..1" />
           <End Type="StateEvalModel.SEArtifactBundle" Role="SEArtifactBundle" Multiplicity="*" />
@@ -8879,18 +8402,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEUserLocationRole_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEUserLocationRole" Role="SEUserLocationRole" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserLocationRole">
-              <PropertyRef Name="SEUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SESummativeFrameworkNodeScore">
           <Key>
             <PropertyRef Name="SummativeFrameworkNodeScoreID" />
@@ -8992,30 +8503,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SESummativeFrameworkNodeScore_SEUserID">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SESummativeFrameworkNodeScore" Role="SESummativeFrameworkNodeScore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SESummativeFrameworkNodeScore">
-              <PropertyRef Name="CreatedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SESummativeRubricRowScore_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SESummativeRubricRowScore" Role="SESummativeRubricRowScore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SESummativeRubricRowScore">
-              <PropertyRef Name="CreatedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="SEEvidenceCollectionType">
           <Key>
             <PropertyRef Name="EvidenceCollectionTypeID" />
@@ -9043,8 +8530,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="StudentGrowthGoalID" Type="Int64" />
           <NavigationProperty Name="SEStudentGrowthGoal" Relationship="StateEvalModel.FK_SEFormPromptResponse_SEStudentGrowthGoal1" FromRole="SEStudentGrowthFormPromptResponse" ToRole="SEStudentGrowthGoal" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEFormPromptResponse_SEUser1" FromRole="SEStudentGrowthFormPromptResponse" ToRole="SEUser" />
           <NavigationProperty Name="SEStudentGrowthFormPrompt" Relationship="StateEvalModel.FK_SEStudentGrowthFormPromptResponse_SEStudentGrowthFormPrompt" FromRole="SEStudentGrowthFormPromptResponse" ToRole="SEStudentGrowthFormPrompt" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEFormPromptResponse_SEUser" FromRole="SEStudentGrowthFormPromptResponse" ToRole="SEUser" />
         </EntityType>
         <Association Name="FK_SEFormPromptResponse_SEStudentGrowthGoal1">
           <End Type="StateEvalModel.SEStudentGrowthGoal" Role="SEStudentGrowthGoal" Multiplicity="0..1" />
@@ -9055,18 +8542,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEStudentGrowthFormPromptResponse">
               <PropertyRef Name="StudentGrowthGoalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEFormPromptResponse_SEUser1">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEStudentGrowthFormPromptResponse" Role="SEStudentGrowthFormPromptResponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEStudentGrowthFormPromptResponse">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9220,8 +8695,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEFrameworkNode" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SEFrameworkNode" FromRole="SEFrameworkNodeScore" ToRole="SEFrameworkNode" />
           <NavigationProperty Name="SELearningWalkClassRoom" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_LearningWalkClassroomID" FromRole="SEFrameworkNodeScore" ToRole="SELearningWalkClassRoom" />
           <NavigationProperty Name="SERubricPerformanceLevel" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SERubricPerformanceLevel" FromRole="SEFrameworkNodeScore" ToRole="SERubricPerformanceLevel" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SEUser" FromRole="SEFrameworkNodeScore" ToRole="SEUser" />
           <NavigationProperty Name="SELinkedItemType" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SELinkedItemType" FromRole="SEFrameworkNodeScore" ToRole="SELinkedItemType" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SEUser" FromRole="SEFrameworkNodeScore" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SERubricRowScore">
           <Key>
@@ -9238,8 +8713,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEEvaluation" Relationship="StateEvalModel.FK_SERubricRowScore_SEEvaluation" FromRole="SERubricRowScore" ToRole="SEEvaluation" />
           <NavigationProperty Name="SELearningWalkClassRoom" Relationship="StateEvalModel.FK_SERubricRowScore_LearningWalkClassroomID" FromRole="SERubricRowScore" ToRole="SELearningWalkClassRoom" />
           <NavigationProperty Name="SERubricPerformanceLevel" Relationship="StateEvalModel.FK_SERubricRowScore_SERubricPerformanceLevel" FromRole="SERubricRowScore" ToRole="SERubricPerformanceLevel" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SERubricRowScore_SEUser" FromRole="SERubricRowScore" ToRole="SEUser" />
           <NavigationProperty Name="SELinkedItemType" Relationship="StateEvalModel.FK_SERubricRowScore_SELinkedItemType" FromRole="SERubricRowScore" ToRole="SELinkedItemType" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SERubricRowScore_SEUser" FromRole="SERubricRowScore" ToRole="SEUser" />
         </EntityType>
         <Association Name="FK_SEFrameworkNodeScore_SEEvaluation">
           <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="1" />
@@ -9301,18 +8776,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEFrameworkNodeScore_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEFrameworkNodeScore" Role="SEFrameworkNodeScore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEFrameworkNodeScore">
-              <PropertyRef Name="CreatedByUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SERubricRowScore_LearningWalkClassroomID">
           <End Type="StateEvalModel.SELearningWalkClassRoom" Role="SELearningWalkClassRoom" Multiplicity="0..1" />
           <End Type="StateEvalModel.SERubricRowScore" Role="SERubricRowScore" Multiplicity="*" />
@@ -9334,18 +8797,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SERubricRowScore">
               <PropertyRef Name="PerformanceLevelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SERubricRowScore_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SERubricRowScore" Role="SERubricRowScore" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SERubricRowScore">
-              <PropertyRef Name="CreatedByUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9405,8 +8856,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SERubricPerformanceLevel" Relationship="StateEvalModel.FK_SEEvalSession_SERubricPerformanceLevel" FromRole="SEEvalSession" ToRole="SERubricPerformanceLevel" />
           <NavigationProperty Name="SESchoolYear" Relationship="StateEvalModel.FK_SEEvalSession_SESchoolYear" FromRole="SEEvalSession" ToRole="SESchoolYear" />
           <NavigationProperty Name="SETrainingProtocol" Relationship="StateEvalModel.FK_SEEvalSession_SETrainingProtocol" FromRole="SEEvalSession" ToRole="SETrainingProtocol" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEEvalSession_SEUser" FromRole="SEEvalSession" ToRole="SEUser" />
-          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEEvalSession_SEUser1" FromRole="SEEvalSession" ToRole="SEUser" />
           <NavigationProperty Name="SEWfState" Relationship="StateEvalModel.FK_SEEvalSession_SEWfState" FromRole="SEEvalSession" ToRole="SEWfState" />
           <NavigationProperty Name="SEFrameworkNode1" Relationship="StateEvalModel.FK_SEEvalSession_SGFrameworkNode" FromRole="SEEvalSession" ToRole="SEFrameworkNode" />
           <NavigationProperty Name="SEPracticeSessions" Relationship="StateEvalModel.FK_SEPracticeSession_AnchorSessionID" FromRole="SEEvalSession" ToRole="SEPracticeSession" />
@@ -9422,7 +8871,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="SERubricRowEvaluations" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession" FromRole="SEEvalSession" ToRole="SERubricRowEvaluation" />
           <NavigationProperty Name="SERubricRowEvaluations1" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession1" FromRole="SEEvalSession" ToRole="SERubricRowEvaluation" />
-        </EntityType>
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEEvalSession_SEUser" FromRole="SEEvalSession" ToRole="SEUser" />
+          <NavigationProperty Name="SEUser1" Relationship="StateEvalModel.FK_SEEvalSession_SEUser1" FromRole="SEEvalSession" ToRole="SEUser" />
+          </EntityType>
         <Association Name="FK_SEEvalSession_SEAnchorType">
           <End Type="StateEvalModel.SEAnchorType" Role="SEAnchorType" Multiplicity="0..1" />
           <End Type="StateEvalModel.SEEvalSession" Role="SEEvalSession" Multiplicity="*" />
@@ -9516,30 +8967,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEEvalSession">
               <PropertyRef Name="TrainingProtocolID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEEvalSession_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEEvalSession" Role="SEEvalSession" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEEvalSession">
-              <PropertyRef Name="EvaluateeUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEEvalSession_SEUser1">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
-          <End Type="StateEvalModel.SEEvalSession" Role="SEEvalSession" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEEvalSession">
-              <PropertyRef Name="EvaluatorUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9705,68 +9132,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="SESelfAssessment">
-          <Key>
-            <PropertyRef Name="SelfAssessmentID" />
-          </Key>
-          <Property Name="SelfAssessmentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EvaluationID" Type="Int64" Nullable="false" />
-          <Property Name="EvaluateeID" Type="Int64" Nullable="false" />
-          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="EvaluationTypeID" Type="Int16" Nullable="false" />
-          <Property Name="PerformanceLevelID" Type="Int16" />
-          <Property Name="IsSharedWithEvaluator" Type="Boolean" Nullable="false" />
-          <Property Name="IsFocused" Type="Boolean" Nullable="false" />
-          <Property Name="FocusedFrameworkNodeID" Type="Int64" />
-          <Property Name="FocusedSGFrameworkNodeID" Type="Int64" />
-          <Property Name="IncludeInFinalReport" Type="Boolean" Nullable="false" />
-          <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="SEEvaluation" Relationship="StateEvalModel.FK_SESelfAssessment_SEEvaluation" FromRole="SESelfAssessment" ToRole="SEEvaluation" />
-          <NavigationProperty Name="SEEvaluationType" Relationship="StateEvalModel.FK_SESelfAssessment_SEEvaluationType" FromRole="SESelfAssessment" ToRole="SEEvaluationType" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SESelfAssessment_SEUser" FromRole="SESelfAssessment" ToRole="SEUser" />
-          <NavigationProperty Name="SERubricRows" Relationship="StateEvalModel.SESelfAssessmentRubricRowFocus" FromRole="SESelfAssessment" ToRole="SERubricRow" />
-        </EntityType>
-        <Association Name="FK_SESelfAssessment_SEEvaluation">
-          <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="1" />
-          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEEvaluation">
-              <PropertyRef Name="EvaluationID" />
-            </Principal>
-            <Dependent Role="SESelfAssessment">
-              <PropertyRef Name="EvaluationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SESelfAssessment_SEEvaluationType">
-          <End Type="StateEvalModel.SEEvaluationType" Role="SEEvaluationType" Multiplicity="1" />
-          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEEvaluationType">
-              <PropertyRef Name="EvaluationTypeID" />
-            </Principal>
-            <Dependent Role="SESelfAssessment">
-              <PropertyRef Name="EvaluationTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SESelfAssessment_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SESelfAssessment">
-              <PropertyRef Name="EvaluateeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="SESelfAssessmentRubricRowFocus">
-          <End Type="StateEvalModel.SERubricRow" Role="SERubricRow" Multiplicity="*" />
-          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
-        </Association>
         <EntityType Name="SERubricRowEvaluation">
           <Key>
             <PropertyRef Name="RubricRowEvaluationID" />
@@ -9792,8 +9157,9 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SERubricPerformanceLevel" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SERubricPerformanceLevel" FromRole="SERubricRowEvaluation" ToRole="SERubricPerformanceLevel" />
           <NavigationProperty Name="SERubricRow" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SERubricRow" FromRole="SERubricRowEvaluation" ToRole="SERubricRow" />
           <NavigationProperty Name="SEStudentGrowthGoalBundle" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEStudentGrowthGoalBundle" FromRole="SERubricRowEvaluation" ToRole="SEStudentGrowthGoalBundle" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEUser" FromRole="SERubricRowEvaluation" ToRole="SEUser" />
           <NavigationProperty Name="SEAlignedEvidences" Relationship="StateEvalModel.FK_SEAlignedEvidence_SERubricRowEvaluation" FromRole="SERubricRowEvaluation" ToRole="SEAlignedEvidence" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEUser" FromRole="SERubricRowEvaluation" ToRole="SEUser" />
+          <NavigationProperty Name="SESelfAssessment" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SESelfAssessment" FromRole="SERubricRowEvaluation" ToRole="SESelfAssessment" />
         </EntityType>
         <Association Name="FK_SERubricRowEvaluation_SEEvalSession">
           <End Type="StateEvalModel.SEEvalSession" Role="SEEvalSession" Multiplicity="0..1" />
@@ -9888,18 +9254,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SERubricRowEvaluation">
               <PropertyRef Name="LinkedStudentGrowthGoalBundleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SERubricRowEvaluation_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SERubricRowEvaluation" Role="SERubricRowEvaluation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SERubricRowEvaluation">
-              <PropertyRef Name="CreatedByUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10056,6 +9410,584 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
               <PropertyRef Name="StudentGrowthGoalID" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SEUser">
+          <Key>
+            <PropertyRef Name="SEUserID" />
+          </Key>
+          <Property Name="SEUserID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASPNetUserID" Type="Guid" />
+          <Property Name="HasMultipleBuildings" Type="Boolean" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="loweredUsername" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="MessageEmailOverride" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LoginName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddressAlternate" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="CertificateNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MobileAccessKey" Type="Guid" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="OTPW" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aspnet_Users" Relationship="StateEvalModel.FK_SEUser_aspnet_Users" FromRole="SEUser" ToRole="aspnet_Users" />
+          <NavigationProperty Name="SEArtifactBundles" Relationship="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID" FromRole="SEUser" ToRole="SEArtifactBundle" />
+          <NavigationProperty Name="SEArtifactBundleRejections" Relationship="StateEvalModel.FK_SEArtifactBundleRejection_SEUser" FromRole="SEUser" ToRole="SEArtifactBundleRejection" />
+          <NavigationProperty Name="SEArtifactLibItems" Relationship="StateEvalModel.FK_SEArtifactLibItem_CreatedByUserID" FromRole="SEUser" ToRole="SEArtifactLibItem" />
+          <NavigationProperty Name="SECommunications" Relationship="StateEvalModel.FK_SECommunication_SEUser" FromRole="SEUser" ToRole="SECommunication" />
+          <NavigationProperty Name="SEEvalAssignmentRequests" Relationship="StateEvalModel.FK_SEEvalAssignmentRequest_SEUser" FromRole="SEUser" ToRole="SEEvalAssignmentRequest" />
+          <NavigationProperty Name="SEEvalAssignmentRequests1" Relationship="StateEvalModel.FK_SEEvalAssignmentRequest_SEUser1" FromRole="SEUser" ToRole="SEEvalAssignmentRequest" />
+          <NavigationProperty Name="SEEvalSessions" Relationship="StateEvalModel.FK_SEEvalSession_SEUser" FromRole="SEUser" ToRole="SEEvalSession" />
+          <NavigationProperty Name="SEEvalSessions1" Relationship="StateEvalModel.FK_SEEvalSession_SEUser1" FromRole="SEUser" ToRole="SEEvalSession" />
+          <NavigationProperty Name="SEEvaluations" Relationship="StateEvalModel.FK_SEEvaluation_SEUser" FromRole="SEUser" ToRole="SEEvaluation" />
+          <NavigationProperty Name="SEEvaluations1" Relationship="StateEvalModel.FK_SEEvaluation_SEUser1" FromRole="SEUser" ToRole="SEEvaluation" />
+          <NavigationProperty Name="SEEvaluationWfHistories" Relationship="StateEvalModel.FK_SEEvaluationWfHistory_SEUser1" FromRole="SEUser" ToRole="SEEvaluationWfHistory" />
+          <NavigationProperty Name="SEFrameworkNodeScores" Relationship="StateEvalModel.FK_SEFrameworkNodeScore_SEUser" FromRole="SEUser" ToRole="SEFrameworkNodeScore" />
+          <NavigationProperty Name="SELearningWalkSessionScores" Relationship="StateEvalModel.FK_SEUserID" FromRole="SEUser" ToRole="SELearningWalkSessionScore" />
+          <NavigationProperty Name="SENotifications" Relationship="StateEvalModel.FK_SENotification_SEUser" FromRole="SEUser" ToRole="SENotification" />
+          <NavigationProperty Name="SENotifications1" Relationship="StateEvalModel.FK_SENotification_SEUser1" FromRole="SEUser" ToRole="SENotification" />
+          <NavigationProperty Name="SEPracticeSessions" Relationship="StateEvalModel.FK_SEPracticeSession_CreatedByUserID" FromRole="SEUser" ToRole="SEPracticeSession" />
+          <NavigationProperty Name="SEPracticeSessions1" Relationship="StateEvalModel.FK_SEPracticeSession_EvaluateeUserID" FromRole="SEUser" ToRole="SEPracticeSession" />
+          <NavigationProperty Name="SEPracticeSessionParticipants" Relationship="StateEvalModel.FK_SEPracticeSessionParticipant_SEUser" FromRole="SEUser" ToRole="SEPracticeSessionParticipant" />
+          <NavigationProperty Name="SERubricRowAnnotations" Relationship="StateEvalModel.FK_SERubricRowAnnotation_SEUserID" FromRole="SEUser" ToRole="SERubricRowAnnotation" />
+          <NavigationProperty Name="SERubricRowEvaluations" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SEUser" FromRole="SEUser" ToRole="SERubricRowEvaluation" />
+          <NavigationProperty Name="SERubricRowScores" Relationship="StateEvalModel.FK_SERubricRowScore_SEUser" FromRole="SEUser" ToRole="SERubricRowScore" />
+          <NavigationProperty Name="SEStudentGrowthFormPromptResponses" Relationship="StateEvalModel.FK_SEFormPromptResponse_SEUser" FromRole="SEUser" ToRole="SEStudentGrowthFormPromptResponse" />
+          <NavigationProperty Name="SESummativeFrameworkNodeScores" Relationship="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEUserID" FromRole="SEUser" ToRole="SESummativeFrameworkNodeScore" />
+          <NavigationProperty Name="SESummativeRubricRowScores" Relationship="StateEvalModel.FK_SESummativeRubricRowScore_SEUser" FromRole="SEUser" ToRole="SESummativeRubricRowScore" />
+          <NavigationProperty Name="SETrainingProtocolPlaylists" Relationship="StateEvalModel.FK_SETrainingProtocolPlaylist_SEUser" FromRole="SEUser" ToRole="SETrainingProtocolPlaylist" />
+          <NavigationProperty Name="SETrainingProtocolRatings" Relationship="StateEvalModel.FK_SETrainingProtocolRating_SEUser" FromRole="SEUser" ToRole="SETrainingProtocolRating" />
+          <NavigationProperty Name="SEDistrictPRViewings" Relationship="StateEvalModel.FK_SEDAPRViewing_DAUserID" FromRole="SEUser" ToRole="SEDistrictPRViewing" />
+          <NavigationProperty Name="SEReportPrintOptionUsers" Relationship="StateEvalModel.FK_SEReportPrintOptionUser_SEUser" FromRole="SEUser" ToRole="SEReportPrintOptionUser" />
+          <NavigationProperty Name="SEUserLocationRoles" Relationship="StateEvalModel.FK_SEUserLocationRole_SEUser" FromRole="SEUser" ToRole="SEUserLocationRole" />
+          <NavigationProperty Name="SEUserPrompts" Relationship="StateEvalModel.FK_SEUserPrompt_CreatedByUserID" FromRole="SEUser" ToRole="SEUserPrompt" />
+          <NavigationProperty Name="SEUserPrompts1" Relationship="StateEvalModel.FK_SEUserPrompt_SEUser" FromRole="SEUser" ToRole="SEUserPrompt" />
+          <NavigationProperty Name="SEUserPromptResponses" Relationship="StateEvalModel.FK_SEUserPromptResponse_SEUser" FromRole="SEUser" ToRole="SEUserPromptResponse" />
+          <NavigationProperty Name="SEUserPromptResponseEntries" Relationship="StateEvalModel.FK_SEUserPromptResponseEntry_SEUser" FromRole="SEUser" ToRole="SEUserPromptResponseEntry" />
+          <NavigationProperty Name="SEUserActivities" Relationship="StateEvalModel.FK_UserActivity_SEUser" FromRole="SEUser" ToRole="SEUserActivity" />
+          <NavigationProperty Name="SEUserPromptConferenceDefaults" Relationship="StateEvalModel.FKSEUserPromptConferenceDefault_SEUser" FromRole="SEUser" ToRole="SEUserPromptConferenceDefault" />
+          <NavigationProperty Name="SESelfAssessments" Relationship="StateEvalModel.FK_SESelfAssessment_SEUser" FromRole="SEUser" ToRole="SESelfAssessment" />
+        </EntityType>
+        <Association Name="FK_SEUser_aspnet_Users">
+          <End Type="StateEvalModel.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="SEUser">
+              <PropertyRef Name="ASPNetUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEArtifactBundle_CreatedByUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEArtifactBundle" Role="SEArtifactBundle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEArtifactBundle">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEArtifactBundleRejection_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEArtifactBundleRejection" Role="SEArtifactBundleRejection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEArtifactBundleRejection">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEArtifactLibItem_CreatedByUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEArtifactLibItem" Role="SEArtifactLibItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEArtifactLibItem">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECommunication_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SECommunication" Role="SECommunication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SECommunication">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEEvalAssignmentRequest_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEEvalAssignmentRequest" Role="SEEvalAssignmentRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEEvalAssignmentRequest">
+              <PropertyRef Name="EvaluatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEEvalAssignmentRequest_SEUser1">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEEvalAssignmentRequest" Role="SEEvalAssignmentRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEEvalAssignmentRequest">
+              <PropertyRef Name="EvaluateeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEEvalSession_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEEvalSession" Role="SEEvalSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEEvalSession">
+              <PropertyRef Name="EvaluateeUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEEvalSession_SEUser1">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEEvalSession" Role="SEEvalSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEEvalSession">
+              <PropertyRef Name="EvaluatorUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEEvaluation_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEEvaluation">
+              <PropertyRef Name="EvaluateeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEEvaluation_SEUser1">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEEvaluation">
+              <PropertyRef Name="EvaluatorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEEvaluationWfHistory_SEUser1">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEEvaluationWfHistory" Role="SEEvaluationWfHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEEvaluationWfHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEFrameworkNodeScore_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEFrameworkNodeScore" Role="SEFrameworkNodeScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEFrameworkNodeScore">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SELearningWalkSessionScore" Role="SELearningWalkSessionScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SELearningWalkSessionScore">
+              <PropertyRef Name="SEUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SENotification_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SENotification" Role="SENotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SENotification">
+              <PropertyRef Name="ReceiverUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SENotification_SEUser1">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SENotification" Role="SENotification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SENotification">
+              <PropertyRef Name="CreatedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEPracticeSession_CreatedByUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEPracticeSession" Role="SEPracticeSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEPracticeSession">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEPracticeSession_EvaluateeUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEPracticeSession" Role="SEPracticeSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEPracticeSession">
+              <PropertyRef Name="EvaluateeUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEPracticeSessionParticipant_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEPracticeSessionParticipant" Role="SEPracticeSessionParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEPracticeSessionParticipant">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERubricRowAnnotation_SEUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SERubricRowAnnotation" Role="SERubricRowAnnotation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SERubricRowAnnotation">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERubricRowEvaluation_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SERubricRowEvaluation" Role="SERubricRowEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SERubricRowEvaluation">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SERubricRowScore_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SERubricRowScore" Role="SERubricRowScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SERubricRowScore">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEFormPromptResponse_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEStudentGrowthFormPromptResponse" Role="SEStudentGrowthFormPromptResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEStudentGrowthFormPromptResponse">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SESummativeFrameworkNodeScore_SEUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SESummativeFrameworkNodeScore" Role="SESummativeFrameworkNodeScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SESummativeFrameworkNodeScore">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SESummativeRubricRowScore_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SESummativeRubricRowScore" Role="SESummativeRubricRowScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SESummativeRubricRowScore">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETrainingProtocolPlaylist_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SETrainingProtocolPlaylist" Role="SETrainingProtocolPlaylist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SETrainingProtocolPlaylist">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETrainingProtocolRating_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SETrainingProtocolRating" Role="SETrainingProtocolRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SETrainingProtocolRating">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEDAPRViewing_DAUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEDistrictPRViewing" Role="SEDistrictPRViewing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEDistrictPRViewing">
+              <PropertyRef Name="DistrictUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEReportPrintOptionUser_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEReportPrintOptionUser" Role="SEReportPrintOptionUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEReportPrintOptionUser">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEUserLocationRole_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEUserLocationRole" Role="SEUserLocationRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEUserLocationRole">
+              <PropertyRef Name="SEUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEUserPrompt_CreatedByUserID">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEUserPrompt" Role="SEUserPrompt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEUserPrompt">
+              <PropertyRef Name="CreatedByUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEUserPrompt_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEUserPrompt" Role="SEUserPrompt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEUserPrompt">
+              <PropertyRef Name="EvaluateeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEUserPromptResponse_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SEUserPromptResponse" Role="SEUserPromptResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEUserPromptResponse">
+              <PropertyRef Name="EvaluateeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEUserPromptResponseEntry_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEUserPromptResponseEntry" Role="SEUserPromptResponseEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEUserPromptResponseEntry">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserActivity_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEUserActivity" Role="SEUserActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEUserActivity">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKSEUserPromptConferenceDefault_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SEUserPromptConferenceDefault" Role="SEUserPromptConferenceDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SEUserPromptConferenceDefault">
+              <PropertyRef Name="EvaluateeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vUserOrientation">
+          <Key>
+            <PropertyRef Name="FrameworkContextID" />
+            <PropertyRef Name="SchoolYear" />
+            <PropertyRef Name="UserLocationRoleID" />
+            <PropertyRef Name="DistrictCode" />
+            <PropertyRef Name="EvaluationTypeID" />
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="RoleName" />
+            <PropertyRef Name="SEUserID" />
+            <PropertyRef Name="SchoolName" />
+          </Key>
+          <Property Name="FrameworkContextID" Type="Int64" Nullable="false" />
+          <Property Name="SchoolYear" Type="Int16" Nullable="false" />
+          <Property Name="UserLocationRoleID" Type="Int64" Nullable="false" />
+          <Property Name="DistrictCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolCode" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="EvaluationTypeID" Type="Int16" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="SEUserID" Type="Int64" Nullable="false" />
+          <Property Name="DistrictName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SESelfAssessment">
+          <Key>
+            <PropertyRef Name="SelfAssessmentID" />
+          </Key>
+          <Property Name="SelfAssessmentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EvaluationID" Type="Int64" Nullable="false" />
+          <Property Name="EvaluateeID" Type="Int64" Nullable="false" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PerformanceLevelID" Type="Int16" />
+          <Property Name="IsSharedWithEvaluator" Type="Boolean" Nullable="false" />
+          <Property Name="IsFocused" Type="Boolean" Nullable="false" />
+          <Property Name="FocusedFrameworkNodeID" Type="Int64" />
+          <Property Name="FocusedSGFrameworkNodeID" Type="Int64" />
+          <Property Name="IncludeInFinalReport" Type="Boolean" Nullable="false" />
+          <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="SEEvaluation" Relationship="StateEvalModel.FK_SESelfAssessment_SEEvaluation" FromRole="SESelfAssessment" ToRole="SEEvaluation" />
+          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SESelfAssessment_SEUser" FromRole="SESelfAssessment" ToRole="SEUser" />
+          <NavigationProperty Name="SERubricRows" Relationship="StateEvalModel.SESelfAssessmentRubricRowFocus" FromRole="SESelfAssessment" ToRole="SERubricRow" />
+          <NavigationProperty Name="SERubricRowEvaluations" Relationship="StateEvalModel.FK_SERubricRowEvaluation_SESelfAssessment" FromRole="SESelfAssessment" ToRole="SERubricRowEvaluation" />
+          <NavigationProperty Name="SEArtifactBundles" Relationship="StateEvalModel.SEArtifactBundleSelfAssessment" FromRole="SESelfAssessment" ToRole="SEArtifactBundle" />
+        </EntityType>
+        <Association Name="FK_SESelfAssessment_SEEvaluation">
+          <End Type="StateEvalModel.SEEvaluation" Role="SEEvaluation" Multiplicity="1" />
+          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEEvaluation">
+              <PropertyRef Name="EvaluationID" />
+            </Principal>
+            <Dependent Role="SESelfAssessment">
+              <PropertyRef Name="EvaluationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SESelfAssessment_SEUser">
+          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
+          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SEUser">
+              <PropertyRef Name="SEUserID" />
+            </Principal>
+            <Dependent Role="SESelfAssessment">
+              <PropertyRef Name="EvaluateeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SESelfAssessmentRubricRowFocus">
+          <End Type="StateEvalModel.SERubricRow" Role="SERubricRow" Multiplicity="*" />
+          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_SERubricRowEvaluation_SESelfAssessment">
+          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="0..1" />
+          <End Type="StateEvalModel.SERubricRowEvaluation" Role="SERubricRowEvaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SESelfAssessment">
+              <PropertyRef Name="SelfAssessmentID" />
+            </Principal>
+            <Dependent Role="SERubricRowEvaluation">
+              <PropertyRef Name="LinkedSelfAssessmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SEArtifactBundleSelfAssessment">
+          <End Type="StateEvalModel.SEArtifactBundle" Role="SEArtifactBundle" Multiplicity="*" />
+          <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -10485,29 +10417,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SEUsers">
-            <EntityTypeMapping TypeName="StateEvalModel.SEUser">
-              <MappingFragment StoreEntitySet="SEUser">
-                <ScalarProperty Name="OTPW" ColumnName="OTPW" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="EvaluationID" ColumnName="EvaluationID" />
-                <ScalarProperty Name="SEUserID" ColumnName="SEUserID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
-                <ScalarProperty Name="DistrictCode" ColumnName="DistrictCode" />
-                <ScalarProperty Name="ASPNetUserID" ColumnName="ASPNetUserID" />
-                <ScalarProperty Name="HasMultipleBuildings" ColumnName="HasMultipleBuildings" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="loweredUsername" ColumnName="loweredUsername" />
-                <ScalarProperty Name="MessageEmailOverride" ColumnName="MessageEmailOverride" />
-                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
-                <ScalarProperty Name="EmailAddressAlternate" ColumnName="EmailAddressAlternate" />
-                <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
-                <ScalarProperty Name="MobileAccessKey" ColumnName="MobileAccessKey" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SEUserPrompts">
             <EntityTypeMapping TypeName="StateEvalModel.SEUserPrompt">
               <MappingFragment StoreEntitySet="SEUserPrompt">
@@ -10925,19 +10834,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SEUserDistrictSchools">
-            <EntityTypeMapping TypeName="StateEvalModel.SEUserDistrictSchool">
-              <MappingFragment StoreEntitySet="SEUserDistrictSchool">
-                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
-                <ScalarProperty Name="DistrictCode" ColumnName="DistrictCode" />
-                <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
-                <ScalarProperty Name="SEUserID" ColumnName="SEUserID" />
-                <ScalarProperty Name="UserDistrictSchoolID" ColumnName="UserDistrictSchoolID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SERubricPerformanceLevels">
             <EntityTypeMapping TypeName="StateEvalModel.SERubricPerformanceLevel">
               <MappingFragment StoreEntitySet="SERubricPerformanceLevel">
@@ -11049,23 +10945,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
                 <ScalarProperty Name="FrameworkContextID" ColumnName="FrameworkContextID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="FrameworkID" ColumnName="FrameworkID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vUserOrientations">
-            <EntityTypeMapping TypeName="StateEvalModel.vUserOrientation">
-              <MappingFragment StoreEntitySet="vUserOrientation">
-                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="SEUserID" ColumnName="SEUserID" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="EvaluationTypeID" ColumnName="EvaluationTypeID" />
-                <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
-                <ScalarProperty Name="DistrictCode" ColumnName="DistrictCode" />
-                <ScalarProperty Name="UserDistrictSchoolID" ColumnName="UserDistrictSchoolID" />
-                <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
-                <ScalarProperty Name="FrameworkContextID" ColumnName="FrameworkContextID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11528,33 +11407,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SESelfAssessments">
-            <EntityTypeMapping TypeName="StateEvalModel.SESelfAssessment">
-              <MappingFragment StoreEntitySet="SESelfAssessment">
-                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
-                <ScalarProperty Name="IncludeInFinalReport" ColumnName="IncludeInFinalReport" />
-                <ScalarProperty Name="FocusedSGFrameworkNodeID" ColumnName="FocusedSGFrameworkNodeID" />
-                <ScalarProperty Name="FocusedFrameworkNodeID" ColumnName="FocusedFrameworkNodeID" />
-                <ScalarProperty Name="IsFocused" ColumnName="IsFocused" />
-                <ScalarProperty Name="IsSharedWithEvaluator" ColumnName="IsSharedWithEvaluator" />
-                <ScalarProperty Name="PerformanceLevelID" ColumnName="PerformanceLevelID" />
-                <ScalarProperty Name="EvaluationTypeID" ColumnName="EvaluationTypeID" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
-                <ScalarProperty Name="EvaluateeID" ColumnName="EvaluateeID" />
-                <ScalarProperty Name="EvaluationID" ColumnName="EvaluationID" />
-                <ScalarProperty Name="SelfAssessmentID" ColumnName="SelfAssessmentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="SESelfAssessmentRubricRowFocus" TypeName="StateEvalModel.SESelfAssessmentRubricRowFocus" StoreEntitySet="SESelfAssessmentRubricRowFocus">
-            <EndProperty Name="SESelfAssessment">
-              <ScalarProperty Name="SelfAssessmentID" ColumnName="SelfAssessmentID" />
-            </EndProperty>
-            <EndProperty Name="SERubricRow">
-              <ScalarProperty Name="RubricRowID" ColumnName="RubricRowID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="SERubricRowEvaluations">
             <EntityTypeMapping TypeName="StateEvalModel.SERubricRowEvaluation">
               <MappingFragment StoreEntitySet="SERubricRowEvaluation">
@@ -11599,6 +11451,77 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SEUsers">
+            <EntityTypeMapping TypeName="StateEvalModel.SEUser">
+              <MappingFragment StoreEntitySet="SEUser">
+                <ScalarProperty Name="OTPW" ColumnName="OTPW" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="MobileAccessKey" ColumnName="MobileAccessKey" />
+                <ScalarProperty Name="CertificateNumber" ColumnName="CertificateNumber" />
+                <ScalarProperty Name="EmailAddressAlternate" ColumnName="EmailAddressAlternate" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="MessageEmailOverride" ColumnName="MessageEmailOverride" />
+                <ScalarProperty Name="loweredUsername" ColumnName="loweredUsername" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="HasMultipleBuildings" ColumnName="HasMultipleBuildings" />
+                <ScalarProperty Name="ASPNetUserID" ColumnName="ASPNetUserID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="SEUserID" ColumnName="SEUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vUserOrientations">
+            <EntityTypeMapping TypeName="StateEvalModel.vUserOrientation">
+              <MappingFragment StoreEntitySet="vUserOrientation">
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="SEUserID" ColumnName="SEUserID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="EvaluationTypeID" ColumnName="EvaluationTypeID" />
+                <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
+                <ScalarProperty Name="DistrictCode" ColumnName="DistrictCode" />
+                <ScalarProperty Name="UserLocationRoleID" ColumnName="UserLocationRoleID" />
+                <ScalarProperty Name="SchoolYear" ColumnName="SchoolYear" />
+                <ScalarProperty Name="FrameworkContextID" ColumnName="FrameworkContextID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SESelfAssessments">
+            <EntityTypeMapping TypeName="StateEvalModel.SESelfAssessment">
+              <MappingFragment StoreEntitySet="SESelfAssessment">
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="IncludeInFinalReport" ColumnName="IncludeInFinalReport" />
+                <ScalarProperty Name="FocusedSGFrameworkNodeID" ColumnName="FocusedSGFrameworkNodeID" />
+                <ScalarProperty Name="FocusedFrameworkNodeID" ColumnName="FocusedFrameworkNodeID" />
+                <ScalarProperty Name="IsFocused" ColumnName="IsFocused" />
+                <ScalarProperty Name="IsSharedWithEvaluator" ColumnName="IsSharedWithEvaluator" />
+                <ScalarProperty Name="PerformanceLevelID" ColumnName="PerformanceLevelID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="EvaluateeID" ColumnName="EvaluateeID" />
+                <ScalarProperty Name="EvaluationID" ColumnName="EvaluationID" />
+                <ScalarProperty Name="SelfAssessmentID" ColumnName="SelfAssessmentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SESelfAssessmentRubricRowFocus" TypeName="StateEvalModel.SESelfAssessmentRubricRowFocus" StoreEntitySet="SESelfAssessmentRubricRowFocus">
+            <EndProperty Name="SESelfAssessment">
+              <ScalarProperty Name="SelfAssessmentID" ColumnName="SelfAssessmentID" />
+            </EndProperty>
+            <EndProperty Name="SERubricRow">
+              <ScalarProperty Name="RubricRowID" ColumnName="RubricRowID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SEArtifactBundleSelfAssessment" TypeName="StateEvalModel.SEArtifactBundleSelfAssessment" StoreEntitySet="SEArtifactBundleSelfAssessment">
+            <EndProperty Name="SESelfAssessment">
+              <ScalarProperty Name="SelfAssessmentID" ColumnName="SelfAssessmentID" />
+            </EndProperty>
+            <EndProperty Name="SEArtifactBundle">
+              <ScalarProperty Name="ArtifactBundleID" ColumnName="ArtifactBundleID" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

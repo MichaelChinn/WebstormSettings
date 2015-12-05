@@ -19,17 +19,16 @@ namespace StateEvalData
             this.SEEvaluationWfHistories = new HashSet<SEEvaluationWfHistory>();
             this.SEReportPrintOptionEvaluations = new HashSet<SEReportPrintOptionEvaluation>();
             this.SEStudentGrowthGoals = new HashSet<SEStudentGrowthGoal>();
-            this.SEUsers = new HashSet<SEUser>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
             this.SESummativeFrameworkNodeScores = new HashSet<SESummativeFrameworkNodeScore>();
             this.SESummativeRubricRowScores = new HashSet<SESummativeRubricRowScore>();
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
-            this.SESelfAssessments = new HashSet<SESelfAssessment>();
             this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
             this.SEAvailableEvidences1 = new HashSet<SEAvailableEvidence>();
+            this.SESelfAssessments = new HashSet<SESelfAssessment>();
         }
     
         public long EvaluationID { get; set; }
@@ -73,23 +72,22 @@ namespace StateEvalData
         public virtual SEFrameworkNode SEFrameworkNode2 { get; set; }
         public virtual SERubricPerformanceLevel SERubricPerformanceLevel { get; set; }
         public virtual SESchoolYear SESchoolYear { get; set; }
-        public virtual SEUser SEUser { get; set; }
-        public virtual SEUser SEUser1 { get; set; }
         public virtual SEWfState SEWfState { get; set; }
         public virtual SEFrameworkNode SEFrameworkNode3 { get; set; }
         public virtual ICollection<SEEvaluationWfHistory> SEEvaluationWfHistories { get; set; }
         public virtual ICollection<SEReportPrintOptionEvaluation> SEReportPrintOptionEvaluations { get; set; }
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
-        public virtual ICollection<SEUser> SEUsers { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
         public virtual ICollection<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual ICollection<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
-        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences1 { get; set; }
+        public virtual SEUser SEUser { get; set; }
+        public virtual SEUser SEUser1 { get; set; }
+        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
     }
 }

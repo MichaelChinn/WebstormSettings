@@ -21,8 +21,8 @@ namespace StateEvalData
         public long UserID { get; set; }
         public string Comment { get; set; }
     
-        public virtual SEUser SEUser { get; set; }
         public virtual SEWfTransition SEWfTransition { get; set; }
         public virtual SEEvaluation SEEvaluation { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

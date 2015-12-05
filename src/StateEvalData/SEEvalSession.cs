@@ -85,8 +85,6 @@ namespace StateEvalData
         public virtual SERubricPerformanceLevel SERubricPerformanceLevel { get; set; }
         public virtual SESchoolYear SESchoolYear { get; set; }
         public virtual SETrainingProtocol SETrainingProtocol { get; set; }
-        public virtual SEUser SEUser { get; set; }
-        public virtual SEUser SEUser1 { get; set; }
         public virtual SEWfState SEWfState { get; set; }
         public virtual SEFrameworkNode SEFrameworkNode1 { get; set; }
         public virtual ICollection<SEPracticeSession> SEPracticeSessions { get; set; }
@@ -101,5 +99,7 @@ namespace StateEvalData
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations1 { get; set; }
+        public virtual SEUser SEUser { get; set; }
+        public virtual SEUser SEUser1 { get; set; }
     }
 }

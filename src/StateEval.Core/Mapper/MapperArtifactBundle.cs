@@ -98,7 +98,7 @@ namespace StateEval.Core.Mapper
         }
 
         public static ArtifactBundleModel MaptoArtifactBundleModel(
-            this SEArtifactBundle source, ArtifactBundleModel target = null)
+            this SEArtifactBundle source, StateEvalEntities EvalEntities, ArtifactBundleModel target = null)
         {
             target = target ?? new ArtifactBundleModel();
 
@@ -133,7 +133,7 @@ namespace StateEval.Core.Mapper
 
             if (source != null && source.SEEvalSessions.Any())
             {
-                target.LinkedObservations = source.SEEvalSessions.Select(x => x.MaptoEvalSessionModel()).ToList();
+                target.LinkedObservations = source.SEEvalSessions.Select(x => x.MaptoEvalSessionModel(EvalEntities)).ToList();
             }
             else
             {

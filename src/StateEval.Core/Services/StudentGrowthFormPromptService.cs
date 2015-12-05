@@ -137,41 +137,5 @@ namespace StateEval.Core.Services
 
             EvalEntities.SaveChanges();
         }
-
-/*
-
-        public StudentGrowthFormPromptModel GetFormPromptById(long promptId)
-        {
-            SEStudentGrowthFormPrompt seFormPrompt = EvalEntities.SEStudentGrowthFormPrompts.FirstOrDefault(x => x.StudentGrowthFormPromptID == promptId);
-            if (seFormPrompt != null)
-            {
-                return seFormPrompt.MaptoFormPromptModel(0, false);
-            }
-
-            return null;
-        }
-
-        public IEnumerable<StudentGrowthFormPromptModel> GetFormPrompts(long userId, short evalType, string districtCode, int schoolyear)
-        {
-            IQueryable<SEStudentGrowthFormPrompt> prompts = EvalEntities.SEStudentGrowthFormPrompts.Where(x => x.DistrictCode == districtCode && x.EvaluationTypeID == evalType && x.SchoolYear == schoolyear);
-            return prompts.ToList().Select(x => x.MaptoFormPromptModel(0, false));
-  
-        }
-
-        public IEnumerable<StudentGrowthFormPromptModel> GetFormPromptsForFrameworkNode(long frameworkNodeId, short evalType, string districtCode, int schoolyear)
-        {
-            IQueryable<SEStudentGrowthFormPrompt> prompts = EvalEntities.SEStudentGrowthFormPrompts.Where(x => (x.DistrictCode == districtCode || x.DistrictCode == "") && x.EvaluationTypeID == evalType && x.SchoolYear == schoolyear);
-            return prompts.ToList().Select(x => x.MaptoFormPromptModel(0, false));
-        }
-
-        public object CreateFormPrompt(StudentGrowthFormPromptModel formPromptModel)
-        {
-            SEStudentGrowthFormPrompt seFormPrompt = formPromptModel.MaptoSEStudentGrowthFormPrompt();
-            EvalEntities.SEStudentGrowthFormPrompts.Add(seFormPrompt);
-            EvalEntities.SaveChanges();
-
-            return new { Id = seFormPrompt.StudentGrowthFormPromptID };
-        }
- */
     }
 }

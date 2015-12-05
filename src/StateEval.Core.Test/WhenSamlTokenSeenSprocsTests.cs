@@ -71,6 +71,7 @@ namespace StateEval.Core.Test
             }
 
             //check userdistrictschool table next
+            /* TODO: ac: remove since we have removed SEUserDistrictSchool
             List<UserDistrictSchoolModel> uds = us.GetDistrictSchoolsForUser(seUserId).ToList();
 
             Assert.AreEqual(distinctLocations.Count, uds.Count);
@@ -81,6 +82,7 @@ namespace StateEval.Core.Test
                 else
                     Assert.IsNotNull(uds.Any(x => x.SchoolCode == location));
             }
+             */
  
         }
 

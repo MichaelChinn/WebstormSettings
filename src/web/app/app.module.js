@@ -21,7 +21,8 @@
         'stateeval.layout',
         'stateeval.summative-eval',
         'stateeval.video-library',
-        'stateeval.configuration'
+        'stateeval.configuration',
+        'stateeval.self-assessment'
 
     ]);
 

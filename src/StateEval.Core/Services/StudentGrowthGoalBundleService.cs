@@ -18,7 +18,7 @@ namespace StateEval.Core.Services
             IQueryable<SEArtifactBundle> artifactBundles = EvalEntities.SEArtifactBundles.Where(
                 x => x.SEStudentGrowthGoalBundles.Select(y=>y.StudentGrowthGoalBundleID).Contains(goalBundleId));
 
-            return artifactBundles.ToList().Select(x => x.MaptoArtifactBundleModel());
+            return artifactBundles.ToList().Select(x => x.MaptoArtifactBundleModel(EvalEntities));
         }
 
         public IEnumerable<StudentGrowthGoalBundleModel> GetInProgressStudentGrowthGoalBundlesForEvaluation(long evaluationId)
@@ -138,7 +138,7 @@ namespace StateEval.Core.Services
                     .Where(x => x.EvaluationID == studentGrowthGoalBundleModel.EvaluationId).Count();
 
                 seStudentGrowthGoalBundle.ShortName = "SG Goal " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
-                if (seStudentGrowthGoalBundle.Title == "")
+                if (seStudentGrowthGoalBundle.Title == null)
                 {
                     seStudentGrowthGoalBundle.Title = seStudentGrowthGoalBundle.ShortName;
                 }
