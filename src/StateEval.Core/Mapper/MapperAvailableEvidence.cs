@@ -20,7 +20,7 @@ namespace StateEval.Core.Mapper
             target.RubricRowId = source.RubricRowID;
             switch (target.EvidenceType) { 
                 case SEEvidenceTypeEnum.ARTIFACT:
-                    target.ArtifactBundle = entities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == source.ArtifactBundleID).MaptoArtifactBundleModel();
+                    target.ArtifactBundle = entities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == source.ArtifactBundleID).MaptoArtifactBundleModel(entities);
                     break;
                 case SEEvidenceTypeEnum.STUDENT_GROWTH_GOAL:
                     target.StudentGrowthGoal = entities.SEStudentGrowthGoals.FirstOrDefault(x => x.StudentGrowthGoalID == source.StudentGrowthGoalID).MaptoStudentGrowthGoalModel(0, "");

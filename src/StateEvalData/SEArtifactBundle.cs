@@ -40,7 +40,6 @@ namespace StateEvalData
         public Nullable<short> RejectionTypeID { get; set; }
         public string ShortName { get; set; }
     
-        public virtual SEUser SEUser { get; set; }
         public virtual SEArtifactBundleRejectionType SEArtifactBundleRejectionType { get; set; }
         public virtual SEEvaluation SEEvaluation { get; set; }
         public virtual SEWfState SEWfState { get; set; }
@@ -53,5 +52,6 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthGoalBundle> SEStudentGrowthGoalBundles { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

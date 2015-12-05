@@ -311,24 +311,22 @@ namespace StateEval.Core.Test
             {
                 var assignmentsService = new AssignmentsService();
                 List<UserModel> teachers = assignmentsService.GetTeachersForAssignment((SESchoolYearEnum)TestHelper.DEFAULT_SCHOOLYEAR,
-                                        DefaultTeacher.DistrictCode, DefaultTeacher.SchoolCode).ToList();
+                                        DefaultTeacher.DistrictCode, SchoolCodes.NorthThurston_NorthThurstonHighSchool).ToList();
 
-                Assert.AreEqual(3, teachers.Count);
                 Assert.IsNotNull(teachers.FirstOrDefault(x => x.FirstName == "T1"));
                 Assert.IsNotNull(teachers.FirstOrDefault(x => x.FirstName == "T2"));
 
-                // make sure we find the teacher that is in multiple schools
-                Assert.IsNotNull(teachers.FirstOrDefault(x => x.FirstName == "TMS"));
+                // this user is in two schools, but only a teacher in this school
+                Assert.IsNotNull(teachers.FirstOrDefault(x => x.FirstName == "T_PRH" && x.LastName == "s3_s4"));
 
                 teachers = assignmentsService.GetTeachersForAssignment((SESchoolYearEnum)TestHelper.DEFAULT_SCHOOLYEAR,
                         DefaultTeacher.DistrictCode, SchoolCodes.NorthThurston_SouthBayElementary).ToList();
 
-                Assert.AreEqual(3, teachers.Count);
                 Assert.IsNotNull(teachers.FirstOrDefault(x => x.FirstName == "T1"));
                 Assert.IsNotNull(teachers.FirstOrDefault(x => x.FirstName == "T2"));
 
-                // make sure we find the teacher that is in multiple schools
-                Assert.IsNotNull(teachers.FirstOrDefault(x => x.FirstName == "TMS"));
+                // this user is in two schools, but only a teacher in one of them. not this one
+                Assert.IsNull(teachers.FirstOrDefault(x => x.FirstName == "T_PRH" && x.LastName == "s3_s4"));
 
                 transaction.Dispose();
 
@@ -342,17 +340,24 @@ namespace StateEval.Core.Test
             {
                 var assignmentsService = new AssignmentsService();
                 List<UserModel> principals = assignmentsService.GetPrincipalsForAssignment((SESchoolYearEnum)TestHelper.DEFAULT_SCHOOLYEAR,
-                                        DefaultTeacher.DistrictCode).ToList();
+                                        DistrictCodes.NorthThurston).ToList();
 
-                Assert.AreEqual(7, principals.Count);
                 Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "PR1" && x.LastName == "North Thurston High School"));
                 Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "PR2" && x.LastName == "North Thurston High School"));
                 Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "PRH" && x.LastName == "North Thurston High School"));
-                Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "PMS" && x.LastName == "North Thurston High School"));
+
+                // this user is in multiple districts/different roles, in NT he is a principal
+                Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "DA_PR2" && x.LastName == "d1_s4"));
 
                 Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "PR1" && x.LastName == "South Bay Elementary"));
                 Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "PR2" && x.LastName == "South Bay Elementary"));
                 Assert.IsNotNull(principals.FirstOrDefault(x => x.FirstName == "PRH" && x.LastName == "South Bay Elementary"));
+
+                principals = assignmentsService.GetPrincipalsForAssignment((SESchoolYearEnum)TestHelper.DEFAULT_SCHOOLYEAR,
+                        DistrictCodes.Othello).ToList();
+
+                // this user is in multiple districts/different roles, in OThello he is a DA so shouldn't be found as a principal
+                Assert.IsNull(principals.FirstOrDefault(x => x.FirstName == "DA_PR2" && x.LastName == "d1_s4"));
 
                 transaction.Dispose();
 

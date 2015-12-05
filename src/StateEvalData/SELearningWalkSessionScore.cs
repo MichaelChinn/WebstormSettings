@@ -21,8 +21,8 @@ namespace StateEvalData
         public long SEUserID { get; set; }
     
         public virtual SELearningWalkClassRoom SELearningWalkClassRoom { get; set; }
-        public virtual SEUser SEUser { get; set; }
         public virtual SERubricPerformanceLevel SERubricPerformanceLevel { get; set; }
         public virtual SEEvalSession SEEvalSession { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

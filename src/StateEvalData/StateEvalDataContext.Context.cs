@@ -67,7 +67,6 @@ namespace StateEvalData
         public virtual DbSet<SETrainingProtocolPlaylist> SETrainingProtocolPlaylists { get; set; }
         public virtual DbSet<SETrainingProtocolRating> SETrainingProtocolRatings { get; set; }
         public virtual DbSet<SETrainingProtocolRatingStatusType> SETrainingProtocolRatingStatusTypes { get; set; }
-        public virtual DbSet<SEUser> SEUsers { get; set; }
         public virtual DbSet<SEUserPrompt> SEUserPrompts { get; set; }
         public virtual DbSet<SEUserPromptConferenceDefault> SEUserPromptConferenceDefaults { get; set; }
         public virtual DbSet<SEUserPromptResponseEntry> SEUserPromptResponseEntries { get; set; }
@@ -138,5 +137,6 @@ namespace StateEvalData
         public virtual DbSet<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual DbSet<SEAlignedEvidence> SEAlignedEvidences { get; set; }
         public virtual DbSet<SEAvailableEvidence> SEAvailableEvidences { get; set; }
+        public virtual DbSet<SEUser> SEUsers { get; set; }
     }
 }

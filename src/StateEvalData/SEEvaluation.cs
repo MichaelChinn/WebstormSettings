@@ -19,7 +19,6 @@ namespace StateEvalData
             this.SEEvaluationWfHistories = new HashSet<SEEvaluationWfHistory>();
             this.SEReportPrintOptionEvaluations = new HashSet<SEReportPrintOptionEvaluation>();
             this.SEStudentGrowthGoals = new HashSet<SEStudentGrowthGoal>();
-            this.SEUsers = new HashSet<SEUser>();
             this.SEArtifactBundles = new HashSet<SEArtifactBundle>();
             this.SESummativeFrameworkNodeScores = new HashSet<SESummativeFrameworkNodeScore>();
             this.SESummativeRubricRowScores = new HashSet<SESummativeRubricRowScore>();
@@ -73,14 +72,11 @@ namespace StateEvalData
         public virtual SEFrameworkNode SEFrameworkNode2 { get; set; }
         public virtual SERubricPerformanceLevel SERubricPerformanceLevel { get; set; }
         public virtual SESchoolYear SESchoolYear { get; set; }
-        public virtual SEUser SEUser { get; set; }
-        public virtual SEUser SEUser1 { get; set; }
         public virtual SEWfState SEWfState { get; set; }
         public virtual SEFrameworkNode SEFrameworkNode3 { get; set; }
         public virtual ICollection<SEEvaluationWfHistory> SEEvaluationWfHistories { get; set; }
         public virtual ICollection<SEReportPrintOptionEvaluation> SEReportPrintOptionEvaluations { get; set; }
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
-        public virtual ICollection<SEUser> SEUsers { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
         public virtual ICollection<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual ICollection<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
@@ -91,5 +87,7 @@ namespace StateEvalData
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences1 { get; set; }
+        public virtual SEUser SEUser { get; set; }
+        public virtual SEUser SEUser1 { get; set; }
     }
 }

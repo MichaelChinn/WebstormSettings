@@ -20,7 +20,6 @@ namespace StateEval.Core.Mapper
         {
             target = target ?? new UserModel();
             target.Id = source.SEUserID;
-            target.EvaluationId  = source.EvaluationID;
             target.FirstName = source.FirstName;
             target.LastName = source.LastName;
             target.DisplayName = target.FirstName + " " + target.LastName;

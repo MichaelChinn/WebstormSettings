@@ -21,8 +21,8 @@ namespace StateEvalData
         public string DistrictCode { get; set; }
         public Nullable<long> PK_SEUserPromptConferenceDefault { get; set; }
     
-        public virtual SEUser SEUser { get; set; }
         public virtual SEUserPrompt SEUserPrompt { get; set; }
         public virtual SEUserPromptType SEUserPromptType { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

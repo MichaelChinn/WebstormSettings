@@ -323,7 +323,7 @@ namespace StateEval.Core.Services
 
                 collectionModel.Observations = EvalEntities.SEEvalSessions
                     .Where(x => x.EvaluationID == collectionRequest.EvaluationId && x.IsSelfAssess == false)
-                    .ToList().Select(x => x.MaptoEvalSessionModel()).ToList();
+                    .ToList().Select(x => x.MaptoEvalSessionModel(EvalEntities)).ToList();
 
                 collectionModel.StudentGrowthGoalBundles = EvalEntities.SEStudentGrowthGoalBundles
                     .Where(x => x.EvaluationID == collectionRequest.EvaluationId)
@@ -357,7 +357,7 @@ namespace StateEval.Core.Services
             if (collectionRequest.CollectionType == SEEvidenceCollectionTypeEnum.OBSERVATION)
             {
                 SEEvalSession session = EvalEntities.SEEvalSessions.FirstOrDefault(x => x.EvalSessionID == collectionRequest.CollectionObjectId);
-                collectionModel.Observation = session.MaptoEvalSessionModel();
+                collectionModel.Observation = session.MaptoEvalSessionModel(EvalEntities);
             } 
 
             return collectionModel;

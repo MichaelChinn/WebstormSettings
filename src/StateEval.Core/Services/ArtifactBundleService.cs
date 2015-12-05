@@ -21,7 +21,7 @@ namespace StateEval.Core.Services
                 EvalEntities.SEArtifactBundles.FirstOrDefault(x => x.ArtifactBundleID == id);
             if (artifactBundle != null)
             {
-                return artifactBundle.MaptoArtifactBundleModel();
+                return artifactBundle.MaptoArtifactBundleModel(EvalEntities);
             }
 
             return null;
@@ -51,7 +51,7 @@ namespace StateEval.Core.Services
                 bundles = bundles.Where(x => x.SERubricRows.Select(y => y.RubricRowID).Contains(bundleRequestModel.RubricRowId));
             }
 
-            return bundles.ToList().Select(x => x.MaptoArtifactBundleModel()).ToList();
+            return bundles.ToList().Select(x => x.MaptoArtifactBundleModel(EvalEntities)).ToList();
         }
 
 
@@ -70,7 +70,7 @@ namespace StateEval.Core.Services
                     .Where(x => x.EvaluationID == evaluationId &&
                               x.WfStateID == (short)SEWfStateEnum.OBS_IN_PROGRESS_TOR);
 
-            return observations.ToList().Select(x => x.MaptoEvalSessionModel());
+            return observations.ToList().Select(x => x.MaptoEvalSessionModel(EvalEntities));
         }
 
         public void UpdateArtifactBundle(ArtifactBundleModel artifactBundleModel)

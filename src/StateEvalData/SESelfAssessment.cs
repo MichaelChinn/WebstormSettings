@@ -35,7 +35,7 @@ namespace StateEvalData
     
         public virtual SEEvaluation SEEvaluation { get; set; }
         public virtual SEEvaluationType SEEvaluationType { get; set; }
-        public virtual SEUser SEUser { get; set; }
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

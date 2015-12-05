@@ -36,12 +36,12 @@ namespace StateEvalData
     
         public virtual ICollection<SELearningWalkClassRoom> SELearningWalkClassRooms { get; set; }
         public virtual ICollection<SELearningWalkClassroomLabel> SELearningWalkClassroomLabels { get; set; }
-        public virtual SEUser SEUser { get; set; }
-        public virtual SEUser SEUser1 { get; set; }
         public virtual SEPracticeSessionType SEPracticeSessionType { get; set; }
         public virtual SESchoolYear SESchoolYear { get; set; }
         public virtual SETrainingProtocol SETrainingProtocol { get; set; }
         public virtual ICollection<SEPracticeSessionParticipant> SEPracticeSessionParticipants { get; set; }
         public virtual SEEvalSession SEEvalSession { get; set; }
+        public virtual SEUser SEUser { get; set; }
+        public virtual SEUser SEUser1 { get; set; }
     }
 }

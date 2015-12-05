@@ -18,7 +18,7 @@ namespace StateEval.Core.Services
             IQueryable<SEArtifactBundle> artifactBundles = EvalEntities.SEArtifactBundles.Where(
                 x => x.SEStudentGrowthGoalBundles.Select(y=>y.StudentGrowthGoalBundleID).Contains(goalBundleId));
 
-            return artifactBundles.ToList().Select(x => x.MaptoArtifactBundleModel());
+            return artifactBundles.ToList().Select(x => x.MaptoArtifactBundleModel(EvalEntities));
         }
 
         public IEnumerable<StudentGrowthGoalBundleModel> GetInProgressStudentGrowthGoalBundlesForEvaluation(long evaluationId)
