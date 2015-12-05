@@ -11,7 +11,8 @@
             'ui.router',                    // Routing                                                                        
             'LocalStorageModule',
             'ngCookies',
-            'toastr'
+            'toastr',
+            'lodash'
         ]);
 })();
 

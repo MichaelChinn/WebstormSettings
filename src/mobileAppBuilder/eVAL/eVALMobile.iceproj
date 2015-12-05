@@ -27,6 +27,9 @@
     <Content Include="app\app.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="app\artifact\artifact.route.js" />
+    <Content Include="app\artifact\artifact.service.js" />
+    <Content Include="app\artifact\artifacts.module.js" />
     <Content Include="app\blocks\exception\exception-handler.provider.js" />
     <Content Include="app\blocks\exception\exception-handler.provider.spec.js" />
     <Content Include="app\blocks\exception\exception.js" />
@@ -76,6 +79,7 @@
     <Content Include="app\lib\angular-cookies\angular-cookies.min.js" />
     <Content Include="app\lib\angular-local-storage\dist\angular-local-storage.js" />
     <Content Include="app\lib\angular-local-storage\dist\angular-local-storage.min.js" />
+    <Content Include="app\lib\angular-lodash-module\angular-lodash-module.js" />
     <Content Include="app\lib\angular-toastr\dist\angular-toastr.css" />
     <Content Include="app\lib\angular-toastr\dist\angular-toastr.js" />
     <Content Include="app\lib\angular-toastr\dist\angular-toastr.min.css" />
@@ -91,6 +95,11 @@
     <Content Include="app\lib\ionic\js\ionic.bundle.js">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="app\lib\lodash\.bower.json" />
+    <Content Include="app\lib\lodash\bower.json" />
+    <Content Include="app\lib\lodash\LICENSE" />
+    <Content Include="app\lib\lodash\lodash.js" />
+    <Content Include="app\lib\lodash\lodash.min.js" />
     <Content Include="app\login\login.controller.js" />
     <Content Include="app\login\login.html" />
     <Content Include="app\login\login.module.js" />
@@ -307,6 +316,7 @@
     <Folder Include="app\lib\angular-cookies\" />
     <Folder Include="app\lib\angular-local-storage\" />
     <Folder Include="app\lib\angular-local-storage\dist\" />
+    <Folder Include="app\lib\angular-lodash-module\" />
     <Folder Include="app\lib\angular-toastr\" />
     <Folder Include="app\lib\angular-toastr\dist\" />
     <Folder Include="app\lib\ionic\" />
@@ -314,7 +324,9 @@
     <Folder Include="app\lib\ionic\js\" />
     <Folder Include="app\layout\" />
     <Folder Include="app\core\" />
+    <Folder Include="app\lib\lodash\" />
     <Folder Include="app\login\" />
+    <Folder Include="app\artifact\" />
     <Folder Include="app\observation\" />
     <Folder Include="App_Resources\" />
     <Folder Include="App_Resources\Android\" />

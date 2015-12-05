@@ -42,7 +42,7 @@
         var modifyFramework = NavLink('Modify Framework', 'modify-framework', 'fa fa-map');
         var evaluateeDashboard = NavLink('Dashboard', 'evaluatee-notifications', 'fa fa-th-large');
         //todo the evaluator dashboard needs to go to a lower level tab page
-        var evaluatorDashboard = NavLink('Dashboard', 'evaluator-dashboard', 'fa fa-th-large');
+        var evaluatorDashboard = NavLink('Home', 'home', 'fa fa-th-large');
         var saDashboard = NavLink('Dashboard', 'sa-dashboard', 'fa fa-th-large');
         var daDashboard = NavLink('Dashboard', 'da-dashboard', 'fa fa-th-large');
         var dvDashboard = NavLink('Dashboard', 'dv-dashboard', 'fa fa-th-large');

@@ -9,11 +9,13 @@
         .factory('evaluationService', evaluationService);
 
     evaluationService.$inject = ['_', 'enums', '$http', '$q', 'logger', 'config', 'frameworkService', 'rubricUtils', 'localStorageService',
-    'evalSessionService', 'artifactService', 'studentGrowthBuildService'];
+        'evalSessionService', 'artifactService'];
+    //'evalSessionService', 'artifactService', 'studentGrowthBuildService'];
 
     /* @ngInject */
     function evaluationService(_, enums, $http, $q, logger, config, frameworkService, rubricUtils, localStorageService,
-   evalSessionService, artifactService, studentGrowthBuildService) {
+        evalSessionService, artifactService, studentGrowthBuildService) {
+   //evalSessionService, artifactService, studentGrowthBuildService) {
 
         var service = {
             getEvaluationById: getEvaluationById,
@@ -34,7 +36,8 @@
                         data[i].linkedItemType = enums.LinkedItemType.OBSERVATION;
                     }
                     list = list.concat(data);
-                    return studentGrowthBuildService.getSubmittedBundlesForEvaluation();
+                    return null;
+                    //return studentGrowthBuildService.getSubmittedBundlesForEvaluation();
                 })
                 .then(function (data) {
                     for(var i in data) {
@@ -63,7 +66,8 @@
                         data[i].itemType = enums.ItemType.OBSERVATION;
                     }
                     list = list.concat(data);
-                    return studentGrowthBuildService.getSubmittedBundlesForEvaluation();
+                    return null;
+                    //return studentGrowthBuildService.getSubmittedBundlesForEvaluation();
                 })
                 .then(function (data) {
                     for(var i in data) {
