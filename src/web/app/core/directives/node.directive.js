@@ -28,8 +28,8 @@
         vm.active = 'framework_node_score_active_btn';
         vm.btnSize = 'btn-sm';
         vm.root = vm.node.root;
-        vm.score = vm.node.score
-
-
+        $scope.$watch('vm.node', function (newVal) {
+            vm.score = vm.node.score;
+        });
     }
 })();

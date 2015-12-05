@@ -96,5 +96,6 @@ namespace WebAPI.Controllers
             return userService.GetUserOrientationsForUser(userId);
         }
         
+
     }
 }
