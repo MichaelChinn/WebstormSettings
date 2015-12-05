@@ -98,58 +98,6 @@ SELECT u.UserID, NULL, @pEvaluationTypeID, @SchoolYear, @pDistrictCode, 1
   FROM dbo.#User u
   
 
-/*
--- TODO: pull forward the evaluationplan for next year
-
-CREATE TABLE #fnMap (fnLast BIGINT, fnThis BIGINT, districtCode VARCHAR (20), evaluationTypeId smallint)
-INSERT #fnMap(fnLast, fnthis, districtCode, evaluationTypeId)
-SELECT fnLast.frameworkNodeId, fnThis.frameworkNodeID, flast.districtcode, flast.EvaluationTypeID
-FROM seframework fLast
-JOIN seFRamework fThis ON fThis.districtcode = fLast.DistrictCode
-		AND fThis.frameworkTypeid = fLast.frameworkTypeid
-JOIN seFrameworkNode fnLast ON fnLast.frameworkId = fLast.FrameworkID
-JOIN seFrameworkNode fnThis ON fnThis.frameworkId = fThis.frameworkID
-WHERE fLast.schoolyear = @pSchoolYear-1 AND fThis.schoolyear = @pSchoolYear
-AND fnLast.shortname = fnThis.shortname
-AND fLast.frameworktypeid IN (1,3)
-ORDER BY fThis.districtcode, fThis.FrameworkTypeID
-
-UPDATE  e_thisYear
-SET     e_thisYear.EvaluateePlanTypeID = e_lastYear.NextYearEvaluateePlanTypeID ,
-		e_thisYear.FocusedFrameworkNodeID = fnm.fnThis
-FROM    #fnMap fnm
-		JOIN SEEvaluation e_lastYear ON fnm.fnLast = e_lastYear.NextYearFocusedFrameworkNodeID
-		JOIN SEEvaluation e_thisYear ON e_lastYear.DistrictCode = e_thisYear.DistrictCode
-										AND e_lastYear.EvaluationTypeID = e_thisYear.EvaluationTypeID
-										AND e_lastYear.EvaluateeID = e_thisYear.EvaluateeID
-JOIN    dbo.#User u ON e_lastYear.EvaluateeID=u.UserID
-WHERE   e_thisYear.SchoolYear = @pSchoolYear
-		AND e_lastYear.SchoolYear = @pSchoolYear - 1
-		AND e_lastYear.NextYearFocusedFrameworkNodeID IS NOT NULL;
- 
-UPDATE  e_thisYear
-SET     e_thisYear.EvaluateePlanTypeID = e_lastYear.NextYearEvaluateePlanTypeID ,
-        e_thisYear.FocusedSGFrameworkNodeID = fnm.fnThis
-FROM    #fnMap fnm
-        JOIN SEEvaluation e_lastYear ON fnm.fnLast = e_lastYear.NextYearFocusedSGFrameworkNodeID
-        JOIN SEEvaluation e_thisYear ON e_lastYear.DistrictCode = e_thisYear.DistrictCode
-                                        AND e_lastYear.EvaluationTypeID = e_thisYear.EvaluationTypeID
-                                        AND e_lastYear.EvaluateeID = e_thisYear.EvaluateeID
-JOIN    dbo.#User u ON e_lastYear.EvaluateeID=u.UserID
-WHERE   e_thisYear.SchoolYear = @pSchoolYear
-        AND e_lastYear.SchoolYear = @pSchoolYear - 1
-        AND e_lastYear.NextYearFocusedSGFrameworkNodeID IS NOT NULL;
-
-	  
-	SELECT @sql_error = @@ERROR
-	IF @sql_error <> 0
-	BEGIN
-		SELECT @sql_error_message = 'Could not update to SEEvaluation  failed. In: ' 
-			+ @ProcName
-			+ ' >>>' + ISNULL(@sql_error_message, '')
-		GOTO ErrorHandler
-	END
-*/
 
 UPDATE u2
    SET u2.EvaluationID=e.EvaluationID
