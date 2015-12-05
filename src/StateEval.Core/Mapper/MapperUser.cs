@@ -39,11 +39,8 @@ namespace StateEval.Core.Mapper
                 target.EvalData = seEval.MapToEvaluationModel();
             }
 
-            List<aspnet_Roles> roles = source.aspnet_Users.aspnet_Roles.ToList();
-            List<SEUserDistrictSchool> locations = source.SEUserDistrictSchools.ToList();
-
-            List<string> roleList = roles.Select(x => x.RoleName).ToList();
-            target.LocationRoles = locations.Select(x => new LocationRoleModel(x.DistrictCode, x.DistrictName, x.SchoolCode, x.SchoolName, roleList)).ToList();
+            List<SEUserLocationRole> userLocationRoles = source.SEUserLocationRoles.ToList();
+            target.LocationRoles = userLocationRoles.Select(x => x.MaptoUserLocationRoleModel()).ToList();
             return target;
         }
     }
