@@ -65,7 +65,7 @@ EXEC dbo.FindInsertUpdateSEUser @pUserName = 'North Thurston TMS', -- varchar(25
     @pSEUserIdOutput = @UserIdOut;
  -- bigint
 
-EXEC dbo.InsertUserReferenceTables @pUserName = 'North Thurston TMS', -- varchar(200)
+EXEC dbo.InsertUserReferenceTables @pUserName = 'North Thurston PMS', -- varchar(200)
     @pLRString = N'2754|SESchoolPrincipal,3010|SESchoolPrincipal', -- nvarchar(4000)
     @pDebug = 0;
  -- smallint
@@ -80,7 +80,7 @@ EXEC dbo.FindInsertUpdateSEUser @pUserName = 'North Thurston PMS', -- varchar(25
     @pSEUserIdOutput = @UserIdOut;
  -- bigint
 
-EXEC dbo.InsertUserReferenceTables @pUserName = 'North Thurston PMS', -- varchar(200)
+EXEC dbo.InsertUserReferenceTables @pUserName = 'North Thurston TMS', -- varchar(200)
     @pLRString = N'2754|SESchoolTeacher,3010|SESchoolTeacher', -- nvarchar(4000)
     @pDebug = 0; -- smallint
 
@@ -116,7 +116,7 @@ TRUNCATE TABLE	#allTwoRoles
 INSERT #schoolRoles (rolename) SELECT roleName FROM aspnet_roles WHERE rolename LIKE '%school%'
 INSERT #districtRoles (rolename) SELECT roleName FROM aspnet_roles WHERE rolename LIKE '%district%'
 INSERT #districts (districtCode) VALUES ('01147'), ('34003')
-INSERT #schools (schoolCode) VALUES ('2961'), ('2902'),('3010'),('2754') 
+INSERT #schools (schoolCode) VALUES ('3010'),('2754') 
 
 INSERT #allSchoolRoles(schoolCode, schoolRole)
 SELECT s.schoolCode, sr.roleName
@@ -176,17 +176,20 @@ UPDATE #allTwoRoles SET r2ShortName = 'DAM'  WHERE r2 =  'SEDistrictAssignmentMa
 
 update #allTwoRoles set l1Shortname = '01147' where lCode1 ='01147'
 update #allTwoRoles set l1Shortname = '34003' where lCode1 ='34003'
+update #allTwoRoles set l1Shortname = '2754'  where lCode1 ='2754' 
+update #allTwoRoles set l1Shortname = '3010'  where lCode1 ='3010' 
+/*
 update #allTwoRoles set l1Shortname = '2961'  where lCode1 ='2961' 
 update #allTwoRoles set l1Shortname = '2902'  where lCode1 ='2902' 
-update #allTwoRoles set l1Shortname = '3010'  where lCode1 ='3010' 
-update #allTwoRoles set l1Shortname = '2754'  where lCode1 ='2754' 
+*/
 update #allTwoRoles set l2Shortname = '01147' where lCode2 ='01147'
 update #allTwoRoles set l2Shortname = '34003' where lCode2 ='34003'
-update #allTwoRoles set l2Shortname = '2961'  where lCode2 ='2961' 
-update #allTwoRoles set l2Shortname = '2902'  where lCode2 ='2902' 
 update #allTwoRoles set l2Shortname = '3010'  where lCode2 ='3010' 
 update #allTwoRoles set l2Shortname = '2754'  where lCode2 ='2754' 
-
+/*
+update #allTwoRoles set l2Shortname = '2961'  where lCode2 ='2961' 
+update #allTwoRoles set l2Shortname = '2902'  where lCode2 ='2902' 
+*/
 UPDATE #allTwoRoles SET RoleString = lcode1 + '|' + r1 + ',' + lcode2 + '|' + r2
 
 UPDATE #allTwoRoles SET userCreateString =   'declare @UserIdOut bigint '

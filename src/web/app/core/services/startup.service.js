@@ -102,6 +102,7 @@
             user.firstName = loginUserData.firstName;
             user.lastName = loginUserData.lastName;
             user.displayName = loginUserData.displayName;
+            user.evaluationId = loginUserData.evaluationId;
             user.evalData = loginUserData.evalData;
             activeUserContextService.user = user;
             activeUserContextService.context = context;

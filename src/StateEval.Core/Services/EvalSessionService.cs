@@ -115,7 +115,7 @@ namespace StateEval.Core.Services
                     .Where(x => x.EvaluationID == evalSessionModel.EvaluationId).Count();
 
                 seEvalSession.ShortName = "Obs " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
-                if (seEvalSession.Title == "")
+                if (seEvalSession.Title == null)
                 {
                     seEvalSession.Title = seEvalSession.ShortName;
                 }

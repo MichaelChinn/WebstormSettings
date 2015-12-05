@@ -62,6 +62,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="SelfAssessmentServiceTest.cs" />
     <Compile Include="AssignmentsServiceTest.cs" />
     <Compile Include="ReportServiceTest .cs" />
     <Compile Include="EventServiceTest.cs" />

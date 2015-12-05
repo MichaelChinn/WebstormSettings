@@ -107,7 +107,6 @@ namespace StateEvalData
         public virtual DbSet<SEDistrictConfiguration> SEDistrictConfigurations { get; set; }
         public virtual DbSet<SEFrameworkContext> SEFrameworkContexts { get; set; }
         public virtual DbSet<SEFramework> SEFrameworks { get; set; }
-        public virtual DbSet<vUserOrientation> vUserOrientations { get; set; }
         public virtual DbSet<vPrototypeFrameworkContext> vPrototypeFrameworkContexts { get; set; }
         public virtual DbSet<ELMAH_Error> ELMAH_Error { get; set; }
         public virtual DbSet<SERubricRow> SERubricRows { get; set; }
@@ -133,10 +132,11 @@ namespace StateEvalData
         public virtual DbSet<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual DbSet<SEEvalSession> SEEvalSessions { get; set; }
         public virtual DbSet<SELinkedItemType> SELinkedItemTypes { get; set; }
-        public virtual DbSet<SESelfAssessment> SESelfAssessments { get; set; }
         public virtual DbSet<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual DbSet<SEAlignedEvidence> SEAlignedEvidences { get; set; }
         public virtual DbSet<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual DbSet<SEUser> SEUsers { get; set; }
+        public virtual DbSet<vUserOrientation> vUserOrientations { get; set; }
+        public virtual DbSet<SESelfAssessment> SESelfAssessments { get; set; }
     }
 }

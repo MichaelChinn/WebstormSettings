@@ -25,10 +25,10 @@ namespace StateEvalData
             this.SEFrameworkNodeScores = new HashSet<SEFrameworkNodeScore>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
-            this.SESelfAssessments = new HashSet<SESelfAssessment>();
             this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
             this.SEAvailableEvidences1 = new HashSet<SEAvailableEvidence>();
+            this.SESelfAssessments = new HashSet<SESelfAssessment>();
         }
     
         public long EvaluationID { get; set; }
@@ -83,11 +83,11 @@ namespace StateEvalData
         public virtual ICollection<SEFrameworkNodeScore> SEFrameworkNodeScores { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
-        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences1 { get; set; }
         public virtual SEUser SEUser { get; set; }
         public virtual SEUser SEUser1 { get; set; }
+        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
     }
 }

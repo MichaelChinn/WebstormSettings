@@ -27,5 +27,3 @@ EXEC dbo.InsertSEUser
 	@pUserName=@UserName, @pFirstname='David', @pLastName='Chinn', @pEMail='dchinn@nwlink.com'
 EXEC dbo.aspnet_UsersInRoles_AddUsersToRoles @AppName, @UserName, 'SESuperAdmin', @utcDate
 
-update SEUser set schoolCode = null where schoolCode = ''
-update SEUser set districtCode = null where districtCode = ''

@@ -16,7 +16,7 @@ namespace StateEvalData
     {
         public long FrameworkContextID { get; set; }
         public short SchoolYear { get; set; }
-        public long UserDistrictSchoolID { get; set; }
+        public long UserLocationRoleID { get; set; }
         public string DistrictCode { get; set; }
         public string SchoolCode { get; set; }
         public short EvaluationTypeID { get; set; }

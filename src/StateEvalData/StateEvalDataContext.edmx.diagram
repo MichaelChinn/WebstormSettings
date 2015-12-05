@@ -146,7 +146,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SEFramework_SEFrameworkContext" />
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkNode_SEFramework" />
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkPerformanceLevel_SEFramework" />
-        <EntityTypeShape EntityType="StateEvalModel.vUserOrientation" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="StateEvalModel.vPrototypeFrameworkContext" Width="1.5" PointX="11.375" PointY="15.75" />
         <EntityTypeShape EntityType="StateEvalModel.ELMAH_Error" Width="1.5" PointX="13.75" PointY="16.75" />
         <EntityTypeShape EntityType="StateEvalModel.SERubricRow" Width="1.5" PointX="36.875" PointY="48.5" />
@@ -253,10 +252,6 @@
         <EntityTypeShape EntityType="StateEvalModel.SELinkedItemType" Width="1.5" PointX="5.375" PointY="7.875" />
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkNodeScore_SELinkedItemType" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SELinkedItemType" />
-        <EntityTypeShape EntityType="StateEvalModel.SESelfAssessment" Width="1.5" PointX="14.25" PointY="76.75" />
-        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluation" />
-        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluationType" />
-        <AssociationConnector Association="StateEvalModel.SESelfAssessmentRubricRowFocus" />
         <EntityTypeShape EntityType="StateEvalModel.SERubricRowEvaluation" Width="1.5" PointX="44.25" PointY="41.875" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession1" />
@@ -278,7 +273,7 @@
         <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRow" />
         <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRowAnnotation" />
         <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEStudentGrowthGoal" />
-        <EntityTypeShape EntityType="StateEvalModel.SEUser" Width="1.5" PointX="5.25" PointY="18.625" />
+        <EntityTypeShape EntityType="StateEvalModel.SEUser" Width="1.5" PointX="5.25" PointY="17.875" />
         <AssociationConnector Association="StateEvalModel.FK_SEUser_aspnet_Users" />
         <AssociationConnector Association="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SEArtifactBundleRejection_SEUser" />
@@ -301,7 +296,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowAnnotation_SEUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SEUser" />
-        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEFormPromptResponse_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SESummativeRubricRowScore_SEUser" />
@@ -317,6 +311,13 @@
         <AssociationConnector Association="StateEvalModel.FK_SEUserPromptResponseEntry_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_UserActivity_SEUser" />
         <AssociationConnector Association="StateEvalModel.FKSEUserPromptConferenceDefault_SEUser" />
+        <EntityTypeShape EntityType="StateEvalModel.vUserOrientation" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="StateEvalModel.SESelfAssessment" Width="1.5" PointX="11.25" PointY="47" />
+        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluation" />
+        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEUser" />
+        <AssociationConnector Association="StateEvalModel.SESelfAssessmentRubricRowFocus" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SESelfAssessment" />
+        <AssociationConnector Association="StateEvalModel.SEArtifactBundleSelfAssessment" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

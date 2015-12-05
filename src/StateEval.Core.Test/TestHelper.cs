@@ -508,6 +508,33 @@ namespace StateEval.Core.Test
 
         #endregion
 
+        #region SelfAssessment
+
+        public static SelfAssessmentModel CreateSelfAssessment(string title, long evaluationId, long evaluateeId, SEEvaluationTypeEnum evaluationType)
+        {
+            var model = new SelfAssessmentModel
+            {
+                EvaluationId = evaluationId,
+                EvaluateeId = evaluateeId,
+                Focused = false,
+                Title = title,
+                ShortName = "ShortName",
+                IsSharedWithEvaluator = false,
+                PerformanceLevel = (short)SERubricPerformanceLevelEnum.UNDEFINED,
+                IncludeInFinalReport = false
+            };
+
+            SelfAssessmentService service = new SelfAssessmentService();
+
+            var val = service.CreateSelfAssessment(model);
+            PropertyInfo p = val.GetType().GetProperty("Id");
+            int id = Convert.ToInt32(p.GetValue(val));
+            model.Id = id;
+            return model;
+        }
+
+        #endregion
+
         #region EvalSession
 
         public static EvalSessionModel CreateEvalSessionModel(string title, long evaluationId, long evaluatorId, long evaluateeId, SEEvaluationTypeEnum evaluationType)
