@@ -219,7 +219,6 @@ UPDATE #allTwoRoles SET userCreateString =   'declare @UserIdOut bigint '
                 WHERE   id > @idx;
             END;
 
-
 /**********need to put in the right seEvaluations***********/
 
 		CREATE TABLE #cmd(id BIGINT IDENTITY(1,1), cmd VARCHAR (500))
