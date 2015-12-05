@@ -1,7 +1,7 @@
 <ion-view title="Observation">
     <ion-content>
         <div class="list">            
-            <div class="item" ng-repeat="evaluatee in vm.evaluatees">{{evaluatee.displayName}}</div>
+            <a href="javascript:void(0)" ng-click="vm.selectEvaluatee(evaluatee)" class="item" ng-repeat="evaluatee in vm.evaluatees">{{evaluatee.displayName}}</a>
         </div>
     </ion-content>    
 </ion-view>

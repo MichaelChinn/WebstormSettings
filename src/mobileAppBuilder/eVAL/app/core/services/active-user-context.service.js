@@ -24,6 +24,7 @@
 
             getActiveUser: getActiveUser,
             getActiveEvaluatee: getActiveEvaluatee,
+            setActiveEvaluatee:setActiveEvaluatee,
             getEvaluateesForActiveUser: getEvaluateesForActiveUser,
             currentUserIsEvaluating: currentUserIsEvaluating,
             getShowAssignedEvaluateesOnly: getShowAssignedEvaluateesOnly,
@@ -99,7 +100,7 @@
         //    frameworkContext: {} - resultingObject from frameworkService.getFrameworkContext()
         //    framework - set to frameworkContext.defaultFramework
         //    frameworkContexts: [] - holds on to a list of used frameworks
-        //    evaluator
+        //    evaluatorsetActiveEvaluatee
         //    evaluatee
         //    evalutees,
         //}
@@ -123,8 +124,13 @@
             return service.context.evaluatee;
         }
 
+        function setActiveEvaluatee(evaluatee) {
+            service.context.evaluatee = evaluatee;
+            save();
+        }
+
         function getActiveUser() {
-            return service.user
+            return service.user;
         }
 
         function getLoggedInUser() {

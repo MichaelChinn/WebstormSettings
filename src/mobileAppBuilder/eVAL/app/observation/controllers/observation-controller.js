@@ -5,11 +5,16 @@
 
     function observationController(activeUserContextService) {
         var vm = this;
+        vm.selectEvaluatee = selectEvaluatee;
 
-        vm.initialize = function () {
+        function activate() {
             vm.evaluatees = activeUserContextService.getEvaluateesForActiveUser();
         };
 
-        vm.initialize();
+        activate();
+
+        function selectEvaluatee(evaluatee) {
+            activeUserContextService.setActiveEvaluatee(evaluatee);
+        }
     }
 })();

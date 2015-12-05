@@ -12,7 +12,7 @@ function configureRoutes($stateProvider, $urlRouterProvider) {
                     {
                         menuContent:
                              {
-                                 templateUrl: 'app/observation/select-evaluatee.html',
+                                 templateUrl: 'app/observation/views/select-evaluatee.html',
                                  controller: 'observationController',
                                  controllerAs: 'vm'
                              }
