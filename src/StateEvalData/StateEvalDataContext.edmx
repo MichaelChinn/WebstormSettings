@@ -1318,18 +1318,6 @@ warning 6002: The table/view 'stateeval.dbo.SETrainingProtocolLabelAssignment' d
           <Property Name="ObjectType" Type="nvarchar" MaxLength="500" />
           <Property Name="ActivityData" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="SEUserDistrictSchool">
-          <Key>
-            <PropertyRef Name="UserDistrictSchoolID" />
-          </Key>
-          <Property Name="UserDistrictSchoolID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SEUserID" Type="bigint" Nullable="false" />
-          <Property Name="SchoolCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DistrictCode" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SchoolName" Type="varchar" MaxLength="100" />
-          <Property Name="DistrictName" Type="varchar" MaxLength="100" />
-          <Property Name="IsPrimary" Type="bit" Nullable="false" />
-        </EntityType>
         <EntityType Name="SEUserLocationRole">
           <Key>
             <PropertyRef Name="UserLocationRoleID" />
@@ -3750,18 +3738,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SEUserDistrictSchool_SEUser">
-          <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
-          <End Role="SEUserDistrictSchool" Type="Self.SEUserDistrictSchool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserDistrictSchool">
-              <PropertyRef Name="SEUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SEUserID">
           <End Role="SEUser" Type="Self.SEUser" Multiplicity="1" />
           <End Role="SELearningWalkSessionScore" Type="Self.SELearningWalkSessionScore" Multiplicity="*" />
@@ -4143,7 +4119,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySet Name="SETrainingProtocolRatingStatusType" EntityType="Self.SETrainingProtocolRatingStatusType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUser" EntityType="Self.SEUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserActivity" EntityType="Self.SEUserActivity" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SEUserDistrictSchool" EntityType="Self.SEUserDistrictSchool" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserLocationRole" EntityType="Self.SEUserLocationRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserPrompt" EntityType="Self.SEUserPrompt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserPromptConferenceDefault" EntityType="Self.SEUserPromptConferenceDefault" Schema="dbo" store:Type="Tables" />
@@ -5003,10 +4978,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_SEUser_aspnet_Users" Association="Self.FK_SEUser_aspnet_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="SEUser" EntitySet="SEUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SEUserDistrictSchool_SEUser" Association="Self.FK_SEUserDistrictSchool_SEUser">
-            <End Role="SEUser" EntitySet="SEUser" />
-            <End Role="SEUserDistrictSchool" EntitySet="SEUserDistrictSchool" />
           </AssociationSet>
           <AssociationSet Name="FK_SEUserID" Association="Self.FK_SEUserID">
             <End Role="SEUser" EntitySet="SEUser" />
@@ -6334,7 +6305,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SENotification" EntitySet="SENotifications" />
           </AssociationSet>
           <EntitySet Name="SEUserActivities" EntityType="StateEvalModel.SEUserActivity" />
-          <EntitySet Name="SEUserDistrictSchools" EntityType="StateEvalModel.SEUserDistrictSchool" />
           <EntitySet Name="SERubricPerformanceLevels" EntityType="StateEvalModel.SERubricPerformanceLevel" />
           <EntitySet Name="SEUserPromptResponses" EntityType="StateEvalModel.SEUserPromptResponse" />
           <AssociationSet Name="FK_PerformanceLevelID" Association="StateEvalModel.FK_PerformanceLevelID">
@@ -6965,10 +6935,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SEReportPrintOptionUser" EntitySet="SEReportPrintOptionUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_SEUserDistrictSchool_SEUser" Association="StateEvalModel.FK_SEUserDistrictSchool_SEUser">
-            <End Role="SEUser" EntitySet="SEUsers" />
-            <End Role="SEUserDistrictSchool" EntitySet="SEUserDistrictSchools" />
-          </AssociationSet>
           <AssociationSet Name="FK_SEUserLocationRole_SEUser" Association="StateEvalModel.FK_SEUserLocationRole_SEUser">
             <End Role="SEUser" EntitySet="SEUsers" />
             <End Role="SEUserLocationRole" EntitySet="SEUserLocationRoles" />
@@ -7393,19 +7359,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="ObjectType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ActivityData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_UserActivity_SEUser" FromRole="SEUserActivity" ToRole="SEUser" />
-        </EntityType>
-        <EntityType Name="SEUserDistrictSchool">
-          <Key>
-            <PropertyRef Name="UserDistrictSchoolID" />
-          </Key>
-          <Property Name="UserDistrictSchoolID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SEUserID" Type="Int64" Nullable="false" />
-          <Property Name="SchoolCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DistrictCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="DistrictName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserDistrictSchool_SEUser" FromRole="SEUserDistrictSchool" ToRole="SEUser" />
         </EntityType>
         <EntityType Name="SERubricPerformanceLevel">
           <Key>
@@ -9505,7 +9458,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SETrainingProtocolRatings" Relationship="StateEvalModel.FK_SETrainingProtocolRating_SEUser" FromRole="SEUser" ToRole="SETrainingProtocolRating" />
           <NavigationProperty Name="SEDistrictPRViewings" Relationship="StateEvalModel.FK_SEDAPRViewing_DAUserID" FromRole="SEUser" ToRole="SEDistrictPRViewing" />
           <NavigationProperty Name="SEReportPrintOptionUsers" Relationship="StateEvalModel.FK_SEReportPrintOptionUser_SEUser" FromRole="SEUser" ToRole="SEReportPrintOptionUser" />
-          <NavigationProperty Name="SEUserDistrictSchools" Relationship="StateEvalModel.FK_SEUserDistrictSchool_SEUser" FromRole="SEUser" ToRole="SEUserDistrictSchool" />
           <NavigationProperty Name="SEUserLocationRoles" Relationship="StateEvalModel.FK_SEUserLocationRole_SEUser" FromRole="SEUser" ToRole="SEUserLocationRole" />
           <NavigationProperty Name="SEUserPrompts" Relationship="StateEvalModel.FK_SEUserPrompt_CreatedByUserID" FromRole="SEUser" ToRole="SEUserPrompt" />
           <NavigationProperty Name="SEUserPrompts1" Relationship="StateEvalModel.FK_SEUserPrompt_SEUser" FromRole="SEUser" ToRole="SEUserPrompt" />
@@ -9860,18 +9812,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEReportPrintOptionUser">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SEUserDistrictSchool_SEUser">
-          <End Type="StateEvalModel.SEUser" Role="SEUser" Multiplicity="1" />
-          <End Type="StateEvalModel.SEUserDistrictSchool" Role="SEUserDistrictSchool" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEUser">
-              <PropertyRef Name="SEUserID" />
-            </Principal>
-            <Dependent Role="SEUserDistrictSchool">
-              <PropertyRef Name="SEUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -10891,19 +10831,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SEUserDistrictSchools">
-            <EntityTypeMapping TypeName="StateEvalModel.SEUserDistrictSchool">
-              <MappingFragment StoreEntitySet="SEUserDistrictSchool">
-                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
-                <ScalarProperty Name="DistrictCode" ColumnName="DistrictCode" />
-                <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
-                <ScalarProperty Name="SEUserID" ColumnName="SEUserID" />
-                <ScalarProperty Name="UserDistrictSchoolID" ColumnName="UserDistrictSchoolID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

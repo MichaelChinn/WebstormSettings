@@ -44,7 +44,6 @@ namespace StateEvalData
             this.SETrainingProtocolRatings = new HashSet<SETrainingProtocolRating>();
             this.SEDistrictPRViewings = new HashSet<SEDistrictPRViewing>();
             this.SEReportPrintOptionUsers = new HashSet<SEReportPrintOptionUser>();
-            this.SEUserDistrictSchools = new HashSet<SEUserDistrictSchool>();
             this.SEUserLocationRoles = new HashSet<SEUserLocationRole>();
             this.SEUserPrompts = new HashSet<SEUserPrompt>();
             this.SEUserPrompts1 = new HashSet<SEUserPrompt>();
@@ -99,7 +98,6 @@ namespace StateEvalData
         public virtual ICollection<SETrainingProtocolRating> SETrainingProtocolRatings { get; set; }
         public virtual ICollection<SEDistrictPRViewing> SEDistrictPRViewings { get; set; }
         public virtual ICollection<SEReportPrintOptionUser> SEReportPrintOptionUsers { get; set; }
-        public virtual ICollection<SEUserDistrictSchool> SEUserDistrictSchools { get; set; }
         public virtual ICollection<SEUserLocationRole> SEUserLocationRoles { get; set; }
         public virtual ICollection<SEUserPrompt> SEUserPrompts { get; set; }
         public virtual ICollection<SEUserPrompt> SEUserPrompts1 { get; set; }

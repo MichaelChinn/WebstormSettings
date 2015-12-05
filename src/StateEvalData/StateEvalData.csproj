@@ -356,9 +356,6 @@
     <Compile Include="SEUserActivity.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="SEUserDistrictSchool.cs">
-      <DependentUpon>StateEvalDataContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="SEUserLocationRole.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>

@@ -347,6 +347,7 @@ namespace StateEval.Core.Services
             return null;
         }
 
+        /* TODO: ac: remove since we have removed SEUserDistrictSchool
         public IEnumerable<UserDistrictSchoolModel> GetDistrictSchoolsForUser(long seUserID)
         {
             IQueryable<SEUserDistrictSchool> uds = EvalEntities.SEUserDistrictSchools
@@ -355,5 +356,6 @@ namespace StateEval.Core.Services
             return uds.ToList().Select(x => x.MaptoUserDistrictSchoolModel(null));
 
         }
+         */
     }
 }

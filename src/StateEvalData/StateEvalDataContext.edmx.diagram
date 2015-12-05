@@ -116,7 +116,6 @@
         <EntityTypeShape EntityType="StateEvalModel.SENotification" Width="1.5" PointX="9.25" PointY="80.125" />
         <AssociationConnector Association="StateEvalModel.FK_SENotification_SEEvent" />
         <EntityTypeShape EntityType="StateEvalModel.SEUserActivity" Width="1.5" PointX="3" PointY="110.75" />
-        <EntityTypeShape EntityType="StateEvalModel.SEUserDistrictSchool" Width="3.125" PointX="3" PointY="115.5" />
         <EntityTypeShape EntityType="StateEvalModel.SERubricPerformanceLevel" Width="1.5" PointX="0.75" PointY="67.125" />
         <EntityTypeShape EntityType="StateEvalModel.SEUserPromptResponse" Width="1.5" PointX="28" PointY="78.375" />
         <AssociationConnector Association="StateEvalModel.FK_PerformanceLevelID" />
@@ -303,7 +302,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SETrainingProtocolRating_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEDAPRViewing_DAUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SEReportPrintOptionUser_SEUser" />
-        <AssociationConnector Association="StateEvalModel.FK_SEUserDistrictSchool_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserLocationRole_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserPrompt_CreatedByUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserPrompt_SEUser" />

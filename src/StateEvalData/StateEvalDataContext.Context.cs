@@ -97,7 +97,6 @@ namespace StateEvalData
         public virtual DbSet<SEResource> SEResources { get; set; }
         public virtual DbSet<SENotification> SENotifications { get; set; }
         public virtual DbSet<SEUserActivity> SEUserActivities { get; set; }
-        public virtual DbSet<SEUserDistrictSchool> SEUserDistrictSchools { get; set; }
         public virtual DbSet<SERubricPerformanceLevel> SERubricPerformanceLevels { get; set; }
         public virtual DbSet<SEUserPromptResponse> SEUserPromptResponses { get; set; }
         public virtual DbSet<SEPracticeSession> SEPracticeSessions { get; set; }

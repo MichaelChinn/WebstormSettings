@@ -200,7 +200,7 @@ UPDATE #allTwoRoles SET userCreateString =   'declare @UserIdOut bigint '
 						+ ', @pEmail=''' + l1ShortName +'_'+ r1shortName +'_'+ l2ShortName +'_'+ r2shortName + '@' + l1ShortName +'_'+ l2ShortName + '.edu''' + ', @pCertNo = '''''
                         + ', @pHasMultipleLocations = 0'
                         + ', @pseUserIdOutput = @UserIdOut OUTPUT'
-						where l1ShortName <> l2ShortName and l1ShortName='34003'
+						where l1ShortName in ('3010', '34003')
 				
 
                 UPDATE #allTwoRoles SET refTableString =   'EXEC dbo.InsertUserReferenceTables '
