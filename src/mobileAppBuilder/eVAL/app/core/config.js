@@ -20,6 +20,9 @@
         if (host.indexOf("localhost")!=-1) {
             return 'http://localhost/StateEvalWebAPI/api/';
         }
+        else if (host.indexOf("simulator") != -1) {
+            return 'http://localhost/StateEvalWebAPI/api/';
+        }
         else if (host.indexOf('test')!=-1) {
             return 'http://test.eval-wa.org/StateEval_WebAPI_Test/api/';
         }

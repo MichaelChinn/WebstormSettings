@@ -28,10 +28,10 @@
              return response;
              })*/
 
-            return $http.post(config.apiUrl + 'authenticate', {'username': username, 'password': password})
-                .then(function (response) {
+            return $http.post(config.apiUrl + 'authenticate', { 'username': username, 'password': password })
+                .then(function(response) {
                     return response.data;
-                })
+                });
 
         }
 
