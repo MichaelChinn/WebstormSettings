@@ -104,8 +104,10 @@
     <Content Include="app\login\login.controller.js" />
     <Content Include="app\login\login.html" />
     <Content Include="app\login\login.module.js" />
+    <Content Include="app\observation\controllers\observation-list-controller.js" />
     <Content Include="app\observation\observation.module.js" />
     <Content Include="app\observation\observation.route.js" />
+    <Content Include="app\observation\views\observation-list.html" />
     <Content Include="app\observation\views\select-evaluatee.html" />
     <Content Include="app\observation\services\observation-service.js" />
     <Content Include="app\observation\controllers\observation-controller.js" />

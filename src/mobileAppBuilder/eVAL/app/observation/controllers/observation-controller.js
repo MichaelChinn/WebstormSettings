@@ -1,9 +1,9 @@
 (function () {
     angular.module("stateeval.mobile.observation").controller("observationController", observationController);
 
-    observationController.$inject = ['activeUserContextService'];
+    observationController.$inject = ['$state','activeUserContextService'];
 
-    function observationController(activeUserContextService) {
+    function observationController($state,activeUserContextService) {
         var vm = this;
         vm.selectEvaluatee = selectEvaluatee;
 
@@ -15,6 +15,7 @@
 
         function selectEvaluatee(evaluatee) {
             activeUserContextService.setActiveEvaluatee(evaluatee);
+            $state.go("observation-list");
         }
     }
 })();

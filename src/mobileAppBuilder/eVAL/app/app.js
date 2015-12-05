@@ -1,6 +1,6 @@
 (function () {
-    var evalMobileApp = angular.module('stateeval.mobile', ['ionic', 'ui.router', 'stateeval.core', 'stateeval.mobile.login','stateeval.mobile.home', 'stateeval.mobile.artifact',
-    'stateeval.mobile.observation']);
+    var evalMobileApp = angular.module('stateeval.mobile', ['ionic', 'ui.router', 'stateeval.core',
+        'stateeval.mobile.login', 'stateeval.mobile.home', 'stateeval.mobile.artifact', 'stateeval.mobile.observation']);
 
     evalMobileApp.config(function ($stateProvider, $urlRouterProvider) {
 

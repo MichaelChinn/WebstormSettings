@@ -17,6 +17,18 @@ function configureRoutes($stateProvider, $urlRouterProvider) {
                                  controllerAs: 'vm'
                              }
                     },
+        }).state('observation-list', {
+            url: '/observation-list',
+            parent: 'app',
+            views:
+                    {
+                        menuContent:
+                             {
+                                 templateUrl: 'app/observation/views/observation-list.html',
+                                 controller: 'observationListController',
+                                 controllerAs: 'vm'
+                             }
+                    },
         });
 
 }
