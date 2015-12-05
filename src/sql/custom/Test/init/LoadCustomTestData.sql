@@ -239,8 +239,8 @@ UPDATE #allTwoRoles SET userCreateString =   'declare @UserIdOut bigint '
         FROM    #cmd;
         WHILE @idx IS NOT NULL
             BEGIN
-                SELECT  @cmd = userCreateString
-                FROM    #allTwoRoles
+                SELECT  @cmd = cmd
+                FROM    #cmd
                 WHERE   id = @idx;
                 EXEC (@cmd)
                 SELECT  @idx = MIN(id)

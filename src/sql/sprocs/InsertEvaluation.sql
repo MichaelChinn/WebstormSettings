@@ -14,6 +14,7 @@ CREATE PROCEDURE InsertEvaluation
 	,@pSchoolYear SMALLINT = NULL
 	,@pDistrictCode VARCHAR(20)
 	,@pEvaluateeID BIGINT = NULL
+	,@pDebug BIT = 0
 	,@sql_error_message VARCHAR(500) OUTPUT
 
 AS
@@ -58,8 +59,9 @@ IF (@pEvaluateeID IS NOT NULL)
 BEGIN
 	INSERT INTO #User(UserID, DistrictCode)
 	SELECT u.SEUserID
-	      ,u.DistrictCode
+	      ,ulr.DistrictCode
 	  FROM dbo.SEUser u
+	  JOIN dbo.SEUserLocationRole ulr ON ulr.SEUserId = u.SEUserID
 	 WHERE u.SEUserID=@pEvaluateeID
 	   AND u.SEUserID NOT IN
 		   (SELECT EvaluateeID
@@ -72,20 +74,22 @@ ELSE
 BEGIN
 	INSERT INTO #User(UserID, DistrictCode)
 	SELECT DISTINCT u.SEUserID
-	      ,u.DistrictCode
+	      ,ulr.DistrictCode
 	  FROM dbo.SEUser u
 	  JOIN dbo.SEUserLocationRole ulr ON ulr.seUserid = u.SEUserID
   	  JOIN dbo.aspnet_Roles r ON ulr.RoleID=r.RoleID
-	 WHERE u.DistrictCode=@pDistrictCode
+	 WHERE ulr.DistrictCode=@pDistrictCode
 	   AND r.RoleName=CASE WHEN @pEvaluationTypeID=1 THEN 'SESchoolPrincipal' ELSE 'SESchoolTeacher' END
 	   AND u.SEUserID NOT IN
 	       (SELECT EvaluateeID
 	          FROM dbo.SEEvaluation 
 	         WHERE DistrictCode=@pDistrictCode
 		       AND EvaluationTypeID=@pEvaluationTypeID
-	           AND SchoolYear=@SchoolYear)
+	           AND SchoolYear=@SchoolYear) 
 END
 
+
+IF @pDebug=1 SELECT '#users', * FROM #user
 
 DECLARE @EvalID BIGINT
 
