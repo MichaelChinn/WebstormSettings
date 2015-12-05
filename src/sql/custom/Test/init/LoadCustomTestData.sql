@@ -220,6 +220,35 @@ UPDATE #allTwoRoles SET userCreateString =   'declare @UserIdOut bigint '
             END;
 
 
+/**********need to put in the right seEvaluations***********/
+
+		CREATE TABLE #cmd(id BIGINT IDENTITY(1,1), cmd VARCHAR (500))
+
+			TRUNCATE TABLE #cmd
+			INSERT #cmd(cmd)
+			SELECT DISTINCT
+                    'declare @sql_error_message varchar(500)   exec dbo.InsertEvaluation '
+					+ ' @pEvaluationTypeID=' + CONVERT(VARCHAR(20), lr.evaluationTypeId)
+                    + ', @pSchoolYear='+CONVERT(VARCHAR(10),lr.SchoolYear)
+					+', @pDistrictCode=''' + lr.districtCode +''''
+                    + ', @sql_error_message=@sql_error_message OUTPUT'
+            FROM    dbo.SEFrameworkContext lr 
+
+
+			        SELECT  @idx = MIN(id)
+        FROM    #cmd;
+        WHILE @idx IS NOT NULL
+            BEGIN
+                SELECT  @cmd = userCreateString
+                FROM    #allTwoRoles
+                WHERE   id = @idx;
+                EXEC (@cmd)
+                SELECT  @idx = MIN(id)
+                FROM    #cmd
+                WHERE   id > @idx;
+            END;
+
+
 
 END
 
