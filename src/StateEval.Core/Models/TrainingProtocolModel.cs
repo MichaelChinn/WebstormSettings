@@ -20,6 +20,7 @@ namespace StateEval.Core.Models
         public Nullable<short> AvgRating { get; set; }
         public Nullable<short> NumRatings { get; set; }
 
+        public List<TrainingProtocolLabelModel> Labels { get; set; }
         public List<TrainingProtocolLabelGroupModel> LabelGroups { get; set; }
         public List<TrainingProtocolCriteriaModel> AlignedCriteria { get; set; }
         public List<TrainingProtocolHighLeveragePracticeModel> AlignedHighLeveragePractices { get; set;}
