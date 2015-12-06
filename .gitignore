@@ -14,3 +14,4 @@ StyleCop.Cache
 *.orig
 src/sql/*.txt
 src/.idea/**
+src/tools/ProtoTypes/src/sql/*.txt
