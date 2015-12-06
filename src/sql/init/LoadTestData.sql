@@ -511,6 +511,35 @@ IF EXISTS ( SELECT  *
 
                 FROM    #principal_assignments a;
 
+
+		        INSERT  #cmd
+                ( sqlcmd
+                )
+                SELECT  'exec AssignEvaluatorToEvaluatee  @pEvaluateeUserID ='
+                        + CONVERT(VARCHAR(10), a.EvaluateeId)
+                        + ',@pEvaluatorUserID='
+                        + CONVERT(VARCHAR(10), a.EvaluatorID)
+                        + ', @pEvaluationTypeID = 2, @pSchoolYear=2015'
+						+ ', @pDistrictCode='''
+						+ CONVERT(VARCHAR(20), a.DistrictCode)
+						+ ''''
+                FROM    #teacher_assignments a;
+	
+        INSERT  #cmd
+                ( sqlcmd
+                )
+                SELECT  'exec AssignEvaluatorToEvaluatee  @pEvaluateeUserID ='
+                        + CONVERT(VARCHAR(10), a.EvaluateeId)
+                        + ',@pEvaluatorUserID='
+                        + CONVERT(VARCHAR(10), a.EvaluatorID)
+                        + ', @pEvaluationTypeID = 1, @pSchoolYear=2015'
+					    + ', @pDistrictCode='''
+						+ CONVERT(VARCHAR(20), a.DistrictCode)
+						+ ''''
+
+                FROM    #principal_assignments a;
+
+
         SELECT  @idx = MIN(id)
         FROM    #cmd;
         WHILE @idx IS NOT NULL

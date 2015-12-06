@@ -17,12 +17,13 @@ namespace StateEvalData
         public SETrainingProtocol()
         {
             this.SEDistrictTrainingProtocolAnchors = new HashSet<SEDistrictTrainingProtocolAnchor>();
-            this.SETrainingProtocolFrameworkNodeAlignments = new HashSet<SETrainingProtocolFrameworkNodeAlignment>();
             this.SETrainingProtocolPlaylists = new HashSet<SETrainingProtocolPlaylist>();
             this.SETrainingProtocolRatings = new HashSet<SETrainingProtocolRating>();
             this.SETrainingProtocolLabels = new HashSet<SETrainingProtocolLabel>();
             this.SEPracticeSessions = new HashSet<SEPracticeSession>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
+            this.SETrainingProtocolCriterias = new HashSet<SETrainingProtocolCriteria>();
+            this.SETrainingProtocolHighLeveragePractices = new HashSet<SETrainingProtocolHighLeveragePractice>();
         }
     
         public long TrainingProtocolID { get; set; }
@@ -43,11 +44,12 @@ namespace StateEvalData
         public Nullable<short> NumRatings { get; set; }
     
         public virtual ICollection<SEDistrictTrainingProtocolAnchor> SEDistrictTrainingProtocolAnchors { get; set; }
-        public virtual ICollection<SETrainingProtocolFrameworkNodeAlignment> SETrainingProtocolFrameworkNodeAlignments { get; set; }
         public virtual ICollection<SETrainingProtocolPlaylist> SETrainingProtocolPlaylists { get; set; }
         public virtual ICollection<SETrainingProtocolRating> SETrainingProtocolRatings { get; set; }
         public virtual ICollection<SETrainingProtocolLabel> SETrainingProtocolLabels { get; set; }
         public virtual ICollection<SEPracticeSession> SEPracticeSessions { get; set; }
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
+        public virtual ICollection<SETrainingProtocolCriteria> SETrainingProtocolCriterias { get; set; }
+        public virtual ICollection<SETrainingProtocolHighLeveragePractice> SETrainingProtocolHighLeveragePractices { get; set; }
     }
 }

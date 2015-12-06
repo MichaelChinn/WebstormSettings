@@ -17,8 +17,7 @@ namespace StateEval.Core.Models
         public string SchoolCode { get; set; }
         public Nullable<bool> LastActiveRole { get; set; }
         public System.DateTime CreateDate { get; set; }
-
-        //public virtual aspnet_Roles aspnet_Roles { get; set; }  //TODO....
-        public virtual UserModel UserModel { get; set; }
+        public string DistrictName { get; set; }
+        public string SchoolName { get; set; }
     }
 }

@@ -30,10 +30,12 @@
         vm.getSafeHtml = utils.getSafeHtml;
         vm.evidenceCollectionService = evidenceCollectionService;
         vm.root = vm.row.root;
-        vm.score = vm.row.score;
         vm.mouseUp = evidenceCollectionService.state.functionality ? mouseUp : function () {};
         vm.show = show;
         console.log('Rubric Row Directive');
+        $scope.$watch('vm.row', function (newVal) {
+            vm.score = vm.row.score;
+        });
 
         function show(id) {
             vm.toggle[id] = !vm.toggle[id];

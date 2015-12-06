@@ -332,7 +332,10 @@
     <Compile Include="SETrainingProtocol.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="SETrainingProtocolFrameworkNodeAlignment.cs">
+    <Compile Include="SETrainingProtocolCriteria.cs">
+      <DependentUpon>StateEvalDataContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SETrainingProtocolHighLeveragePractice.cs">
       <DependentUpon>StateEvalDataContext.tt</DependentUpon>
     </Compile>
     <Compile Include="SETrainingProtocolLabel.cs">
@@ -411,8 +414,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StateEvalDataContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="StateEvalDataContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

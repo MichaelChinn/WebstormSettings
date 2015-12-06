@@ -1214,17 +1214,22 @@ warning 6002: The table/view 'stateeval.dbo.SEStudentGrowthGoalBundleGoal' does 
           <Property Name="AvgRating" Type="smallint" />
           <Property Name="NumRatings" Type="smallint" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'stateeval.dbo.SETrainingProtocolFrameworkNodeAlignment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="SETrainingProtocolFrameworkNodeAlignment">
+        <EntityType Name="SETrainingProtocolCriteria">
           <Key>
-            <PropertyRef Name="TrainingProtocolID" />
-            <PropertyRef Name="FrameworkNodeID" />
-            <PropertyRef Name="IsStateAlignment" />
+            <PropertyRef Name="TrainingProtocolCriteriaID" />
           </Key>
-          <Property Name="TrainingProtocolID" Type="bigint" Nullable="false" />
-          <Property Name="FrameworkNodeID" Type="bigint" Nullable="false" />
-          <Property Name="IsStateAlignment" Type="bit" Nullable="false" />
+          <Property Name="TrainingProtocolCriteriaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SETrainingProtocolHighLeveragePractice">
+          <Key>
+            <PropertyRef Name="TrainingProtocolHighLeveragePracticeID" />
+          </Key>
+          <Property Name="TrainingProtocolHighLeveragePracticeID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="SETrainingProtocolLabel">
           <Key>
@@ -1280,6 +1285,22 @@ warning 6002: The table/view 'stateeval.dbo.SETrainingProtocolLabelAssignment' d
           <Property Name="TrainingProtocolRatingStatusTypeID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="SETrainingProtocolTrainingProtocolCriteria">
+          <Key>
+            <PropertyRef Name="TrainingProtocolID" />
+            <PropertyRef Name="TrainingProtocolCriteriaID" />
+          </Key>
+          <Property Name="TrainingProtocolID" Type="bigint" Nullable="false" />
+          <Property Name="TrainingProtocolCriteriaID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SETrainingProtocolTrainingProtocolHighLeveragePractice">
+          <Key>
+            <PropertyRef Name="TrainingProtocolID" />
+            <PropertyRef Name="TrainingProtocolHighLeveragePracticeID" />
+          </Key>
+          <Property Name="TrainingProtocolID" Type="bigint" Nullable="false" />
+          <Property Name="TrainingProtocolHighLeveragePracticeID" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="SEUser">
           <Key>
             <PropertyRef Name="SEUserID" />
@@ -1331,6 +1352,8 @@ warning 6002: The table/view 'stateeval.dbo.SETrainingProtocolLabelAssignment' d
           <Property Name="SchoolCode" Type="nvarchar" MaxLength="25" />
           <Property Name="LastActiveRole" Type="bit" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="DistrictName" Type="nvarchar" MaxLength="255" />
+          <Property Name="SchoolName" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="SEUserPrompt">
           <Key>
@@ -1467,8 +1490,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="SEUserID" Type="bigint" Nullable="false" />
-          <Property Name="DistrictName" Type="varchar" MaxLength="100" />
-          <Property Name="SchoolName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DistrictName" Type="nvarchar" MaxLength="255" />
+          <Property Name="SchoolName" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <Association Name="FK__aspnet_Us__RoleI__4AB81AF0">
           <End Role="aspnet_Roles" Type="Self.aspnet_Roles" Multiplicity="1" />
@@ -3618,30 +3641,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SETrainingProtocol_SEFrameworkNode">
-          <End Role="SEFrameworkNode" Type="Self.SEFrameworkNode" Multiplicity="1" />
-          <End Role="SETrainingProtocolFrameworkNodeAlignment" Type="Self.SETrainingProtocolFrameworkNodeAlignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEFrameworkNode">
-              <PropertyRef Name="FrameworkNodeID" />
-            </Principal>
-            <Dependent Role="SETrainingProtocolFrameworkNodeAlignment">
-              <PropertyRef Name="FrameworkNodeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SETrainingProtocol_SETrainingProtocol">
-          <End Role="SETrainingProtocol" Type="Self.SETrainingProtocol" Multiplicity="1" />
-          <End Role="SETrainingProtocolFrameworkNodeAlignment" Type="Self.SETrainingProtocolFrameworkNodeAlignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SETrainingProtocol">
-              <PropertyRef Name="TrainingProtocolID" />
-            </Principal>
-            <Dependent Role="SETrainingProtocolFrameworkNodeAlignment">
-              <PropertyRef Name="TrainingProtocolID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SETrainingProtocolLabel_SETrainingProtocolLabelGroup">
           <End Role="SETrainingProtocolLabelGroup" Type="Self.SETrainingProtocolLabelGroup" Multiplicity="1" />
           <End Role="SETrainingProtocolLabel" Type="Self.SETrainingProtocolLabel" Multiplicity="*" />
@@ -3723,6 +3722,54 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SETrainingProtocolRating">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETrainingProtocolTrainingProtocolCriteria_SETrainingProtocol">
+          <End Role="SETrainingProtocol" Type="Self.SETrainingProtocol" Multiplicity="1" />
+          <End Role="SETrainingProtocolTrainingProtocolCriteria" Type="Self.SETrainingProtocolTrainingProtocolCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SETrainingProtocol">
+              <PropertyRef Name="TrainingProtocolID" />
+            </Principal>
+            <Dependent Role="SETrainingProtocolTrainingProtocolCriteria">
+              <PropertyRef Name="TrainingProtocolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETrainingProtocolTrainingProtocolCriteria_SETrainingProtocolCriteria">
+          <End Role="SETrainingProtocolCriteria" Type="Self.SETrainingProtocolCriteria" Multiplicity="1" />
+          <End Role="SETrainingProtocolTrainingProtocolCriteria" Type="Self.SETrainingProtocolTrainingProtocolCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SETrainingProtocolCriteria">
+              <PropertyRef Name="TrainingProtocolCriteriaID" />
+            </Principal>
+            <Dependent Role="SETrainingProtocolTrainingProtocolCriteria">
+              <PropertyRef Name="TrainingProtocolCriteriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETrainingProtocolTrainingProtocolHighLeveragePractice_SETrainingProtocol">
+          <End Role="SETrainingProtocol" Type="Self.SETrainingProtocol" Multiplicity="1" />
+          <End Role="SETrainingProtocolTrainingProtocolHighLeveragePractice" Type="Self.SETrainingProtocolTrainingProtocolHighLeveragePractice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SETrainingProtocol">
+              <PropertyRef Name="TrainingProtocolID" />
+            </Principal>
+            <Dependent Role="SETrainingProtocolTrainingProtocolHighLeveragePractice">
+              <PropertyRef Name="TrainingProtocolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SETrainingProtocolTrainingProtocolHighLeveragePractice_SETrainingProtocolHighLeveragePractice">
+          <End Role="SETrainingProtocolHighLeveragePractice" Type="Self.SETrainingProtocolHighLeveragePractice" Multiplicity="1" />
+          <End Role="SETrainingProtocolTrainingProtocolHighLeveragePractice" Type="Self.SETrainingProtocolTrainingProtocolHighLeveragePractice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SETrainingProtocolHighLeveragePractice">
+              <PropertyRef Name="TrainingProtocolHighLeveragePracticeID" />
+            </Principal>
+            <Dependent Role="SETrainingProtocolTrainingProtocolHighLeveragePractice">
+              <PropertyRef Name="TrainingProtocolHighLeveragePracticeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4112,11 +4159,15 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySet Name="SESummativeFrameworkNodeScore" EntityType="Self.SESummativeFrameworkNodeScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SESummativeRubricRowScore" EntityType="Self.SESummativeRubricRowScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SETrainingProtocol" EntityType="Self.SETrainingProtocol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SETrainingProtocolCriteria" EntityType="Self.SETrainingProtocolCriteria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SETrainingProtocolHighLeveragePractice" EntityType="Self.SETrainingProtocolHighLeveragePractice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SETrainingProtocolLabel" EntityType="Self.SETrainingProtocolLabel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SETrainingProtocolLabelGroup" EntityType="Self.SETrainingProtocolLabelGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SETrainingProtocolPlaylist" EntityType="Self.SETrainingProtocolPlaylist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SETrainingProtocolRating" EntityType="Self.SETrainingProtocolRating" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SETrainingProtocolRatingStatusType" EntityType="Self.SETrainingProtocolRatingStatusType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SETrainingProtocolTrainingProtocolCriteria" EntityType="Self.SETrainingProtocolTrainingProtocolCriteria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SETrainingProtocolTrainingProtocolHighLeveragePractice" EntityType="Self.SETrainingProtocolTrainingProtocolHighLeveragePractice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUser" EntityType="Self.SEUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserActivity" EntityType="Self.SEUserActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SEUserLocationRole" EntityType="Self.SEUserLocationRole" Schema="dbo" store:Type="Tables" />
@@ -4186,13 +4237,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
     [SEStudentGrowthGoalBundleGoal].[BundleID] AS [BundleID], 
     [SEStudentGrowthGoalBundleGoal].[GoalID] AS [GoalID]
     FROM [dbo].[SEStudentGrowthGoalBundleGoal] AS [SEStudentGrowthGoalBundleGoal]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="SETrainingProtocolFrameworkNodeAlignment" EntityType="Self.SETrainingProtocolFrameworkNodeAlignment" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [SETrainingProtocolFrameworkNodeAlignment].[TrainingProtocolID] AS [TrainingProtocolID], 
-    [SETrainingProtocolFrameworkNodeAlignment].[FrameworkNodeID] AS [FrameworkNodeID], 
-    [SETrainingProtocolFrameworkNodeAlignment].[IsStateAlignment] AS [IsStateAlignment]
-    FROM [dbo].[SETrainingProtocolFrameworkNodeAlignment] AS [SETrainingProtocolFrameworkNodeAlignment]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SETrainingProtocolLabelAssignment" EntityType="Self.SETrainingProtocolLabelAssignment" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -4939,14 +4983,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEUser" EntitySet="SEUser" />
             <End Role="SESummativeRubricRowScore" EntitySet="SESummativeRubricRowScore" />
           </AssociationSet>
-          <AssociationSet Name="FK_SETrainingProtocol_SEFrameworkNode" Association="Self.FK_SETrainingProtocol_SEFrameworkNode">
-            <End Role="SEFrameworkNode" EntitySet="SEFrameworkNode" />
-            <End Role="SETrainingProtocolFrameworkNodeAlignment" EntitySet="SETrainingProtocolFrameworkNodeAlignment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SETrainingProtocol_SETrainingProtocol" Association="Self.FK_SETrainingProtocol_SETrainingProtocol">
-            <End Role="SETrainingProtocol" EntitySet="SETrainingProtocol" />
-            <End Role="SETrainingProtocolFrameworkNodeAlignment" EntitySet="SETrainingProtocolFrameworkNodeAlignment" />
-          </AssociationSet>
           <AssociationSet Name="FK_SETrainingProtocolLabel_SETrainingProtocolLabelGroup" Association="Self.FK_SETrainingProtocolLabel_SETrainingProtocolLabelGroup">
             <End Role="SETrainingProtocolLabelGroup" EntitySet="SETrainingProtocolLabelGroup" />
             <End Role="SETrainingProtocolLabel" EntitySet="SETrainingProtocolLabel" />
@@ -4974,6 +5010,22 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_SETrainingProtocolRating_SEUser" Association="Self.FK_SETrainingProtocolRating_SEUser">
             <End Role="SEUser" EntitySet="SEUser" />
             <End Role="SETrainingProtocolRating" EntitySet="SETrainingProtocolRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETrainingProtocolTrainingProtocolCriteria_SETrainingProtocol" Association="Self.FK_SETrainingProtocolTrainingProtocolCriteria_SETrainingProtocol">
+            <End Role="SETrainingProtocol" EntitySet="SETrainingProtocol" />
+            <End Role="SETrainingProtocolTrainingProtocolCriteria" EntitySet="SETrainingProtocolTrainingProtocolCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETrainingProtocolTrainingProtocolCriteria_SETrainingProtocolCriteria" Association="Self.FK_SETrainingProtocolTrainingProtocolCriteria_SETrainingProtocolCriteria">
+            <End Role="SETrainingProtocolCriteria" EntitySet="SETrainingProtocolCriteria" />
+            <End Role="SETrainingProtocolTrainingProtocolCriteria" EntitySet="SETrainingProtocolTrainingProtocolCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETrainingProtocolTrainingProtocolHighLeveragePractice_SETrainingProtocol" Association="Self.FK_SETrainingProtocolTrainingProtocolHighLeveragePractice_SETrainingProtocol">
+            <End Role="SETrainingProtocol" EntitySet="SETrainingProtocol" />
+            <End Role="SETrainingProtocolTrainingProtocolHighLeveragePractice" EntitySet="SETrainingProtocolTrainingProtocolHighLeveragePractice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SETrainingProtocolTrainingProtocolHighLeveragePractice_SETrainingProtocolHighLeveragePractice" Association="Self.FK_SETrainingProtocolTrainingProtocolHighLeveragePractice_SETrainingProtocolHighLeveragePractice">
+            <End Role="SETrainingProtocolHighLeveragePractice" EntitySet="SETrainingProtocolHighLeveragePractice" />
+            <End Role="SETrainingProtocolTrainingProtocolHighLeveragePractice" EntitySet="SETrainingProtocolTrainingProtocolHighLeveragePractice" />
           </AssociationSet>
           <AssociationSet Name="FK_SEUser_aspnet_Users" Association="Self.FK_SEUser_aspnet_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
@@ -5262,7 +5314,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <NavigationProperty Name="SEFrameworkNode2" Relationship="Self.FK_SEFrameworkNode_SEFrameworkNode" FromRole="SEFrameworkNode1" ToRole="SEFrameworkNode" />
           <NavigationProperty Name="SEPullQuotes" Relationship="Self.FK_SEPullQuote_SEFrameworkNode" FromRole="SEFrameworkNode" ToRole="SEPullQuote" />
           <NavigationProperty Name="SERubricRowFrameworkNodes" Relationship="Self.FK_SERubricRowFrameworkNode_SEFrameworkNode" FromRole="SEFrameworkNode" ToRole="SERubricRowFrameworkNode" />
-          <NavigationProperty Name="SETrainingProtocolFrameworkNodeAlignments" Relationship="Self.FK_SETrainingProtocol_SEFrameworkNode" FromRole="SEFrameworkNode" ToRole="SETrainingProtocolFrameworkNodeAlignment" />
           <NavigationProperty Name="SEStudentGrowthGoals" Relationship="StateEvalModel.FK_SEStudentGrowthGoal_SEFrameworkNode" FromRole="SEFrameworkNode" ToRole="SEStudentGrowthGoal" />
           <NavigationProperty Name="SEFramework" Relationship="StateEvalModel.FK_SEFrameworkNode_SEFramework" FromRole="SEFrameworkNode" ToRole="SEFramework" />
           <NavigationProperty Name="SEEvaluations" Relationship="StateEvalModel.FK_SEEvaluation_FocusFrameworkNode" FromRole="SEFrameworkNode" ToRole="SEEvaluation" />
@@ -5497,12 +5548,13 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="AvgRating" Type="Int16" />
           <Property Name="NumRatings" Type="Int16" />
           <NavigationProperty Name="SEDistrictTrainingProtocolAnchors" Relationship="Self.FK_SEDistrictTrainingProtocolAnchor_SETrainingProtocol" FromRole="SETrainingProtocol" ToRole="SEDistrictTrainingProtocolAnchor" />
-          <NavigationProperty Name="SETrainingProtocolFrameworkNodeAlignments" Relationship="Self.FK_SETrainingProtocol_SETrainingProtocol" FromRole="SETrainingProtocol" ToRole="SETrainingProtocolFrameworkNodeAlignment" />
           <NavigationProperty Name="SETrainingProtocolPlaylists" Relationship="Self.FK_SETrainingProtocolPlaylist_SETrainingProtocol" FromRole="SETrainingProtocol" ToRole="SETrainingProtocolPlaylist" />
           <NavigationProperty Name="SETrainingProtocolRatings" Relationship="Self.FK_SETrainingProtocolRating_SETrainingProtocol" FromRole="SETrainingProtocol" ToRole="SETrainingProtocolRating" />
           <NavigationProperty Name="SETrainingProtocolLabels" Relationship="Self.SETrainingProtocolLabelAssignment" FromRole="SETrainingProtocol" ToRole="SETrainingProtocolLabel" />
           <NavigationProperty Name="SEPracticeSessions" Relationship="StateEvalModel.FK_SEPracticeSession_TrainingProtocolID" FromRole="SETrainingProtocol" ToRole="SEPracticeSession" />
           <NavigationProperty Name="SEEvalSessions" Relationship="StateEvalModel.FK_SEEvalSession_SETrainingProtocol" FromRole="SETrainingProtocol" ToRole="SEEvalSession" />
+          <NavigationProperty Name="SETrainingProtocolCriterias" Relationship="StateEvalModel.SETrainingProtocolTrainingProtocolCriteria" FromRole="SETrainingProtocol" ToRole="SETrainingProtocolCriteria" />
+          <NavigationProperty Name="SETrainingProtocolHighLeveragePractices" Relationship="StateEvalModel.SETrainingProtocolTrainingProtocolHighLeveragePractice" FromRole="SETrainingProtocol" ToRole="SETrainingProtocolHighLeveragePractice" />
         </EntityType>
         <EntityType Name="SETrainingProtocolLabel">
           <Key>
@@ -5720,18 +5772,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEReportPrintOptionUser_SEUser" FromRole="SEReportPrintOptionUser" ToRole="SEUser" />
         </EntityType>
-        <EntityType Name="SETrainingProtocolFrameworkNodeAlignment">
-          <Key>
-            <PropertyRef Name="TrainingProtocolID" />
-            <PropertyRef Name="FrameworkNodeID" />
-            <PropertyRef Name="IsStateAlignment" />
-          </Key>
-          <Property Name="TrainingProtocolID" Type="Int64" Nullable="false" />
-          <Property Name="FrameworkNodeID" Type="Int64" Nullable="false" />
-          <Property Name="IsStateAlignment" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="SEFrameworkNode" Relationship="Self.FK_SETrainingProtocol_SEFrameworkNode" FromRole="SETrainingProtocolFrameworkNodeAlignment" ToRole="SEFrameworkNode" />
-          <NavigationProperty Name="SETrainingProtocol" Relationship="Self.FK_SETrainingProtocol_SETrainingProtocol" FromRole="SETrainingProtocolFrameworkNodeAlignment" ToRole="SETrainingProtocol" />
-        </EntityType>
         <Association Name="FK_MessageTypeRecipientConfig_MessageType">
           <End Role="MessageType" Type="Self.MessageType" Multiplicity="1" />
           <End Role="MessageTypeRecipientConfig" Type="Self.MessageTypeRecipientConfig" Multiplicity="*" />
@@ -5848,18 +5888,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
               <PropertyRef Name="FrameworkNodeID" />
             </Principal>
             <Dependent Role="SERubricRowFrameworkNode">
-              <PropertyRef Name="FrameworkNodeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SETrainingProtocol_SEFrameworkNode">
-          <End Role="SEFrameworkNode" Type="Self.SEFrameworkNode" Multiplicity="1" />
-          <End Role="SETrainingProtocolFrameworkNodeAlignment" Type="Self.SETrainingProtocolFrameworkNodeAlignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SEFrameworkNode">
-              <PropertyRef Name="FrameworkNodeID" />
-            </Principal>
-            <Dependent Role="SETrainingProtocolFrameworkNodeAlignment">
               <PropertyRef Name="FrameworkNodeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -5981,18 +6009,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </Principal>
             <Dependent Role="SEUserPrompt">
               <PropertyRef Name="SchoolYear" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SETrainingProtocol_SETrainingProtocol">
-          <End Role="SETrainingProtocol" Type="Self.SETrainingProtocol" Multiplicity="1" />
-          <End Role="SETrainingProtocolFrameworkNodeAlignment" Type="Self.SETrainingProtocolFrameworkNodeAlignment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SETrainingProtocol">
-              <PropertyRef Name="TrainingProtocolID" />
-            </Principal>
-            <Dependent Role="SETrainingProtocolFrameworkNodeAlignment">
-              <PropertyRef Name="TrainingProtocolID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -6131,7 +6147,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySet Name="ProtoFrameworksToLoads" EntityType="Self.ProtoFrameworksToLoad" />
           <EntitySet Name="SEDistrictPRViewings" EntityType="Self.SEDistrictPRViewing" />
           <EntitySet Name="SEReportPrintOptionUsers" EntityType="Self.SEReportPrintOptionUser" />
-          <EntitySet Name="SETrainingProtocolFrameworkNodeAlignments" EntityType="Self.SETrainingProtocolFrameworkNodeAlignment" />
           <AssociationSet Name="FK_MessageTypeRecipientConfig_MessageType" Association="Self.FK_MessageTypeRecipientConfig_MessageType">
             <End Role="MessageType" EntitySet="MessageTypes" />
             <End Role="MessageTypeRecipientConfig" EntitySet="MessageTypeRecipientConfigs" />
@@ -6172,10 +6187,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             <End Role="SEFrameworkNode" EntitySet="SEFrameworkNodes" />
             <End Role="SERubricRowFrameworkNode" EntitySet="SERubricRowFrameworkNodes" />
           </AssociationSet>
-          <AssociationSet Name="FK_SETrainingProtocol_SEFrameworkNode" Association="Self.FK_SETrainingProtocol_SEFrameworkNode">
-            <End Role="SEFrameworkNode" EntitySet="SEFrameworkNodes" />
-            <End Role="SETrainingProtocolFrameworkNodeAlignment" EntitySet="SETrainingProtocolFrameworkNodeAlignments" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClassroomID" Association="Self.FK_ClassroomID">
             <End Role="SELearningWalkClassRoom" EntitySet="SELearningWalkClassRooms" />
             <End Role="SELearningWalkSessionScore" EntitySet="SELearningWalkSessionScores" />
@@ -6215,10 +6226,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="FK_SEUserPrompt_SESchoolYear" Association="Self.FK_SEUserPrompt_SESchoolYear">
             <End Role="SESchoolYear" EntitySet="SESchoolYears" />
             <End Role="SEUserPrompt" EntitySet="SEUserPrompts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SETrainingProtocol_SETrainingProtocol" Association="Self.FK_SETrainingProtocol_SETrainingProtocol">
-            <End Role="SETrainingProtocol" EntitySet="SETrainingProtocols" />
-            <End Role="SETrainingProtocolFrameworkNodeAlignment" EntitySet="SETrainingProtocolFrameworkNodeAlignments" />
           </AssociationSet>
           <AssociationSet Name="FK_SETrainingProtocolPlaylist_SETrainingProtocol" Association="Self.FK_SETrainingProtocolPlaylist_SETrainingProtocol">
             <End Role="SETrainingProtocol" EntitySet="SETrainingProtocols" />
@@ -6984,6 +6991,16 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <AssociationSet Name="SEArtifactBundleSelfAssessment" Association="StateEvalModel.SEArtifactBundleSelfAssessment">
             <End Role="SEArtifactBundle" EntitySet="SEArtifactBundles" />
             <End Role="SESelfAssessment" EntitySet="SESelfAssessments" />
+          </AssociationSet>
+          <EntitySet Name="SETrainingProtocolCriterias" EntityType="StateEvalModel.SETrainingProtocolCriteria" />
+          <EntitySet Name="SETrainingProtocolHighLeveragePractices" EntityType="StateEvalModel.SETrainingProtocolHighLeveragePractice" />
+          <AssociationSet Name="SETrainingProtocolTrainingProtocolCriteria" Association="StateEvalModel.SETrainingProtocolTrainingProtocolCriteria">
+            <End Role="SETrainingProtocol" EntitySet="SETrainingProtocols" />
+            <End Role="SETrainingProtocolCriteria" EntitySet="SETrainingProtocolCriterias" />
+          </AssociationSet>
+          <AssociationSet Name="SETrainingProtocolTrainingProtocolHighLeveragePractice" Association="StateEvalModel.SETrainingProtocolTrainingProtocolHighLeveragePractice">
+            <End Role="SETrainingProtocol" EntitySet="SETrainingProtocols" />
+            <End Role="SETrainingProtocolHighLeveragePractice" EntitySet="SETrainingProtocolHighLeveragePractices" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="SEStudentGrowthProcessSetting">
@@ -8389,6 +8406,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="aspnet_Roles" Relationship="StateEvalModel.FK_SEUserLocationRole_aspnet_Roles" FromRole="SEUserLocationRole" ToRole="aspnet_Roles" />
           <NavigationProperty Name="SEUser" Relationship="StateEvalModel.FK_SEUserLocationRole_SEUser" FromRole="SEUserLocationRole" ToRole="SEUser" />
+          <Property Name="DistrictName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_SEUserLocationRole_aspnet_Roles">
           <End Type="StateEvalModel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="1" />
@@ -9920,8 +9939,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <Property Name="RoleId" Type="Guid" Nullable="false" />
           <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="SEUserID" Type="Int64" Nullable="false" />
-          <Property Name="DistrictName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DistrictName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SESelfAssessment">
           <Key>
@@ -9988,6 +10007,33 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
         <Association Name="SEArtifactBundleSelfAssessment">
           <End Type="StateEvalModel.SEArtifactBundle" Role="SEArtifactBundle" Multiplicity="*" />
           <End Type="StateEvalModel.SESelfAssessment" Role="SESelfAssessment" Multiplicity="*" />
+        </Association>
+        <EntityType Name="SETrainingProtocolCriteria">
+          <Key>
+            <PropertyRef Name="TrainingProtocolCriteriaID" />
+          </Key>
+          <Property Name="TrainingProtocolCriteriaID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SETrainingProtocols" Relationship="StateEvalModel.SETrainingProtocolTrainingProtocolCriteria" FromRole="SETrainingProtocolCriteria" ToRole="SETrainingProtocol" />
+        </EntityType>
+        <EntityType Name="SETrainingProtocolHighLeveragePractice">
+          <Key>
+            <PropertyRef Name="TrainingProtocolHighLeveragePracticeID" />
+          </Key>
+          <Property Name="TrainingProtocolHighLeveragePracticeID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SETrainingProtocols" Relationship="StateEvalModel.SETrainingProtocolTrainingProtocolHighLeveragePractice" FromRole="SETrainingProtocolHighLeveragePractice" ToRole="SETrainingProtocol" />
+        </EntityType>
+        <Association Name="SETrainingProtocolTrainingProtocolCriteria">
+          <End Type="StateEvalModel.SETrainingProtocol" Role="SETrainingProtocol" Multiplicity="*" />
+          <End Type="StateEvalModel.SETrainingProtocolCriteria" Role="SETrainingProtocolCriteria" Multiplicity="*" />
+        </Association>
+        <Association Name="SETrainingProtocolTrainingProtocolHighLeveragePractice">
+          <End Type="StateEvalModel.SETrainingProtocol" Role="SETrainingProtocol" Multiplicity="*" />
+          <End Type="StateEvalModel.SETrainingProtocolHighLeveragePractice" Role="SETrainingProtocolHighLeveragePractice" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -10560,15 +10606,6 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
               <MappingFragment StoreEntitySet="SEReportPrintOptionUser">
                 <ScalarProperty Name="ReportPrintOptionID" ColumnName="ReportPrintOptionID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SETrainingProtocolFrameworkNodeAlignments">
-            <EntityTypeMapping TypeName="StateEvalModel.SETrainingProtocolFrameworkNodeAlignment">
-              <MappingFragment StoreEntitySet="SETrainingProtocolFrameworkNodeAlignment">
-                <ScalarProperty Name="TrainingProtocolID" ColumnName="TrainingProtocolID" />
-                <ScalarProperty Name="FrameworkNodeID" ColumnName="FrameworkNodeID" />
-                <ScalarProperty Name="IsStateAlignment" ColumnName="IsStateAlignment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11210,6 +11247,8 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
           <EntitySetMapping Name="SEUserLocationRoles">
             <EntityTypeMapping TypeName="StateEvalModel.SEUserLocationRole">
               <MappingFragment StoreEntitySet="SEUserLocationRole">
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="LastActiveRole" ColumnName="LastActiveRole" />
                 <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
@@ -11520,6 +11559,41 @@ warning 6002: The table/view 'stateeval.dbo.vUserOrientation' does not have a pr
             </EndProperty>
             <EndProperty Name="SEArtifactBundle">
               <ScalarProperty Name="ArtifactBundleID" ColumnName="ArtifactBundleID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="SETrainingProtocolCriterias">
+            <EntityTypeMapping TypeName="StateEvalModel.SETrainingProtocolCriteria">
+              <MappingFragment StoreEntitySet="SETrainingProtocolCriteria">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="TrainingProtocolCriteriaID" ColumnName="TrainingProtocolCriteriaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SETrainingProtocolHighLeveragePractices">
+            <EntityTypeMapping TypeName="StateEvalModel.SETrainingProtocolHighLeveragePractice">
+              <MappingFragment StoreEntitySet="SETrainingProtocolHighLeveragePractice">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="TrainingProtocolHighLeveragePracticeID" ColumnName="TrainingProtocolHighLeveragePracticeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SETrainingProtocolTrainingProtocolCriteria" TypeName="StateEvalModel.SETrainingProtocolTrainingProtocolCriteria" StoreEntitySet="SETrainingProtocolTrainingProtocolCriteria">
+            <EndProperty Name="SETrainingProtocolCriteria">
+              <ScalarProperty Name="TrainingProtocolCriteriaID" ColumnName="TrainingProtocolCriteriaID" />
+            </EndProperty>
+            <EndProperty Name="SETrainingProtocol">
+              <ScalarProperty Name="TrainingProtocolID" ColumnName="TrainingProtocolID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SETrainingProtocolTrainingProtocolHighLeveragePractice" TypeName="StateEvalModel.SETrainingProtocolTrainingProtocolHighLeveragePractice" StoreEntitySet="SETrainingProtocolTrainingProtocolHighLeveragePractice">
+            <EndProperty Name="SETrainingProtocolHighLeveragePractice">
+              <ScalarProperty Name="TrainingProtocolHighLeveragePracticeID" ColumnName="TrainingProtocolHighLeveragePracticeID" />
+            </EndProperty>
+            <EndProperty Name="SETrainingProtocol">
+              <ScalarProperty Name="TrainingProtocolID" ColumnName="TrainingProtocolID" />
             </EndProperty>
           </AssociationSetMapping>
           </EntityContainerMapping>

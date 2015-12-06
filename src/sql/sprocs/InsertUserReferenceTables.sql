@@ -216,6 +216,8 @@ GO
 						  SEUserid ,
                           SchoolCode ,
                           DistrictCode ,
+						  DistrictName ,
+						  SchoolName ,
                           RoleName ,
                           RoleId ,
                           CreateDate 
@@ -224,6 +226,8 @@ GO
 								@seuserId ,
                                 schoolcode ,
                                 districtCode ,
+								districtName ,
+								schoolName,
                                 roleName ,
                                 roleId ,
                                 GETDATE()

@@ -13,6 +13,8 @@
     function impersonateSettingsModalController($modalInstance, enums, userService, locationService,
         activeUserContextService) {
         var vm = this;
+        vm.impersonationOptions = activeUserContextService.context.impersonatees;
+
 
         vm.showPR = false;
         vm.showDTE = false;

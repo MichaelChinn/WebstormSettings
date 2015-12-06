@@ -79,7 +79,6 @@ namespace StateEvalData
         public virtual DbSet<ProtoFrameworksToLoad> ProtoFrameworksToLoads { get; set; }
         public virtual DbSet<SEDistrictPRViewing> SEDistrictPRViewings { get; set; }
         public virtual DbSet<SEReportPrintOptionUser> SEReportPrintOptionUsers { get; set; }
-        public virtual DbSet<SETrainingProtocolFrameworkNodeAlignment> SETrainingProtocolFrameworkNodeAlignments { get; set; }
         public virtual DbSet<SEStudentGrowthProcessSetting> SEStudentGrowthProcessSettings { get; set; }
         public virtual DbSet<SEStudentGrowthProcessSettingsFormPrompt> SEStudentGrowthProcessSettingsFormPrompts { get; set; }
         public virtual DbSet<SEArtifactBundleWfHistory> SEArtifactBundleWfHistories { get; set; }
@@ -137,5 +136,7 @@ namespace StateEvalData
         public virtual DbSet<SEUser> SEUsers { get; set; }
         public virtual DbSet<vUserOrientation> vUserOrientations { get; set; }
         public virtual DbSet<SESelfAssessment> SESelfAssessments { get; set; }
+        public virtual DbSet<SETrainingProtocolCriteria> SETrainingProtocolCriterias { get; set; }
+        public virtual DbSet<SETrainingProtocolHighLeveragePractice> SETrainingProtocolHighLeveragePractices { get; set; }
     }
 }
