@@ -23,6 +23,7 @@ namespace StateEval.Core.Models
         public List<RubricRowModel> AlignedRubricRows { get; set; }
         public List<EvalSessionModel> LinkedObservations { get; set; }
         public List<StudentGrowthGoalBundleModel> LinkedStudentGrowthGoalBundles { get; set; }
+        public List<SelfAssessmentModel> LinkedSelfAssessments { get; set; }
     }
 }
 

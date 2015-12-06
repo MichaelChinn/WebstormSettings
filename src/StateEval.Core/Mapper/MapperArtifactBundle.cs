@@ -80,6 +80,21 @@ namespace StateEval.Core.Mapper
                 });
             }
 
+            //Adding and removing linked self-assessments
+            if (source.LinkedSelfAssessments != null)
+            {
+                List<SESelfAssessment> toRemoveAssessments = target.SESelfAssessments.Where(x => !source.LinkedSelfAssessments.Select(y => y.Id).Contains(x.SelfAssessmentID)).ToList();
+                List<SelfAssessmentModel> toAddAssessments = source.LinkedSelfAssessments.Where(n => !target.SESelfAssessments.Select(db => db.SelfAssessmentID).Contains(n.Id)).ToList();
+
+                toRemoveAssessments.ForEach(x => target.SESelfAssessments.Remove(x));
+                toAddAssessments.ForEach(x =>
+                {
+                    SESelfAssessment assessment = evalEntities.SESelfAssessments.FirstOrDefault(y => y.SelfAssessmentID == x.Id);
+                    target.SESelfAssessments.Add(assessment);
+                });
+            }
+
+
             //Adding and removing linked sg goal bundles
             if (source.LinkedStudentGrowthGoalBundles != null)
             {
@@ -138,6 +153,16 @@ namespace StateEval.Core.Mapper
             else
             {
                 target.LinkedObservations = new List<EvalSessionModel>();
+            }
+
+
+            if (source != null && source.SESelfAssessments.Any())
+            {
+                target.LinkedSelfAssessments = source.SESelfAssessments.Select(x => x.MaptoSelfAssessmentModel()).ToList();
+            }
+            else
+            {
+                target.LinkedSelfAssessments = new List<SelfAssessmentModel>();
             }
 
             if (source != null && source.SEStudentGrowthGoalBundles.Any())
