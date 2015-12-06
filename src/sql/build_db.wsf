@@ -403,18 +403,21 @@
 		  // TODO: need to fix to get it to rundo_script("sprocs\\SetupAnnualRollover.sql");
 
 		  if (g_rebuild) {
-		  do_script("init\\InitUsers.sql");
-		  do_script("init\\InitFrameworks2Load.sql");
+		      do_script("init\\InitUsers.sql");
+		      do_script("init\\InitFrameworks2Load.sql");
 		  }
 
 		  if (g_rebuild) {
-		  do_script("init\\LoadTestData.sql");
-		  do_script("init\\LoadCustomTestData.sql");
-		  do_script("init\\InitEDSExportTables.sql");
+		      do_script("init\\LoadTestData.sql");
+		      do_script("init\\LoadCustomTestData.sql");
+		      do_script("init\\InitEDSExportTables.sql");
+		  //    do_script("init\\InitTrainingProtocols.sql");
 		  }
 
+        
 		  do_script("updates\\37533827_trainingProtocolsData.sql");
 		  do_script("updates\\60345690_trainingProtocolsOverviews.sql");
+		  do_script("updates\\66740308_Resources_VideoInstanceChanges.sql");
 		  do_script("updates\\68945748_trainingProtocolsData.sql");
 		  do_script("updates\\90551102_trainingProtocolsData.sql");
 		

@@ -64,6 +64,11 @@
     <Compile Include="Constants\RoleName.cs" />
     <Compile Include="Event\BaseEvent.cs" />
     <Compile Include="Event\ObservationCreatedEvent.cs" />
+    <Compile Include="Mapper\MapperTrainingProtocolHighLeveragePractice.cs" />
+    <Compile Include="Mapper\MapperTrainingProtocolCriteria.cs" />
+    <Compile Include="Mapper\MapperTrainingProtocolLabelGroup.cs" />
+    <Compile Include="Mapper\MapperTrainingProtocolLabel.cs" />
+    <Compile Include="Mapper\MapperTrainingProtocol.cs" />
     <Compile Include="Mapper\MapperSelfAssessment.cs" />
     <Compile Include="Mapper\MapperAvailableEvidence.cs" />
     <Compile Include="Mapper\MapperAlignedEvidence.cs" />
@@ -154,6 +159,11 @@
     </Compile>
     <Compile Include="Models\RubricRowScoreModel.cs" />
     <Compile Include="Models\AuthDataModel.cs" />
+    <Compile Include="Models\TrainingProtocolCriteriaModel.cs" />
+    <Compile Include="Models\TrainingProtocolHighLeveragePracticeModel.cs" />
+    <Compile Include="Models\TrainingProtocolLabelGroupModel.cs" />
+    <Compile Include="Models\TrainingProtocolLabelModel.cs" />
+    <Compile Include="Models\TrainingProtocolModel.cs" />
     <Compile Include="Models\UserActivityModel.cs" />
     <Compile Include="Models\UserLocationRoleModel.cs" />
     <Compile Include="Models\UserOrientationModel.cs" />
@@ -173,6 +183,7 @@
     <Compile Include="RequestModel\EvidenceCollectionRequestModel.cs" />
     <Compile Include="RequestModel\RubricRowEvaluationsRequestModel.cs" />
     <Compile Include="RequestModel\UserPromptRequestModel.cs" />
+    <Compile Include="Services\TrainingProtocolService.cs" />
     <Compile Include="Services\SelfAssessmentService.cs" />
     <Compile Include="Services\ArtifactBundleService.cs" />
     <Compile Include="Services\BaseService.cs" />

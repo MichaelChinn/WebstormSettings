@@ -27,3 +27,9 @@ EXEC dbo.InsertSEUser
 	@pUserName=@UserName, @pFirstname='David', @pLastName='Chinn', @pEMail='dchinn@nwlink.com'
 EXEC dbo.aspnet_UsersInRoles_AddUsersToRoles @AppName, @UserName, 'SESuperAdmin', @utcDate
 
+SELECT @UserName = 'happlewhite'
+EXEC dbo.InsertSEUser
+	@pUserName=@UserName, @pFirstname='Hannah', @pLastName='Applewhite', @pEMail='happlewhite@esd113.org'
+EXEC dbo.aspnet_UsersInRoles_AddUsersToRoles @AppName, @UserName, 'SESuperAdmin', @utcDate
+
+
