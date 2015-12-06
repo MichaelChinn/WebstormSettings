@@ -183,7 +183,6 @@
 		<property name="root.deployment.dir.for.config"				value="${root.deployment.dir}" />
 
 		<property name="database.SEDbConnection"					value="data source=${database.server};database=${database.name};uid=${database.user.name.for.application};pwd=${database.user.password.for.application};Pooling=true;Max Pool Size=2000" />
-		<property name="database.SERepoDbConnection"				value="data source=${database.server};database=${database.name}_Repo;uid=${database.user.name.for.application};pwd=${database.user.password.for.application};Pooling=true;Max Pool Size=2000" />
 		<property name="database.sessionState"						value="data source=${database.server};user id=${database.user.name.for.application};password=${database.user.password.for.application};" />
 		<property name="database.EvalEntities"						value="metadata=res://stateevallib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null/DataModels.DatabaseEntities.csdl|res://stateevallib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null/DataModels.DatabaseEntities.ssdl|res://stateevallib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null/DataModels.DatabaseEntities.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;data source=${database.server};initial catalog=${database.name};uid=${database.user.name.for.application};pwd=${database.user.password.for.application};multipleactiveresultsets=True;App=EntityFramework&amp;quot;" />
 		<property name="database.StateEvalEntities"					value="metadata=res://*/StateEvalDataContext.csdl|res://*/StateEvalDataContext.ssdl|res://*/StateEvalDataContext.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=${database.server};initial catalog=${database.name};user id=${database.user.name.for.application};password=${database.user.password.for.application};multipleactiveresultsets=True;application name=EntityFramework&quot;" />    
@@ -268,10 +267,6 @@
 			value="${database.SEDbConnection}" />
 		<xmlpoke
 			file="${config.file.full.path}"
-			xpath="/configuration/connectionStrings/add[@name = 'RepoDbConnection']/@connectionString"
-			value="${database.SERepoDbConnection}" />
-		<xmlpoke
-			file="${config.file.full.path}"
 			xpath="/configuration/connectionStrings/add[@name = 'StateEvalEntities']/@connectionString"
 			value="${database.StateEvalEntities}" />
 		<xmlpoke
@@ -288,10 +283,6 @@
 		<property name="customization.argument"	value="/customization:${database.customization}" if="${database.customization != ''}"/>
 
 		<echo message="Using database customization: ${database.customization}" 	if="${database.customization != ''}" />
-
-		
-		<echo message="Running update of the database: ${database.name}_repo" 	if="${do_update_database}" />
-		<echo message="Running rebuild of the database: ${database.name}_repo" 	if="${do_rebuild_database}" />
 		
 		<mkdir dir="${root.source.dir}\sql\${database.customization}\Init" />
 		
@@ -328,14 +319,6 @@
 			<call target="rebuild_database" />
 			<property name="do_rebuild_database"	value="false" />
 		</if>
-		<call target="rebuild_database" />
-		
-		<property name="rebuild.argument"			value="/really_rebuild" />
-		<property name="database.name.full"			value="${database.name}_Repo"/>
-		<property name="sql.dir"					value="${root.source.dir}\Repository\sql"/>
-		
-		<call target="backup_database" />
-		<call target="update_database" />
 		<call target="rebuild_database" />
 
 		<property name="rebuild.argument"			value="/rebuild" />
@@ -442,14 +425,6 @@
 		
 		<copy todir="${install.dir}\src\sql" >
 			<fileset basedir="${root.source.dir}\sql">
-				<include name="**\*.sql" />
-				<include name="**\*.bat" />
-				<include name="**\*.wsf" />
-			</fileset>
-		</copy>
-
-		<copy todir="${install.dir}\src\Repository\sql" >
-			<fileset basedir="${root.source.dir}\Repository\sql">
 				<include name="**\*.sql" />
 				<include name="**\*.bat" />
 				<include name="**\*.wsf" />
@@ -600,11 +575,6 @@
 			file="${config.file.full.path}"
 			xpath="/configuration/connectionStrings/add[@name = 'StateEval.tests.Properties.Settings.stateevalConnectionString']/@connectionString"
 			value="${database.SEDbConnection}" />
-
-		<xmlpoke
-			file="${config.file.full.path}"
-			xpath="/configuration/connectionStrings/add[@name = 'StateEval.tests.Properties.Settings.StateEval_RepoConnectionString']/@connectionString"
-			value="${database.SERepoDbConnection}" />
 			
 		<xmlpoke
 			file="${config.file.full.path}"
@@ -615,12 +585,6 @@
 			file="${config.file.full.path}"
 			xpath="/configuration/connectionStrings/add[@name = 'SEDbConnection']/@connectionString"
 			value="${database.SEDbConnection}" />
-
-		<xmlpoke
-			file="${config.file.full.path}"
-			xpath="/configuration/connectionStrings/add[@name = 'SERepoDbConnection']/@connectionString"
-			value="${database.SERepoDbConnection}" />
-
 		
 		<exec program="OpenCover.Console.exe" basedir="${open.cover.tool.dir}" workingdir="${root.dir}" resultproperty="nunit.result" failonerror="false">
 			<arg value="-target:${nunit.tool.dir}\nunit-console.exe" />
