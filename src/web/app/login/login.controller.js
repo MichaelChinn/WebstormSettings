@@ -213,17 +213,16 @@
 
         function login() {
             authenticationService.login(vm.username, vm.password)
-                .then(function (user) {
+                .then(function(user) {
                     if (user.userOrientations.length === 0) {
                         $state.go('no-frameworks', {}, {});
-                    }
-                    else {
+                    } else {
                         console.log(vm.username + ' logging in: ', user);
                         authenticationService.setCredentials(vm.username, vm.password);
                         startupService.setUser(user);
                         startupService.setupContext();
                     }
-                })
+                });
         }
 
     }

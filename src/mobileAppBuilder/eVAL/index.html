@@ -1,214 +1,90 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
-    <title></title>
-    <meta charset="utf-8" />
-    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-    <link href="styles/main.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <title>Todo</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">    
+    <link href="app/lib/ionic/css/ionic.css" rel="stylesheet" />    
+    <link href="app/lib/angular-toastr/dist/angular-toastr.css" rel="stylesheet" />
+    <script src="app/lib/ionic/js/ionic.bundle.js"></script>
+    <script src="app/lib/angular-local-storage/dist/angular-local-storage.js"></script>    
+    
+    <script src="app/lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <!--<script src="app/lib/angular-toastr/dist/angular-toastr.min.js"></script>-->
+
+    <script src="app/lib/angular-cookies/angular-cookies.min.js"></script>
+    <script src="app/lib/lodash/lodash.min.js"></script>
+    <script src="app/lib/angular-lodash-module/angular-lodash-module.js"></script>
+
+    <script src="app/blocks/logger/logger.module.js"></script>
+    <script src="app/blocks/logger/logger.js"></script>
+    
+    <script src="app/blocks/exception/exception.module.js"></script>
+    <script src="app/blocks/exception/exception-handler.provider.js"></script>
+    <script src="app/blocks/exception/exception.js"></script>
+
+    <script src="app/core/core.module.js"></script>
+    <script src="app/core/config.js"></script>
+    <!--<script src="app/core/config.route.js"></script>-->
+    <script src="app/core/services/active-user-context.service.js"></script>
+    <script src="app/core/services/apiInterceptor.service.js"></script>
+    <script src="app/core/services/authentication.service.js"></script>
+    <script src="app/core/services/evalSession.service.js"></script>
+    <script src="app/core/services/evaluation.service.js"></script>
+    <script src="app/core/services/evidenceCollection.service.js"></script>
+    <script src="app/core/services/framework.service.js"></script>
+    <script src="app/core/services/httpErrorResponseInterceptor.service.js"></script>
+    <script src="app/core/services/location.service.js"></script>
+    <script src="app/core/services/notification.service.js"></script>
+    <script src="app/core/services/rubricRowEvaluation.service.js"></script>
+    <script src="app/core/services/rubric-utils.service.js"></script>
+    <!--<script src="app/Core/services/rubric-utils.service.spec.js"></script>-->
+    <script src="app/core/services/startup.service.js"></script>
+    <script src="app/core/services/user.service.js"></script>
+    <!--<script src="app/Core/services/user.service.spec.js"></script>-->
+    <script src="app/core/services/userActivity.service.js"></script>
+    <script src="app/core/services/utils.service.js"></script>
+    <script src="app/core/services/work-area.service.js"></script>
+
+    <script src="app/login/login.module.js"></script>
+    <script src="app/login/login.controller.js"></script>
+    
+
+    <script src="app/artifact/artifacts.module.js"></script>
+    <script src="app/artifact/artifact.service.js"></script>
+
+
+    <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
+    <!--<script src="app/blocks/logger/logger.module.js"></script>
+    <script src="app/blocks/logger/logger.js"></script>
+
+    <script src="app/blocks/router/router.module.js"></script>
+    <script src="app/blocks/router/router-helper.provider.js"></script>
+
+    <script src="app/blocks/exception/exception.js"></script>
+    <script src="app/blocks/exception/exception.module.js"></script>
+    <script src="app/blocks/exception/exception-handler.provider.js"></script>-->
+    
+    
 
     <script src="cordova.js"></script>
-    <!--<script src="kendo/js/jquery.min.js"></script>-->
-    <script src="scripts/lib/jquery.min.js"></script>
-    <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/layout/container-controller.js"></script>
+    
+    <script src="app/home/home.module.js"></script>
+    <script src="app/home/home-controller.js"></script>
 
-    <script src="scripts/require.js" data-main="scripts/main.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="app/login/login.module.js"></script>
+    <script src="app/login/login.controller.js"></script>
 
-    <!--By Anshul-->
-    <script>
-        $(function () {
-            $('#side-bar-event').click(function (event) {
-                event.preventDefault();
-                if ($('#side-bar-event-target').css('display') == 'none') {
-                    $('#side-bar-event-target').css('display', 'block');
-                }
-                else {
-                    $('#side-bar-event-target').css('display', 'none');
-                }
-            });
-        });
+    <script src="app/observation/observation.module.js"></script>
+    <script src="app/observation/observation.route.js"></script>
+    <script src="app/observation/services/observation-service.js"></script>
+    <script src="app/observation/controllers/observation-controller.js"></script>
+    <script src="app/observation/controllers/observation-list-controller.js"></script>
 
-        $(function () {
-            $('#liChanger').click(function () {
-
-                var imgIcon = $('#changer').attr('src');
-                if (imgIcon == "images/sidebararrow.png") {
-
-                    $('#changer').attr('src', 'images/sidebararrowdown.png');
-                    $('#changer').attr('width', '28px');
-
-                } else {
-
-                    $('#changer').attr('src', 'images/sidebararrow.png');
-                    $('#changer').attr('width', '16px');
-                }
-            });
-        });
-
-    </script>
-    <!---->
 </head>
-<body>
-
-    <div data-role="layout" data-id="login" data-init="App.layouts.login.onInit">
-        <div data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
-        </div>
-        <!-- application views will be rendered here -->
-    </div>
-
-    <div data-role="layout" data-id="main" data-init="App.layouts.main.onInit">
-        <div data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-                <a data-role="button"  href="#appDrawer" class="trsnpt" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
-                <a data-role="backbutton" data-align="left" class="backbtn">Back</a>
-            </div>
-            <div class="evalHeader" style="text-align:center"></div>
-        </div>
-        <!-- application views will be rendered here -->
-        <footer data-role="footer">
-            <div data-role="tabstrip">
-
-            </div>
-        </footer>
-    </div>
-
-    <!-- application drawer and contents -->
-
-    <div data-role="drawer" id="appDrawer" style="width: 270px" data-title="Navigation" data-init="App.drawers.appDrawer.onInit" data-show="App.drawers.appDrawer.onShow" data-before-show="App.drawers.appDrawer.onBeforeShow">
-        <div data-role="header">
-            <div data-role="navbar" class="sidebartop">
-                <img width="200px" height="54px" src="images/home_logo.png" />
-            </div>
-        </div>
-        <ul data-role="listview" id="slidenavarrow" data-style="inset" data-type="group">
-
-            <li class="practice listtitle">
-                <table>
-                    <tr>
-                        <td> <img width="24" src="images/options.png" /> </td>
-                        <td> <b> Options </b> </td>
-                    </tr>
-                </table>
-
-                <ul>
-                    <li data-icon="">
-                        <a href="views/home.html">Home <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" /> </span> </a>
-                    </li>
-
-                    <li data-icon="">
-                        <a href="views/settings/settings.html" data-icon="">Settings <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" /> </span> </a>
-                    </li>
-
-                    <li onclick="logout();" data-icon="">
-                        <a>Logout <span class="sidebararrow"> <img width="20" src="images/logout.png" /> </span> </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="myEval listtitle">
-                <table>
-                    <tr>
-                        <td>  <img width="24" src="images/My_Evaluation.png" /> </td>
-                        <td> <b>   My Evaluation </b> </td>
-                    </tr>
-                </table>
-
-                <ul>
-                    <li data-icon="" id="liChanger">
-                        <a id="side-bar-event">Evidence <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" id="changer" />  </span>  </a>
-                    </li>
-                    <li id="side-bar-event-target" style="display: none;" data-icon="">
-                        <a href="views/evidence/artifacts.html"> Artifacts <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" /> </span> </a>
-                    </li>
-                </ul>
-            </li>
-
-
-            <li class="evalTeachers listtitle">
-                <table>
-                    <tr>
-                        <td> <img width="24" src="images/teacher.png" /> </td>
-                        <td> <b> Evaluate Teachers </b> </td>
-                    </tr>
-                </table>
-
-                <ul>
-                    <li data-icon="">
-                        <a href="views/observe/evaluatees.html?section=evalTeachers">Observe <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" /> </span> </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="evalPrincipals listtitle">
-                <table>
-                    <tr>
-                        <td> <img width="24" src="images/options.png" /> </td>
-                        <td> <b> Evaluate Principals </b> </td>
-                    </tr>
-                </table>
-
-                <ul>
-                    <li data-icon="">
-                        <a href="views/observe/evaluatees.html?section=evalTeachers">Observe <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" /> </span> </a>
-
-
-
-                    </li>
-                </ul>
-            </li>
-            <li class="practice listtitle">
-                <table>
-                    <tr>
-                        <td> <img width="24" src="images/Practice.png" /> </td>
-                        <td> <b> Practice </b> </td>
-                    </tr>
-                </table>
-
-                <ul>
-                    <li data-icon="">
-                        <a href="views/practice/learningWalks.html?section=practice">Learning Walks <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" /> </span> </a>
-                    </li>
-                </ul>
-            </li>
-
-
-
-            <li class="admin listtitle">
-                <table>
-                    <tr>
-                        <td> <img width="24" src="images/options.png" />  </td>
-                        <td> <b>    Admin  </b> </td>
-                    </tr>
-                </table>
-
-                <ul>
-                    <li data-icon="">
-                        <a href="views/sa_setup.html">Setup <span class="sidebararrow"> <img width="16" src="images/sidebararrow.png" /> </span>  </a>
-
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
-    </div>
-
-    <script>
-
-        function logout() {
-            var save = App.getSaveBarcodeLS();
-            console.log("logout: " + save);
-            if (save == "false") {
-                console.log("logout: flushLogin");
-                localStorage.setItem("UUID", "");
-                localStorage.setItem("SEUserID", "");
-            }
-            App.kendo.navigate(App.initialPage);
-        }
-    </script>
-
+<body ng-app="stateeval.mobile" ng-controller="containerController as container">
+    <ion-nav-view>
+    </ion-nav-view>
 </body>
 </html>

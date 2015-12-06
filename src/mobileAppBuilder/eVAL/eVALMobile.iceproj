@@ -24,6 +24,96 @@
     <Content Include=".abproject" />
     <Content Include=".debug.abproject" />
     <Content Include=".release.abproject" />
+    <Content Include="app\app.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\artifact\artifact.route.js" />
+    <Content Include="app\artifact\artifact.service.js" />
+    <Content Include="app\artifact\artifacts.module.js" />
+    <Content Include="app\blocks\exception\exception-handler.provider.js" />
+    <Content Include="app\blocks\exception\exception-handler.provider.spec.js" />
+    <Content Include="app\blocks\exception\exception.js" />
+    <Content Include="app\blocks\exception\exception.module.js" />
+    <Content Include="app\blocks\logger\logger.js" />
+    <Content Include="app\blocks\logger\logger.module.js" />
+    <Content Include="app\blocks\router\router-helper.provider.js" />
+    <Content Include="app\blocks\router\router.module.js" />
+    <Content Include="app\core\config.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\core\config.route.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\core\core.module.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\core\services\active-user-context.service.js" />
+    <Content Include="app\core\services\apiInterceptor.service.js" />
+    <Content Include="app\core\services\authentication.service.js" />
+    <Content Include="app\core\services\evalSession.service.js" />
+    <Content Include="app\core\services\evaluation.service.js" />
+    <Content Include="app\core\services\evidenceCollection.service.js" />
+    <Content Include="app\core\services\framework.service.js" />
+    <Content Include="app\core\services\httpErrorResponseInterceptor.service.js" />
+    <Content Include="app\core\services\location.service.js" />
+    <Content Include="app\core\services\notification.service.js" />
+    <Content Include="app\core\services\rubric-utils.service.js" />
+    <Content Include="app\core\services\rubric-utils.service.spec.js" />
+    <Content Include="app\core\services\rubricRowEvaluation.service.js" />
+    <Content Include="app\core\services\startup.service.js" />
+    <Content Include="app\core\services\user.service.js" />
+    <Content Include="app\core\services\user.service.spec.js" />
+    <Content Include="app\core\services\userActivity.service.js" />
+    <Content Include="app\core\services\utils.service.js" />
+    <Content Include="app\core\services\work-area.service.js" />
+    <Content Include="app\home.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\home\home.module.js" />
+    <Content Include="app\home\home-controller.js" />
+    <Content Include="app\home\home.html">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\layout\container-controller.js" />
+    <Content Include="app\layout\layout.html" />
+    <Content Include="app\lib\angular-cookies\angular-cookies.js" />
+    <Content Include="app\lib\angular-cookies\angular-cookies.min.js" />
+    <Content Include="app\lib\angular-local-storage\dist\angular-local-storage.js" />
+    <Content Include="app\lib\angular-local-storage\dist\angular-local-storage.min.js" />
+    <Content Include="app\lib\angular-lodash-module\angular-lodash-module.js" />
+    <Content Include="app\lib\angular-toastr\dist\angular-toastr.css" />
+    <Content Include="app\lib\angular-toastr\dist\angular-toastr.js" />
+    <Content Include="app\lib\angular-toastr\dist\angular-toastr.min.css" />
+    <Content Include="app\lib\angular-toastr\dist\angular-toastr.min.js" />
+    <Content Include="app\lib\angular-toastr\dist\angular-toastr.tpls.js" />
+    <Content Include="app\lib\angular-toastr\dist\angular-toastr.tpls.min.js" />
+    <Content Include="app\lib\ionic\css\ionic.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\lib\ionic\css\ionic.min.css">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\lib\ionic\js\ionic.bundle.js">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="app\lib\lodash\.bower.json" />
+    <Content Include="app\lib\lodash\bower.json" />
+    <Content Include="app\lib\lodash\LICENSE" />
+    <Content Include="app\lib\lodash\lodash.js" />
+    <Content Include="app\lib\lodash\lodash.min.js" />
+    <Content Include="app\login\login.controller.js" />
+    <Content Include="app\login\login.html" />
+    <Content Include="app\login\login.module.js" />
+    <Content Include="app\observation\controllers\observation-list-controller.js" />
+    <Content Include="app\observation\observation.module.js" />
+    <Content Include="app\observation\observation.route.js" />
+    <Content Include="app\observation\views\observation-list.html" />
+    <Content Include="app\observation\views\select-evaluatee.html" />
+    <Content Include="app\observation\services\observation-service.js" />
+    <Content Include="app\observation\controllers\observation-controller.js" />
+    <Content Include="app\observation\views\observation.html">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="App_Resources\WP8\SplashScreenImage.png">
       <SubType>Content</SubType>
     </Content>
@@ -221,6 +311,32 @@
     <Content Include="views\settings\settings.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\blocks\" />
+    <Folder Include="app\blocks\exception\" />
+    <Folder Include="app\blocks\logger\" />
+    <Folder Include="app\blocks\router\" />
+    <Folder Include="app\core\services\" />
+    <Folder Include="app\home\" />
+    <Folder Include="app\lib\" />
+    <Folder Include="app\lib\angular-cookies\" />
+    <Folder Include="app\lib\angular-local-storage\" />
+    <Folder Include="app\lib\angular-local-storage\dist\" />
+    <Folder Include="app\lib\angular-lodash-module\" />
+    <Folder Include="app\lib\angular-toastr\" />
+    <Folder Include="app\lib\angular-toastr\dist\" />
+    <Folder Include="app\lib\ionic\" />
+    <Folder Include="app\lib\ionic\css\" />
+    <Folder Include="app\lib\ionic\js\" />
+    <Folder Include="app\layout\" />
+    <Folder Include="app\core\" />
+    <Folder Include="app\lib\lodash\" />
+    <Folder Include="app\login\" />
+    <Folder Include="app\artifact\" />
+    <Folder Include="app\observation\" />
+    <Folder Include="app\observation\controllers\" />
+    <Folder Include="app\observation\views\" />
+    <Folder Include="app\observation\services\" />
     <Folder Include="App_Resources\" />
     <Folder Include="App_Resources\Android\" />
     <Folder Include="App_Resources\Android\drawable-hdpi\" />
