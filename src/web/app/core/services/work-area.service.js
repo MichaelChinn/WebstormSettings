@@ -47,11 +47,11 @@
         var saDashboard = NavLink('Dashboard', 'sa-dashboard', 'fa fa-th-large');
         var daDashboard = NavLink('Dashboard', 'da-dashboard', 'fa fa-th-large');
         var dvDashboard = NavLink('Dashboard', 'dv-dashboard', 'fa fa-th-large');
-        var teeNav = [evaluateeDashboard, artifacts, otherEvidence, sgGrowthGoalsTee, observations, summativeEval, evaluateeReports];
-        var pr_trNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_TR];
-        var pr_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_PR_PR];
-        var de_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DE];
-        var dteNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, summativeEval, evaluateeReports, setup_DTE];
+        var teeNav = [evaluateeDashboard, artifacts, otherEvidence, sgGrowthGoalsTee, observations, selfAssessments, summativeEval, evaluateeReports];
+        var pr_trNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_PR_TR];
+        var pr_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_PR_PR];
+        var de_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_DE];
+        var dteNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_DTE];
 
         //AREAS
 
