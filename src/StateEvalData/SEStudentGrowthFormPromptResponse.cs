@@ -21,7 +21,7 @@ namespace StateEvalData
         public Nullable<long> StudentGrowthGoalID { get; set; }
     
         public virtual SEStudentGrowthGoal SEStudentGrowthGoal { get; set; }
-        public virtual SEUser SEUser { get; set; }
         public virtual SEStudentGrowthFormPrompt SEStudentGrowthFormPrompt { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace StateEval.Core.Test
             using (TransactionScope transaction = new TransactionScope())
             {
                 var goalBundleService = new StudentGrowthGoalBundleService();
-                StudentGrowthGoalBundleModel bundleModel = TestHelper.CreateStudentGrowthGoalBundle("B1");
+                StudentGrowthGoalBundleModel bundleModel = TestHelper.CreateStudentGrowthGoalBundle("B1", DefaultTeacher.EvaluationId);
                 bundleModel = goalBundleService.GetStudentGrowthGoalBundleById(bundleModel.Id);
                 Assert.IsNotNull(bundleModel);
 
@@ -46,7 +46,7 @@ namespace StateEval.Core.Test
 
                 var goalBundleService = new StudentGrowthGoalBundleService();
 
-                StudentGrowthGoalBundleModel bundleModel = TestHelper.CreateStudentGrowthGoalBundleModel();
+                StudentGrowthGoalBundleModel bundleModel = TestHelper.CreateStudentGrowthGoalBundleModel("B1", DefaultTeacher.EvaluationId);
 
                 // Makes sure all the basic properties have been set and have the same value when retrieved.
                 StudentGrowthGoalBundleModel bundle1 = TestHelper.CreateStudentGrowthGoalBundle(bundleModel);
@@ -56,7 +56,7 @@ namespace StateEval.Core.Test
                 // Update the basic properties and make sure they come back with the changed values after update.
                 bundle2.EvaluationId = 2;
                 bundle2.Title = "title2";
-                bundle2.WfState = (short)SEWfStateEnum.GOAL_BUNDLE_IN_STEP1;
+                bundle2.WfState = (short)SEWfStateEnum.GOAL_BUNDLE_IN_PROGRESS;
                 bundle2.Comments = "comments2";
                 bundle2.Course = "course";
                 bundle2.Grade = "grade";
@@ -71,11 +71,9 @@ namespace StateEval.Core.Test
         [TestMethod]
         public void StudentGrowthGoalBundle_AddedGoalShouldBePersisted()
         {
-            FrameworkModel framework = TestHelper.GetStateFramework(SEEvaluationTypeEnum.TEACHER);
-
             using (TransactionScope transaction = new TransactionScope())
             {
-                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1", framework);
+                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1");
 
                 var goalBundleService = new StudentGrowthGoalBundleService();
                 goalBundle = goalBundleService.GetStudentGrowthGoalBundleById(goalBundle.Id);
@@ -90,11 +88,9 @@ namespace StateEval.Core.Test
         [TestMethod]
         public void UpdateGoalProperty_GoalBundleUpdate()
         {
-            FrameworkModel framework = TestHelper.GetStateFramework(SEEvaluationTypeEnum.TEACHER);
-
             using (TransactionScope transaction = new TransactionScope())
             {
-                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1", framework);
+                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1");
 
                 var goalBundleService = new StudentGrowthGoalBundleService();
                 goalBundle = goalBundleService.GetStudentGrowthGoalBundleById(goalBundle.Id);
@@ -120,11 +116,9 @@ namespace StateEval.Core.Test
         [TestMethod]
         public void UpdateBundle_GoalPrompts()
         {
-            FrameworkModel framework = TestHelper.GetStateFramework(SEEvaluationTypeEnum.TEACHER);
-
             using (TransactionScope transaction = new TransactionScope())
             {
-                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1", framework);
+                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1");
 
                 var goalBundleService = new StudentGrowthGoalBundleService();
                 goalBundle = goalBundleService.GetStudentGrowthGoalBundleById(goalBundle.Id);
@@ -161,11 +155,9 @@ namespace StateEval.Core.Test
         [TestMethod]
         public void UpdateBundle_GoalPromptResponse()
         {
-            FrameworkModel framework = TestHelper.GetStateFramework(SEEvaluationTypeEnum.TEACHER);
-
             using (TransactionScope transaction = new TransactionScope())
             {
-                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1", framework);
+                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1");
 
                 var goalBundleService = new StudentGrowthGoalBundleService();
                 goalBundle = goalBundleService.GetStudentGrowthGoalBundleById(goalBundle.Id);
@@ -203,7 +195,7 @@ namespace StateEval.Core.Test
             using (TransactionScope transaction = new TransactionScope())
             {
                 var goalBundleService = new StudentGrowthGoalBundleService();
-                StudentGrowthGoalBundleModel bundleModel = TestHelper.CreateStudentGrowthGoalBundle("B1");
+                StudentGrowthGoalBundleModel bundleModel = TestHelper.CreateStudentGrowthGoalBundle("B1", DefaultTeacher.EvaluationId);
                 bundleModel = goalBundleService.GetStudentGrowthGoalBundleById(bundleModel.Id);
                 Assert.IsNotNull(bundleModel);
 
@@ -217,11 +209,9 @@ namespace StateEval.Core.Test
         [TestMethod]
         public void DeleteBundleWithGoalsAndPrompts()
         {
-            FrameworkModel framework = TestHelper.GetStateFramework(SEEvaluationTypeEnum.TEACHER);
-
             using (TransactionScope transaction = new TransactionScope())
             {
-                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1", framework);
+                StudentGrowthGoalBundleModel goalBundle = TestHelper.CreateStudentGrowthGoalBundleModelWithC3Goal("G1");
 
                 var goalBundleService = new StudentGrowthGoalBundleService();
                 goalBundle = goalBundleService.GetStudentGrowthGoalBundleById(goalBundle.Id);

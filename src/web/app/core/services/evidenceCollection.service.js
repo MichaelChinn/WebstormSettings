@@ -17,26 +17,34 @@
             this.creationDate = new Date();
             this.instantiator = activeUserContextService.user;
             this.observation = data.observation;
+            this.selfAssessment = data.selfAssessment;
+            this.studentGrowthGoalBundle = data.studentGrowthGoalBundle;
             this.associatedCollections = {};
 
-            if(request.collectionType === enums.EvidenceCollectionType.SUMMATIVE) {
-                for(var i in enums.EvColTypeAccessor) {
+            if (request.collectionType === enums.EvidenceCollectionType.SUMMATIVE) {
+                for (var i in enums.EvColTypeAccessor) {
                     // this.associatedCollections['observations'] = array of observations
                     // this.associatedCollections['studentGrowthGoalBundles'] = array of bundles
                     // this.associatedCollections[linkedItemType][linkedItemId]: object
                     this.associatedCollections[enums.EvidenceCollectionType[i]] = data[enums.EvColTypeAccessor[i]] || [];
-                    for(var j in this.associatedCollections) {
-                       this.associatedCollections[j] = _.groupBy(this.associatedCollections[j], 'id');
-                        for(var k in this.associatedCollections[j]) {
+                    for (var j in this.associatedCollections) {
+                        this.associatedCollections[j] = _.groupBy(this.associatedCollections[j], 'id');
+                        for (var k in this.associatedCollections[j]) {
                             this.associatedCollections[j][k] = this.associatedCollections[j][k][0];
                         }
                     }
                 }
             }
-
             var stateV = activeUserContextService.context.frameworkContext.stateFramework;
             var instrV = activeUserContextService.context.frameworkContext.instructionalFramework;
-            var build = buildFramework([stateV, instrV], data, this);
+            var arr = [];
+            if (stateV) {
+                arr.push(stateV);
+            }
+            if (instrV) {
+                arr.push(instrV);
+            }
+            var build = buildFramework(arr, data, this);
             this.score = null;
             this.frameworkNodeScores = _.groupBy(data.frameworkNodeScores, 'frameworkNodeId') || [];
             for (var i in this.frameworkNodeScores) {
@@ -334,13 +342,13 @@
                     var temp = value[0];
                     var r = rubricUtils.formatRubricRow(value[0], undefined, evaluations[temp.id]);
                     r.evaluations = evaluations[r.data.id] || [];
-                    if(evidenceCollection.request.collectionType === enums.EvidenceCollectionType.SUMMATIVE){
+                    if (evidenceCollection.request.collectionType === enums.EvidenceCollectionType.SUMMATIVE) {
                         r.scores = rubricRowScores[temp.id] || [];
                         r.score = rowSumScores[temp.id] && rowSumScores[temp.id][0]
-                            ||evidenceCollection.newRubricRowScore(temp.id, null);
+                            || evidenceCollection.newRubricRowScore(temp.id, null);
                     } else {
-                       r.score = rubricRowScores[temp.id] && rubricRowScores[temp.id][0]
-                            ||evidenceCollection.newRubricRowScore(temp.id, null);
+                        r.score = rubricRowScores[temp.id] && rubricRowScores[temp.id][0]
+                            || evidenceCollection.newRubricRowScore(temp.id, null);
                     }
                     r.parent = {};
                     var evs = _.groupBy(evidences[r.data.id], 'evidenceType');
@@ -375,13 +383,13 @@
                     tree[name][nodeShortName].data = views[i].frameworkNodes[j];
 
                     //fills scores with non summative scores during summative scoring
-                    if(evidenceCollection.request.collectionType === enums.EvidenceCollectionType.SUMMATIVE){
+                    if (evidenceCollection.request.collectionType === enums.EvidenceCollectionType.SUMMATIVE) {
                         tree[name][nodeShortName].scores = frameworkNodeScores[nodeId] || [];
                         tree[name][nodeShortName].score = nodeSumScores[nodeId] && nodeSumScores[nodeId][0]
-                            ||evidenceCollection.newFrameworkNodeScore(nodeId, null);
+                            || evidenceCollection.newFrameworkNodeScore(nodeId, null);
                     } else {
                         tree[name][nodeShortName].score = frameworkNodeScores[nodeId] && frameworkNodeScores[nodeId][0]
-                        ||evidenceCollection.newFrameworkNodeScore(nodeId, null);
+                            || evidenceCollection.newFrameworkNodeScore(nodeId, null);
                     }
                 }
                 tree[name].data = views[i];

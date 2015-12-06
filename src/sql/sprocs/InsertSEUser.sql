@@ -75,8 +75,8 @@ EXEC dbo.aspnet_Membership_CreateUser
 
 DECLARE @UserID BIGINT
 
-INSERT dbo.SEUser(aspnetUserID, FirstName, LastName, districtCode, schoolCode, emailAddress)
-VALUES (@NetUserID, @pFirstName, @pLastName, @pDistrictCode, @pSchoolCode, @pEMail)
+INSERT dbo.SEUser(aspnetUserID, FirstName, LastName, emailAddress)
+VALUES (@NetUserID, @pFirstName, @pLastName, @pEMail)
 SELECT @sql_error = @@ERROR, @UserID = SCOPE_IDENTITY()
 IF @sql_error <> 0
 BEGIN
@@ -85,46 +85,6 @@ BEGIN
 		+ ' >>>' + ISNULL(@sql_error_message, '')
 	GOTO ErrorHandler
 END
-
-INSERT dbo.SEUserDistrictSchool(SEUserID, districtCode, schoolCode, IsPrimary)
-VALUES (@UserID, @pDistrictCode, @pSchoolCode, 1)
-SELECT @sql_error = @@ERROR
-IF @sql_error <> 0
-BEGIN
-	SELECT @sql_error_message = 'Could not insert to SEUserDistrictSchool  failed. In: ' 
-		+ @ProcName
-		+ ' >>>' + ISNULL(@sql_error_message, '')
-	GOTO ErrorHandler
-END
-
-   UPDATE  SEUserDistrictSchool
-    SET     Schoolname = ds.districtschoolName
-    FROM    SEUserDistrictSchool uds
-			JOIN seDistrictSchool ds ON ds.schoolcode = uds.schoolcode
-    WHERE   SEUserID = @UserID AND uds.schoolcode <> ''
-
-    SELECT  @sql_error = @@ERROR;
-    IF @sql_error <> 0
-        BEGIN
-            SELECT  @sql_error_message = 'Problem with SeUserDistrictSchool hydrate school name. In: '
-                    + @ProcName + ' >>>' + ISNULL(@sql_error_message, '');
-            GOTO ErrorHandler;
-        END;
-
-    UPDATE  SEUserDistrictSchool
-    SET     DistrictName = x.districtschoolName
-    FROM    SEUserDistrictSchool uds
-            JOIN seDistrictschool x ON x.districtCode = uds.districtCode
-    WHERE   SEUserID = @UserID;
-
-    SELECT  @sql_error = @@ERROR;
-    IF @sql_error <> 0
-        BEGIN
-            SELECT  @sql_error_message = 'Problem with SeUserDistrictSchool hydrate districtme. In: '
-                    + @ProcName + ' >>>' + ISNULL(@sql_error_message, '');
-            GOTO ErrorHandler;
-        END;
-
 
 -------------------
 -- Handle errors --

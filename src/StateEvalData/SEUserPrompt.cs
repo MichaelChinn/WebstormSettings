@@ -43,13 +43,13 @@ namespace StateEvalData
     
         public virtual SEEvaluationType SEEvaluationType { get; set; }
         public virtual SESchoolYear SESchoolYear { get; set; }
-        public virtual SEUser SEUser { get; set; }
-        public virtual SEUser SEUser1 { get; set; }
         public virtual SEUserPromptType SEUserPromptType { get; set; }
         public virtual ICollection<SEUserPromptConferenceDefault> SEUserPromptConferenceDefaults { get; set; }
         public virtual ICollection<SEUserPromptResponse> SEUserPromptResponses { get; set; }
         public virtual SEWfState SEWfState { get; set; }
         public virtual ICollection<SERubricRow> SERubricRows { get; set; }
         public virtual SEEvalSession SEEvalSession { get; set; }
+        public virtual SEUser SEUser { get; set; }
+        public virtual SEUser SEUser1 { get; set; }
     }
 }

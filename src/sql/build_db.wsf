@@ -357,97 +357,110 @@
 
 		  if (g_rebuild)
 		  {
-		      do_script("init\\SchemaCreate.sql");
-		      do_script("init\\FlushASPNetTables.sql");
-		      do_script("init\\InitDistrictsAndSchools.sql");
-		      do_script("init\\InitBaseStuff.sql");
-		      do_script("init\\InitRoles.sql");
+		  do_script("init\\SchemaCreate.sql");
+		  do_script("init\\FlushASPNetTables.sql");
+		  do_script("init\\InitDistrictsAndSchools.sql");
+		  do_script("init\\InitBaseStuff.sql");
+		  do_script("init\\InitRoles.sql");
 		  }
 
 		  // Prior patches were done in both schemaCreate and patches
 		  // moving forward we are only doing updates for all changes and they
 		  // will always remain in this file and all patches contain a bug#
 		  // instead of a patch#. The UpdateLog table now has a bugnumber
-        // column
+		  // column
 
 		  do_script("views\\vSchoolName.sql");
 		  do_script("views\\vDistrictName.sql");
 		  do_script("views\\vUserOrientation.sql");
 		  do_script("views\\vPrototypeFrameworkContext.sql");
-  
+		  do_script("views\\vEDSUsers.sql");
+		  do_script("views\\vEDSRoles.sql");
+
 		  do_script("sprocs\\AssignEvaluatorToEvaluatee.sql");
+		  do_script("sprocs\\EDSExport_InsertEvaluation.sql");
+		  do_script("sprocs\\EDSExport_ProcessMergedUsers.sql");
+		  do_script("sprocs\\EDSExport_PruneStaging.sql");
+		  do_script("sprocs\\EDSExport_RemoveMissing.sql");
+		  do_script("sprocs\\EDSExport_ReplaceProperties.sql");
+		  do_script("sprocs\\EDSExport_SetupNew.sql");
+		  do_script("sprocs\\EDSExport_SetupStaging.sql");
+		  do_script("sprocs\\FetchMembershipPW.sql");
+		  do_script("sprocs\\FetchOTPW.sql");
 		  do_script("sprocs\\FindInsertUpdateSEUser.sql");
 		  do_script("sprocs\\InsertEvaluation.sql");
 		  do_script("sprocs\\InsertSEUser.sql");
 		  do_script("sprocs\\InsertUserReferenceTables.sql");
 		  do_script("sprocs\\LoadFrameworkContext.sql");
-		  do_script("sprocs\\FetchMembershipPW.sql");
-		  do_script("sprocs\\FetchOTPW.sql");
-		  do_script("sprocs\\SaveOTPW.sql");
+		  do_script("sprocs\\ProcessOSPIUserExport.sql");
 		  do_script("sprocs\\RemoveOTPW.sql");
-		  
-		  
+		  do_script("sprocs\\SaveOTPW.sql");
+
+
+
+
+
 		  // TODO: need to fix to get it to rundo_script("sprocs\\SetupAnnualRollover.sql");
 
 		  if (g_rebuild) {
-		      do_script("init\\InitUsers.sql");
-		      do_script("init\\InitFrameworks2Load.sql");
-		  }
-	
-		  if (g_rebuild) {
-		     do_script("init\\LoadTestData.sql");
-		     do_script("init\\LoadCustomTestData.sql");
+		  do_script("init\\InitUsers.sql");
+		  do_script("init\\InitFrameworks2Load.sql");
 		  }
 
-        /* TODO: get these to run before launch
+		  if (g_rebuild) {
+		  do_script("init\\LoadTestData.sql");
+		  do_script("init\\LoadCustomTestData.sql");
+		  do_script("init\\InitEDSExportTables.sql");
+		  }
+
 		  do_script("updates\\37533827_trainingProtocolsData.sql");
 		  do_script("updates\\60345690_trainingProtocolsOverviews.sql");
 		  do_script("updates\\68945748_trainingProtocolsData.sql");
 		  do_script("updates\\90551102_trainingProtocolsData.sql");
-          */
+		
 		  do_script("updates\\103824006_fixFormattingDanielsonDescriptor.sql");
 
 		  do_script("updates\\99759090_sggoals_data.sql");
 
 		  // Create backup for nunit tests
 		  if (g_backup) {
-		    backup();
+		  backup();
 		  }
 
 		  }
 
 		  function do_build()
 		  {
-		      log("enter do_build");
-		      do__scripts();
+		  log("enter do_build");
+		  do__scripts();
 		  }
 
 		  function get_log_status(filepath)
 		  {
-		    var status = "PASSED";
+		  var status = "PASSED";
 
-		    if (fs.FileExists(filepath))
-		    {
-		        if (errors_in_log(filepath))
-		            {
-		            status = "FAILED";
-		        }     
-		    }
+		  if (fs.FileExists(filepath))
+		  {
+		  if (errors_in_log(filepath))
+		  {
+		  status = "FAILED";
+		  }
+		  }
 
-		    return status;
+		  return status;
 		  }
 
 		  function main()
 		  {
-		      process_params();
-		      do_build();
+		  process_params();
+		  do_build();
 
-		      if (!g_quiet)
-		      {
-		        WScript.Echo("BUILD SUCCESSFUL.");
-		      }
+		  if (!g_quiet)
+		  {
+		  WScript.Echo("BUILD SUCCESSFUL.");
+		  }
 
-		      end_log();
+		  end_log();
 		  }
 
 		  //

@@ -20,7 +20,7 @@ namespace StateEvalData
         public long UserID { get; set; }
         public System.DateTime CreationDateTime { get; set; }
     
-        public virtual SEUser SEUser { get; set; }
         public virtual SEUserPromptResponse SEUserPromptResponse { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

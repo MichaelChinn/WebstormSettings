@@ -21,7 +21,7 @@ namespace StateEvalData
         public long CreatedByUserID { get; set; }
     
         public virtual SEArtifactBundleRejectionType SEArtifactBundleRejectionType { get; set; }
-        public virtual SEUser SEUser { get; set; }
         public virtual SEArtifactBundle SEArtifactBundle { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

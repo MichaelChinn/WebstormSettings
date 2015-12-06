@@ -88,7 +88,6 @@
     <Compile Include="Mapper\MapperRubricRowScore.cs" />
     <Compile Include="Mapper\MapperRubricRowEvaluation.cs" />
     <Compile Include="Mapper\MapperRubricRowAnnotation.cs" />
-    <Compile Include="Mapper\MapperUserDistrictSchool.cs" />
     <Compile Include="Mapper\MapperUserLocationRole.cs" />
     <Compile Include="Mapper\MapperUserOrientation.cs" />
     <Compile Include="Mapper\MapperUser Activity.cs" />
@@ -156,7 +155,6 @@
     <Compile Include="Models\RubricRowScoreModel.cs" />
     <Compile Include="Models\AuthDataModel.cs" />
     <Compile Include="Models\UserActivityModel.cs" />
-    <Compile Include="Models\UserDistrictSchoolModel.cs" />
     <Compile Include="Models\UserLocationRoleModel.cs" />
     <Compile Include="Models\UserOrientationModel.cs" />
     <Compile Include="Models\UserPromptResponseModel.cs" />

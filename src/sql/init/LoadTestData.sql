@@ -189,7 +189,8 @@ IF EXISTS ( SELECT  *
                         + ', @pseUserIdOutput = @UserIdOut OUTPUT'
                 FROM    #places p
                         JOIN #pType t ON 1 = 1
-                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'PRH', 'T1', 'T2')
+                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'PRH', 'T1', 'T2', 'TMS',
+                               'PMS' )
                         AND p.schoolCode <> '';
 
         INSERT  #cmd
@@ -236,6 +237,19 @@ IF EXISTS ( SELECT  *
                         AND p.schoolCode = '';
 
 
+	-- Teacher and principal in multiple schools account
+        INSERT  #cmd
+                ( sqlcmd
+                )
+                SELECT  'EXEC dbo.InsertUserReferenceTables @pUserName='''
+                        + placeName + ' ' + x + '''' + ', @pLRString = '''
+                        + p.schoolCode + '|' + t.roleString + ''''
+                FROM    #places p
+                        JOIN #pType t ON 1 = 1
+                WHERE   x IN ( 'TMS' )
+                        AND p.schoolCode IN ( '3010', '3015' );
+
+
 	-- multiple roled
 	--drop table #mrc
         CREATE TABLE #mrC
@@ -258,6 +272,20 @@ IF EXISTS ( SELECT  *
                 WHERE   x IN ( 'PRH' )
                         AND p.schoolCode <> '';
 
+
+
+        INSERT  #mrC
+                ( userName ,
+                  locationCode ,
+                  roleString
+                )
+                SELECT  placeName + ' ' + x ,
+                        p.schoolCode ,
+                        ',' + t.roleString
+                FROM    #places p
+                        JOIN #pType t ON 1 = 1
+                WHERE   x IN ( 'PMS' )
+                        AND p.schoolCode IN ( '3015', '3010' );
 
         INSERT  #mrC
                 ( userName ,
@@ -412,7 +440,8 @@ IF EXISTS ( SELECT  *
         CREATE TABLE #teacher_assignments
             (
               EvaluateeId BIGINT ,
-              EvaluatorID BIGINT
+              EvaluatorID BIGINT ,
+			  DistrictCode VARCHAR(20)
             );
         INSERT  #teacher_assignments
                 ( EvaluateeId
@@ -422,7 +451,8 @@ IF EXISTS ( SELECT  *
                 WHERE   u.RoleName IN ( 'SESchoolTeacher' );
 	 
         UPDATE  #teacher_assignments
-        SET     EvaluatorID = evaluator.SEUserID
+        SET     EvaluatorID = evaluator.SEUserID,
+		        DistrictCode = evaluator.DistrictCode
 
         FROM    dbo.SEUserLocationRole u
                 JOIN #teacher_assignments a ON a.EvaluateeId = u.SEUserID
@@ -433,7 +463,8 @@ IF EXISTS ( SELECT  *
         CREATE TABLE #principal_assignments
             (
               EvaluateeId BIGINT ,
-              EvaluatorID BIGINT
+              EvaluatorID BIGINT ,
+			  DistrictCode VARCHAR(20)
             );
         INSERT  #principal_assignments
                 ( EvaluateeId
@@ -443,7 +474,8 @@ IF EXISTS ( SELECT  *
                 WHERE   r.RoleName IN ( 'SESchoolPrincipal' );
 	 
         UPDATE  #principal_assignments
-        SET     EvaluatorID = evaluator.SEUserID
+        SET     EvaluatorID = evaluator.SEUserID,
+		        DistrictCode = evaluator.DistrictCode
         FROM    dbo.SEUserLocationRole u
                 JOIN #principal_assignments a ON a.EvaluateeId = u.SEUserID
                 JOIN SEUserLocationRole evaluator ON u.DistrictCode = evaluator.DistrictCode
@@ -460,6 +492,9 @@ IF EXISTS ( SELECT  *
                         + ',@pEvaluatorUserID='
                         + CONVERT(VARCHAR(10), a.EvaluatorID)
                         + ', @pEvaluationTypeID = 2, @pSchoolYear=2016'
+						+ ', @pDistrictCode='''
+						+ CONVERT(VARCHAR(20), a.DistrictCode)
+						+ ''''
                 FROM    #teacher_assignments a;
 	
         INSERT  #cmd
@@ -470,7 +505,40 @@ IF EXISTS ( SELECT  *
                         + ',@pEvaluatorUserID='
                         + CONVERT(VARCHAR(10), a.EvaluatorID)
                         + ', @pEvaluationTypeID = 1, @pSchoolYear=2016'
+					    + ', @pDistrictCode='''
+						+ CONVERT(VARCHAR(20), a.DistrictCode)
+						+ ''''
+
                 FROM    #principal_assignments a;
+
+
+		        INSERT  #cmd
+                ( sqlcmd
+                )
+                SELECT  'exec AssignEvaluatorToEvaluatee  @pEvaluateeUserID ='
+                        + CONVERT(VARCHAR(10), a.EvaluateeId)
+                        + ',@pEvaluatorUserID='
+                        + CONVERT(VARCHAR(10), a.EvaluatorID)
+                        + ', @pEvaluationTypeID = 2, @pSchoolYear=2015'
+						+ ', @pDistrictCode='''
+						+ CONVERT(VARCHAR(20), a.DistrictCode)
+						+ ''''
+                FROM    #teacher_assignments a;
+	
+        INSERT  #cmd
+                ( sqlcmd
+                )
+                SELECT  'exec AssignEvaluatorToEvaluatee  @pEvaluateeUserID ='
+                        + CONVERT(VARCHAR(10), a.EvaluateeId)
+                        + ',@pEvaluatorUserID='
+                        + CONVERT(VARCHAR(10), a.EvaluatorID)
+                        + ', @pEvaluationTypeID = 1, @pSchoolYear=2015'
+					    + ', @pDistrictCode='''
+						+ CONVERT(VARCHAR(20), a.DistrictCode)
+						+ ''''
+
+                FROM    #principal_assignments a;
+
 
         SELECT  @idx = MIN(id)
         FROM    #cmd;
@@ -479,6 +547,7 @@ IF EXISTS ( SELECT  *
                 SELECT  @cmd = sqlcmd
                 FROM    #cmd
                 WHERE   id = @idx;
+				-- SELECT @cmd
                 EXEC (@cmd);
                 SELECT  @idx = MIN(id)
                 FROM    #cmd
@@ -486,5 +555,15 @@ IF EXISTS ( SELECT  *
             END;
 	
 	
-     END;
+        UPDATE  SEUser
+        SET     HasMultipleBuildings = 1
+        WHERE   ( FirstName LIKE '%PMS%'
+                  OR FirstName LIKE '%TMS%'
+                );
+
+
+
+
+
+    END;
 

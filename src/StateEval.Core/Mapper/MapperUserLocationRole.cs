@@ -22,13 +22,8 @@ namespace StateEval.Core.Mapper
             target.SchoolCode = source.SchoolCode;
             target.LastActiveRole = source.LastActiveRole;
             target.CreateDate = source.CreateDate; ;
-
-
-            if (source.SEUser != null)
-            {
-                target.UserModel = Mapper.MapToUserModel(source.SEUser, null);
-            }
-            // aspnet_Roles      //TODO... looping problem   
+            target.DistrictName = source.DistrictName;
+            target.SchoolName = source.SchoolName;
 
             return target;
         }

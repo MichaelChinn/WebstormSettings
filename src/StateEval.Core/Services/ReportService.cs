@@ -73,7 +73,7 @@ namespace StateEval.Core.Services
 
                 .Where(
                     x => x.DistrictCode == districtCode && x.SchoolYear == (short) schoolYear && x.EvaluationTypeID == 2)
-                .Where(x => x.SEUser.aspnet_Users.aspnet_Roles.Any(y => y.RoleName == "SESchoolTeacher"))
+                .Where(x => x.SEUser.SEUserLocationRoles.Any(y => y.RoleName == "SESchoolTeacher"))
                 .Where(x => assignedOnly == false || x.EvaluatorID == evaluatorId)
                 .Where(x => submissionRetrievalType == SEEvaluateeSubmissionRetrievalType.All
                             ||
@@ -83,6 +83,7 @@ namespace StateEval.Core.Services
                             (submissionRetrievalType == SEEvaluateeSubmissionRetrievalType.NotSubmitted &&
                              x.HasBeenSubmitted == false))
                 .Where(x => ws == SEWfStateEnum.UNDEFINED || x.WfStateID == (long) ws)
+                // TODO: use SEUserLocationRoles
                 .Where(x => x.SEUser.SEUserDistrictSchools.Any(y => y.SchoolCode == schoolCode));
             
             IList<SummativeReportItem> summativeReportItems = new List<SummativeReportItem>();

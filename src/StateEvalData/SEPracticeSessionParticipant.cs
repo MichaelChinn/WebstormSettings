@@ -19,8 +19,8 @@ namespace StateEvalData
         public long EvalSessionID { get; set; }
         public long UserID { get; set; }
     
-        public virtual SEUser SEUser { get; set; }
         public virtual SEPracticeSession SEPracticeSession { get; set; }
         public virtual SEEvalSession SEEvalSession { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

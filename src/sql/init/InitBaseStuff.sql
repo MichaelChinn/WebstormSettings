@@ -73,6 +73,7 @@ INSERT SEEvaluationScoreType(Name) VALUES('DriftDetect')
 
 INSERT SEEvaluationType(Name) VALUES('Principal')
 INSERT SEEvaluationType(Name) VALUES('Teacher')
+INSERT SEEvaluationType(Name) VALUES('Librarian')
 
 -- select 'INSERT SEEventType(Name) VALUES(''' + Name + ''')' from SEEventType
 INSERT SEEventType(Name) VALUES('Observation Created')

@@ -30,15 +30,12 @@
 
         var loginUserData = {};
         var order = enums.Order;
-        var context = new Context();
-        var user = new User();
-
-
 
         var service = {
             setupContext: setupContext,
             setUser: setUser,
-            load: load
+            load: load,
+            contextCreation: contextCreation
         };
         return service;
 
@@ -53,42 +50,59 @@
         }
 
         //Builds ORIENTATION_OPTIONS object and sets default workArea on the context and user objects and puts them on AUCS
+        function changeEvaluationTypesToWorkAreaTags(locationRoles) {
+            var list = [];
+            for(var i in locationRoles) {
+                var tags = workAreaService.getTagsOfRole(locationRoles[i].roleName, locationRoles[i].evaluationType);
+                for(var j in tags) {
+                    var lr = _.clone(locationRoles[i]);
+                    lr.workAreaTag = tags[j].tag;
+                    delete lr.evaluationType;
+                    list.push(lr);
+                }
+            }
+            return list;
+        }
+        function createOrientation(index, ungrouped) {
+            if(!order[index]) {
+                return ungrouped[0];
+            }
+            var grouped = _.groupBy(ungrouped, order[index]);
+            for(var i in grouped) {
+                grouped[i] = createOrientation(index+1, grouped[i]);
+            }
+            return grouped;
+        }
+        function defaultNavOption(index,  current, obj) {
+            obj[order[index]] = Object.keys(current)[0];
+            if (order[index + 1]) {
+                defaultNavOption(index + 1, current[obj[order[index]]], obj);
+            }
+            return obj
+        }
+
         function setupContext() {
             if (!loginUserData) {
                 console.log('No login or cached information.');
                 $state.go('login');
                 return $q.when();
             }
-            function changeEvaluationTypesToWorkAreaTags(locationRoles) {
-                for(var i in locationRoles) {
-                    locationRoles[i].workAreaTag = workAreaService.getSingleTagOfRole(locationRoles[i].roleName, locationRoles[i].evaluationType);
-                    delete locationRoles[i].evaluationType;
-                }
-            }
-            function createOrientation(index, ungrouped) {
-                if(!order[index]) {
-                    return ungrouped[0];
-                }
-                var grouped = _.groupBy(ungrouped, order[index]);
-                for(var i in grouped) {
-                    grouped[i] = createOrientation(index+1, grouped[i]);
-                }
-                return grouped;
-            }
-            function defaultNavOption(index,  current, obj) {
-                obj[order[index]] = Object.keys(current)[0];
-                if (order[index + 1]) {
-                    defaultNavOption(index + 1, current[obj[order[index]]], obj);
-                }
-                return obj
-            }
+            contextCreation(loginUserData)
+                .initializeWorkArea(activeUserContextService, true)
+                .then(function () {
+                    activeUserContextService.save();
+                });
+        }
 
-            changeEvaluationTypesToWorkAreaTags(loginUserData.userOrientations);
-            context.orientationOptions = createOrientation(0, loginUserData.userOrientations);
+        function contextCreation(userData) {
+            var context = new Context();
+            var user = new User();
+            var userOrientations = changeEvaluationTypesToWorkAreaTags(userData.userOrientations);
+            context.orientationOptions = createOrientation(0, userOrientations);
             var dNO = defaultNavOption(0, context.orientationOptions, {});
-            var y = _.uniq(_.pluck(loginUserData.userOrientations, 'schoolYear')).length;
-            var d = _.uniq(_.pluck(loginUserData.userOrientations, 'districtName')).length;
-            var s = _.uniq(_.pluck(loginUserData.userOrientations, 'schoolName')).length;
+            var y = _.uniq(_.pluck(userData.userOrientations, 'schoolYear')).length;
+            var d = _.uniq(_.pluck(userData.userOrientations, 'districtName')).length;
+            var s = _.uniq(_.pluck(userData.userOrientations, 'schoolName')).length;
             context.showOptions = !(y === 1 && d === 1 && s === 1);
 
             //NavOption is the only thing that remembers the users state, using navOption to traverse through
@@ -98,32 +112,21 @@
             context.orientation = activeUserContextService.getOrientationWithNav(0, context.orientationOptions, dNO);
             context.navOptions = dNO;
             context.frameworkContexts = [];
-            user.id = loginUserData.id;
-            user.firstName = loginUserData.firstName;
-            user.lastName = loginUserData.lastName;
-            user.displayName = loginUserData.displayName;
-            user.evaluationId = loginUserData.evaluationId;
-            user.evalData = loginUserData.evalData;
+            user.id = userData.id;
+            user.firstName = userData.firstName;
+            user.lastName = userData.lastName;
+            user.displayName = userData.displayName;
+            user.evaluationId = userData.evaluationId;
+            user.evalData = userData.evalData;
             activeUserContextService.user = user;
             activeUserContextService.context = context;
-            //activeUserContextService.user = new User();
-            //activeUserContextService.context = new Context();
-            //
-            //for(var i in user) {
-            //    activeUserContextService['user'][i] = user[i];
-            //}
-            //for(var j in context) {
-            //    activeUserContextService['context'][j] = context[j];
-            //}
-            activeUserContextService.save();
-            return context.workArea().initializeWorkArea(activeUserContextService, true)
-                .then(function () {
-                    //evidenceCollectionService.startupFrameworks(context);
-                });
+            return context.workArea();
         }
 
         function load() {
             var contextTemp = localStorageService.get('context');
+            var context = new Context();
+            var user = new User();
             if(!contextTemp) {
                 console.log('No cached data');
                 $state.go('login');

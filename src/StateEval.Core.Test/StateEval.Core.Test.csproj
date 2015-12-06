@@ -62,11 +62,13 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="SelfAssessmentServiceTest.cs" />
     <Compile Include="AssignmentsServiceTest.cs" />
     <Compile Include="ReportServiceTest .cs" />
     <Compile Include="EventServiceTest.cs" />
     <Compile Include="RubricRowAnnotationServiceTest.cs" />
     <Compile Include="EvalSessionServiceTest.cs" />
+    <Compile Include="RubricRowEvaluationServiceTest.cs" />
     <Compile Include="SamlTokenProcessorTests.cs" />
     <Compile Include="UserPromptServiceTest.cs" />
     <Compile Include="ArtifactBundleServiceTest.cs" />

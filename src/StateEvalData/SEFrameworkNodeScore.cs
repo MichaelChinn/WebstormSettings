@@ -27,7 +27,7 @@ namespace StateEvalData
         public virtual SEFrameworkNode SEFrameworkNode { get; set; }
         public virtual SELearningWalkClassRoom SELearningWalkClassRoom { get; set; }
         public virtual SERubricPerformanceLevel SERubricPerformanceLevel { get; set; }
-        public virtual SEUser SEUser { get; set; }
         public virtual SELinkedItemType SELinkedItemType { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

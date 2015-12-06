@@ -32,7 +32,7 @@ namespace StateEvalData
         public long CreatedByUserID { get; set; }
     
         public virtual SEArtifactLibItemType SEArtifactLibItemType { get; set; }
-        public virtual SEUser SEUser { get; set; }
         public virtual ICollection<SEArtifactBundle> SEArtifactBundles { get; set; }
+        public virtual SEUser SEUser { get; set; }
     }
 }

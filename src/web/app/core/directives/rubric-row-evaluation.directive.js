@@ -30,7 +30,6 @@
     function rubricRowEvaluationController(utils, enums, config, evidenceCollectionService, $scope) {
         var vm = this;
         $scope.name = 'RUBRIC ROW EVALUATION';
-        console.log('RubricRow Evaluation');
         vm.enums = enums;
         vm.getSafeHtml = utils.getSafeHtml;
         vm.summernoteOptions = config.summernoteDefaultOptions;

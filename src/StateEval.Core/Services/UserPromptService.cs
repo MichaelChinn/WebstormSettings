@@ -63,7 +63,7 @@ namespace StateEval.Core.Services
 
             foreach (var assignedUser in assignedUsers)
             {
-                List<SEUserDistrictSchool> locations = assignedUser.MaptoSEUser().SEUserDistrictSchools.ToList();
+                List<UserLocationRoleModel> locations = assignedUser.LocationRoles.Where(x=>x.SchoolCode!="").ToList();
                 schoolCodes.AddRange(locations.Select(x => x.SchoolCode));
             }
             

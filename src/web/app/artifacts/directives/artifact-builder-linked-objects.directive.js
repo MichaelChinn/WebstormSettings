@@ -30,6 +30,7 @@
         vm.editModeBtnText = 'Done';
         vm.observations = [];
         vm.goalBundles = [];
+        vm.assessments = [];
 
         vm.toggleEditMode = toggleEditMode;
         vm.clear = clear;
@@ -46,7 +47,12 @@
                             return loadGoalBundles();
                         })
                         .then(function() {
-                            if (vm.artifact.linkedObservations.length>0 || vm.artifact.linkedStudentGrowthGoalBundles.length>0) {
+                            return loadSelfAssessments();
+                        })
+                        .then(function() {
+                            if (vm.artifact.linkedObservations.length>0 ||
+                                vm.artifact.linkedStudentGrowthGoalBundles.length>0 ||
+                                vm.artifacts.linkedSelfAssessments.length>0) {
                                 vm.editMode=false;
                                 vm.editModeBtnText = 'Edit';
                             }
@@ -66,6 +72,13 @@
             vm.editModeBtnText = vm.editMode?"Done":"Edit";
             artifactService.saveArtifact(vm.artifact);
         }
+
+        function loadSelfAssessments() {
+            return artifactService.getAttachableSelfAssessmentsForEvaluation().then(function(assessments) {
+                vm.assessments = assessments;
+            })
+        }
+
         function loadObservations() {
             return artifactService.getAttachableObservationsForEvaluation().then(function(observations) {
                 vm.observations = observations;

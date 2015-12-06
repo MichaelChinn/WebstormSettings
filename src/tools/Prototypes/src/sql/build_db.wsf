@@ -292,7 +292,7 @@
     function do_script(script)
     {
       log("enter do_script: " + script);
-      run("run script: " + script, "sqlcmd " + g_db_login + " -n -S " + g_server + " -d " + g_database + " -i \"" + g_sqldir + script + "\"");
+      run("run script: " + script, "sqlcmd " + g_db_login + "  -S " + g_server + " -d " + g_database + " -i \"" + g_sqldir + script + "\"");
     }
 
     function do__scripts()
@@ -327,7 +327,7 @@
 
 	  g_db_login = "-U " + g_owner_user + " -P " + g_owner_password;
 	  
-      if (g_rebuild)
+    if (g_rebuild)
       {
 		  do_script("init\\" + g_baseCreateScript);
      }
@@ -357,6 +357,8 @@
 	do_script("sprocs\\UpdateRubricRow.sql");
 
       // updates
+
+
     }
 
     function do_build()

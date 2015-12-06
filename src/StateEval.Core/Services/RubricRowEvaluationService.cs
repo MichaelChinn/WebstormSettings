@@ -132,8 +132,7 @@ namespace StateEval.Core.Services
         IEnumerable<RubricRowEvaluationModel> GetRubricRowEvaluationsForTorTee(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly, short evalType, string roleName)
         {
             IQueryable<SEUser> users = EvalEntities.SEUsers
-                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == roleName))
-                .Where(u => u.SEUserDistrictSchools.Any(d => d.DistrictCode == districtCode && d.SchoolCode == schoolCode))
+                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == roleName && r.DistrictCode == districtCode && r.SchoolCode == schoolCode))
                 .Where(u => u.SEEvaluations.Any(e => e.EvaluateeID == u.SEUserID
                                                 && e.SchoolYear == schoolYear
                                                 && e.EvaluationTypeID == evalType
