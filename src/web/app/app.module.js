@@ -20,9 +20,9 @@
         'stateeval.resource',
         'stateeval.layout',
         'stateeval.summative-eval',
-        'stateeval.video-library',
         'stateeval.configuration',
-        'stateeval.self-assessment'
+        'stateeval.self-assessment',
+        'stateeval.training-protocols'
 
     ]);
 

@@ -96,8 +96,8 @@
         // Other
         var RS = new WorkArea('RS', 'Resources', evalU, noAdditionalInfoWorkArea,
             [NavLink('Resources', 'resource-list', 'fa fa-bomb')]);
-        var VL = new WorkArea('VL', 'Video Library', evalU, noAdditionalInfoWorkArea,
-            [NavLink('Video Library', 'video-list', 'fa fa-magic')]);
+        var TRAIN = new WorkArea('TRAIN', 'Training', evalU, noAdditionalInfoWorkArea,
+            [NavLink('Training Protocols', 'training-protocols', 'fa fa-magic')]);
 
         //todo create videos and resources
         //todo what links should an impersonate get how to switch between impersonations
@@ -155,7 +155,7 @@
             DV_PR: DV_PR,
             DV_TR: DV_TR,
             RS: RS,
-            VL: VL,
+            TRAIN: TRAIN,
             IMP_TR: IMP_TR,
             IMP_PR: IMP_PR,
             NMP: NMP,

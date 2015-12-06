@@ -108,7 +108,7 @@
             //NavOption is the only thing that remembers the users state, using navOption to traverse through
             // orientation will find you how the user is oriented
             //to find current execute context.navOption = opt;
-            context.additionalWorkAreas = ['RS', 'VL'];
+            context.additionalWorkAreas = ['RS', 'TRAIN'];
             context.orientation = activeUserContextService.getOrientationWithNav(0, context.orientationOptions, dNO);
             context.navOptions = dNO;
             context.frameworkContexts = [];
