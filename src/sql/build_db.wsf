@@ -413,12 +413,11 @@
 		  do_script("init\\InitEDSExportTables.sql");
 		  }
 
-		  /* TODO: get these to run before launch
 		  do_script("updates\\37533827_trainingProtocolsData.sql");
 		  do_script("updates\\60345690_trainingProtocolsOverviews.sql");
 		  do_script("updates\\68945748_trainingProtocolsData.sql");
 		  do_script("updates\\90551102_trainingProtocolsData.sql");
-		  */
+		
 		  do_script("updates\\103824006_fixFormattingDanielsonDescriptor.sql");
 
 		  do_script("updates\\99759090_sggoals_data.sql");
