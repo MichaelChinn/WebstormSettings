@@ -17,6 +17,8 @@
             this.creationDate = new Date();
             this.instantiator = activeUserContextService.user;
             this.observation = data.observation;
+            this.selfAssessment = data.selfAssessment;
+            this.studentGrowthGoalBundle = data.studentGrowthGoalBundle;
             this.associatedCollections = {};
 
             if (request.collectionType === enums.EvidenceCollectionType.SUMMATIVE) {

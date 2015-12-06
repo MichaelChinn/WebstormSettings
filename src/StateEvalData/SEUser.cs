@@ -37,7 +37,6 @@ namespace StateEvalData
             this.SERubricRowAnnotations = new HashSet<SERubricRowAnnotation>();
             this.SERubricRowEvaluations = new HashSet<SERubricRowEvaluation>();
             this.SERubricRowScores = new HashSet<SERubricRowScore>();
-            this.SESelfAssessments = new HashSet<SESelfAssessment>();
             this.SEStudentGrowthFormPromptResponses = new HashSet<SEStudentGrowthFormPromptResponse>();
             this.SESummativeFrameworkNodeScores = new HashSet<SESummativeFrameworkNodeScore>();
             this.SESummativeRubricRowScores = new HashSet<SESummativeRubricRowScore>();
@@ -45,7 +44,6 @@ namespace StateEvalData
             this.SETrainingProtocolRatings = new HashSet<SETrainingProtocolRating>();
             this.SEDistrictPRViewings = new HashSet<SEDistrictPRViewing>();
             this.SEReportPrintOptionUsers = new HashSet<SEReportPrintOptionUser>();
-            this.SEUserDistrictSchools = new HashSet<SEUserDistrictSchool>();
             this.SEUserLocationRoles = new HashSet<SEUserLocationRole>();
             this.SEUserPrompts = new HashSet<SEUserPrompt>();
             this.SEUserPrompts1 = new HashSet<SEUserPrompt>();
@@ -53,13 +51,12 @@ namespace StateEvalData
             this.SEUserPromptResponseEntries = new HashSet<SEUserPromptResponseEntry>();
             this.SEUserActivities = new HashSet<SEUserActivity>();
             this.SEUserPromptConferenceDefaults = new HashSet<SEUserPromptConferenceDefault>();
+            this.SESelfAssessments = new HashSet<SESelfAssessment>();
         }
     
         public long SEUserID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string SchoolCode { get; set; }
-        public string DistrictCode { get; set; }
         public Nullable<System.Guid> ASPNetUserID { get; set; }
         public bool HasMultipleBuildings { get; set; }
         public string Username { get; set; }
@@ -94,7 +91,6 @@ namespace StateEvalData
         public virtual ICollection<SERubricRowAnnotation> SERubricRowAnnotations { get; set; }
         public virtual ICollection<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual ICollection<SERubricRowScore> SERubricRowScores { get; set; }
-        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
         public virtual ICollection<SEStudentGrowthFormPromptResponse> SEStudentGrowthFormPromptResponses { get; set; }
         public virtual ICollection<SESummativeFrameworkNodeScore> SESummativeFrameworkNodeScores { get; set; }
         public virtual ICollection<SESummativeRubricRowScore> SESummativeRubricRowScores { get; set; }
@@ -102,7 +98,6 @@ namespace StateEvalData
         public virtual ICollection<SETrainingProtocolRating> SETrainingProtocolRatings { get; set; }
         public virtual ICollection<SEDistrictPRViewing> SEDistrictPRViewings { get; set; }
         public virtual ICollection<SEReportPrintOptionUser> SEReportPrintOptionUsers { get; set; }
-        public virtual ICollection<SEUserDistrictSchool> SEUserDistrictSchools { get; set; }
         public virtual ICollection<SEUserLocationRole> SEUserLocationRoles { get; set; }
         public virtual ICollection<SEUserPrompt> SEUserPrompts { get; set; }
         public virtual ICollection<SEUserPrompt> SEUserPrompts1 { get; set; }
@@ -110,5 +105,6 @@ namespace StateEvalData
         public virtual ICollection<SEUserPromptResponseEntry> SEUserPromptResponseEntries { get; set; }
         public virtual ICollection<SEUserActivity> SEUserActivities { get; set; }
         public virtual ICollection<SEUserPromptConferenceDefault> SEUserPromptConferenceDefaults { get; set; }
+        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
     }
 }

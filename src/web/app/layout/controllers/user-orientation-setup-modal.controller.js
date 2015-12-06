@@ -60,7 +60,7 @@
 
         function save() {
             var tag = activeUserContextService.context.navOptions.workAreaTag;
-            workAreaService[tag].initializeWorkArea(activeUserContextService);
+            workAreaService[tag].initializeWorkArea(activeUserContextService, true);
             $modalInstance.close({});
         }
 

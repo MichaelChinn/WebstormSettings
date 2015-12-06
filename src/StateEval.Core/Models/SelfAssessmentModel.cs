@@ -12,7 +12,6 @@ namespace StateEval.Core.Models
         public string Title { get; set; }
         public DateTime CreationDateTime { get; set; }
         public long EvaluateeId { get; set; }
-        public SEEvaluationTypeEnum EvaluationType { get; set; }
         public bool Focused { get; set; }
         public short PerformanceLevel { get; set; }
         public long EvaluationId { get; set; }

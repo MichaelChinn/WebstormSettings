@@ -10,19 +10,18 @@ AS
 
 select distinct fc.FrameworkContextID,
  fc.SchoolYear,
- ds.UserDistrictSchoolID,
+ ulr.UserLocationRoleID,
  fc.DistrictCode,
- ds.SchoolCode,
+ ulr.SchoolCode,
  fc.EvaluationTypeID,
  r.RoleId,
  r.RoleName, 
  u.SEUserID,
- ds.DistrictName,
- ISNULL (ds.SchoolName, '') as SchoolName
+ ulr.DistrictName,
+ ISNULL (ulr.SchoolName, '') as SchoolName
   from dbo.SEFrameworkContext fc
-  join dbo.SEUserDistrictSchool ds on fc.DistrictCode=ds.DistrictCode
-  join dbo.SEUser u on ds.SEUserID=u.SEUserID
-  JOIN dbo.SEUserLocationRole ulr ON ulr.seUserid = u.SEUserID
+  join dbo.SEUserLocationRole ulr on fc.DistrictCode=ulr.DistrictCode
+  join dbo.SEUser u on ulr.SEUserID=u.SEUserID
   join dbo.aspnet_Roles r on ulr.RoleID=r.RoleID
   join dbo.SEEvaluationTypeRole evalRole on r.roleid=evalRole.roleID
  where fc.EvaluationTypeID=evalRole.EvaluationTypeID

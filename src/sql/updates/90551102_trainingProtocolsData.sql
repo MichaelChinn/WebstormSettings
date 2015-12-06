@@ -131,12 +131,7 @@ UPDATE SETrainingProtocol SET DocName='FINAL video 358.pdf' WHERE TrainingProtoc
 UPDATE SETrainingProtocol SET DocName='FINAL video 360.pdf' WHERE TrainingProtocolID=119
 UPDATE SETrainingProtocol SET DocName='FINAL video 367.pdf' WHERE TrainingProtocolID=108
 
-
-
 DECLARE @ProtocolID BIGINT
-DECLARE @FrameworkName VARCHAR(MAX)
-SELECT @FrameworkName = name from seframework where derivedfromframeworkname ='Dan, StateView'
-
 ----------------------------------------
  -- Video 1 --
 ----------------------------------------
@@ -162,24 +157,19 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Secondary', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C1', 'C2', 'C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+      INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H4')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1', 'C2', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H4')
+
 
 ----------------------------------------
  -- Video 2 --
@@ -205,26 +195,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Math', 'Secondary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C3', 'C5')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H4', 'H9')
    
+      INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C3', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H4', 'H9')
 ----------------------------------------
  -- Video 6 --
 ----------------------------------------
@@ -250,24 +232,17 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Art', 'Secondary', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4', 'C5', 'C6')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4', 'C5', 'C6')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2', 'H7')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2', 'H7')
    
 ----------------------------------------
  -- Video 13 --
@@ -294,24 +269,17 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Health', 'Secondary', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+ INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C4')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C4')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H1', 'H9')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H1', 'H9')
    
 ----------------------------------------
  -- Video 14 --
@@ -338,26 +306,17 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('CTE', 'Intermediate', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+ INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C1', 'C4')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1', 'C4')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H13')
-
-
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H13')
 ----------------------------------------
  -- Video 16 --
 ----------------------------------------
@@ -383,24 +342,17 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Math', 'Intermediate', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C4')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C3')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H3')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H3')
    
 ----------------------------------------
  -- Video 20 --
@@ -425,25 +377,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('English/Language Arts', 'Intermediate', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C1', 'C2', 'C5')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1', 'C2', 'C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H9')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H9')
    
 ----------------------------------------
  -- Video 21 --
@@ -469,24 +414,18 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Social', 'Secondary', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C1', 'C5')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1', 'C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H9')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H9')
+
 
 ----------------------------------------
  -- Video 21B --
@@ -511,25 +450,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Social', 'Secondary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C1')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H3')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H3')
+
    
 ----------------------------------------
  -- Video 26 --
@@ -554,26 +487,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Math', 'Science', 'Primary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4', 'C5')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H7','H9')
    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H7', 'H9')
 
 ----------------------------------------
  -- Video 30 --
@@ -598,26 +523,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Social Studies', 'Primary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C5')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H3')
-   
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H3')
    
 ----------------------------------------
  -- Video 59 --
@@ -642,25 +559,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('CTE', 'Primary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H1','H3')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H1', 'H3')
    
 ----------------------------------------
  -- Video 61 --
@@ -685,27 +595,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Social Studies', 'Intermediate', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C5')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2')
    
-   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2')
  ----------------------------------------
  -- Video 75 --
 ----------------------------------------
@@ -730,24 +631,17 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Health', 'Primary', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C4')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C4')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H1')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H1')
    
 ----------------------------------------
  -- Video 77 --
@@ -772,25 +666,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Social Studies', 'Secondary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2', 'H3')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2', 'H3')
+
    
 ----------------------------------------
  -- Video 87 --
@@ -815,27 +703,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Art', 'Primary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4', 'C5', 'C6')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2', 'H3')
    
-   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4', 'C5', 'C6')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2', 'H3')
+
 ----------------------------------------
  -- Video 94 --
 ----------------------------------------
@@ -859,26 +739,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Science', 'Intermediate', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2', 'H3')
    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2', 'H3')
 ----------------------------------------
  -- Video 102 --
 ----------------------------------------
@@ -902,26 +774,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Health', 'Intermediate', 'Secondary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C3')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H10')
    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C3')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H10')
 ----------------------------------------
  -- Video 103 --
 ----------------------------------------
@@ -946,24 +810,17 @@ SELECT @ProtocolID,
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('English/Language Arts', 'Primary', 'National Board')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C4')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C4')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H3')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H3')
    
 ----------------------------------------
  -- Video 107 --
@@ -988,24 +845,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C5')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H10')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H10')
    
 ----------------------------------------
  -- Video 111 --
@@ -1030,24 +881,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Math', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C3', 'C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H1', 'H2')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H1', 'H2')
    
 ----------------------------------------
  -- Video 112 --
@@ -1072,25 +917,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Music', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H7')
    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H7')
    
 ----------------------------------------
  -- Video 113 --
@@ -1115,25 +953,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('English/Language Arts', 'Primary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C3', 'C4', 'C5')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H7', 'H8')
    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C3', 'C4', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H7', 'H8')
 
 ----------------------------------------
  -- Video 120B --
@@ -1158,24 +989,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Math', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C4')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2', 'H3')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C4')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2', 'H3')
 
 ----------------------------------------
  -- Video 121 --
@@ -1200,24 +1025,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Science', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C5')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H9')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H09')
    
    ----------------------------------------
  -- Video 128 --
@@ -1242,24 +1061,20 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Health', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H3', 'H8')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H3', 'H8')
+
    
 ----------------------------------------
  -- Video 132 --
@@ -1284,14 +1099,13 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Art', 'Intermediate', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2')
+
    
 ----------------------------------------
  -- Video 137 --
@@ -1316,23 +1130,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Health', 'Primary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C3', 'C4', 'C5')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C3', 'C4', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H7')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H7')
+
    
 ----------------------------------------
  -- Video 154 --
@@ -1357,23 +1167,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('CTE', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C5', 'C6')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C5', 'C6')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H7', 'H9')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H7', 'H9')
+
    
 ----------------------------------------
  -- Video 161 --
@@ -1398,23 +1204,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Science', 'Intermediate', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H1', 'H2')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H1', 'H2')
+
    
  ----------------------------------------
  -- Video 167 --
@@ -1442,26 +1244,19 @@ SELECT @ProtocolID,
  WHERE lb.Name in ('Health', 'Primary', 'National Board')
 
 SELECT * FROM dbo.SETrainingProtocolLabel
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C3', 'C4')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H12', 'H13')
    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C3', 'C4')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H12', 'H13')
+
    ----------------------------------------
  -- Video 183 --
 ----------------------------------------
@@ -1485,24 +1280,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Health', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C1', 'C3', 'C5')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H7')
    
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1', 'C3', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H7')
+
 ----------------------------------------
  -- Video 192 --
 ----------------------------------------
@@ -1526,23 +1316,20 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Art', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H1', 'H3')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H1', 'H3')
+
    
  ----------------------------------------
  -- Video 195 --
@@ -1570,25 +1357,18 @@ SELECT @ProtocolID,
  WHERE lb.Name in ('Social Studies', 'Primary', 'National Board')
 
 SELECT * FROM dbo.SETrainingProtocolLabel
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C1', 'C3', 'C4')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C1', 'C3', 'C4')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H1')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H1')
 
 ----------------------------------------
  -- Video 202 --
@@ -1613,23 +1393,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Music', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C2', 'C5')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C2', 'C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H14')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H14')
+
 
 ----------------------------------------
  -- Video 202-2 --
@@ -1654,23 +1430,20 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Music', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C6')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C6')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H14')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H14')
+
  ----------------------------------------
  -- Video 203 --
 ----------------------------------------
@@ -1694,23 +1467,19 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('Social Studies', 'Secondary', 'National Board')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C5')
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C5')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H2', 'H3')
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H2', 'H3')
+
    
   ----------------------------------------
  -- Video 212 --
@@ -1736,25 +1505,18 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('English/Language Arts', 'Primary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C5')
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C5')
 
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
 SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H9') 
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H9')
    
 ----------------------------------------
  -- Video 216 --
@@ -1780,26 +1542,20 @@ SELECT @ProtocolID,
        lb.TrainingProtocolLabelID
   FROM dbo.SETrainingProtocolLabel lb
  WHERE lb.Name in ('English/Language Arts', 'Primary', 'National Board')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   1
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.Name=@FrameworkName
-   and f.SchoolYear=2014
-   and fn.ShortName IN ('C4')
-
-INSERT SETrainingProtocolFrameworkNodeAlignment(TrainingProtocolID, FrameworkNodeID, IsStateAlignment)
-SELECT @ProtocolID,
-	   fn.FrameworkNodeID,
-	   0
-  FROM dbo.SEFrameworkNode fn
-  JOIN dbo.SEFramework f on fn.frameworkid=f.frameworkid
- where f.SchoolYear=2014
-   and fn.ShortName IN ('H3')
    
+   
+INSERT SETrainingProtocolTrainingProtocolCriteria(TrainingProtocolID, TrainingProtocolCriteriaID)
+SELECT @ProtocolID,
+	   TrainingProtocolCriteriaID
+  FROM dbo.SETrainingProtocolCriteria
+ WHERE ShortName IN ('C4')
+
+INSERT SETrainingProtocolTrainingProtocolHighLeveragePractice(TrainingProtocolID, TrainingProtocolHighLeveragePracticeID)
+SELECT @ProtocolID,
+	   TrainingProtocolHighLeveragePracticeID
+  FROM dbo.SETrainingProtocolHighLeveragePractice
+ WHERE ShortName IN ('H3')
+
 
 
 /***** ^^^^                  ^^^^^^ ************************************************/

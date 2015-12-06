@@ -19,7 +19,6 @@ namespace StateEvalData
             this.SEFrameworkNode1 = new HashSet<SEFrameworkNode>();
             this.SEPullQuotes = new HashSet<SEPullQuote>();
             this.SERubricRowFrameworkNodes = new HashSet<SERubricRowFrameworkNode>();
-            this.SETrainingProtocolFrameworkNodeAlignments = new HashSet<SETrainingProtocolFrameworkNodeAlignment>();
             this.SEStudentGrowthGoals = new HashSet<SEStudentGrowthGoal>();
             this.SEEvaluations = new HashSet<SEEvaluation>();
             this.SEEvaluations1 = new HashSet<SEEvaluation>();
@@ -48,7 +47,6 @@ namespace StateEvalData
         public virtual SEFrameworkNode SEFrameworkNode2 { get; set; }
         public virtual ICollection<SEPullQuote> SEPullQuotes { get; set; }
         public virtual ICollection<SERubricRowFrameworkNode> SERubricRowFrameworkNodes { get; set; }
-        public virtual ICollection<SETrainingProtocolFrameworkNodeAlignment> SETrainingProtocolFrameworkNodeAlignments { get; set; }
         public virtual ICollection<SEStudentGrowthGoal> SEStudentGrowthGoals { get; set; }
         public virtual SEFramework SEFramework { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations { get; set; }

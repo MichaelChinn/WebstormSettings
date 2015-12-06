@@ -124,7 +124,7 @@ namespace StateEval.Core.Services
                     .Where(x => x.EvaluationID == artifactBundleModel.EvaluationId).Count();
 
                 seArtifactBundle.ShortName = "Artifact " + Convert.ToString(seEvaluation.SchoolYear - 1) + "-" + Convert.ToString(seEvaluation.SchoolYear) + "." + Convert.ToString(count + 1);
-                if (seArtifactBundle.Title == "")
+                if (seArtifactBundle.Title == null)
                 {
                     seArtifactBundle.Title = seArtifactBundle.ShortName;
                 }

@@ -25,6 +25,7 @@ namespace StateEvalData
             this.SEStudentGrowthGoalBundles = new HashSet<SEStudentGrowthGoalBundle>();
             this.SEEvalSessions = new HashSet<SEEvalSession>();
             this.SEAvailableEvidences = new HashSet<SEAvailableEvidence>();
+            this.SESelfAssessments = new HashSet<SESelfAssessment>();
         }
     
         public long ArtifactBundleID { get; set; }
@@ -53,5 +54,6 @@ namespace StateEvalData
         public virtual ICollection<SEEvalSession> SEEvalSessions { get; set; }
         public virtual ICollection<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual SEUser SEUser { get; set; }
+        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
     }
 }

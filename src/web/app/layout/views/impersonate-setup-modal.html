@@ -3,26 +3,10 @@
     <h4 class="modal-title" id="myModalLabel">Viewing Options</h4>
 </div>
 <div class="modal-body">
-    <div class="form-group">
-        <label>Select the viewing option</label>
-        <select class="form-control" ng-model="vm.option"  ng-change="vm.changeOption()">
-            <option value="PR" ng-show="vm.showPR">View Principal</option>
-            <option value="DTE" ng-show="vm.showDTE">View District-wide Teacher Evaluator</option>
+    <div>
+        <select name="" id="">
+            <option value="" ng-repeat="user in vm.impersonationOptions"></option>
         </select>
-
-        <div ng-show="vm.option!='DTE'">
-            <br/>
-            <label>Select school:</label>
-            <select class="form-control" ng-model="vm.schoolCode" ng-change="vm.changeSchool()">
-                <option ng-repeat="school in vm.schools"
-                        value="{{school.schoolCode}}">{{school.name}}</option>
-            </select>
-        </div>
-        <br/>
-        <label>Select Evaluator:</label>
-        <select class="form-control" ng-model="vm.evaluator" ng-options="evaluator.displayName for evaluator in vm.evaluators">
-        </select>
-        <br/>
     </div>
 </div>
 <div class="modal-footer">

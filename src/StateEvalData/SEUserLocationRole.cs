@@ -23,6 +23,8 @@ namespace StateEvalData
         public string SchoolCode { get; set; }
         public Nullable<bool> LastActiveRole { get; set; }
         public System.DateTime CreateDate { get; set; }
+        public string DistrictName { get; set; }
+        public string SchoolName { get; set; }
     
         public virtual aspnet_Roles aspnet_Roles { get; set; }
         public virtual SEUser SEUser { get; set; }

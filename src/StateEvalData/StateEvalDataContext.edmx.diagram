@@ -59,7 +59,6 @@
         <EntityTypeShape EntityType="StateEvalModel.ProtoFrameworksToLoad" Width="1.5" PointX="13.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StateEvalModel.SEDistrictPRViewing" Width="1.5" PointX="12" PointY="79.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StateEvalModel.SEReportPrintOptionUser" Width="1.5" PointX="3" PointY="142.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StateEvalModel.SETrainingProtocolFrameworkNodeAlignment" Width="1.5" PointX="12" PointY="56.75" IsExpanded="true" />
         <AssociationConnector Association="StateEvalModel.FK_MessageTypeRecipientConfig_MessageType" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SEDistrictTrainingProtocolAnchor_SETrainingProtocol" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SEEvalAssignmentRequest_SEEvalAssignmentRequestStatusType" ManuallyRouted="false" />
@@ -70,7 +69,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkNode_SEFrameworkNode" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SEPullQuote_SEFrameworkNode" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowFrameworkNode_SEFrameworkNode" ManuallyRouted="false" />
-        <AssociationConnector Association="StateEvalModel.FK_SETrainingProtocol_SEFrameworkNode" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_ClassroomID" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SEReportPrintOption_SEReportPrintOptionType" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SEReportPrintOptionEvalSession_SEReportPrintOption" ManuallyRouted="false" />
@@ -81,7 +79,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SEReportSnapshot_SESchoolYear" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SEDAPRViewing_SchoolYear" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserPrompt_SESchoolYear" ManuallyRouted="false" />
-        <AssociationConnector Association="StateEvalModel.FK_SETrainingProtocol_SETrainingProtocol" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SETrainingProtocolPlaylist_SETrainingProtocol" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SETrainingProtocolRating_SETrainingProtocol" ManuallyRouted="false" />
         <AssociationConnector Association="StateEvalModel.FK_SETrainingProtocolLabel_SETrainingProtocolLabelGroup" ManuallyRouted="false" />
@@ -116,7 +113,6 @@
         <EntityTypeShape EntityType="StateEvalModel.SENotification" Width="1.5" PointX="9.25" PointY="80.125" />
         <AssociationConnector Association="StateEvalModel.FK_SENotification_SEEvent" />
         <EntityTypeShape EntityType="StateEvalModel.SEUserActivity" Width="1.5" PointX="3" PointY="110.75" />
-        <EntityTypeShape EntityType="StateEvalModel.SEUserDistrictSchool" Width="3.125" PointX="3" PointY="115.5" />
         <EntityTypeShape EntityType="StateEvalModel.SERubricPerformanceLevel" Width="1.5" PointX="0.75" PointY="67.125" />
         <EntityTypeShape EntityType="StateEvalModel.SEUserPromptResponse" Width="1.5" PointX="28" PointY="78.375" />
         <AssociationConnector Association="StateEvalModel.FK_PerformanceLevelID" />
@@ -146,7 +142,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SEFramework_SEFrameworkContext" />
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkNode_SEFramework" />
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkPerformanceLevel_SEFramework" />
-        <EntityTypeShape EntityType="StateEvalModel.vUserOrientation" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="StateEvalModel.vPrototypeFrameworkContext" Width="1.5" PointX="11.375" PointY="15.75" />
         <EntityTypeShape EntityType="StateEvalModel.ELMAH_Error" Width="1.5" PointX="13.75" PointY="16.75" />
         <EntityTypeShape EntityType="StateEvalModel.SERubricRow" Width="1.5" PointX="36.875" PointY="48.5" />
@@ -253,10 +248,6 @@
         <EntityTypeShape EntityType="StateEvalModel.SELinkedItemType" Width="1.5" PointX="5.375" PointY="7.875" />
         <AssociationConnector Association="StateEvalModel.FK_SEFrameworkNodeScore_SELinkedItemType" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SELinkedItemType" />
-        <EntityTypeShape EntityType="StateEvalModel.SESelfAssessment" Width="1.5" PointX="14.25" PointY="76.75" />
-        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluation" />
-        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluationType" />
-        <AssociationConnector Association="StateEvalModel.SESelfAssessmentRubricRowFocus" />
         <EntityTypeShape EntityType="StateEvalModel.SERubricRowEvaluation" Width="1.5" PointX="44.25" PointY="41.875" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEEvalSession1" />
@@ -278,7 +269,7 @@
         <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRow" />
         <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SERubricRowAnnotation" />
         <AssociationConnector Association="StateEvalModel.FK_SEAvailableEvidence_SEStudentGrowthGoal" />
-        <EntityTypeShape EntityType="StateEvalModel.SEUser" Width="1.5" PointX="5.25" PointY="18.625" />
+        <EntityTypeShape EntityType="StateEvalModel.SEUser" Width="1.5" PointX="5.25" PointY="17.875" />
         <AssociationConnector Association="StateEvalModel.FK_SEUser_aspnet_Users" />
         <AssociationConnector Association="StateEvalModel.FK_SEArtifactBundle_CreatedByUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SEArtifactBundleRejection_SEUser" />
@@ -301,7 +292,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowAnnotation_SEUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SERubricRowScore_SEUser" />
-        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEFormPromptResponse_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SESummativeFrameworkNodeScore_SEUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SESummativeRubricRowScore_SEUser" />
@@ -309,7 +299,6 @@
         <AssociationConnector Association="StateEvalModel.FK_SETrainingProtocolRating_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEDAPRViewing_DAUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SEReportPrintOptionUser_SEUser" />
-        <AssociationConnector Association="StateEvalModel.FK_SEUserDistrictSchool_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserLocationRole_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserPrompt_CreatedByUserID" />
         <AssociationConnector Association="StateEvalModel.FK_SEUserPrompt_SEUser" />
@@ -317,6 +306,17 @@
         <AssociationConnector Association="StateEvalModel.FK_SEUserPromptResponseEntry_SEUser" />
         <AssociationConnector Association="StateEvalModel.FK_UserActivity_SEUser" />
         <AssociationConnector Association="StateEvalModel.FKSEUserPromptConferenceDefault_SEUser" />
+        <EntityTypeShape EntityType="StateEvalModel.vUserOrientation" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="StateEvalModel.SESelfAssessment" Width="1.5" PointX="11.25" PointY="47" />
+        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEEvaluation" />
+        <AssociationConnector Association="StateEvalModel.FK_SESelfAssessment_SEUser" />
+        <AssociationConnector Association="StateEvalModel.SESelfAssessmentRubricRowFocus" />
+        <AssociationConnector Association="StateEvalModel.FK_SERubricRowEvaluation_SESelfAssessment" />
+        <AssociationConnector Association="StateEvalModel.SEArtifactBundleSelfAssessment" />
+        <EntityTypeShape EntityType="StateEvalModel.SETrainingProtocolCriteria" Width="1.5" PointX="12" PointY="53.75" />
+        <EntityTypeShape EntityType="StateEvalModel.SETrainingProtocolHighLeveragePractice" Width="1.5" PointX="12" PointY="68.375" />
+        <AssociationConnector Association="StateEvalModel.SETrainingProtocolTrainingProtocolCriteria" />
+        <AssociationConnector Association="StateEvalModel.SETrainingProtocolTrainingProtocolHighLeveragePractice" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

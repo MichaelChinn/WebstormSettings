@@ -12,16 +12,17 @@ namespace StateEvalData
     using System;
     using System.Collections.Generic;
     
-    public partial class SEUserDistrictSchool
+    public partial class SETrainingProtocolCriteria
     {
-        public long UserDistrictSchoolID { get; set; }
-        public long SEUserID { get; set; }
-        public string SchoolCode { get; set; }
-        public string DistrictCode { get; set; }
-        public string SchoolName { get; set; }
-        public string DistrictName { get; set; }
-        public bool IsPrimary { get; set; }
+        public SETrainingProtocolCriteria()
+        {
+            this.SETrainingProtocols = new HashSet<SETrainingProtocol>();
+        }
     
-        public virtual SEUser SEUser { get; set; }
+        public long TrainingProtocolCriteriaID { get; set; }
+        public string ShortName { get; set; }
+        public string Title { get; set; }
+    
+        public virtual ICollection<SETrainingProtocol> SETrainingProtocols { get; set; }
     }
 }

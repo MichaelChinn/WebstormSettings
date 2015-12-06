@@ -43,5 +43,6 @@ namespace StateEvalData
         public virtual SEStudentGrowthGoalBundle SEStudentGrowthGoalBundle { get; set; }
         public virtual ICollection<SEAlignedEvidence> SEAlignedEvidences { get; set; }
         public virtual SEUser SEUser { get; set; }
+        public virtual SESelfAssessment SESelfAssessment { get; set; }
     }
 }

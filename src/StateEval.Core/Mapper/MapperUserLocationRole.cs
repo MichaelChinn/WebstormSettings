@@ -22,6 +22,8 @@ namespace StateEval.Core.Mapper
             target.SchoolCode = source.SchoolCode;
             target.LastActiveRole = source.LastActiveRole;
             target.CreateDate = source.CreateDate; ;
+            target.DistrictName = source.DistrictName;
+            target.SchoolName = source.SchoolName;
 
             return target;
         }

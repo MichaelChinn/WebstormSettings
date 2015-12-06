@@ -88,6 +88,14 @@ namespace WebAPI.Controllers
         {
             return userService.GetUsersInRoleAtSchool(districtCode, schoolCode, roleName);
         }
+
+        [Route("api/userorientation/{userId}")]
+        [HttpGet]
+        public IEnumerable<UserOrientationModel> GetUsersInRoleAtSchool(long userId)
+        {
+            return userService.GetUserOrientationsForUser(userId);
+        }
         
+
     }
 }

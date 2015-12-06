@@ -12,13 +12,18 @@ namespace StateEvalData
     using System;
     using System.Collections.Generic;
     
-    public partial class SETrainingProtocolFrameworkNodeAlignment
+    public partial class SETrainingProtocolHighLeveragePractice
     {
-        public long TrainingProtocolID { get; set; }
-        public long FrameworkNodeID { get; set; }
-        public bool IsStateAlignment { get; set; }
+        public SETrainingProtocolHighLeveragePractice()
+        {
+            this.SETrainingProtocols = new HashSet<SETrainingProtocol>();
+        }
     
-        public virtual SEFrameworkNode SEFrameworkNode { get; set; }
-        public virtual SETrainingProtocol SETrainingProtocol { get; set; }
+        public long TrainingProtocolHighLeveragePracticeID { get; set; }
+        public string ShortName { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+    
+        public virtual ICollection<SETrainingProtocol> SETrainingProtocols { get; set; }
     }
 }

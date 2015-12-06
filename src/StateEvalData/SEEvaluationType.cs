@@ -20,7 +20,6 @@ namespace StateEvalData
             this.SEStudentGrowthProcessSettings = new HashSet<SEStudentGrowthProcessSetting>();
             this.SEEvaluations = new HashSet<SEEvaluation>();
             this.SEStudentGrowthFormPromptFrameworkNodes = new HashSet<SEStudentGrowthFormPromptFrameworkNode>();
-            this.SESelfAssessments = new HashSet<SESelfAssessment>();
         }
     
         public short EvaluationTypeID { get; set; }
@@ -30,6 +29,5 @@ namespace StateEvalData
         public virtual ICollection<SEStudentGrowthProcessSetting> SEStudentGrowthProcessSettings { get; set; }
         public virtual ICollection<SEEvaluation> SEEvaluations { get; set; }
         public virtual ICollection<SEStudentGrowthFormPromptFrameworkNode> SEStudentGrowthFormPromptFrameworkNodes { get; set; }
-        public virtual ICollection<SESelfAssessment> SESelfAssessments { get; set; }
     }
 }

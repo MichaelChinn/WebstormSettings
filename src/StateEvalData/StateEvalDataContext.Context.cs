@@ -79,7 +79,6 @@ namespace StateEvalData
         public virtual DbSet<ProtoFrameworksToLoad> ProtoFrameworksToLoads { get; set; }
         public virtual DbSet<SEDistrictPRViewing> SEDistrictPRViewings { get; set; }
         public virtual DbSet<SEReportPrintOptionUser> SEReportPrintOptionUsers { get; set; }
-        public virtual DbSet<SETrainingProtocolFrameworkNodeAlignment> SETrainingProtocolFrameworkNodeAlignments { get; set; }
         public virtual DbSet<SEStudentGrowthProcessSetting> SEStudentGrowthProcessSettings { get; set; }
         public virtual DbSet<SEStudentGrowthProcessSettingsFormPrompt> SEStudentGrowthProcessSettingsFormPrompts { get; set; }
         public virtual DbSet<SEArtifactBundleWfHistory> SEArtifactBundleWfHistories { get; set; }
@@ -97,7 +96,6 @@ namespace StateEvalData
         public virtual DbSet<SEResource> SEResources { get; set; }
         public virtual DbSet<SENotification> SENotifications { get; set; }
         public virtual DbSet<SEUserActivity> SEUserActivities { get; set; }
-        public virtual DbSet<SEUserDistrictSchool> SEUserDistrictSchools { get; set; }
         public virtual DbSet<SERubricPerformanceLevel> SERubricPerformanceLevels { get; set; }
         public virtual DbSet<SEUserPromptResponse> SEUserPromptResponses { get; set; }
         public virtual DbSet<SEPracticeSession> SEPracticeSessions { get; set; }
@@ -107,7 +105,6 @@ namespace StateEvalData
         public virtual DbSet<SEDistrictConfiguration> SEDistrictConfigurations { get; set; }
         public virtual DbSet<SEFrameworkContext> SEFrameworkContexts { get; set; }
         public virtual DbSet<SEFramework> SEFrameworks { get; set; }
-        public virtual DbSet<vUserOrientation> vUserOrientations { get; set; }
         public virtual DbSet<vPrototypeFrameworkContext> vPrototypeFrameworkContexts { get; set; }
         public virtual DbSet<ELMAH_Error> ELMAH_Error { get; set; }
         public virtual DbSet<SERubricRow> SERubricRows { get; set; }
@@ -133,10 +130,13 @@ namespace StateEvalData
         public virtual DbSet<SERubricRowScore> SERubricRowScores { get; set; }
         public virtual DbSet<SEEvalSession> SEEvalSessions { get; set; }
         public virtual DbSet<SELinkedItemType> SELinkedItemTypes { get; set; }
-        public virtual DbSet<SESelfAssessment> SESelfAssessments { get; set; }
         public virtual DbSet<SERubricRowEvaluation> SERubricRowEvaluations { get; set; }
         public virtual DbSet<SEAlignedEvidence> SEAlignedEvidences { get; set; }
         public virtual DbSet<SEAvailableEvidence> SEAvailableEvidences { get; set; }
         public virtual DbSet<SEUser> SEUsers { get; set; }
+        public virtual DbSet<vUserOrientation> vUserOrientations { get; set; }
+        public virtual DbSet<SESelfAssessment> SESelfAssessments { get; set; }
+        public virtual DbSet<SETrainingProtocolCriteria> SETrainingProtocolCriterias { get; set; }
+        public virtual DbSet<SETrainingProtocolHighLeveragePractice> SETrainingProtocolHighLeveragePractices { get; set; }
     }
 }

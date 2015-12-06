@@ -11,6 +11,7 @@ namespace StateEval.Core.Models
         public SEEvidenceCollectionTypeEnum CollectionType { get; set; }
         public Nullable<long> CollectionObjectId { get; set; }
         public EvalSessionModel Observation { get; set; }
+        public SelfAssessmentModel SelfAssessment { get; set; }
         public StudentGrowthGoalBundleModel StudentGrowthGoalBundle { get; set; }
         public long RubricRowId { get; set; }
 
