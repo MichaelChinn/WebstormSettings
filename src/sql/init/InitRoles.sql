@@ -8,6 +8,7 @@ EXEC aspnet_Roles_CreateRole 'SE', 'SESchoolAdmin'
 EXEC aspnet_Roles_CreateRole 'SE', 'SESchoolPrincipal'
 EXEC aspnet_Roles_CreateRole 'SE', 'SESchoolTeacher'
 EXEC aspnet_Roles_CreateRole 'SE', 'SESchoolHeadPrincipal'
+EXEC aspnet_Roles_CreateRole 'SE', 'SESchoolLibrarian'
 
 EXEC aspnet_Roles_CreateRole 'SE', 'SEDistrictAdmin'
 EXEC aspnet_Roles_CreateRole 'SE', 'SEDistrictEvaluator'
@@ -15,9 +16,10 @@ EXEC aspnet_Roles_CreateRole 'SE', 'SEDistrictWideTeacherEvaluator'
 EXEC aspnet_Roles_CreateRole 'SE', 'SEDistrictAssignmentManager'
 EXEC aspnet_Roles_CreateRole 'SE', 'SEDistrictViewer'
 
-DECLARE @EvalTypePR SMALLINT, @EvalTypeTR SMALLINT
+DECLARE @EvalTypePR SMALLINT, @EvalTypeTR SMALLINT, @EvalTypeLIB SMALLINT
 SELECT @EvalTypePR = EvaluationTypeID FROM dbo.SEEvaluationType WHERE Name='Principal'
 SELECT @EvalTypeTR = EvaluationTypeID FROM dbo.SEEvaluationType WHERE Name='Teacher'
+SELECT @EvalTypeLIB = EvaluationTypeID FROM dbo.SEEvaluationType WHERE Name='Librarian'
 
 INSERT SEEvaluationTypeRole(RoleID, EvaluationTypeID)
 SELECT RoleID
@@ -44,6 +46,19 @@ SELECT RoleID
 					'SEDistrictViewer',
 					'SEDistrictAssignmentManager',
 					'SESuperAdmin')
+
+INSERT SEEvaluationTypeRole(RoleID, EvaluationTypeID)
+SELECT RoleID
+      ,@EvalTypeLIB
+  FROM dbo.aspnet_Roles
+ WHERE RoleName in ('SESchoolLibrarian', 
+					'SESchoolPrincipal',
+					'SEDistrictWideTeacherEvaluator',
+					'SESchoolAdmin',
+					'SEDistrictAdmin',
+					'SEDistrictViewer',
+					'SEDistrictAssignmentManager',
+					'SESuperAdmin')
   
     
 DECLARE @roleId UNIQUEIDENTIFIER
@@ -59,6 +74,13 @@ INSERT dbo.SEEvaluateeRoleEvaluationType
         ( RoleId, EvaluationTypeID )
 VALUES  ( @roleId, -- RoleId - uniqueidentifier
           2  -- EvaluationTypeID - smallint
+          )
+
+SELECT @roleId = roleId FROM aspnet_roles WHERE roleName = 'SESchoolLibrarian'
+INSERT dbo.SEEvaluateeRoleEvaluationType
+        ( RoleId, EvaluationTypeID )
+VALUES  ( @roleId, -- RoleId - uniqueidentifier
+          3  -- EvaluationTypeID - smallint
           )
 
 

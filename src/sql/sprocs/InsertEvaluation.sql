@@ -79,7 +79,11 @@ BEGIN
 	  JOIN dbo.SEUserLocationRole ulr ON ulr.seUserid = u.SEUserID
   	  JOIN dbo.aspnet_Roles r ON ulr.RoleID=r.RoleID
 	 WHERE ulr.DistrictCode=@pDistrictCode
-	   AND r.RoleName=CASE WHEN @pEvaluationTypeID=1 THEN 'SESchoolPrincipal' ELSE 'SESchoolTeacher' END
+	   AND r.RoleName=
+	   CASE WHEN @pEvaluationTypeID=1 THEN 'SESchoolPrincipal' 
+	   WHEN @pEvaluationTypeID=2 THEN 'SESchoolTeacher' 
+	   WHEN @pEvaluationTypeID=3 THEN 'SESchoolLibrarian'
+	   END
 	   AND u.SEUserID NOT IN
 	       (SELECT EvaluateeID
 	          FROM dbo.SEEvaluation 

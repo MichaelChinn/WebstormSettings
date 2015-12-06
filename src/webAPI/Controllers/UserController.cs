@@ -53,6 +53,13 @@ namespace WebAPI.Controllers
             return userService.GetEvaluateesForPR_TR(schoolYear, districtCode, schoolCode, evaluatorId, assignedOnly, includeEvalData);
         }
 
+        [Route("api/users/evaluatees/prlib/{schoolYear}/{districtCode}/{schoolCode}/{evaluatorId}/{assignedOnly}/{includeEvalData}")]
+        [HttpGet]
+        public IEnumerable<UserModel> GetEvaluateesForPR_LIB(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly, bool includeEvalData)
+        {
+            return userService.GetEvaluateesForPR_LIB(schoolYear, districtCode, schoolCode, evaluatorId, assignedOnly, includeEvalData);
+        }
+
         [Route("api/users/evaluatees/prpr/{schoolYear}/{districtCode}/{schoolCode}/{evaluatorId}/{assignedOnly}/{includeEvalData}")]
         [HttpGet]
         public IEnumerable<UserModel> GetEvaluateesForPR_PR(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly, bool includeEvalData)

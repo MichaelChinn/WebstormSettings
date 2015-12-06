@@ -174,6 +174,10 @@ IF EXISTS ( SELECT  *
         VALUES  ( 'DRM' ,
                   'SEDistrictAssignmentManager'
                 );
+	    INSERT  #pType
+                ( x, roleString )
+        VALUES  ( 'LIB', 'SESchoolLibrarian' );
+
 
 	-- User Accounts
         INSERT  #cmd
@@ -189,7 +193,7 @@ IF EXISTS ( SELECT  *
                         + ', @pseUserIdOutput = @UserIdOut OUTPUT'
                 FROM    #places p
                         JOIN #pType t ON 1 = 1
-                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'PRH', 'T1', 'T2', 'TMS',
+                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'PRH', 'T1', 'T2', 'TMS', 'LIB',
                                'PMS' )
                         AND p.schoolCode <> '';
 
@@ -220,7 +224,7 @@ IF EXISTS ( SELECT  *
                         + t.roleString + ''''
                 FROM    #places p
                         JOIN #pType t ON 1 = 1
-                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'T1', 'T2' )
+                WHERE   x IN ( 'AD', 'PR1', 'PR2', 'T1', 'T2', 'LIB' )
                         AND p.schoolCode <> '';
 
 	--DistrictRoles
@@ -448,7 +452,7 @@ IF EXISTS ( SELECT  *
                 )
                 SELECT  u.SEUserId
                 FROM    dbo.SEUserLocationRole u
-                WHERE   u.RoleName IN ( 'SESchoolTeacher' );
+                WHERE   u.RoleName IN ( 'SESchoolTeacher', 'SESchoolLibrarian' );
 	 
         UPDATE  #teacher_assignments
         SET     EvaluatorID = evaluator.SEUserID,

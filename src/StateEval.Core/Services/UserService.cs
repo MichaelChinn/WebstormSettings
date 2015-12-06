@@ -153,6 +153,12 @@ namespace StateEval.Core.Services
                                         (short)SEEvaluationTypeEnum.TEACHER, StateEval.Core.Constants.RoleName.SESchoolTeacher);
         }
 
+        public IEnumerable<UserModel> GetEvaluateesForPR_LIB(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly, bool includeEvalData)
+        {
+            return GetEvaluateesInSchool(schoolYear, districtCode, schoolCode, evaluatorId, assignedOnly, includeEvalData,
+                                        (short)SEEvaluationTypeEnum.LIBRARIAN, StateEval.Core.Constants.RoleName.SESchoolLibrarian);
+        }
+
         public IEnumerable<UserModel> GetEvaluateesForPR_PR(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly, bool includeEvalData)
         {
             return GetEvaluateesInSchool(schoolYear, districtCode, schoolCode, evaluatorId, assignedOnly, includeEvalData,

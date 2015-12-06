@@ -128,7 +128,8 @@
         EvaluationTypes: [
             'Undefined',
             'Principal Evaluation',
-            'Teacher Evaluation'
+            'Teacher Evaluation',
+            'Librarian Evaluation'
         ],
         RubricRowAnnotationType: {
             'UNDEFINED': 0,
@@ -238,17 +239,11 @@
             'SY_2014_2015': 2015,
             'SY_2015_2016': 2016
         },
-        FrameworkType: {
-            'UNDEFINED': 0,
-            'TSTATE': 1,
-            'TINSTR': 2,
-            'PSTATE': 3,
-            'PINSTR': 4
-        },
         EvaluationType: {
             'UNDEFINED': 0,
             'PRINCIPAL': 1,
-            'TEACHER': 2
+            'TEACHER': 2,
+            'LIBRARIAN': 3
         },
         PromptType: {
             'PreConf': 1,

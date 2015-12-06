@@ -19,5 +19,6 @@ namespace StateEval.Core.Constants
         public const string SECustomSupportL1 = "SECustomerSupportL1";
         public const string SEDistrictAssignmentManager = "SEDistrictAssignmentManager";
         public const string SESuperAdmin = "SESuperAdmin";
+        public const string SESchoolLibrarian = "SESchoolLibrarian";
     }
 }

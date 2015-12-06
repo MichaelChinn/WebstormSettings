@@ -13,6 +13,7 @@
         var evalT = enums.EvaluationType.TEACHER;
         var evalP = enums.EvaluationType.PRINCIPAL;
         var evalU = enums.EvaluationType.UNDEFINED;
+        var evalL = enums.EvaluationType.LIBRARIAN;
 
 
         //LINKS
@@ -49,6 +50,7 @@
         var dvDashboard = NavLink('Dashboard', 'dv-dashboard', 'fa fa-th-large');
         var teeNav = [evaluateeDashboard, artifacts, otherEvidence, sgGrowthGoalsTee, observations, selfAssessments, summativeEval, evaluateeReports];
         var pr_trNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_PR_TR];
+        var pr_libNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_PR_TR];
         var pr_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_PR_PR];
         var de_prNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_DE];
         var dteNav = [evaluatorDashboard, artifacts, otherEvidence, sgGrowthGoalsTor, observations, selfAssessments, summativeEval, evaluateeReports, setup_DTE];
@@ -88,6 +90,8 @@
             pr_prNav);
         var PR_TR = new WorkArea('PR_TR', 'Evaluate Teachers', evalT, getEvaluateesForEvaluatorPR_TR,
             pr_trNav);
+        var PR_LIB = new WorkArea('PR_LIB', 'Evaluate Librarians', evalL, getEvaluateesForEvaluatorPR_LIB,
+            pr_libNav);
         var DE = new WorkArea('DE', 'Evaluate Principals', evalP, getEvaluateesForEvaluatorDE_PR,
             de_prNav);
         var DTE = new WorkArea('DTE', 'Evaluate Teachers', evalT, getObserveEvaluateesForDTEEvaluator,
@@ -118,7 +122,7 @@
             SEDistrictAdmin: [DA_TR, DA_PR, IMP_TR, IMP_PR],
             SEDistrictViewer: [DV_TR, DV_PR, IMP_TR, IMP_PR],
             SESchoolAdmin: [SA_TR, SA_PR],
-            SESchoolPrincipal: [PR_TR, PR_ME],
+            SESchoolPrincipal: [PR_TR, PR_LIB, PR_ME],
             SESchoolTeacher: [TR_ME],
             SEDistrictEvaluator: [DE],
             SEDistrictWideTeacherEvaluator: [DTE],
@@ -147,6 +151,7 @@
             DA_PR: DA_PR,
             PR_ME: PR_ME,
             PR_TR: PR_TR,
+            PR_LIB: PR_LIB,
             DTE: DTE,
             DE: DE,
             SUPER: SUPER,
@@ -271,6 +276,15 @@
             var user = activeUserContextService.user;
             var context = activeUserContextService.context;
             return userService.getEvaluateesForEvaluatorPR_TR({id: user.id}, context.orientation.districtCode, context.orientation.schoolCode)
+                .then(function (evaluatees) {
+                    context.evaluatees = evaluatees;
+                })
+        }
+
+        function getEvaluateesForEvaluatorPR_LIB(activeUserContextService) {
+            var user = activeUserContextService.user;
+            var context = activeUserContextService.context;
+            return userService.getEvaluateesForEvaluatorPR_LIB({id: user.id}, context.orientation.districtCode, context.orientation.schoolCode)
                 .then(function (evaluatees) {
                     context.evaluatees = evaluatees;
                 })

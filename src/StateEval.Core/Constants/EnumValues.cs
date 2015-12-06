@@ -289,7 +289,8 @@ namespace StateEval.Core.Constants
 	{
 		UNDEFINED = 0,
 		PRINCIPAL,
-		TEACHER
+		TEACHER,
+        LIBRARIAN
 	}
 
 	public enum SEEvaluationScoreType

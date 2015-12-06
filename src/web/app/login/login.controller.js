@@ -21,6 +21,7 @@
             "North Thurston High School PR2",
             "North Thurston High School T1",
             "North Thurston High School T2",
+            "North Thurston High School LIB",
             "North Thurston High School TMS",
             "North Thurston High School PMS",
             "North Thurston Public Schools DA",

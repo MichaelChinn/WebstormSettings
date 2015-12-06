@@ -17,6 +17,7 @@
             getUserById: getUserById,
             getEvaluateesForEvaluatorPR_PR: getEvaluateesForEvaluatorPR_PR,
             getEvaluateesForEvaluatorPR_TR: getEvaluateesForEvaluatorPR_TR,
+            getEvaluateesForEvaluatorPR_LIB: getEvaluateesForEvaluatorPR_LIB,
             getEvaluateesForEvaluatorDE_PR: getEvaluateesForEvaluatorDE_PR,
             getObserveEvaluateesForDTEEvaluator: getObserveEvaluateesForDTEEvaluator,
             getPrincipalsInDistrict: getPrincipalsInDistrict,
@@ -68,6 +69,16 @@
             assignedOnly = assignedOnly || false;
             var url = config.apiUrl + 'users/evaluatees/prtr/' + activeUserContextService.context.orientation.schoolYear + '/' + districtCode + '/'
                         + schoolCode + '/' + evaluator.id + '/' + assignedOnly + '/true';
+
+            return $http.get(url).then(function(response) {
+                return response.data;
+            });
+        }
+
+        function getEvaluateesForEvaluatorPR_LIB(evaluator, districtCode, schoolCode,  assignedOnly) {
+            assignedOnly = assignedOnly || false;
+            var url = config.apiUrl + 'users/evaluatees/prlib/' + activeUserContextService.context.orientation.schoolYear + '/' + districtCode + '/'
+                + schoolCode + '/' + evaluator.id + '/' + assignedOnly + '/true';
 
             return $http.get(url).then(function(response) {
                 return response.data;
