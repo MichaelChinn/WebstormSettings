@@ -22,7 +22,10 @@ FrameworkContextID	Name	SchoolYear	EvaluationTypeID	StateFrameworkID	Instruction
 
 	-- Librarian Frameworks
 	-- 2016
-	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(11, '34003', 'Othello School District', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(11, '34003', 'North Thurston Public Schools', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(11, '29317', 'Conway School District', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(11, '21302', 'Chehalis School District', 4)
+	insert ProtoFrameworkContextsToLoad(FrameworkContextID, DistrictCode, PlaceName, nTeachers) values(11, '01147', 'Othello School District', 4)
 
 	-- Teacher Frameworks
 

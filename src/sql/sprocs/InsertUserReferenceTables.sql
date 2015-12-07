@@ -250,10 +250,10 @@ GO
                 WHERE   cmdId = @idx
                         AND cmd IS NOT NULL;	
 		
-				--IF @pDebug = 1
-				--SELECT @cmd
-                
-			    EXEC (@cmd);
+				IF @pDebug = 1
+				   SELECT @cmd
+                ELSE 
+			       EXEC (@cmd);
                              
                 SELECT  @idx = MIN(cmdId)
                 FROM    #cmdBlock
