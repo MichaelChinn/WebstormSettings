@@ -82,6 +82,8 @@
         var DV_PR = new WorkArea('DV_PR', 'View Principal Evaluations', evalP, noAdditionalInfoWorkArea,
             [dvDashboard, impersonation]);
         // Evaluation Work-areas
+        var LIB_ME = new WorkArea('LIB_ME', 'Prepare for My Evaluation', evalL, getEvaluationForUserLibrarian,
+            teeNav);
         var TR_ME = new WorkArea('TR_ME', 'Prepare for My Evaluation', evalT, getEvaluationForUserTeacher,
             teeNav);
         var PR_ME = new WorkArea('PR_ME', 'Prepare for My Evaluation', evalP, getEvaluationForUserPrincipal,
@@ -124,6 +126,7 @@
             SESchoolAdmin: [SA_TR, SA_PR],
             SESchoolPrincipal: [PR_TR, PR_LIB, PR_ME],
             SESchoolTeacher: [TR_ME],
+            SESchoolLibrarian: [LIB_ME],
             SEDistrictEvaluator: [DE],
             SEDistrictWideTeacherEvaluator: [DTE],
             SESchoolHeadPrincipal: [PR_PR],
@@ -146,6 +149,7 @@
             SA_TR: SA_TR,
             SA_PR: SA_PR,
             TR_ME: TR_ME,
+            LIB_ME: LIB_ME,
             PR_PR: PR_PR,
             DA_TR: DA_TR,
             DA_PR: DA_PR,
@@ -241,6 +245,12 @@
         function getEvaluationForUserTeacher(activeUserContextService) {
             activeUserContextService.context.evaluatees = null;
             return getEvaluationForEvaluatee(activeUserContextService, evalT);
+        }
+
+        //Loads evaluatee and evaluation for a librarian
+        function getEvaluationForUserLibrarian(activeUserContextService) {
+            activeUserContextService.context.evaluatees = null;
+            return getEvaluationForEvaluatee(activeUserContextService, evalL);
         }
 
         //loads all observable evaluatees for DTE
