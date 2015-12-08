@@ -25,6 +25,7 @@
             getArtifactBundlesForEvaluation: getArtifactBundlesForEvaluation,
             getAttachableObservationsForEvaluation: getAttachableObservationsForEvaluation,
             getAttachableStudentGrowthGoalBundlesForEvaluation: getAttachableStudentGrowthGoalBundlesForEvaluation,
+            getAttachableSelfAssessmentsForEvaluation: getAttachableSelfAssessmentsForEvaluation,
             saveArtifact: saveArtifact,
             deleteArtifact: deleteArtifact,
             updateArtifactRejection: updateArtifactRejection,
@@ -44,6 +45,14 @@
         };
 
         /////////////////////////////////
+
+        function getAttachableSelfAssessmentsForEvaluation() {
+            var evaluationid = activeUserContextService.context.evaluatee.evalData.id;
+            var url = config.apiUrl + evaluationid + '/attachableselfassessments';
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
+        }
 
         function getAttachableStudentGrowthGoalBundlesForEvaluation() {
             var evaluationid = activeUserContextService.context.evaluatee.evalData.id;

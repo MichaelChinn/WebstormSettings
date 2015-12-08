@@ -52,7 +52,7 @@
                         .then(function() {
                             if (vm.artifact.linkedObservations.length>0 ||
                                 vm.artifact.linkedStudentGrowthGoalBundles.length>0 ||
-                                vm.artifacts.linkedSelfAssessments.length>0) {
+                                vm.artifact.linkedSelfAssessments.length>0) {
                                 vm.editMode=false;
                                 vm.editModeBtnText = 'Edit';
                             }
@@ -64,6 +64,7 @@
         function clear() {
             vm.artifact.linkedObservations = [];
             vm.artifact.linkedStudentGrowthGoals = [];
+            vm.artifact.linkedSelfAssessments = [];
             artifactService.saveArtifact(vm.artifact);
         }
 

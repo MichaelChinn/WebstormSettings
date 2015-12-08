@@ -73,6 +73,15 @@ namespace StateEval.Core.Services
             return observations.ToList().Select(x => x.MaptoEvalSessionModel(EvalEntities));
         }
 
+        public IEnumerable<SelfAssessmentModel> GetAttachableSelfAssessmentsForEvaluation(long evaluationId)
+        {
+            IQueryable<SESelfAssessment> assessments = EvalEntities.SESelfAssessments
+                    .Where(x => x.EvaluationID == evaluationId &&
+                              x.IsSharedWithEvaluator == true);
+
+            return assessments.ToList().Select(x => x.MaptoSelfAssessmentModel());
+        }
+
         public void UpdateArtifactBundle(ArtifactBundleModel artifactBundleModel)
         {
             SEArtifactBundle seArtifactBundle =
