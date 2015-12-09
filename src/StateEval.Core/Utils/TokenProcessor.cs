@@ -36,18 +36,6 @@ namespace StateEval.Core.Utils
         public bool UserHasRoles { get; private set; }
         public string RawClaims { get; private set;}
 
-        /*public LocalityRoleContainer LRContainer
-        {
-            get
-            {
-                return new LocalityRoleContainer(LRString);
-            }
-        }
-        public ClaimCollection ProcessedClaims { get; private set; }
-        */
-
-
-
         void DecodeEDSRoleClaim(Claim edsRoleClaim)
         {
             //eds gives us the role claim like: "OrgName;OrgCode;Role1;Role2;....."
@@ -61,8 +49,13 @@ namespace StateEval.Core.Utils
             {
                 string role = toks[i].Trim();
                 string appRole = (string)_roleXlate[role];  //the role xlated into app speak
-                
+
                 ra.RoleList.Add(appRole);       //never mind dups; pick those out later
+
+                //have to ensure that all head principals are also principals
+                //as above, assume that any dups will be taken out later...
+                if (appRole == TokenProcessorReferences.SESchoolHeadPrincipal)
+                    ra.RoleList.Add(TokenProcessorReferences.SESchoolPrincipal);
              
                 if (ra.RoleList.Count > 0)
                 {

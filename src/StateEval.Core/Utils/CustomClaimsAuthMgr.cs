@@ -69,9 +69,12 @@ namespace StateEval.Core.Utils
             //... locationCode|roleString, locationCode|roleString....
             StringBuilder sbLocationRoleString = new StringBuilder();
 
+
             foreach (RolesAt ra in rolesAtList)
             {
-                foreach (string role in ra.RoleList)
+
+                List<string> distinctRoles = ra.RoleList.Distinct().ToList();
+                foreach (string role in distinctRoles)
                 {
                     sbLocationRoleString.Append(ra.CDSCode + "|" + role + ",");
                 }
