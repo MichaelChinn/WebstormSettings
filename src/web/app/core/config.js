@@ -272,16 +272,8 @@
             'SEDistrictWideTeacherEvaluator': 'SEDistrictWideTeacherEvaluator',
             'SESchoolHeadPrincipal': 'SESchoolHeadPrincipal',
             'SECustomSupportL1': 'SECustomSupportL1',
-            'SEDistrictAssignmentManager': 'SEDistrictAssignmentManager'
-        },
-        ActiveEvaluationRole: {
-            'UNDEFINED': 0,
-            'PR_PR': 1,
-            'PR_TR': 2,
-            'DE_PR': 3,
-            'DTE_TR': 4,
-            'DA_PR': 5,
-            'SA_TR': 6
+            'SEDistrictAssignmentManager': 'SEDistrictAssignmentManager',
+            'SESchoolLibrarian': 'SESchoolLibrarian'
         },
         PreConfPromptStateEnum: {
             PromptCreated: 1,

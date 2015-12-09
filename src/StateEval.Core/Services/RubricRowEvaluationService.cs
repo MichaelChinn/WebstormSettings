@@ -129,31 +129,27 @@ namespace StateEval.Core.Services
         }
 
 
-        IEnumerable<RubricRowEvaluationModel> GetRubricRowEvaluationsForTorTee(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly, short evalType, string roleName)
+        public IEnumerable<RubricRowEvaluationModel> GetRubricRowEvaluationsForTorTee(CoreRequestModel request)
         {
             IQueryable<SEUser> users = EvalEntities.SEUsers
-                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == roleName && r.DistrictCode == districtCode && r.SchoolCode == schoolCode))
+                .Where(u => u.SEUserLocationRoles.Any(r => r.RoleName == request.RoleName && 
+                                                        r.DistrictCode == request.DistrictCode &&
+                                                        (r.SchoolCode == request.SchoolCode || request.SchoolCode == "")))
                 .Where(u => u.SEEvaluations.Any(e => e.EvaluateeID == u.SEUserID
-                                                && e.SchoolYear == schoolYear
-                                                && e.EvaluationTypeID == evalType
-                                                && e.DistrictCode == districtCode
-                                                && (!assignedOnly || e.EvaluatorID == evaluatorId)))
-                .Where(u => u.SEUserID != evaluatorId);
+                                                && e.SchoolYear == (short)request.SchoolYear
+                                                && e.EvaluationTypeID == (short)request.EvaluationType
+                                                && e.DistrictCode == request.DistrictCode
+                                                && (!request.AssignedOnly || e.EvaluatorID == request.EvaluatorId)))
+                .Where(u => u.SEUserID != request.EvaluatorId);
 
             IQueryable<SEEvaluation> seEvals = EvalEntities.SEEvaluations
-                .Where(x => x.SchoolYear == schoolYear && x.DistrictCode == districtCode && x.EvaluationTypeID==evalType)
+                .Where(x => x.SchoolYear == (short)request.SchoolYear && x.DistrictCode == request.DistrictCode && x.EvaluationTypeID==(short)request.EvaluationType)
                 .Where(x => users.Select(u => u.SEUserID).Contains(x.EvaluateeID));
 
             IQueryable<SERubricRowEvaluation> seRREvals = EvalEntities.SERubricRowEvaluations
                 .Where(x=>seEvals.Select(y=>y.EvaluationID).Contains(x.EvaluationID));
 
             return seRREvals.ToList().Select(x => x.MaptoRubricRowEvaluationModel(EvalEntities));
-        }
-
-        public IEnumerable<RubricRowEvaluationModel> GetRubricRowEvaluationsForPR_TR(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly)
-        {
-            return GetRubricRowEvaluationsForTorTee(schoolYear, districtCode, schoolCode, evaluatorId, assignedOnly,
-                                        (short)SEEvaluationTypeEnum.TEACHER, StateEval.Core.Constants.RoleName.SESchoolTeacher);
         }
 
         public List<RubricRowEvaluationModel> GetRubricRowEvaluationsForEvaluation(long evaluationId)

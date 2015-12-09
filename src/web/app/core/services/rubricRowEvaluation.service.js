@@ -14,7 +14,7 @@
             getRubricRowEvaluationById: getRubricRowEvaluationById,
             getRubricRowEvaluationsForEvaluation: getRubricRowEvaluationsForEvaluation,
             getRubricRowEvaluationsForEvaluationById: getRubricRowEvaluationsForEvaluationById,
-            getRubricRowEvaluationsForPR_TR: getRubricRowEvaluationsForPR_TR,
+            getRubricRowEvaluationsForTeeTor: getRubricRowEvaluationsForTeeTor,
             getRubricRowEvaluationsForEvalSession: getRubricRowEvaluationsForEvalSession
         };
 
@@ -26,14 +26,35 @@
 
         }
 
-       function getRubricRowEvaluationsForPR_TR(evaluator,  assignedOnly) {
-            assignedOnly = assignedOnly || false;
-            var districtCode = activeUserContextService.context.orientation.districtCode;
-            var schoolCode = activeUserContextService.context.orientation.schoolCode;
-            var url = config.apiUrl + 'rubricrowevaluations/prtr/' + activeUserContextService.context.orientation.schoolYear + '/' + districtCode + '/'
-                + schoolCode + '/' + evaluator.id + '/' + assignedOnly;
+        function mapEvalTypeToRole(evalType) {
+            switch (evalType) {
+                case enums.EvaluationType.LIBRARIAN:
+                    return enums.Roles.SESchoolLibrarian;
+                    break;
+                case enums.EvaluationType.PRINCIPAL:
+                    return enums.Roles.SESchoolPrincipal;
+                    break;
+                case enums.EvaluationType.TEACHER:
+                    return enums.Roles.SESchoolTeacher;
+                    break;
+            }
+        }
 
-            return $http.get(url).then(function(response) {
+       function getRubricRowEvaluationsForTeeTor(evaluator,  assignedOnly) {
+
+           var request = {
+               schoolYear: activeUserContextService.context.orientation.schoolYear,
+               districtCode: activeUserContextService.context.orientation.districtCode,
+               schoolCode: activeUserContextService.context.orientation.schoolCode,
+               evaluationType: activeUserContextService.context.workArea().evalType,
+               evaluatorId: activeUserContextService.context.user,
+               roleName: mapEvalTypeToRole(activeUserContextService.context.workArea().evaluationType),
+               assignedOnly: assignedOnly || false
+           };
+
+            var url = config.apiUrl + 'rubricrowevaluationstortee';
+
+            return $http.get(url, {params: request}).then(function(response) {
                 return response.data;
             });
         }

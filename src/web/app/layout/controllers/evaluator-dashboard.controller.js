@@ -66,7 +66,7 @@
 
         function activate() {
 
-            rubricRowEvaluationService.getRubricRowEvaluationsForPR_TR(activeUserContextService.user)
+            rubricRowEvaluationService.getRubricRowEvaluationsForTeeTor(activeUserContextService.user)
                 .then(function(rrEvals) {
                     vm.rrEvalsGroupByEvalId = _.groupBy(rrEvals, 'id');
                     for (var evalId in vm.rrEvalsGroupByEvalId) {

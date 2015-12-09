@@ -15,4 +15,5 @@ StyleCop.Cache
 src/tools/Prototypes/src/sql/*.txt
 src/sql/*.txt
 src/.idea/**
+src/.idea/*.xml
 *workspace.xml

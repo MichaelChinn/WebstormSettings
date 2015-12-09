@@ -21,5 +21,8 @@ namespace StateEval.Core.RequestModel
         public string DistrictCode { get; set; }
         public string SchoolCode { get; set; }
         public SEEvaluationTypeEnum EvaluationType { get; set; }
+        public string RoleName { get; set; }
+        public bool AssignedOnly { get; set; }
+        public long EvaluatorId { get; set; }
     }
 }

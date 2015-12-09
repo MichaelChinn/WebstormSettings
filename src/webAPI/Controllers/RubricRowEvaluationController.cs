@@ -20,11 +20,11 @@ namespace WebAPI.Controllers
     {
         private readonly RubricRowEvaluationService rubricRowEvaluationService = new RubricRowEvaluationService();
 
-        [Route("api/rubricrowevaluations/prtr/{schoolYear}/{districtCode}/{schoolCode}/{evaluatorId}/{assignedOnly}")]
+        [Route("api/rubricrowevaluationstortee")]
         [HttpGet]
-        public IEnumerable<RubricRowEvaluationModel> GetRubricRowEvaluationsForPR_TR(short schoolYear, string districtCode, string schoolCode, long evaluatorId, bool assignedOnly)
+        public IEnumerable<RubricRowEvaluationModel> GetRubricRowEvaluationsForTorTee([FromUri] CoreRequestModel request)
         {
-            return rubricRowEvaluationService.GetRubricRowEvaluationsForPR_TR(schoolYear, districtCode, schoolCode, evaluatorId, assignedOnly);
+            return rubricRowEvaluationService.GetRubricRowEvaluationsForTorTee(request);
         }
 
         [Route("api/{evaluationId}/rubricrowevaluations")]
@@ -39,7 +39,8 @@ namespace WebAPI.Controllers
             return rubricRowEvaluationService.GetRubricRowEvaluationsForEvaluation(requestModel);
         }
 
-        [Route("api/rubricrowevaluations/")]
+        [Route("api/rubricrowevaluations/{id}")]
+        [HttpGet]
         public RubricRowEvaluationModel GetRubricRowEvaluationById(long id)
         {
             return rubricRowEvaluationService.GetRubricRowEvaluationById(id);

@@ -35,9 +35,9 @@
 
         function activate() {
 
-            rubricRowEvaluationService.getRubricRowEvaluationsForPR_TR(vm.context.evaluator)
-                .then(function (data) {
-                    vm.rubricRowEvaluations = data;
+            rubricRowEvaluationService.getRubricRowEvaluationsForTeeTor(activeUserContextService.user)
+                .then(function(rrEvals) {
+                    vm.rubricRowEvaluations = rrEvals;
                     load();
                 });
 
