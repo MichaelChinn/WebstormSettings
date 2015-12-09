@@ -513,7 +513,7 @@
 				<arg value="-O" />
 			</exec>		
 			
-			<call target="create_svn_tag" />
+			<!-- call target="create_svn_tag" / -->
 		</if>
 	</target>
 
