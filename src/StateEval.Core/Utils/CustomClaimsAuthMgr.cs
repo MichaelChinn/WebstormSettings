@@ -72,9 +72,7 @@ namespace StateEval.Core.Utils
 
             foreach (RolesAt ra in rolesAtList)
             {
-
-                List<string> distinctRoles = ra.RoleList.Distinct().ToList();
-                foreach (string role in distinctRoles)
+                foreach (string role in ra.RoleList)
                 {
                     sbLocationRoleString.Append(ra.CDSCode + "|" + role + ",");
                 }

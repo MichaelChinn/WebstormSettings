@@ -125,6 +125,8 @@ namespace StateEval.Core.Test
 
             Assert.AreEqual(roleData.Count > 1 ? true : false, stp.HasMultipleLocations);
 
+            Assert.AreEqual(roleData.Count, stp.RolesAtList.Count);
+
             foreach (RolesAt ra in stp.RolesAtList)
             {
                 List<string> xlatedRoles = XLateRoles(roleData[ra.OrgName + ";" + ra.CDSCode]);
@@ -185,7 +187,7 @@ namespace StateEval.Core.Test
 
             Dictionary<string, List<string>> roleData = new Dictionary<string, List<string>>()
             {
-                {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.RoleSchoolTeacher}}
+                {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.EDSRoleSchoolTeacher}}
             };
 
             ClaimsIdentity incomingClaims = GenerateToken(myUserData, roleData);
@@ -193,8 +195,9 @@ namespace StateEval.Core.Test
             TokenProcessor tp = new TokenProcessor(TokenProcessorReferences.RoleXlate, incomingClaims.Claims);
             Verify(myUserData, roleData, tp);
         }
+
         [TestMethod]
-        public void MultipleRolesInTokenAreDetected()
+        public void HeadPrincipalGetsSchoolPrincipalIfNecessary()
         {
 
             Dictionary<string, string> myUserData = new Dictionary<string, string>()
@@ -210,15 +213,195 @@ namespace StateEval.Core.Test
 
             Dictionary<string, List<string>> roleData = new Dictionary<string, List<string>>()
             {
-               {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.RoleHeadPrincipal}},
-                {"South Bay Elementary;2754",  new List<string>(){ TokenProcessorReferences.RoleHeadPrincipal, TokenProcessorReferences.RoleSchoolAdmin}},
-                {"Othello School District;01147",  new List<string>(){ TokenProcessorReferences.RoleDistrictTeacherEvaluator, TokenProcessorReferences.RoleSchoolAdmin}}
+               {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.EDSRoleSchoolHeadPrincipal}},
+                {"South Bay Elementary;2754",  new List<string>(){ TokenProcessorReferences.EDSRoleSchoolHeadPrincipal, TokenProcessorReferences.EDSRoleSchoolAdmin}}
             };
 
             ClaimsIdentity incomingClaims = GenerateToken(myUserData, roleData);
 
             TokenProcessor tp = new TokenProcessor(TokenProcessorReferences.RoleXlate, incomingClaims.Claims);
-            Verify(myUserData, roleData, tp);
+
+            Dictionary<string, List<string>> expectedData = new Dictionary<string, List<string>>()
+            {
+               {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.EDSRoleSchoolHeadPrincipal, TokenProcessorReferences.EDSRoleSchoolPrincipal}},
+                {"South Bay Elementary;2754",  new List<string>(){ TokenProcessorReferences.EDSRoleSchoolHeadPrincipal,TokenProcessorReferences.EDSRoleSchoolPrincipal, TokenProcessorReferences.EDSRoleSchoolAdmin}}
+            };
+
+
+            Verify(myUserData, expectedData, tp);
         }
+
+        [TestMethod]
+        public void NoDuplicateRolesAllowed()
+        {
+
+            Dictionary<string, string> myUserData = new Dictionary<string, string>()
+                    {
+                        {MSClaimTypes.Name, "134"},       //personId
+                        {MSClaimTypes.GivenName, "Public, John Q."},
+                        {MSClaimTypes.Email, "fleeble@flooble.com"},
+                        {MSClaimTypes.Sid, "Ar3948"},       //unique return identifier
+                        {MSClaimTypes.NameIdentifier,"X-43942"},     //previous personIds... exclude this
+                        {MSClaimTypes.PPID,"28-48492C"}        //cert number
+                    };
+
+
+            Dictionary<string, List<string>> roleData = new Dictionary<string, List<string>>()
+            {
+               {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.EDSRoleSchoolHeadPrincipal, TokenProcessorReferences.EDSRoleSchoolHeadPrincipal}},
+                {"South Bay Elementary;2754",  new List<string>(){ TokenProcessorReferences.EDSRoleSchoolAdmin, TokenProcessorReferences.EDSRoleSchoolAdmin}},
+                {"Othello School District;01147",  new List<string>(){ TokenProcessorReferences.EDSRoleDistrictTeacherEvaluator, TokenProcessorReferences.EDSRoleDistrictTeacherEvaluator}}
+            };
+
+            ClaimsIdentity incomingClaims = GenerateToken(myUserData, roleData);
+
+            TokenProcessor tp = new TokenProcessor(TokenProcessorReferences.RoleXlate, incomingClaims.Claims);
+
+            Dictionary<string, List<string>> expected = new Dictionary<string, List<string>>()
+            {
+               {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.EDSRoleSchoolHeadPrincipal, TokenProcessorReferences.EDSRoleSchoolPrincipal}},
+                {"South Bay Elementary;2754",  new List<string>(){ TokenProcessorReferences.EDSRoleSchoolAdmin}},
+                {"Othello School District;01147",  new List<string>(){  TokenProcessorReferences.EDSRoleDistrictTeacherEvaluator}}
+            };
+
+            Verify(myUserData, expected, tp);
+        }
+
+        [TestMethod]
+        public void NoSchoolRolesInDistrictAllowed()
+        {
+
+            Dictionary<string, string> myUserData = new Dictionary<string, string>()
+                    {
+                        {MSClaimTypes.Name, "134"},       //personId
+                        {MSClaimTypes.GivenName, "Public, John Q."},
+                        {MSClaimTypes.Email, "fleeble@flooble.com"},
+                        {MSClaimTypes.Sid, "Ar3948"},       //unique return identifier
+                        {MSClaimTypes.NameIdentifier,"X-43942"},     //previous personIds... exclude this
+                        {MSClaimTypes.PPID,"28-48492C"}        //cert number
+                    };
+
+
+            Dictionary<string, List<string>> roleData = new Dictionary<string, List<string>>()
+            {
+               {"North Thurston High School;3010", new List<string>(){ TokenProcessorReferences.EDSRoleDistrictAdmin, TokenProcessorReferences.EDSRoleSchoolAdmin}},
+                {"South Bay Elementary;2754",  new List<string>(){ TokenProcessorReferences.EDSRoleDistrictViewer, TokenProcessorReferences.EDSRoleSchoolPrincipal}},
+            };
+
+            ClaimsIdentity incomingClaims = GenerateToken(myUserData, roleData);
+
+            TokenProcessor tp = new TokenProcessor(TokenProcessorReferences.RoleXlate, incomingClaims.Claims);
+
+            Dictionary<string, List<string>> expected = new Dictionary<string, List<string>>()
+            {
+               {"North Thurston High School;3010", new List<string>(){TokenProcessorReferences.EDSRoleSchoolAdmin}},
+                {"South Bay Elementary;2754",  new List<string>(){ TokenProcessorReferences.EDSRoleSchoolPrincipal}},
+            };
+
+            Verify(myUserData, expected, tp);
+        }
+
+        [TestMethod]
+        public void NoDistrictRolesInSchoolAllowed()
+        {
+
+            Dictionary<string, string> myUserData = new Dictionary<string, string>()
+                    {
+                        {MSClaimTypes.Name, "134"},       //personId
+                        {MSClaimTypes.GivenName, "Public, John Q."},
+                        {MSClaimTypes.Email, "fleeble@flooble.com"},
+                        {MSClaimTypes.Sid, "Ar3948"},       //unique return identifier
+                        {MSClaimTypes.NameIdentifier,"X-43942"},     //previous personIds... exclude this
+                        {MSClaimTypes.PPID,"28-48492C"}        //cert number
+                    };
+
+
+            Dictionary<string, List<string>> roleData = new Dictionary<string, List<string>>()
+            {
+               {"North Thurston Public Schools;34003",  new List<string>(){  TokenProcessorReferences.EDSRoleDistrictTeacherEvaluator, TokenProcessorReferences.EDSRoleSchoolTeacher}},
+            };
+
+            ClaimsIdentity incomingClaims = GenerateToken(myUserData, roleData);
+
+            TokenProcessor tp = new TokenProcessor(TokenProcessorReferences.RoleXlate, incomingClaims.Claims);
+
+            Dictionary<string, List<string>> expected = new Dictionary<string, List<string>>()
+            {
+               {"North Thurston Public Schools;34003",  new List<string>(){  TokenProcessorReferences.EDSRoleDistrictTeacherEvaluator}},
+            };
+
+            Verify(myUserData, expected, tp);
+        }
+
+
+
+        TokenProcessor GetTPForLocationRole(Dictionary<string, string>userData, string location, List<string>roleString)
+        {
+            Dictionary<string, List<string>> roleData = new Dictionary<string, List<string>>();
+            roleData.Add(location, roleString);
+            
+            ClaimsIdentity incomingClaims = GenerateToken(userData, roleData);
+
+            return new TokenProcessor(TokenProcessorReferences.RoleXlate, incomingClaims.Claims);
+        }
+
+        [TestMethod]
+        public void EDSRolesAreMappedCorrectly()
+        {
+
+            Dictionary<string, string> myUserData = new Dictionary<string, string>()
+                    {
+                        {MSClaimTypes.Name, "134"},       //personId
+                        {MSClaimTypes.GivenName, "Public, John Q."},
+                        {MSClaimTypes.Email, "fleeble@flooble.com"},
+                        {MSClaimTypes.Sid, "Ar3948"},       //unique return identifier
+                        {MSClaimTypes.NameIdentifier,"X-43942"},     //previous personIds... exclude this
+                        {MSClaimTypes.PPID,"28-48492C"}        //cert number
+                    };
+
+            TokenProcessor tp;
+            tp = GetTPForLocationRole(myUserData, "North Thurston Public Schools;34003", new List<string>() { TokenProcessorReferences.EDSRoleDistrictAdmin });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SEDistrictAdmin"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+            
+            tp = GetTPForLocationRole(myUserData, "North Thurston Public Schools;34003", new List<string>() { TokenProcessorReferences.EDSRoleDistrictAssignentManager });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SEDistrictAssignmentManager"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+         
+            tp = GetTPForLocationRole(myUserData, "North Thurston Public Schools;34003", new List<string>() { TokenProcessorReferences.EDSRoleDistrictEvaluator });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SEDistrictEvaluator"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+          
+            tp = GetTPForLocationRole(myUserData, "North Thurston Public Schools;34003", new List<string>() { TokenProcessorReferences.EDSRoleDistrictTeacherEvaluator });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SEDistrictWideTeacherEvaluator"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+         
+            tp = GetTPForLocationRole(myUserData, "North Thurston Public Schools;34003", new List<string>() { TokenProcessorReferences.EDSRoleDistrictViewer });  
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SEDistrictViewer"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+
+            tp = GetTPForLocationRole(myUserData, "North Thurston High School;3010",  new List<string>() {TokenProcessorReferences.EDSRoleSchoolAdmin         }); 
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SESchoolAdmin"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+
+            tp = GetTPForLocationRole(myUserData, "North Thurston High School;3010",  new List<string>() {TokenProcessorReferences.EDSRoleSchoolHeadPrincipal });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SESchoolHeadPrincipal"));
+            Assert.AreEqual(2, tp.RolesAtList[0].RoleList.Count);  //!! head principal resolves to **2*** roles
+         
+            tp = GetTPForLocationRole(myUserData, "North Thurston High School;3010",  new List<string>() {TokenProcessorReferences.EDSRoleSchoolPrincipal     });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SESchoolPrincipal"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+
+            tp = GetTPForLocationRole(myUserData, "North Thurston High School;3010",  new List<string>() {TokenProcessorReferences.EDSRoleSchoolTeacher       });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SESchoolTeacher"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+
+            tp = GetTPForLocationRole(myUserData, "North Thurston High School;3010",  new List<string>() {TokenProcessorReferences.EDSRoleSchoolLibrarian     });
+            Assert.IsTrue(tp.RolesAtList[0].RoleList.Contains("SESchoolLibrarian"));
+            Assert.AreEqual(1, tp.RolesAtList[0].RoleList.Count);
+
+
+        }
+
     }
 }

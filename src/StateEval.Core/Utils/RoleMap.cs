@@ -12,87 +12,93 @@ namespace StateEval.Core.Utils
 
         public const string EdsNameTag = "_edsUser";
 
-        public const string RoleDistrictAdmin = "eValDistrictAdmin";
-        public const string RoleDistrictEvaluator = "eValDistrictEvaluator";
-        public const string RoleSchoolAdmin = "eValSchoolAdmin";
-        public const string RoleSchoolPrincipal = "eValSchoolPrincipal";
-        public const string RoleSchoolTeacher = "eValSchoolTeacher";
-        public const string RoleStateAdmin = "eValStateAdmin";
-        public const string RoleSuperAdmin = "eValSuperAdmin";
-        public const string RoleHeadPrincipal = "eValHeadPrincipal";
-        public const string RoleDistrictTeacherEvaluator = "eValDistrictTeacherEvaluator";
-        public const string RoleDistrictViewer = "eValDistrictViewer";
-        public const string RoleDistrictRoleManager = "eValDistrictAssignmentManager";
+        //the following comes exactly from the old code base  
+        // ...\StateEvalLib\security\EDSIdentity
+        //
+        //the following has been reordered, and prepended with 'EDS' for clarity
+        //..also added the librarian role, new in V2
 
-    
+        //EDS Roles
+        //district roles, alphabetically
+        public const string EDSRoleDistrictAdmin = "eValDistrictAdmin";
+        public const string EDSRoleDistrictAssignentManager = "eValDistrictAssignmentManager";
+        public const string EDSRoleDistrictEvaluator = "eValDistrictEvaluator";
+        public const string EDSRoleDistrictTeacherEvaluator = "eValDistrictTeacherEvaluator";
+        public const string EDSRoleDistrictViewer = "eValDistrictViewer";
+
+        //school roles, hierarchichally
+        public const string EDSRoleSchoolAdmin = "eValSchoolAdmin";
+        public const string EDSRoleSchoolHeadPrincipal = "eValHeadPrincipal";
+        public const string EDSRoleSchoolPrincipal = "eValSchoolPrincipal";
+        public const string EDSRoleSchoolTeacher = "eValSchoolTeacher";
+        public const string EDSRoleSchoolLibrarian = "eValSchoolLibrarian";
+
+        //never sent from EDS
+        public const string EDSRoleStateAdmin = "eValStateAdmin";
+        public const string EDSRoleSuperAdmin = "eValSuperAdmin";
 
 
-
+        //SERoles from InitRoles in the sql init folder...
         public const string SESuperAdmin = "SESuperAdmin";
-        public const string SEStateAdmin = "SEStateAdmin";
+        public const string SECustomerSupportL1 = "SECustomerSupportL1";
+        public const string SEPracticeParticipantGuest = "SEPracticeParticipantGuest";
+
         public const string SEDistrictAdmin = "SEDistrictAdmin";
+        public const string SEDistrictAssignmentManager = "SEDistrictAssignmentManager";
+        public const string SEDistrictEvaluator = "SEDistrictEvaluator";
+        public const string SEDistrictWideTeacherEvaluator = "SEDistrictWideTeacherEvaluator";
         public const string SEDistrictViewer = "SEDistrictViewer";
+
         public const string SESchoolAdmin = "SESchoolAdmin";
+        public const string SESchoolHeadPrincipal = "SESchoolHeadPrincipal";
         public const string SESchoolPrincipal = "SESchoolPrincipal";
         public const string SESchoolTeacher = "SESchoolTeacher";
-        public const string SEDistrictEvaluator = "SEDistrictEvaluator";
-        public const string SEESDAdmin = "SEESDAdmin";
-        public const string SEPracticeParticipantGuest = "SEPracticeParticipantGuest";
-        public const string SETeacherEvaluator = "SETeacherEvaluator";
-        public const string SEPrincipalEvaluator = "SEPrincipalEvaluator";
-        public const string SECustomSupportL1 = "SECustomerSupportL1";
-        public const string SEDistrictRoleManager = "SEDistrictRoleManager";
-        public const string SEHomeLocation = "SEHomeLocation";
-        public const string SEDistrictWideTeacherEvaluator = "SEDistrictWideTeacherEvaluator";
-        public const string SESchoolHeadPrincipal = "SESchoolHeadPrincipal";
-        public const string SEDistrictAssignmentManager = "SEDistrictAssignmentManager";
+        public const string SESchoolLibrarian = "SESchoolLibrarian";
 
 
-        public static Dictionary<string, bool> IsOkForSchool = new Dictionary<string, bool>()
+        public static List<string> SchoolRoles = new List<string>()
         {
-            {SESchoolAdmin , true},
-            {SESchoolPrincipal , true},
-            {SESchoolTeacher , true},
-            
-            {SEPracticeParticipantGuest , true},
-            {SETeacherEvaluator , true},
-            {SEPrincipalEvaluator , true},
-            {SECustomSupportL1 , true},
-            
+            SEPracticeParticipantGuest , 
+            SECustomerSupportL1 , 
+   
+            SESchoolAdmin , 
+            SESchoolPrincipal , 
+            SESchoolTeacher , 
+            SESchoolHeadPrincipal ,
+            SESchoolLibrarian
         };
 
-
-
-                public static Dictionary<string, bool> IsOkForDistrict = new Dictionary<string, bool>()
+        public static List<string> DistrictRoles = new List<string>()
         { 
-            {SEDistrictAdmin , true},
-            {SEDistrictViewer , true},
+            SEDistrictAdmin , 
+            SEDistrictViewer , 
+            SEDistrictWideTeacherEvaluator, 
+            SEDistrictAssignmentManager ,
+            SEDistrictEvaluator
 
-            {SEDistrictEvaluator , true},
-            
-            {SEPracticeParticipantGuest , true},
-            {SETeacherEvaluator , true},
-            {SEPrincipalEvaluator , true},
-            
-            {SEDistrictRoleManager , true}
         };
-        
+        public static bool IsSchoolRole(string roleName)
+        {
+            return SchoolRoles.Contains(roleName);
+        }
+        public static bool IsDistrictRole(string roleName)
+        {
+            return DistrictRoles.Contains(roleName);
+        }
+
         public static Dictionary<string, string> RoleXlate = new Dictionary<string, string>()
         {
-            {RoleSuperAdmin, SESuperAdmin},
-            {RoleStateAdmin, SEStateAdmin},
-            
-            {RoleDistrictAdmin, SEDistrictAdmin},
-            {RoleDistrictEvaluator, SEDistrictEvaluator},
-            {RoleDistrictTeacherEvaluator, SEDistrictWideTeacherEvaluator},
-
-            {RoleSchoolAdmin, SESchoolAdmin},
-            {RoleHeadPrincipal, SESchoolHeadPrincipal},
-            {RoleSchoolPrincipal, SESchoolPrincipal},
-            
-            {RoleSchoolTeacher, SESchoolTeacher},
-            {RoleDistrictViewer, SEDistrictViewer},
-            {RoleDistrictRoleManager, SEDistrictAssignmentManager},
+            {EDSRoleDistrictAdmin                    ,  SEDistrictAdmin                  },
+            {EDSRoleDistrictAssignentManager         ,  SEDistrictAssignmentManager      },
+            {EDSRoleDistrictEvaluator                ,  SEDistrictEvaluator              },
+            {EDSRoleDistrictTeacherEvaluator         ,  SEDistrictWideTeacherEvaluator   },
+            {EDSRoleDistrictViewer                   ,  SEDistrictViewer                 }, 
+                                                                       
+            {EDSRoleSchoolAdmin                      ,  SESchoolAdmin                    },
+            {EDSRoleSchoolHeadPrincipal              ,  SESchoolHeadPrincipal            },
+            {EDSRoleSchoolPrincipal                  ,  SESchoolPrincipal                },
+            {EDSRoleSchoolTeacher                    ,  SESchoolTeacher                  },
+            {EDSRoleSchoolLibrarian                  ,  SESchoolLibrarian                }
         };
 
         public static Dictionary<string, string> School2District = new Dictionary<string, string>()

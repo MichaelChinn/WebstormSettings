@@ -36,12 +36,15 @@ namespace StateEval.Core.Utils
         public bool UserHasRoles { get; private set; }
         public string RawClaims { get; private set;}
 
+
+
         void DecodeEDSRoleClaim(Claim edsRoleClaim)
         {
             //eds gives us the role claim like: "OrgName;OrgCode;Role1;Role2;....."
             _locationCount++;
             List<string> roles = new List<string>();
             string[] toks = edsRoleClaim.Value.Split(new char[] { ';' });
+
 
             RolesAt ra = new RolesAt(toks[0], toks[1]);
 
@@ -50,17 +53,27 @@ namespace StateEval.Core.Utils
                 string role = toks[i].Trim();
                 string appRole = (string)_roleXlate[role];  //the role xlated into app speak
 
-                ra.RoleList.Add(appRole);       //never mind dups; pick those out later
+                if (ra.IsSchool && !TokenProcessorReferences.IsSchoolRole(appRole))
+                    continue;
+
+                if (ra.IsDistrict && !TokenProcessorReferences.IsDistrictRole(appRole))
+                    continue;
+                
+
+                if (!roles.Contains(appRole))
+                    roles.Add(appRole);
 
                 //have to ensure that all head principals are also principals
-                //as above, assume that any dups will be taken out later...
                 if (appRole == TokenProcessorReferences.SESchoolHeadPrincipal)
-                    ra.RoleList.Add(TokenProcessorReferences.SESchoolPrincipal);
-             
-                if (ra.RoleList.Count > 0)
                 {
-                    RolesAtList.Add(ra);
+                    if (!roles.Contains(TokenProcessorReferences.SESchoolPrincipal))
+                        roles.Add(TokenProcessorReferences.SESchoolPrincipal);
                 }
+            }
+            if (roles.Count > 0)
+            {
+                ra.RoleList = roles.Distinct().ToList();
+                RolesAtList.Add(ra);
             }
         }
 
@@ -95,7 +108,7 @@ namespace StateEval.Core.Utils
              * 
              * Recall that, the new code base,  only thing the WIF site is used for is as 
              * a gateway to the clientside.  The whole identity principal thing is used
-             * only as a way to communicate with the web site, so that it can put package
+             * only as a way to communicate with the web site, so that it can package
              * up the user id and a password in a secure query string to redirect to the
              * client so that *it* can send *that* to the web api to get a token.
              * 
