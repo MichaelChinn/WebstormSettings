@@ -1,0 +1,8 @@
+
+Top navigation bar. The subnavigation needs to stand out more. Which ones is highlighted.
+
+Artifact Report index at tbottom should append to end
+
+On focused observation the criteria legend should only show focused criteria 
+
+IE11 compatibilityview settings was necessary to get notes editor to work. messages didn't work. clicked on links and nothing happened.

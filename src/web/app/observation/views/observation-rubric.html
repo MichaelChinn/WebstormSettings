@@ -1,0 +1,142 @@
+<div>
+    <div style="display: inline-block; font-size: 20px; margin-right: 40px; height: 40px;">{{vm.selectedRubricRow.shortName}}</div>
+    <div style="display:inline-block; font-weight: bold;margin-right: 40px; border-bottom: 5px solid black;height: 40px;">Available Evidence({{vm.artifactBundles.length}})</div>
+    <div style=" display: inline-block;font-weight: bold; height: 40px;">Evaluated Evidence(0)</div>
+    <span class="pull-right"><input type="button" value="Back to Notes" class="btn btn-primary btn-xs" ng-click="vm.showNoteSection()" /></span>
+</div>
+<hr style="margin-top:0px;" />
+<div style="margin-top: 40px;">
+    <div>
+        <h2>{{vm.selectedRubricRow.title}}</h2>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+<hr />
+<div style="margin-bottom: 30px;">
+    This section displays all available Evidence for this Rubric, note that you don't have to use all of them in your evaluation process
+</div>
+
+
+<div>
+    <div ng-show="vm.artifactBundlesEvaluatee.length>0">
+        <div>
+            <span style="font-weight: bold;"> Teachers Submitted Evidence</span>
+            <br />
+            <span>list of evidence items submitted by the teacher, and connected to both of the observation and the rubric.</span>
+            <br />
+            <br />
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Items</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="artifact in vm.artifactBundlesEvaluatee">
+                        <td>
+                            <a href="#" ng-click="isCollapsed = !isCollapsed">
+                                <span ng-class="{'fa fa-caret-right': !isCollapsed, 'fa fa-caret-down': isCollapsed}"></span>
+                            </a>
+                        </td>
+                        <td>{{artifact.creationDateTime|date:'MM/dd/yyyy'}}</td>
+                        <td style="width: 200px;">{{artifact.title}}</td>
+                        <td>{{artifact.items}}</td>
+                        <td>
+                            <input type="button" value="View" class="btn btn-primary btn-xs" />
+                            <input type="button" value="Evaluate" class="btn btn-primary btn-xs" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div style="margin-top: 40px;" ng-show="vm.hasAnnotation">
+        <div>
+            <b>Coded Items</b>
+        </div>
+        <div>
+            <span>Below you can find all the notes you've coded to this rubric</span>
+            <span class="pull-right">
+                <input type="button" value="Evaluate Coded Items" class="btn btn-primary btn-xs" ng-click="vm.evaluateNotes()" />
+            </span>
+        </div>
+        <br />
+        <div ng-show="vm.annotationsFromNoteEditor.length>0">
+            <div style="height: 40px; line-height: 40px;background-color: gainsboro; padding: 0px 0px 0px 20px;">
+                <b>Coding from the Notes Editor</b>
+            </div>
+            <div style="background-color: gainsboro">
+                <div class="content" style="background-color: white; margin:0px 5px 0px 5px;">
+                    <div ng-repeat="annotation in vm.annotationsFromNoteEditor" style="border-bottom: solid 5px gainsboro;">
+                        <div style="margin-left: 20px;padding: 10px 0px 10px 0px;">
+                            {{annotation.annotation}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-show="vm.annotationsFromPreConfMeeting.length>0">
+            <div style="height: 40px; line-height: 40px;background-color: gainsboro; padding: 0px 0px 0px 20px;">
+                <b>Pre-conference meeting summary</b>
+            </div>
+            
+            <div style="background-color: gainsboro; ">
+                <div class="content" style="margin:0px 5px 0px 5px; background-color: white;">
+                    <div ng-repeat="annotation in vm.annotationsFromPreConfMeeting" style="border-bottom: solid 5px gainsboro;">
+                        <div style="margin-left: 20px;padding: 10px 0px 10px 0px;">
+                            {{annotation.annotation}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; margin-bottom: 20px;" ng-show="vm.artifactBundlesEvaluator.length>0">
+        <div>
+            <div>
+                <b>Evaluators Evidence Items</b>
+            </div>
+            <div>
+                List of srtifacts attatched by evaluator
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Items</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="artifact in vm.artifactBundlesEvaluator">
+                        <td>
+                            <a href="#" ng-click="isCollapsed = !isCollapsed">
+                                <span ng-class="{'fa fa-caret-right': !isCollapsed, 'fa fa-caret-down': isCollapsed}"></span>
+                            </a>
+                        </td>
+                        <td>{{artifact.creationDateTime|date:'MM/dd/yyyy'}}</td>
+                        <td style="width: 200px;">{{artifact.title}}</td>
+                        <td>{{artifact.items}}</td>
+                        <td>
+                            <input type="button" value="View" class="btn btn-primary btn-xs" />
+                            <input type="button" value="Evaluate" class="btn btn-primary btn-xs" ng-click="vm.evaluateArtifact(artifact)" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

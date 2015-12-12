@@ -1,0 +1,2818 @@
+﻿
+body {
+	line-height: 1;
+	font: 13px/1.5 Arial,sans-serif;
+	color: #5c5040;
+	background-color: #fcfbe8;
+}
+
+.error_message_window
+{
+	background-color: #fcfbe8;	
+		width: 450px;
+		height:200px;
+	margin: 0 auto;
+}
+
+.error_message_window .message
+{
+	padding:20px;
+	font-weight:bold;
+	font: 13px/1.5 Arial,sans-serif;
+	color: #5c5040;
+}
+.error_message_window .header
+{
+	padding:20px;
+}
+
+/*******************************************************************
+ BEGIN Telerik PanelBar overrides
+ ******************************************************************/
+ 
+.RadPanelBar .rpRootGroup
+{
+     border: none !important;
+     text-decoration: none;
+}
+.RadPanelBar .rpRootGroup .rpLink,
+.RadPanelBar .rpRootGroup .rpOut,
+.RadPanelBar .rpHeaderTemplate
+{
+    border: 0 !important;
+    padding: 0 !important;
+}
+
+/*******************************************************************
+ BEGIN Telerik PanelBar overrides
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN Telerik Tab overrides
+ ******************************************************************/
+
+/* Default */
+.selectedTab
+{
+    height:40px !important;
+    width:190px !important;
+    line-height:40px !important;
+    text-align:left !important;
+    background-color:#66654f !important;
+    color:#fcfbe8 !important;
+    font-weight:bold !important;
+    font-size:15px !important;
+    border-right:1px solid #fcfbe8 !important;
+}
+
+.defaultTab
+{
+    height:40px !important;
+    width:190px !important;
+    line-height:40px !important;
+    text-align:left !important;
+    background-color:#bcbba6;
+    color:#fcfbe8 !important;
+    font-weight:bold !important;
+    font-size:15px !important;
+    border-right:1px solid #fcfbe8 !important;
+}
+
+
+/* Blue-ish tab in Observe */
+.selectedTabBlue
+{
+    height:40px !important;
+    width:190px !important;
+    line-height:40px !important;
+    text-align:left !important;
+    background-color:#567482 !important;
+    color:#fcfbe8 !important;
+    font-weight:bold !important;
+    font-size:15px !important;
+    border-right:1px solid #fcfbe8 !important;
+}
+
+.defaultTabBlue
+{
+    height:40px !important;
+    width:190px !important;
+    line-height:40px !important;
+    text-align:left !important;
+    background-color:#a9b7b5;
+    color:#fcfbe8 !important;
+    font-weight:bold !important;
+    font-size:15px !important;
+    border-right:1px solid #fcfbe8 !important;
+}
+
+/*******************************************************************
+ END Telerik Tab overrides
+ ******************************************************************/
+ 
+
+/*******************************************************************
+ BEGIN AjaxToolkit PanelBars
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN Blue frameworknode Panel Bar
+ ******************************************************************/
+
+div.fn_header
+{
+    position:relative;
+    font:Arial;
+    height:47px;
+    background-color:#e5e4d1;
+}
+
+div.fn_header span.shortName
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+    border:0;
+    background-color:#567482;
+    color:#fcfbe8;
+    font-size:15px;
+    font-weight:bold;
+    width:47px;
+    line-height:47px;
+    text-align:center;
+    display:block;
+}
+
+div.fn_header span.focus
+{
+    background-image: url(../images/Focus.png);
+}
+
+div.fn_header span.desc,
+div.fn_header span.score
+{
+    background-color:#e5e4d1;
+    color:#1d4658;
+    text-align:left;
+    font-weight:bold;
+    padding-left:10px;
+    font-size:12px;
+    display:block;
+}
+
+div.fn_header span.score
+{
+    line-height:44px;
+}
+
+div.fn_header span.desc
+{
+    position:absolute;
+    top:0px;
+    left:47px;
+    width:650px;
+    line-height:21px;
+}
+
+table.contain
+{
+    height:47px;
+}
+
+div.fn_header span.score
+{
+    position:absolute;
+    top:0px;
+    right:45px;
+}
+
+div.fn_header span.btn
+{
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
+/*******************************************************************
+ BEGIN Blue frameworknode Panel Bar
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN Configurable background-color Panel Bar
+ ******************************************************************/
+
+div.panel_header,
+div.os_panel_header
+{
+    position:relative;
+    font:Arial;
+    height:47px;
+    width:100%;
+}
+
+div.panel_header .panel_text,
+div.os_panel_header .os_panel_text
+{
+    position:absolute;
+    top:10px;
+    left:10px;
+    color:#fcfbe8;
+    font-size:15px;
+    font-weight:bold;
+    text-align:left;
+    padding-left:10px;
+}
+
+div.panel_header .panel_btn,
+div.os_panel_header .os_panel_btn
+{
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
+/*******************************************************************
+ END Configurable background-color Panel Bar
+ ******************************************************************/
+ 
+/*******************************************************************
+ END AjaxToolkit PanelBars
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN Top-level and landings
+ ******************************************************************/
+ 
+.loginbox
+{
+    background-color:#f2f1de;
+}
+
+#dialog {
+	margin: 0 auto;
+}
+
+#dialog_header {
+	position: relative;
+	height: 100px;
+}
+
+#dialog_maincontent {
+	position: relative;
+}
+
+#unauthenticated {
+	width: 925px;
+	margin: 0 auto;
+}
+
+#unauthenticated_header {
+	position: relative;
+	width: 925px;
+	height: 100px;
+}
+
+#unauthenticated_maincontent {
+	position: relative;
+	width: 925px;
+}
+
+/* fixed-sized content centered */
+#site {
+	width: 950px;
+	margin: 0 auto;
+}
+
+#site_header {
+	position: relative;
+	    top:0px;
+    left:0px;
+	width: 950px;
+}
+
+/* logo in upper left */
+#logo {
+	display: block;
+}
+
+/* account info upper right */
+#site_header_account_info 
+{
+	position: absolute;
+	top: 10px;
+	right: 0;
+	border: 0;
+}
+
+#site_header_account_info  .displayname
+{
+    color:#fb661a;
+    font-size:22px;
+    white-space:nowrap;  
+    float:right;
+}
+
+#site_header_account_info select
+{
+    clear:both;
+	background-color:#f39869;
+	color:#fcfbe8;
+	float:right;
+}
+
+#site_header_account_info  .account
+{
+    clear:both;
+    float:right;
+	border: 0;
+    white-space:nowrap;
+    font-size:11px;
+    color:#7795a3;
+}
+
+#site_header_account_info .account a:link,
+#site_header_account_info .account a:hover, 
+#site_header_account_info .account a:visited
+{
+    color:#7795a3;
+    text-decoration:none;
+}
+
+#banner {
+	display: block;
+} 
+
+/* 
+   top horizontal edge of navbar that's
+   visible on all pages, even if the user has not yet
+   chosen a role with the section nav bar 
+*/
+
+#site_header_topnav
+{
+    display:block;
+	height:16px;
+}
+
+#site_header_topnav ul
+{
+    list-style-type:none;
+	display:inline;
+}
+
+#site_header_topnav ul li
+{
+    display:inline;
+    float:left;   
+    margin-right:1px;
+}
+
+#site_header_topnav ul li.one
+{
+    background-color:#e73541;
+    width:189px;
+}
+
+.appt_one
+{
+    background-color:#e73541;
+    color:#fcfbe8;
+}
+
+.panel_header_one
+{
+    background-color:#e73541;
+}
+
+.page_header_one
+{
+    color:#e73541;
+}
+
+#site_header_topnav ul li.two
+{
+    background-color:#fb5500;
+    width:189px;
+}
+
+.section2 .panel_header
+{
+    background-color:#fb5500;
+}
+
+.page_header
+{
+    color:#fb5500;
+}
+
+#site_header_topnav ul li.three
+{
+    background-color:#f4b800;
+    width:189px;
+}
+
+.panel_header_three
+{
+    background-color:#f4b800;
+}
+
+.page_header
+{
+    color:#f4b800;
+}
+
+#site_header_topnav ul li.four
+{
+    background-color:#33bb99;
+    width:188px;
+}
+
+.panel_header_four
+{
+    background-color:#33bb99;
+}
+
+.page_header
+{
+    color:#33bb99;
+}
+
+#site_header_topnav ul li.five
+{
+    background-color:#1d4658;
+    width:188px;
+}
+
+.panel_header_five
+{
+    background-color:#1d4658;
+}
+
+.page_header
+{
+    color:#1d4658;
+}
+
+#site_header_topnav ul li.six
+{
+    background-color:#815d95;
+    width:189px;
+}
+
+.panel_header_six
+{
+    background-color:#815d95;
+}
+
+.page_header_six
+{
+    color:#815d95;
+}
+
+/* page topnav */
+
+#site_topnav 
+{
+    position:relative;    
+    top:0px;
+    left:0px;
+	width:950px;
+}
+
+ul.top_nav_menu
+{
+    list-style-type:none;
+}
+
+ul.top_nav_menu
+{
+    display:inline;
+}
+
+ul.top_nav_menu li
+{
+    display:inline;
+}
+
+ul.top_nav_menu li a
+{
+    display:block;
+    float:left;
+    margin-right:1px;
+    text-align:center;
+    color:#fcfbe8;
+    font-size:13px;
+    font:Arial;
+    font-weight:bold;
+    text-transform:uppercase;
+    line-height:62px;
+    text-decoration:none;
+}
+
+ul.top_nav_menu li a.one
+{
+    background-color:#ed6871;
+    width:189px;
+}
+
+ul.top_nav_menu li a.one:hover, ul.top_nav_menu li a.one_active
+{
+    background-color:#e73541;
+    width:189px;
+}
+
+ul.top_nav_menu li a.two 
+{
+    background-color:#fc8040;
+    width:189px;
+}
+
+ul.top_nav_menu li a.two:hover, ul.top_nav_menu li a.two_active
+{
+    background-color:#fb5500;
+    width:189px;
+}
+
+ul.top_nav_menu li a.three
+{
+    background-color:#f7ca40;
+    width:189px;
+}
+
+ul.top_nav_menu li a.three:hover, ul.top_nav_menu li a.three_active
+{
+    background-color:#f4b800;
+    width:189px;
+}
+
+ul.top_nav_menu li a.four
+{
+    background-color:#66ccb3;
+    width:188px;
+}
+
+ul.top_nav_menu li a.four:hover, ul.top_nav_menu li a.four_active
+{
+    background-color:#33bb99;
+    width:188px;
+}
+
+ul.top_nav_menu li a.five
+{
+    background-color:#567482;
+    width:188px;
+}
+
+ul.top_nav_menu li a.five:hover, ul.top_nav_menu li a.five_active
+{
+    background-color:#1d4658;
+    width:188px;
+}
+
+ul.top_nav_menu li a.six
+{
+    background-color:#a186b7;
+    width:189px;
+}
+
+ul.top_nav_menu li a.six:hover, ul.top_nav_menu li a.six_active
+{
+    background-color:#815d95;
+    width:189px;
+}
+
+#site_topnav_arrow
+{
+    display:block;
+	height:9px;
+}
+
+#site_topnav_arrow ul
+{
+    list-style-type:none;
+	display:inline;
+}
+
+#site_topnav_arrow ul li
+{
+    display:inline;
+    float:left;   
+    margin-right:1px;
+}
+
+#site_topnav_arrow ul li.one
+{
+    width:189px;
+}
+
+#site_topnav_arrow ul li.one_active
+{
+    background: #faf9e6 url(../images/Arrow_Red.png) no-repeat 89px 0px;
+    width:189px;
+}
+
+#site_topnav_arrow ul li.two
+{
+    width:189px;
+}
+
+#site_topnav_arrow ul li.two_active
+{
+    background: #faf9e6 url(../images/Arrow_Orange.png) no-repeat 89px 0px;
+    width:189px;
+}
+
+#site_topnav_arrow ul li.three
+{
+    width:189px;
+}
+
+#site_topnav_arrow ul li.three_active
+{
+    background: #faf9e6 url(../images/Arrow_Yellow.png) no-repeat 89px 0px;
+    width:189px;
+}
+
+#site_topnav_arrow ul li.four
+{
+    width:188px;
+}
+
+#site_topnav_arrow ul li.four_active
+{
+    background: #faf9e6 url(../images/Arrow_Green.png) no-repeat 89px 0px;
+    width:188px;
+}
+
+#site_topnav_arrow ul li.five
+{
+    width:188px;
+}
+
+#site_topnav_arrow ul li.five_active
+{
+    background: #faf9e6 url(../images/Arrow_BLue.png) no-repeat 89px 0px;
+    width:188px;
+}
+
+#site_header_topnav ul li.six
+{
+    background-color:#815d95;
+    width:189px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* the different pages have the need to add white space before the main content starts */
+.vspacer
+{
+    display:block;
+}
+
+#site_main
+{
+    position: relative;
+	width: 950px;
+}
+
+.main_planding
+{
+    height:517px;
+    background: #faf9e6 url(../images/PLandingBG.jpg);
+}
+
+.main_pevaluatorlanding, 
+.main_pevaluateelanding, 
+.main_devaluatorlanding, 
+.main_tevaluateelanding, 
+.main_dadminlanding, 
+.main_sadminlanding
+{
+    height:511px;
+    background: #faf9e6 url(../images/PEvaluatorLandingBG.jpg) no-repeat;
+}
+
+.begin_left_btn
+{
+    position:absolute;
+    left:325px;
+    top:10px;
+}
+
+.begin_right_btn
+{
+    position:absolute;
+    left:650px;
+    top:10px;
+}
+
+.planding_welcome, .dlanding_welcome, .tlanding_welcome, .dadminlanding_welcome, .sadminlanding_welcome
+{
+    color:#fcfbe8;
+    font-size:13px;
+    font:Arial;
+    font-weight:bold;
+    position:absolute;
+    top:34px;
+    left:25px;
+}
+
+.planding_welcome_name, .dlanding_welcome_name, .tlanding_welcome_name, .dadminlanding_welcome_name, .sadminlanding_welcome_name
+{
+    color:#ddd761;
+    font-size:20px;
+    font:Arial;
+    font-weight:normal;
+    position:absolute;
+    top:47px;
+    left:25px;
+}
+
+.landing_desc
+{
+    color:#fcfbe8;
+    font-size:13px;
+    font:Arial;
+    font-weight:normal;
+}
+
+.begin_left_desc
+{
+    position:absolute;
+    left:325px;
+    top:58px;
+    width:245px;
+}
+
+.begin_right_desc
+{
+    position:absolute;
+    left:650px;
+    top:58px;
+    width:235px;
+}
+
+/*******************************************************************
+ END Top-level and landings
+ ******************************************************************/
+
+
+/* Main content beyond landing pages */
+
+.clear
+{
+    clear:both;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+strong {
+	font-weight: bold;
+	color: #5c5040;
+	font-size:12px;
+}
+
+.formfieldlabel 
+{
+    font-weight: bold;
+
+} 
+
+/*******************************************************************
+ BEGIN RESOURCES
+ ******************************************************************/
+.resources .grid_title
+{
+    font-weight:bold;
+    font-size:14px;
+    color:#fcfbe8;
+    background-color:#7c7b65;
+    padding-bottom:5px;
+    padding-top:5px;
+    padding-left:10px;
+    display:block;
+}
+
+/*******************************************************************
+ BEGIN RESOURCES
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN PRE-CONF
+ ******************************************************************/
+
+.preconf
+{
+    position:relative;
+    background-color:#eeedda;
+    height:800px;
+}
+
+.preconf .leftnav
+{
+    position:absolute;
+    top:20px;
+    left:20px;
+    width:115px;
+}
+
+.preconf .main_content
+{
+    position:absolute;
+    top:20px;
+    left:175px;
+    width:735px;
+}
+
+.preconf .leftnav .leftnav_menu_heading
+{
+    text-transform:uppercase;
+    font-size:10px;
+    font-weight:bold;
+}
+
+ul.leftnav_menu li
+{
+   font-size:15px;
+   font-weight:bold;
+
+}
+
+ul.leftnav_menu li a
+{
+    color:#7c7b65;
+    text-decoration:none;
+}
+
+ul.leftnav_menu li .here,
+ul.leftnav_menu li .here_one
+{
+    color:#e73541;
+}
+
+ul.leftnav_menu li .here_two
+{
+    color:#fc8040;
+}
+
+   
+.edit_eval_session .btn_container .defaultbtn
+{
+    position:absolute;
+    top:0px;
+    right:0px;
+}
+
+.lightbrown_text
+{
+    color:#7c7b65;
+}
+
+.preconf .main_content .panel_content
+{
+    background-color:white;
+    padding:5px;
+    margin-bottom:20px;
+}
+
+.preconf .main_content .panel_header
+{
+}
+
+.preconf .notes_instructions
+{
+    font-size:12px;
+    font-weight:bold;
+    padding-top:40px;
+    padding-left:0px;
+    padding-bottom:8px;
+}
+
+.preconf .btn_container .defaultbtn
+{
+    position:absolute;
+    top:-8px;
+    right:20px;
+}
+
+.preconf .main_content .calibrate_pagedesc
+{
+    width:685px;
+    padding-top:0px;
+    padding-bottom:10px;
+    color:#7c7b65;
+    font-weight:bold;
+}
+
+
+.preconf .calibrate_btn_container
+{
+    padding-bottom:10px;
+}
+
+.preconf .calibrate_btn_container .defaultbtn
+{
+    position:absolute;
+    top:160px;
+    left:0px;
+}
+
+.calibrate_add .editform_inner .search_btn_container 
+{
+    position:relative;
+}
+
+.calibrate_add .editform_inner .search_btn_container .defaultbtn
+{
+    position:absolute;
+    top:-25px;
+    left:500px;
+}
+
+.calibrate_add .SearchGrid
+{
+    width:400px;
+}
+
+.preconf .update_btn_container
+{
+    position:relative;
+}
+
+
+.preconf .update_btn_container .defaultbtn
+{
+    position:absolute;
+    top:0px;
+    left:650px;
+}
+
+.preconf .update_notes_btn_container
+{
+    position:relative;
+}
+
+.preconf .update_notes_btn_container .defaultbtn
+{
+    position:absolute;
+    top:30px;
+}
+
+.preconf .update_notes_btn_container .updatebtn
+{
+    left:570px;
+}
+
+.preconf .update_notes_btn_container .cancelbtn
+{
+    left:650px;
+}
+
+.preconf .update_main_btn_container
+{
+    position:relative;
+}
+
+.preconf .update_main_btn_container .defaultbtn
+{
+    position:absolute;
+    top:0px;
+    left:600px;
+}
+
+.preconf .update_main_btn_container .cancelbtn
+{
+    position:absolute;
+    top:0px;
+    left:600px;
+    width:120px;
+}
+
+.preconf .update_main_btn_container .updatebtn
+{
+    position:absolute;
+    top:0px;
+    left:460px;
+    width:120px;
+}
+
+
+.preconf .update_schedule_btn_container
+{
+    position:relative;
+}
+
+.preconf .update_schedule_btn_container .defaultbtn
+{
+    position:absolute;
+    top:0px;
+    left:600px;
+}
+
+.preconf .state_focus
+{
+    font-weight:bold;
+    position:relative;
+}
+
+.preconf .state_focus .formfieldlabel
+{
+    position:absolute;
+    top:20px;
+    left:30px;
+}
+
+.preconf .state_focus .state_focus_table
+{
+    position:absolute;
+    top:40px;
+    left:30px;
+}
+
+.preconf .instructional_focus
+{
+    font-weight:bold;
+    position:relative;
+}
+
+.preconf .instructional_focus .formfieldlabel
+{
+    position:absolute;
+    top:20px;
+    left:200px;
+}
+
+.preconf .instructional_focus .instructional_focus_tree
+{
+    position:absolute;
+    top:40px;
+    left:200px;
+}
+
+.preconf .main_content .preconf_notes
+{
+    padding:20px;  
+}
+
+.preconf .editor_instructions
+{
+    font-size:12px;
+    font-weight:bold;
+    padding-left:10px;
+    padding-bottom:3px;
+}
+
+.preconf .focus_alignment_instructions
+{
+    font-size:12px;
+    font-weight:bold;
+    padding-left:10px;
+    width:400px;
+}
+
+.preconf .btn_container
+{
+    position:relative;
+}
+
+.preconf .btn_container .defaultbtn
+{
+    position:absolute;
+    top:10;
+    right:20px;
+}
+  
+  
+/*******************************************************************
+ END PRE-CONF
+ ******************************************************************/
+
+
+
+/*******************************************************************
+ BEGIN REVIEW
+ ******************************************************************/
+
+.no_evaluator_message
+{
+    font-weight:bold;
+    font-size:14px;
+    color:red;
+}
+
+.review_global_notes .pageview,
+.review_summary .pageview
+{
+    border: 1px solid #7c7b65;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:20px;
+    padding-bottom:20px;
+    font-size:12px;
+    color:#7c7b65;
+    background-color:#eeedda;
+}
+
+.review_summative_rubric
+{
+    position: relative;
+	top:100px;
+	left:0px;
+	border:0;
+}
+
+.review_observation_notes,
+.review_global_notes,
+.review_reflections,
+.review_summary,
+.review_rubrics,
+.review_obs_and_assess
+{
+    padding-bottom:20px;
+}
+
+.review_global_notes .panel_content,
+.review_observation_notes .panel_content,
+.review_reflections .panel_content,
+.review_summary .panel_content,
+.review_rubrics .panel_content,
+.review_obs_and_assess .panel_content
+{
+    background-color:#f2f1de;
+    color:#7c7b65;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:20px;
+    padding-bottom:40px;
+    font-size:12px;
+}
+
+.review_summary .panel_content
+{
+    padding-top:20px;
+}
+
+/* Special case for evaluation summary panel so that it
+   matches FN panels below it
+ */
+ 
+ div.es_panel_header
+{
+    position:relative;
+    font:Arial;
+    height:47px;
+    width:950px;
+}
+
+div.es_panel_header span.es_panel_text
+{
+    position:absolute;
+    top:0px;
+    left:15px;
+    border:0;
+    color:#fcfbe8;
+    font-size:15px;
+    font-weight:bold;
+    line-height:47px;
+    text-align:left;
+    display:block;
+    width:100px;
+}
+
+div.es_panel_header span.es_panel_status
+{
+    color:#fcfbe8;
+    text-align:left;
+    font-weight:bold;
+    padding-left:10px;
+    font-size:14px;
+    line-height:47px;
+    display:block;
+    position:absolute;
+    top:0px;
+    right:0px;
+    width:940px;
+    height:47px;
+    line-height:47px;
+    text-align:center;
+    display:block;
+}
+
+div.es_panel_header span.es_panel_score
+{
+    color:#fcfbe8;
+    font-weight:bold;
+    padding-left:0;
+    font-size:12px;
+    line-height:47px;
+    display:block;
+}
+
+div.es_panel_header span.es_panel_score
+{
+    position:absolute;
+    top:0px;
+    right:45px;
+    line-height:44px;
+}
+
+div.es_panel_header span.es_panel_btn
+{
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
+.review_obs_and_assess .grid_title
+{
+    font-weight:bold;
+    font-size:14px;
+    color:#fcfbe8;
+    background-color:#7c7b65;
+    padding-bottom:5px;
+    padding-top:5px;
+    padding-left:10px;
+    width:900px;
+    display:block;
+}
+
+.reflections_btn_container 
+{
+    position:relative;
+}
+
+.reflections_btn_container .show_hide_cb
+{
+    position:absolute;
+    top:7px;
+    right:10px;
+    font-weight:bold;
+}
+
+
+/* for criteria pullquotes */
+
+p.criteria_notes
+{
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.review_criteria
+{
+    position:relative;
+    padding-bottom:20px;
+}
+
+.review_criteria .criteria_content
+{
+    background-color:#e5e4d1;
+    color:#567482;
+    font-size:12px;
+    margin-top:1px;
+    padding-bottom:20px;
+}
+
+.criteria_content
+{
+    padding-left:20px;
+}
+
+.criteria_content .rubric_header,
+.criteria_content .artifacts_header,
+.criteria_content .pullquotes_header,
+.criteria_content .summative_score_header
+{
+    color:#1d4658;
+    font-size:18px;
+    font-weight:normal;
+    padding-top:20px;
+    margin-left:20;
+}
+
+.criteria_content .summative_score_observations_header
+{
+    color:#1d4658;
+    font-size:12px;
+    font-weight:bold;
+    padding-top:20px;
+    margin-left:0;
+}
+.criteria_content .summative_score_observations
+{
+    font-size:12px;
+    color:#567482;
+}
+
+.criteria_content .criteria_pullquotes,
+.criteria_content .criteria_rubric
+{
+    background-color:#e5e4d1;
+}
+
+.criteria_content .criteria_summative_score,
+.criteria_content .criteria_artifacts
+{
+    background-color:#eeedda;
+    padding-bottom:20px;
+}
+
+.criteria_content .criteria_summative_score,
+{
+    padding-top:10px;
+    padding-bottom:20px;
+}
+  
+.fn_content .toggle_options
+{
+    padding-top:10px;
+    padding-bottom:33px;
+    border-bottom: 2px solid #faf9e6;
+}
+
+.fn_content .toggle_options 
+{
+    position:relative;
+}
+
+.fn_content .toggle_options .toggle_descriptor_collapse
+{
+    position:absolute;
+    right:5px;
+    top:10px;
+}
+
+.fn_content .toggle_options .toggle_pullquotes_collapse
+{
+    position:absolute;
+    right:160px;
+    top:10px;
+}
+.criteria_rubric a
+{
+        color:#567482;
+}
+
+.selfassess .rubrics_pageview
+{
+    padding: 20px 0px;
+    background-color:#fcfbe8;
+    border-top: 1px solid #567482 !important;
+    font-size:12px !important;
+    color:#1d4658 !important;
+}
+
+.criteria_artifacts .no_artifacts
+{
+    color:#567482;
+}
+
+.criteria_artifacts ul
+{
+    list-style-type:none;
+    width:930px;
+}
+
+.criteria_artifacts ul li
+{
+    position:relative;
+    display:inline;
+    float:left;   
+    margin-right:1px;
+    width:189px;
+    overflow:hidden;
+}
+
+.criteria_artifacts .image
+{
+}
+
+.criteria_artifacts .title
+{
+    position:absolute;
+    top:0px;
+    left:57px;
+    font-size:12px;
+    color:#567482;
+}
+
+.criteria_artifacts .download
+{
+    position:absolute;
+    top:35px;
+    left:57px;
+    font-size:12px;
+    font-weight:bold;
+    color:#567482;
+}
+
+.criteria_content hr.review
+{
+    margin-right:10px;
+    margin-left:5px;
+}
+
+
+/* 
+   horizontal row of artifacts within the rubric section or ReviewEvaluatee
+*/
+
+/*******************************************************************
+ END REVIEW
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN SCHOOL/DISTRICT ADMIN SUMMARY
+ ******************************************************************/
+ 
+  
+ .submission_info td
+ {
+     padding-top:10px;
+     padding-bottom:10px;
+     padding-right:5px;
+     vertical-align:top;
+ }
+
+  .submission_info td.status_message
+ {
+     font-weight:bold;
+ }
+  
+  .submission_info td.info_message
+ {
+     padding-left:20px;
+     padding-right:20px;
+ }
+ 
+ 
+/*******************************************************************
+ BEGIN SCHOOL ADMIN SUMMARY
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN SELF-ASSESS
+ ******************************************************************/
+
+.selfassess_summary
+{
+    padding-top:36px;
+    padding-bottom:62px;
+
+}
+.selfassess_summary ul
+{
+    list-style:none;
+    margin-left:0;
+    padding-left:0;
+    padding-top:100px;
+}
+
+.selfassess_summary ul.one
+{
+    position: absolute;
+	top:0px;
+	left:0px;
+}
+
+.selfassess_summary ul.two
+{
+    position: absolute;
+	top:0px;
+	left:300px;
+}
+
+.selfassess_summary ul.three
+{
+    position: absolute;
+	top:0px;
+	left:550px;
+}
+
+.selfassess_summary ul.four
+{
+    position: absolute;
+	top:0px;
+	right:0px;
+}
+
+.selfassess_summary li
+{
+    display:block;
+    font:Arial;
+ }
+
+.selfassess_summary ul li.one
+{
+    color:#4c4c3d;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.selfassess_summary ul li.two
+{
+    color:#7c7b65;
+    font-size:20px;
+    font-weight:normal;
+    overflow:hidden;
+}
+
+.selfassess_summary ul li.three
+{
+    color:#7c7b65;
+    font-size:13px;
+    font-weight:normal;
+}
+
+.selfassess_summary select.dd
+{
+    color:#7c7b65;
+    background-color:white;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/*******************************************************************
+ END SELF-ASSESS
+ ******************************************************************/
+
+
+
+/*******************************************************************
+ BEGIN SESSIONS - PRE-CONFERENCE, PRACTICE, OBSERVATIONS
+ ******************************************************************/
+
+.sessions_grid,
+.sessions_calendar
+{
+    padding-bottom:20px;
+}
+
+.sessions_grid .panel_content
+{
+}
+
+.sessions_calendar .panel_content
+{
+    height:600px;
+}
+
+.video_image
+{
+    display:block;
+    padding:2px;
+}
+
+.select_video_message
+{
+    font-weight:bold;
+}
+
+/*******************************************************************
+ END SESSIONS - PRE-CONFERENCE, PRACTICE, OBSERVATIONS
+ ******************************************************************/
+
+
+/*******************************************************************
+ BEGIN PRACTICE
+ ******************************************************************/
+
+
+/*******************************************************************
+ END PRACTICE
+ ******************************************************************/
+
+
+/*******************************************************************
+ BEGIN OBSERVE
+ ******************************************************************/
+
+.observe_summary,
+.observe_preconference,
+.observe_notes
+{
+    padding-bottom:20px;
+}
+
+
+.start_observation_scheduled
+{
+    padding-bottom:20px;
+}
+
+.start_observation_scheduled .panel_content
+{
+    background-color:white;
+    margin-bottom:40px;
+}
+
+/* Special case for evaluation summary panel so that it
+   matches FN panels below it
+ */
+ 
+ .observe_summary .panel_content
+{
+    background-color:#eeedda;
+    color:#7c7b65;
+    padding:20px;
+}
+
+div.os_panel_header
+{
+    position:relative;
+    height:47px;
+    width:950px;
+}
+
+div.os_panel_header span.os_panel_text
+{
+    position:absolute;
+    top:10px;
+    left:15px;
+    width:540px;
+}
+
+div.os_panel_header span.os_panel_status
+{
+    position:absolute;
+    top:10px;
+    left:220px;
+    color:#faf9e6;
+    font-weight:bold;
+    font-size:14px;
+}
+
+div.os_panel_header span.os_panel_score
+{
+    position:absolute;
+    top:10px;
+    right:55px;
+    color:#fcfbe8;
+    font-size:14px;
+    font-weight:bold;
+}
+
+div.os_panel_header span.os_panel_btn
+{
+    position:absolute;
+    top:20px;
+    right:20px;
+}
+
+.observe_preconference .panel_content
+{
+    background-color:#eeedda;
+    color:#7c7b65;
+    padding-top:20px;
+}
+
+.observe_preconference .preconf_notes_header
+{
+    color:#7c7b65;
+    font-size:14px;
+    font-weight:bold;
+    padding-top:0px;
+}
+
+.observe_preconference .preconf_notes
+{
+    padding-top:20px;
+    padding-bottom:10px;
+}
+
+p.preconf_notes
+{
+    padding:0px;
+    margin:0px;
+}
+
+.observe_reflections_header
+{
+    height:40px;
+    background-color:#e6e5d2;
+    color:#4c4c3d;
+    text-align:left;
+    padding-left:6px !important;
+}
+
+.observe_preconference .pageview
+{
+    border: 1px solid #7c7b65 !important;
+    padding-left:20px !important;
+    padding-right:20px !important;
+    padding-top:0px !important;
+    padding-bottom:20px !important;
+    font-size:12px !important;
+    color:#7c7b65 !important;
+}
+
+.observe_preconference .reflections_pageview
+{
+    padding-left:0px !important;
+    padding-right:0px !important;
+}
+
+.observe_notes .panel_content
+{
+    background-color:#fcfbe8;
+    color:#567482;
+    padding-top:20px;
+}
+
+.editor_disabled
+{
+    border: 1px solid #5c5040;
+    background-color:White !important;
+	font: 13px/1.5 Arial,sans-serif;
+	color: #5c5040;
+	padding:20px 10px 20px 10px;
+}
+
+.observe_notes .editor_pageview
+{
+    background-color:#e1dac7;
+    border-top: 1px solid #567482 !important;
+    padding-left:0px !important;
+    padding-right:0px !important;
+    padding-top:0px !important;
+    padding-bottom:20px !important;
+    font-size:12px !important;
+    color:#567482 !important;
+}
+
+.editor_header
+{
+    position:relative;
+    height:45px;
+    width:100%; 
+}
+
+.editor_header .editor_instructions
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+    width:670px;
+    color:#1d4658;
+    height:48px;
+    line-height:48px;
+    font-size:12px;
+    font-weight:bold;
+    padding-left:25px;
+}
+
+.editor_header .videolink
+{
+    position:absolute;
+    top:10px;
+    right:20px;
+}
+
+.observe_notes .pullquotes_pageview,
+.tabstrip .pullquotes_pageview
+{
+    background-color:#fcfbe8;
+    border-top: 1px solid #567482 !important;
+    padding-left:0px !important;
+    padding-right:0px !important;
+    padding-top:0px !important;
+    padding-bottom:20px !important;
+    font-size:12px !important;
+    color:#1d4658 !important;
+}
+
+.observe_notes .pullquotes_current_view
+{
+    height:60px;
+    line-height:60px;
+    font-size:14px;
+    font-weight:bold;
+    padding-left:0px;
+}
+
+.observe_notes .pullquotes_current_view .label
+{
+    padding-right:3px;
+
+}
+.observe_notes .pullquotes_current_view .dd
+{
+    background-color:white;
+        color:#7c7b65;
+}
+
+.observe_notes .state_rubrics,
+.selfasses .state_rubrics
+{
+    padding-top:20px;
+}
+
+.observe_notes .rubrics_current_view,
+.selfassess .rubrics_current_view
+{
+    height:60px;
+    line-height:60px;
+    font-size:14px;
+    font-weight:bold;
+    padding-left:0px;
+}
+
+.observe_notes .rubrics_current_view .label,
+.self_assess .rubrics_current_view .label
+{
+    padding-right:3px;
+}
+
+.observe_notes .rubrics_current_view .dd,
+.selfassess .rubrics_current_view .dd
+{
+    background-color:white;
+        color:#7c7b65;
+}
+
+.pullquotes
+{
+    position:relative;
+    padding-bottom:20px;
+}
+
+.pullquotes .fn_content
+{
+    background-color:#e5e4d1;
+    color:#567482;
+    padding-top:0px;
+    border-top: 1px solid #fcfbe8;
+    padding-left:47px;
+}
+
+.observe_notes .rubrics_pageview
+{
+    padding: 20px 0px;
+    background-color:#fcfbe8;
+    border-top: 1px solid #567482 !important;
+    font-size:12px !important;
+    color:#1d4658 !important;
+}
+
+.fn_rubrics
+{
+    position:relative;
+    padding-bottom:20px;
+}
+
+.fn_rubrics .fn_content
+{
+    background-color:#eeedda;
+    color:#567482;
+    padding-top:0px;
+    border-top: 1px solid #fcfbe8;
+    padding-left:47px;
+}
+/* These don't work within the collapsable panelbar
+   but the default layout is ok for now. I left
+   the styles in the html in case we need to 
+   modify the layout later
+.rubric_descriptor_cell
+{
+    position:relative;
+}
+
+.rubric_desriptor_cell .rubric_cb
+{
+    position:absolute;
+    top:0px;
+    left:0;
+}
+
+.rubric_desriptor_cell .rubric_tt
+{
+    position:absolute;
+    top:0px;
+    left:0;
+}
+*/
+/* Observe editor pullquote toolbar settings */
+
+.reToolbar.Sunset .ApplyD1
+{
+    background-image: url(../Images/D1.png);
+}
+
+.reToolbar.Sunset .ApplyD2
+{
+    background-image: url(../Images/D2.png);
+}
+
+.reToolbar.Sunset .ApplyD3
+{
+    background-image: url(../Images/D3.png);
+}
+
+.reToolbar.Sunset .ApplyD4
+{
+    background-image: url(../Images/D4.png);
+}
+
+.reToolbar.Sunset .ApplyC1
+{
+    background-image: url(../Images/C1.png);
+}
+
+.reToolbar.Sunset .ApplyC2
+{
+    background-image: url(../Images/C2.png);
+}
+
+.reToolbar.Sunset .ApplyC3
+{
+    background-image: url(../Images/C3.png);
+}
+
+.reToolbar.Sunset .ApplyC4
+{
+    background-image: url(../Images/C4.png);
+}
+
+.reToolbar.Sunset .ApplyC5
+{
+    background-image: url(../Images/C5.png);
+}
+
+.reToolbar.Sunset .ApplyC6
+{
+    background-image: url(../Images/C6.png);
+}
+
+.reToolbar.Sunset .ApplyC7
+{
+    background-image: url(../Images/C7.png);
+}
+
+.reToolbar.Sunset .ApplyC8
+{
+    background-image: url(../Images/C8.png);
+}
+
+
+/* Kennewick Principal */
+.reToolbar.Sunset .ApplyK1
+{
+    background-image: url(../Images/K1.png);
+}
+
+.reToolbar.Sunset .ApplyK2
+{
+    background-image: url(../Images/K2.png);
+}
+
+.reToolbar.Sunset .ApplyK3
+{
+    background-image: url(../Images/K3.png);
+}
+
+.reToolbar.Sunset .ApplyK4
+{
+    background-image: url(../Images/K4.png);
+}
+
+.reToolbar.Sunset .ApplyK5
+{
+    background-image: url(../Images/K5.png);
+}
+
+.reToolbar.Sunset .ApplyK6
+{
+    background-image: url(../Images/K6.png);
+}
+
+.reToolbar.Sunset .ApplyK7
+{
+    background-image: url(../Images/K7.png);
+}
+
+.reToolbar.Sunset .ApplyK8
+{
+    background-image: url(../Images/K8.png);
+}
+
+
+/*******************************************************************
+ END OBSERVE
+ ******************************************************************/
+
+/*******************************************************************
+ BEGIN REPORTS
+ ******************************************************************/
+ 
+.reports ul
+{
+    list-style-type:none;
+    width:930px;
+    padding-top:6px;
+    padding-bottom:5px;
+}
+
+.reports ul li
+{
+    position:relative;
+    display:inline;
+    float:left;   
+    margin-right:1px;
+    width:220px;
+}
+
+.reports .image
+{
+}
+
+.reports ul li a
+{
+    display:block;
+}
+
+.reports span
+{
+    position:absolute;
+    top:100px;
+    left:0px;
+    width:220px;
+    text-align:center;
+    font-size:12px;
+    color:#567482;
+}
+
+.reports .content
+{
+    padding-top:40px;
+}
+
+.no_report_content_info_message
+{
+    	font-weight:bold;
+	text-align:center;
+	width:950px;
+	font-size:20px;
+}
+
+table.irr
+{
+}
+
+ table.irr td.header,
+ table.irr td.scorer_header,
+  table.irr td.anchor_header
+{
+	border:1px solid #5c5040;
+	font-weight:bold;
+	background-color:#e6e5d2;
+}
+
+table.irr td
+{
+    border: 1px solid #5c5040;
+}
+
+td.anchor_score,
+td.scorer
+{
+}
+
+table.irr td.title_col
+{
+}
+
+.irr_detail_score,
+.irr_score_summary,
+.irr_non_anchor
+{
+    padding-bottom:20px;
+}
+
+.irr_anchor
+{
+    padding-bottom:40px;
+}
+
+.irr_score_summary .panel_content
+{
+    padding-top:20px;
+}
+
+/*******************************************************************
+ END REPORTS
+ ******************************************************************/
+ 
+/*******************************************************************
+ BEGIN ASSIGNMENTS
+ ******************************************************************/
+ 
+ td.DefaultHeaderCell
+{
+	border:1px solid #e6e5d2;
+	font-weight:bold;
+	background-color:#e6e5d2;
+}
+
+td.IRRScoreCell, 
+td.DefaultGridCell
+{
+    border:1px solid #e6e5d2;
+}
+
+ .assignments
+ {
+     position:relative;
+ }
+ 
+ .assignments .school_list
+ {
+     position:absolute;
+     top:20px;
+     left:0;
+ }
+ 
+  .assignments .grid
+ {
+    position:absolute;
+    top:80px;
+    left:0;
+    border:0px solid #babab8;
+    background:#faf9e6;
+    color:#7C7B65;
+
+ }
+ 
+   .assignments .cb
+ {
+    position:absolute;
+    top:0px;
+    left:250px;
+    color:#7C7B65;
+    font-weight:bold;
+    width:400px;
+
+ }
+ 
+ .assignments .delegate_msg
+ {
+    color:red;
+    font-weight:bold;
+ }
+ 
+ 
+/*******************************************************************
+ BEGIN ASSIGNMENTS
+ ******************************************************************/
+
+
+/*******************************************************************
+ BEGIN SUMMARY
+ ******************************************************************/
+
+.sumary .panel_content
+{
+    margin-bottom:40px;
+}
+
+
+/*******************************************************************
+ END SUMMARY
+ ******************************************************************/
+ 
+.rtTemplate  
+{  
+    margin-top: -4px;  
+}  
+
+
+.tv
+{
+    overflow:hidden;
+}
+
+.btn_float_right
+{
+    float:right;
+}
+
+.fieldset1
+{
+    clear:right;
+}
+
+.ValidationSummary
+{
+    font-weight:bold;
+}
+
+div .rubricTabText
+{
+    color:red;
+    text-decoration:underline;
+}
+
+
+
+
+
+
+/*
+a:link,
+a:visited {
+	color: #7795a3;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: #429093;
+}
+*/
+
+
+tr .state_aligned
+{
+    background-color: papayawhip;
+}
+
+.rubric
+{
+	border: 1px solid #666666;
+	border-collapse: collapse;
+	background-color:White;
+}
+
+.rubric_pageview
+{
+   	border: 1px solid #666666;
+	border-collapse: collapse;
+	background-color:White; 
+	padding:20px;
+}
+
+
+.editform
+{
+    border:1px solid #666666;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:30px;
+    height:1400px;
+    font: 13px/1.5 Helvetica,Arial,sans-serif;
+	color: #565656;
+}
+
+.detailform
+{
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:30px;
+    font: 13px/1.5 Helvetica,Arial,sans-serif;
+	color: #565656;
+}
+
+
+.editform_inner, .detailform_inner
+{
+    padding:10px;
+}
+
+.editform_legend, .detailform_legend
+{
+    font-weight: bold;
+}
+
+legend, .editform li, .detailform li
+{
+	font: 13px/1.5 Helvetica,Arial,sans-serif;
+	color: #565656;
+}
+
+.defaultbtn
+{
+    background-color: #7c7b65;
+    color: white;
+	font: 13px/1.5 Arial,sans-serif;
+	border: 0px;
+	margin-bottom:10px;
+}      
+
+.slider, .slider_pane
+{
+    border: 0;
+}
+
+
+
+.frameworkNode_rubric
+{
+    position:relative;
+    padding-bottom:20px;
+}
+
+.frameworkNode_rubric .content
+{
+    background-color:#f2f1de;
+    color:#567482;
+    padding-left:25px;
+    padding-right:0px;
+    padding-top:40px;
+    padding-bottom:40px;
+    font-size:12px;
+}
+
+/*******************************************************************
+ BEGIN Telerik Grid overrides
+ ******************************************************************/
+
+.DefaultRadGridTitle
+{
+    color:#7c7b65;
+    background-color:#e5e4d1;
+    font-weight: bold;
+    font-size: 15px;
+    text-align:left;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:5px;
+}
+
+/* grids used throughout */
+.DefaultRadGrid
+{
+    background-color: #e5e4d1;
+    padding-left:0px;
+    color:#e5e4d1;
+}
+
+.DefaultRadGrid Table
+{
+    font-family: Arial, Verdana;
+    color: #7c7b65;
+}
+
+.DefaultRadGrid A
+{
+    color: #7c7b65;
+}
+
+.DefaultRadGridHeader
+{
+    height: 34px;
+    color: #7c7b65;
+    font-weight: bold;
+    font-size: 14px;
+    background-color:#e5e4d1;
+    text-align:left;
+    padding-left:5px;
+}
+
+.DefaultRadGridHeader A, .DefaultRadGridHeader SPAN
+{
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.DefaultRadGridHeader A:hover
+{
+    text-decoration: underline;
+}
+
+.EditFormHeader
+{
+    background-color: #ced9c1;
+    color: #7c7b65;
+    height: 10px;
+}
+
+.EditFormButtonRow A { FONT-SIZE: 12px; COLOR: darkgreen }
+
+.EditFormHeader TD { FONT-WEIGHT: bold; FONT-SIZE: 12px; PADDING-TOP: 4px; TEXT-ALIGN: center }
+
+.DefaultRadGridItem
+{
+    padding-left:0px;
+    height: 20px;
+    font-size: 12px;
+    color: #7c7b65;   
+    background-color:#eeedda;
+    text-align:left;
+}
+
+.DefaultRadGridAlternatingItem
+{
+    padding-left:0px;
+    height: 20px;
+    font-size: 12px;
+    color: #7c7b65;
+    background-color:#e6e5d2;
+    border-color:#e6e5d2;
+   text-align:left;
+}
+
+
+.ObservePullQuotesRadGridTitle
+{
+    color:#1d4658;
+    background-color:#e5e4d1;
+    font-weight: bold;
+    font-size: 15px;
+    text-align:left;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:5px;
+}
+
+.ObservePullQuotesRadGrid
+{
+    background-color: #e5e4d1;
+    padding-left:0px;
+    color:#1d4658;
+}
+
+.ObservePullQuotesRadGrid Table
+{
+    font-family: Arial, Verdana;
+    color:#1d4658;
+}
+
+.ObservePullQuotesRadGrid A
+{
+    color:#1d4658;
+    font-weight:bold;
+}
+
+.ObservePullQuotesRadGridHeader
+{
+    height: 34px;
+    color:#1d4658;
+    font-weight: bold;
+    font-size: 14px;
+    background-color:#e5e4d1;
+    text-align:left;
+    padding-left:5px;
+}
+
+.ObservePullQuotesRadGridHeader A, .ObservePullQuotesRadGridHeader SPAN
+{
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.ObservePullQuotesRadGridHeader A:hover
+{
+    text-decoration: underline;
+}
+
+.EditFormHeader
+{
+    background-color: #ced9c1;
+    color:#1d4658;
+    height: 10px;
+}
+
+.EditFormButtonRow A { FONT-SIZE: 12px; COLOR: darkgreen }
+
+.EditFormHeader TD { FONT-WEIGHT: bold; FONT-SIZE: 12px; PADDING-TOP: 4px; TEXT-ALIGN: center }
+
+.ObservePullQuotesRadGridItem
+{
+    padding-left:0px;
+    height: 20px;
+    font-size: 12px;
+    font-weight:500;
+    color:#1d4658;
+    background-color:#eeedda;
+    text-align:left;
+}
+
+.ObservePullQuotesRadGridAlternatingItem
+{
+    padding-left:0px;
+    height: 20px;
+    font-size: 12px;
+    font-weight:500;
+    color:#1d4658;
+    background-color:#e6e5d2;
+    border-color:#e6e5d2;
+   text-align:left;
+}
+
+.ObserveQuestionsRadGrid
+{
+    background-color: #faf9e6;
+    padding-left:0px;
+    color:#e5e4d1;
+}
+
+.ObserveQuestionsRadGrid Table
+{
+    font-family: Arial, Verdana;
+    color: #7c7b65;
+}
+
+.ObserveQuestionsRadGrid A
+{
+    color: #7c7b65;
+}
+
+.ObserveQuestionsRadGridHeader
+{
+    height: 34px;
+    color: #7c7b65;
+    font-weight: bold;
+    font-size: 14px;
+    background-color:#e5e4d1;
+    text-align:left;
+    padding-left:5px;
+}
+
+.ObserveQuestionsRadGridHeader A, .ObserveQuestionsRadGridHeader SPAN
+{
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.ObserveQuestionsRadGridHeader A:hover
+{
+    text-decoration: underline;
+}
+
+.ObserveQuestionsRadGridItem
+{
+    padding-left:0px;
+    font-size: 12px;
+    color: #7c7b65;   
+    background-color:#faf9e6;
+    text-align:left;
+}
+
+.ObserveQuestionsRadGridAlternatingItem
+{
+    padding-left:0px;
+    font-size: 12px;
+    color: #7c7b65;
+    background-color:#faf9e6;
+    border-color:#e6e5d2;
+    text-align:left;
+}
+
+
+.TestRadGrid
+{
+    background-color: #faf9e6;
+    padding-left:0px;
+    color:#e5e4d1;
+}
+
+.TestRadGrid Table
+{
+    font-family: Arial, Verdana;
+    color: #7c7b65;
+}
+
+.TestRadGrid A
+{
+    color: #7c7b65;
+}
+
+.TestRadGridHeader
+{
+    color: #7c7b65;
+    font-weight: bold;
+    font-size: 14px;
+    background-color:#e5e4d1;
+    text-align:left;
+    padding-left:5px;
+}
+
+.TestRadGridHeader A, .TestRadGridHeader SPAN
+{
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.TestRadGridHeader A:hover
+{
+    text-decoration: underline;
+}
+
+.TestRadGridItem
+{
+    padding-left:0px;
+    font-size: 12px;
+    color: #7c7b65;   
+    background-color:#eeedda;
+    text-align:left;
+}
+
+.TestRadGridAlternatingItem
+{
+    padding-left:0px;
+    font-size: 12px;
+    color: #7c7b65;
+    background-color:#e6e5d2;
+    border-color:#e6e5d2;
+    text-align:left;
+}
+
+
+
+
+.preconf_questions_btns_container
+{
+    position:relative;
+}
+    
+
+.preconf_questions_btns_container .defaultbtn
+{
+    position:absolute;
+    top:-5px;
+    left:0px;
+}
+
+.main_content .update_main_btn_container .show_hide_cb
+{
+    position:absolute;
+    top:50px;
+    right:20px;
+    color: #7c7b65;
+    font-weight:bold;
+}
+
+    
+    
+.ObserveRubricsRadGrid
+{
+    background-color: #e5e4d1;
+    padding-left:0px;
+    color:#1d4658;
+}
+
+.ObserveRubricsRadGrid Table
+{
+    font-family: Arial, Verdana;
+    color: #1d4658;
+}
+
+.ObserveRubricsRadGrid A
+{
+    color: #1d4658;
+}
+
+.ObserveRubricsRadGridHeader
+{
+    height: 34px;
+    color: #1d4658;
+    font-weight: bold;
+    font-size: 14px;
+    background-color:#e5e4d1;
+    text-align:center;
+    padding-left:5px;
+}
+
+.ObserveRubricsRadGridHeader A, .ObserveRubricsRadGridHeader SPAN
+{
+    display: block;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.ObserveRubricsRadGridHeader A:hover
+{
+    text-decoration: underline;
+}
+
+.ObserveRubricsRadGridItem
+{
+    padding-left:0px;
+    font-size: 12px;
+    color: #1d4658;   
+    background-color:#eeedda;
+    text-align:left;
+}
+
+.ObserveRubricsRadGridAlternatingItem
+{
+    padding-left:0px;
+    font-size: 12px;
+    color: #1d4658;
+    background-color:#e5e4d1;
+    border-color:#e6e5d2;
+    text-align:left;
+}
+
+.observe_reflections_header
+{
+    font-weight:bold !important;
+    text-align:center;
+}
+
+/*******************************************************************
+ END Telerik Grid overrides
+ ******************************************************************/
+
+
+.RubricPPTT
+{
+    border: 1px solid #e5e4d1;
+    padding:10px;
+    width:200px;
+    background-color:#faf9e6;
+    color:#1d4658;
+    font-size:13px;
+    
+}
+
+.RubricPPTT .header
+{
+    background-color:#e5e4d1;
+    font-weight:bold;
+    text-transform:uppercase;
+    text-align:center;
+}
+
+.RubricPPTT .desc
+{
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.rubric_tt
+{
+}
+
+.rubric_descriptor
+{
+}
+
+
+.hidden
+{
+    display:none;
+}
+
+.header_line
+{
+    color:#bcbba6;
+    width:100%;
+    height:2px;
+}
+
+.pagedesc
+{
+    padding-top:0px;
+    padding-bottom:28px;
+    color:#7c7b65;
+    font-weight:bold;
+}
+
+
+TABLE.IRRGroup
+{
+	border: #7C7B65 solid 1px;
+	border-collapse: collapse;
+	background-color:White;
+}
+
+
+.EmphaticExcerpt
+{
+	background-color:#efef11;
+}
+ 
+td.score_pl
+{
+    border-width: 0px !important;
+}
+
+
+.release_title
+{
+    color:#FB5500;    
+}

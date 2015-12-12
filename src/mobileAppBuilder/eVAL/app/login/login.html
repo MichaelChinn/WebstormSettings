@@ -1,0 +1,27 @@
+<ion-view view-title="Home">
+    <ion-content class="padding">
+        <div class="list">
+            <div class="item item-select">
+                <select ng-model="vm.district" ng-change="vm.changeDistrict()">
+                    <option value="ntps">Danielson SD</option>
+                    <option value="conway">Mazano SD</option>
+                    <option value="chehalis">CEL SD</option>
+                </select>
+            </div>
+            <div class="item item-select">
+                <select ng-if="vm.district==='ntps'" ng-model="vm.username">
+                    <option ng-repeat="username in vm.norththurston_usernames" ng-value="username">{{username}}</option>
+                </select>
+                <select ng-if="vm.district==='conway'" ng-model="vm.username">
+                    <option ng-repeat="username in vm.conway_usernames" ng-value="username">{{username}}</option>
+                </select>
+                <select ng-if="vm.district==='chehalis'" ng-model="vm.username">
+                    <option ng-repeat="username in vm.chehalis_usernames" ng-value="username">{{username}}</option>
+                </select>
+            </div>
+            <div class="item item-input">
+                <button id="loginButton" ng-click="vm.login()" class="button button-small">Login</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

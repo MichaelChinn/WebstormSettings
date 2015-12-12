@@ -1,0 +1,7 @@
+<button ng-if="vm.evidenceCollectionService.state.scoringVisible"
+        ng-repeat="level in vm.enums.PerformanceLevels"
+        ng-class="vm.score.performanceLevel == ($index + 1) ? vm.active: ''"
+        ng-click="scoreItem($index + 1)"
+        class="btn btn-outline btn-default {{vm.btnSize}}">
+    {{level[0] + level[1] + level[2]}}
+</button>

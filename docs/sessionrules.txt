@@ -1,0 +1,41 @@
+
+
+EvaluateeSessions
+
+- cannot unschedule
+- cannot create new ones
+- cannot reschedule by dragging from grid to schedule or dragging on schedule
+- cannot edit by double-clicking on appt, appt is readonly
+
+- can observe from context menu on schedule, but only practice and evaluator preconf sessions
+
+only teachers have practice sessions in the observations list
+principals will see them in their observations list as an evaluator
+
+calender should color code appts. Need to code them by
+	- evaluatee
+	- evaluator
+	- practice
+	- 
+
+Context Menus
+
+Practice
+	Observe
+
+Evaluator for session
+	Observe
+	COnfigure
+	drag to new timeslot
+	unschedule
+
+Evaluatee for session
+	Configure if in pre-conf
+
+
+Evaluator PlanObservations
+
+can timeslot click to create new
+
+
+If you are not the evaluator then the Observation is readonly and you cannot see the Notes

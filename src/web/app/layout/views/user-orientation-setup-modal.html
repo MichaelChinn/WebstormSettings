@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Options</h4>
+</div>
+<div class="modal-body">
+    <div class="optionsModal">
+        <!--<div class="row">-->
+            <!--<div class="col-sm-4"><strong>Year</strong></div>-->
+            <!--<div class="col-sm-8">-->
+                <!--<h4 ng-show="vm.lengths['schoolYear'] === 1">{{vm.context.orientation.schoolYear}}</h4>-->
+                <!--<select ng-model="vm.context.navOptions['schoolYear']" ng-hide="vm.lengths['schoolYear'] === 1"-->
+                        <!--ng-change="vm.change(vm.context.orientationOptions, vm.context.navOptions['schoolYear'], 0)">-->
+                    <!--<option ng-value="key" ng-repeat="(key, value) in vm.context.orientationOptions">{{key}}-->
+                    <!--</option>-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="row" ng-repeat="order in vm.order" ng-if="vm.context.navOptions[order] !== ''">
+            <div class="col-sm-4"><strong>{{vm.displayNames[$index]}}</strong></div>
+            <div class="col-sm-8">
+                <h4 ng-show="vm.lengths[order] === 1">{{vm.context.orientation[order]}}</h4>
+                <select ng-model="vm.context.navOptions[order]" ng-hide="vm.lengths[order] === 1"
+                        ng-change="vm.change(vm[order], vm.context.navOptions[order], $index)">
+                    <option ng-value="key" ng-repeat="(key, value) in vm[order]">{{key}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="vm.cancel()">Close</button>
+    <button type="button" class="btn btn-primary" ng-click="vm.save()">Done </button>
+</div>

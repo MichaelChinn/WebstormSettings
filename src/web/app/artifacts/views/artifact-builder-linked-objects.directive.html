@@ -1,0 +1,73 @@
+
+<div class="align-artifact-wrapper">
+    <div class="row">
+        <div class="col-lg-6">
+            <label class="align-artifact-heading">Make available to eVAL Evidence Collections</label>
+        </div>
+        <div class="col-lg-6">
+            <div class="btn-toolbar pull-right">
+                <button ng-click="vm.clear()" class="btn btn-default btn-sm hide-when-read-only">Clear</button>
+                <button ng-click="vm.toggleEditMode()" class="btn btn-primary btn-sm  hide-when-read-only">
+                    {{vm.editModeBtnText }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div ng-show="vm.editMode" style="color: white">
+        <br />
+        <table class="table align-artifact">
+            <tbody>
+                <tr><td colspan="3">Observations</td></tr>
+                <tr ng-repeat="observation in vm.observations">
+                    <td>{{observation.creationDateTime | date}}</td>
+                    <td>{{observation.title}}</td>
+                    <td>
+                        <input type="checkbox" data-checklist-model="vm.artifact.linkedObservations" data-checklist-value="observation">
+                    </td>
+                </tr>
+                <tr><td colspan="3">Self Assessments</td></tr>
+                <tr ng-repeat="assessment in vm.assessments">
+                    <td>{{assessment.creationDateTime | date}}</td>
+                    <td>{{assessment.title}}</td>
+                    <td>
+                        <input type="checkbox" data-checklist-model="vm.artifact.linkedSelfAssessments" data-checklist-value="assessment">
+                    </td>
+                </tr>
+                <tr><td colspan="3">Student Growth Goals</td></tr>
+                <tr ng-repeat="goalBundle in vm.goalBundles">
+                    <td>{{goalBundle.creationDateTime | date}}</td>
+                    <td>{{goalBundle.title}}</td>
+                    <td>
+                        <input type="checkbox" data-checklist-model="vm.artifact.linkedStudentGrowthGoalBundles" data-checklist-value="goalBundle">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-show="!vm.editMode">
+        <br />
+        <table class="table align-artifact">
+            <tbody>
+            <tr ng-show="vm.artifact.linkedObservations.length>0" class="aligned-fn-ro">
+                <td colspan="2">Observations</td>
+                <td></td>
+            </tr>
+            <tr class="aligned-rr-ro"  ng-repeat="observation in vm.artifact.linkedObservations">
+                <td></td>
+                <td width="100px">{{observation.creationDateTime | date}}</td>
+                <td>{{observation.title}}</td>
+            </tr>
+            <tr ng-show="vm.artifact.linkedStudentGrowthGoalBundles.length>0" class="aligned-fn-ro">
+                <td colspan="2">Student Growth Goals</td>
+                <td></td>
+            </tr>
+            <tr class="aligned-rr-ro"  ng-repeat="goalBundle in vm.artifact.linkedStudentGrowthGoalBundles">
+                <td></td>
+                <td width="100px">{{goalBundle.creationDateTime | date}}</td>
+                <td>{{goalBundle.title}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

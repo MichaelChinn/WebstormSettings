@@ -1,0 +1,32 @@
+
+<div class="align-artifact-wrapper">
+    <div class="row">
+        <div class="col-lg-3">
+            <label class="align-artifact-heading">Select Availability</label>
+        </div>
+        <div class="col-lg-9">
+            <div class="btn-toolbar pull-right">
+                <button ng-click="vm.clear()" class="btn btn-default btn-sm hide-when-read-only">Clear</button>
+                <button ng-click="vm.toggleEditMode()" class="btn btn-primary btn-sm  hide-when-read-only">
+                    {{vm.editModeBtnText }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div ng-show="vm.editMode" style="color: white">
+        <br />
+        <br />
+        <table class="table align-artifact">
+            <tbody ng-repeat="(key,value) in vm.objectsGroupedByType">
+                <tr><td colspan="2">{{vm.mapLinkedItemTypeToFullString(key)}}s</td></tr>
+                <tr ng-repeat="object in value">
+                    <td>{{object.title}}</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-show="!vm.editMode">
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>Request Assignments
+            <small class="m-l-sm">Request access to school teachers to perform observations and be the assigned evaluator</small>
+        </h5>
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Teacher</th>
+                            <th>School</th>
+                            <th>Request Status</th>
+                            <th>Accepted Request Eval Type</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="request in vm.requests">
+                            <td>{{request.teacherDisplayName}}</td>
+                            <td>{{vm.requestSchools(request)}}</td>
+                            <td>{{vm.requestStatus(request)}}</td>
+                            <td>{{vm.requestType(request)}}</td>
+                            <td><button class="btn btn-primary btn-xs" ng-click="vm.removeRequest(request)">Remove</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br/><br/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <label>Select school:</label>
+                    <select class="form-control" ng-model="vm.schoolCode" ng-change="vm.changeSchool()">
+                        <option ng-repeat="school in vm.schools"
+                                value="{{school.schoolCode}}">{{school.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Teacher</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="teacher in vm.teachers">
+                            <td>{{teacher.displayName}}</td>
+                            <td><button class="btn btn-primary btn-xs" ng-click="vm.createRequest(teacher)">Create Request</button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<div  class="align-artifact-wrapper">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <label class="align-artifact-heading">Alignment to {{vm.framework.displayName}}</label>
+        </div>
+    </div>
+</div>
+
+<table class="table align-artifact">
+    <tbody ng-repeat="frameworkNode in vm.framework.frameworkNodes" >
+    <tr class="aligned-fn-ro" ng-show="vm.frameworkNodeIsAligned(frameworkNode)">
+        <td>{{frameworkNode.shortName}} {{frameworkNode.title}}</td>
+    </tr>
+    <tr class="aligned-rr-ro"   ng-repeat="rubricRow in frameworkNode.rubricRows" ng-show="vm.rubricRowIsAligned(rubricRow)" >
+        <td width="50%">
+            <div ng-click="vm.open(rubricRow)"> {{rubricRow.title}}</div>
+        </td>
+    </tr>
+    </tbody>
+</table>

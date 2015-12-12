@@ -1,0 +1,66 @@
+<div class="row" >
+    <div class="col-lg-12">
+        <div class="pull-right">
+            <button class="btn btn-default btn-outline btn-sm" ng-click="vm.back()">Back</button>
+            <button class="btn btn-default btn-outline btn-sm"
+                    ng-if="!vm.submitted"
+                    ng-click="vm.save(false)">Save for Later</button>
+            <button class="btn btn-primary btn-sm"
+                    ng-if="!vm.submitted"
+                    ng-click="vm.save(true)">Share with Evaluator</button>
+            <button class="btn btn-primary btn-sm"
+                    ng-if="vm.showCompleteScoringBtn"
+                    ng-click="vm.completeScoring()">Scoring Complete</button>
+            <button class="btn btn-primary btn-sm"
+                    ng-if="vm.showReturnToNotScoredBtn"
+                    ng-click="vm.returnToNotScored()">Re-Score</button>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="!vm.submitted">
+    <div class="col-lg-12">
+        <ng-form name="vm.myForm">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <!--TODO: validation -->
+                        <input type="text" name="title" class="form-control" ng-model="vm.bundle.title"
+                               placeholder="Enter Title" required>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Which criteria will be covered in this goal?</label>
+                        <p>You may select multiple criteria to create a single nested goal that spans criteria.</p>
+
+                        <div class="btn-toolbar">
+                            <button ng-repeat="fn in vm.studentGrowthFrameworkNodes" class="btn btn-sm"
+                                    ng-class="{ 'btn-default': !vm.goalIsActive(fn), 'btn-primary': vm.goalIsActive(fn) }"
+                                    ng-click="vm.toggleGoalActivation(fn)">
+                                {{fn.shortName}}
+                            </button>
+                        </div>
+                        <h4 ng-show="vm.activeGoals.length>0">{{vm.bundleDisplayName}}</h4>
+                        <p ng-show="vm.activeGoals.length>1">Nested goals should have a common theme.</p>
+                        <br/><br/>
+                    </div>
+                </div>
+            </div>
+        </ng-form>
+    </div>
+</div>
+<div class="row" ng-if="vm.submitted">
+    <div class="col-lg-12">
+        <div class="form-group">
+            <h3>Goal - {{vm.bundle.title}}</h3>
+            <p>{{vm.bundleDisplayName}}</p>
+        </div>
+        <br />
+    </div>
+</div>
+
+<br/>
+<sg-goal-planning ng-repeat-start="goal in vm.activeGoals"
+                  bundle="vm.bundle" goal="goal" evidence-collection="vm.evidenceCollection">
+</sg-goal-planning>
+<br ng-repeat-end/>

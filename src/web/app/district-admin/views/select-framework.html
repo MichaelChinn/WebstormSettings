@@ -1,0 +1,99 @@
+<div class="tabs-container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div >
+                <tabset>
+                    <!--
+                         vm.prototypeContextsBySchoolYear =
+            {   '2015': {'1': { frameworkContext: null, selectedProto: null, prototypes: []}, '2': { frameworkContext: null,selectedProto: null,  prototypes: [] }},
+                '2016': {'1': { frameworkContext: null, selectedProto: null, prototypes: []}, '2': { frameworkContext: null, selectedProto: null, prototypes: [] }}
+            }       -->
+                    <tab ng-repeat="(schoolYear,byYear) in vm.prototypeContextsBySchoolYear" heading="{{schoolYear-1}}-{{schoolYear}}">
+                        <div class="tab-body">
+                            <div ng-repeat="(evalType,byEvalType) in byYear" class="panel panel-default" >
+
+                                <div class="panel-heading"><h4>{{vm.enums.EvaluationTypes[evalType]}}</h4></div>
+                                <div class="panel-body">
+                                    <div ng-if="!byEvalType.frameworkContext">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <select ng-model="byEvalType.selectedProto"
+                                                        ng-options="protoContext as protoContext.name for protoContext in byEvalType.protoTypes">
+                                                    <option value="null">Select</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <button class="btn btn-primary btn-sm" ng-confirm="Are you sure you want to load this framework?" ng-click="vm.loadFrameworkContext(byEvalType.selectedProto.id)">Load Framework</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div ng-if="byEvalType.frameworkContext">
+                                        <div class="pull-right">
+                                            <button class="btn btn-primary btn-sm" ng-click="vm.updateFrameworkContext(byEvalType.frameworkContext)">Save</button>
+                                        </div>
+                                        <div>
+                                            <label>Framework</label><br/>
+                                            {{byEvalType.frameworkContext.name}}<br/><br/>
+                                            <label>Load Date</label><br/>
+                                            {{byEvalType.frameworkContext.loadDateTime | date }}
+                                        </div>
+                                        <br/>
+                                        <br/>
+                                        <div class="checkbox checkbox-primary">
+                                            <input type="checkbox"  id="cb{{$index}}" ng-model="byEvalType.frameworkContext.isActive">
+                                            <label for="cb{{$index}}">Make this school year/framework available for use</label>
+                                        </div>
+                                        <br/><br/>
+                                        <div ng-if="byEvalType.frameworkContext.stateFramework && byEvalType.frameworkContext.instructionalFramework">
+                                            <label>Framework View Type</label><br/>
+                                            <select ng-model="byEvalType.frameworkContext.frameworkViewType" convert-to-number>
+                                                <option value="{{vm.enums.FrameworkViewType.STATE_FRAMEWORK_ONLY}}">State Framework Only</option>
+                                                <option value="{{vm.enums.FrameworkViewType.STATE_FRAMEWORK_DEFAULT}}">State Framework Default</option>
+                                                <option value="{{vm.enums.FrameworkViewType.INSTRUCTION_FRAMEWORK_ONLY}}">Instructional Framework Only</option>
+                                                <option value="{{vm.enums.FrameworkViewType.INSTRUCTIONAL_FRAMEWORK_DEFAULT}}">Instructional Framework Default</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+ <!--
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pull-right">
+                    <button class="btn btn-primary btn-sm" ng-click="vm.updateFrameworkContext()">Save</button>
+                </div>
+                <div>
+                    <label>Framework</label><br/>
+                    {{vm.frameworkContext.name}}<br/><br/>
+                    <label>Load Date</label><br/>
+                    {{vm.frameworkContext.loadDateTime | date }}
+                </div>
+                <br/>
+                <br/>
+                <div class="checkbox checkbox-primary">
+                    <input type="checkbox"  id="cb{{$index}}" ng-model="vm.frameworkContext.isActive">
+                    <label for="cb{{$index}}">Make this school year/framework available for use</label>
+                </div>
+                <br/><br/>
+                <div ng-if="vm.frameworkContext.stateFramework && vm.frameworkContext.instructionalFramework">
+                    <label>Framework View Type</label><br/>
+                    <select ng-model="vm.frameworkContext.frameworkViewType" convert-to-number>
+                        <option value="{{vm.enums.FrameworkViewType.STATE_FRAMEWORK_ONLY}}">State Framework Only</option>
+                        <option value="{{vm.enums.FrameworkViewType.STATE_FRAMEWORK_DEFAULT}}">State Framework Default</option>
+                        <option value="{{vm.enums.FrameworkViewType.INSTRUCTION_FRAMEWORK_ONLY}}">Instructional Framework Only</option>
+                        <option value="{{vm.enums.FrameworkViewType.INSTRUCTIONAL_FRAMEWORK_DEFAULT}}">Instructional Framework Default</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>

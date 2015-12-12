@@ -1,0 +1,116 @@
+<div >
+    <select class="form-control rubric-component-select" ng-model="vm.rubricFilter" >
+        <option value="All">All</option>
+        <option ng-repeat="option in vm.rubricFilterUtils.getFrameworkSelectNodes(vm.frameworkNodes)" value="{{option.ShortName}}">{{option.ShortName}} {{option.Title}}</option>
+    </select>
+</div>
+<br/>
+<div ng-repeat="fn in vm.frameworkNodes" >
+    <div ng-show="vm.rubricFilterUtils.showFrameworkNodePanel(fn, vm.rubricFilter)" class="panel panel-primary" >
+        <div ng-show="vm.rubricFilterUtils.showFrameworkNodePanelHeader(fn, vm.rubricFilter)" class="panel-heading">
+            {{ fn.ShortName }} {{ fn.Title }}
+            <span class="pull-right"></span>
+            <span class="label label-success pull-right">DIS</span>
+            <span class="label label-info pull-right">PRO</span>
+            <span class="label label-warning pull-right">BAS</span>
+            <span class="label label-danger pull-right">UNS</span>
+        </div>
+        <div class="panel-body">
+            <div ng-repeat="r in fn.RubricRows">
+                <div ng-show="vm.rubricFilterUtils.showRubricRowPanel(r, vm.rubricFilter)" class="panel panel-primary" >
+                    <div class="panel-heading">
+                        {{ r.ShortName}} {{ r.Title }}
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped table-condensed table-bordered">
+                            <tr>
+                                <td width="25%"><strong>UNS</strong></td>
+                                <td width="25%"><strong>BAS</strong></td>
+                                <td width="25%"><strong>PRO</strong></td>
+                                <td width="25%"><strong>DIS</strong></td>
+                            </tr>
+                            <tbody>
+                            <tr><td colspan="4"><strong>Evaluator Input</strong></td></tr>
+                            <tr>
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluator(1, r, r.P1Descriptor)"></td>
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluator(2, r, r.P2Descriptor)"></td>
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluator(3, r, r.P3Descriptor)"></td>
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluator(4, r, r.P4Descriptor)"></td>
+                            </tr>
+                            <tr ng-show="vm.showNotes">
+                                <td colspan="4">
+                                    <strong>Evaluator Notes</strong>
+                                    <button class="btn btn-primary btn-xs m-l-sm" ng-click="vm.editNotes=true" type="button">edit</button>
+                                    <button class="btn btn-primary btn-xs m-l-sm" ng-click="vm.editNotes=false" type="button">save</button>
+                                </td>
+                            </tr>
+                            <tr ng-show="vm.showNotes && vm.editNotes"><td colspan="4"><summernote height="150" ng-model="vm.mainNotesHTML"></summernote></td></tr>
+                            <tr ng-show="vm.showNotes && !vm.editNotes">
+                                <td colspan="4">
+                                    <p>The teacher is sitting in front of the class at the carpet at the front of the room. She is reading a story.</p><p>A student in the back of the room is getting restless. The teacher asks the student whether he is having a hard time sitting for so long and whether he would like to take a quick break to stretch and then return to the carpet.The student agrees, walks around a little bit and then returns to the carpet. He is much more focused now.</p><p>The teacher is reading Little House on the Prairie. She asks the students what just happened in the last paragraph and several students raise their hands. One student blurts out an answer. The teacher tells the student that it is nice that he is excited about responding, but he needs to raise his hand and give everyone a chance to respond.</p>
+                                </td>
+                            </tr>
+
+                            <tr ng-show="vm.showClaimStatements" ><td colspan="4"><strong>Evaluator Claim Statements</strong></td></tr>
+                            <tr ng-show="vm.showClaimStatements" >
+                                <td width="25%"><strong>Source</strong></td>
+                                <td width="25%"><strong>Statement</strong></td>
+                                <td colspan="2"><strong>Evidence</strong></td>
+                            </tr>
+                            <tr ng-show="vm.showClaimStatements"  ng-repeat="s in vm.getClaimStatementsAlignedToRubricRowForEvaluator(r)">
+                                <td>
+                                    <ul class="rubric-artifact-list">
+                                        <li><label>Author:</label><span>{{s.getAuthor().DisplayName}}</span></li>
+                                        <li><span class="fa {{s.getEvidenceCollection().Icon}}">{{s.getEvidenceCollection().Title}}</span></li>
+                                    </ul>
+                                </td>
+                                <td>{{s.Statement}}</td>
+                                <td>{{s.Evidence}}</td>
+                            </tr>
+
+                            <tr ng-show="vm.showTeacherInput" ><td colspan="4"><strong>Evaluatee Input</strong></td></tr>
+                            <tr ng-show="vm.showTeacherInput">
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluatee(1, r, r.P1Descriptor)"></td>
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluatee(2, r, r.P2Descriptor)"></td>
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluatee(3, r, r.P3Descriptor)"></td>
+                                <td ng-bind-html="vm.getEvaluateeRubricDescriptorTextFromEvaluatee(4, r, r.P4Descriptor)"></td>
+                            </tr>
+                            <tr  ng-show="vm.showTeacherInput && vm.showNotes">
+                                <td colspan="4">
+                                    <strong>Evaluatee Notes</strong>
+                                    <button class="btn btn-primary btn-xs m-l-sm" ng-click="vm.editNotes=true" type="button">edit</button>
+                                    <button class="btn btn-primary btn-xs m-l-sm" ng-click="vm.editNotes=false" type="button">save</button>
+                                </td>
+                            </tr>
+                            <tr ng-show="vm.showTeacherInput && vm.showNotes" ng-if="vm.editNotes"><td colspan="4"><summernote height="150" ng-model="vm.mainNotesHTML"></summernote></td></tr>
+                            <tr ng-show="vm.showTeacherInput && vm.showNotes" ng-if="!vm.editNotes">
+                                <td colspan="4">
+                                    <p>The teacher is sitting in front of the class at the carpet at the front of the room. She is reading a story.</p><p>A student in the back of the room is getting restless. The teacher asks the student whether he is having a hard time sitting for so long and whether he would like to take a quick break to stretch and then return to the carpet.The student agrees, walks around a little bit and then returns to the carpet. He is much more focused now.</p><p>The teacher is reading Little House on the Prairie. She asks the students what just happened in the last paragraph and several students raise their hands. One student blurts out an answer. The teacher tells the student that it is nice that he is excited about responding, but he needs to raise his hand and give everyone a chance to respond.</p>
+                                </td>
+                            </tr>
+                            <tr ng-show="vm.showClaimStatements && vm.showTeacherInput" ><td colspan="4"><strong>Evaluatee Claim Statements</strong></td></tr>
+                            <tr ng-show="vm.showClaimStatements && vm.showTeacherInput" >
+                                <td width="25%"><strong>Source</strong></td>
+                                <td width="25%"><strong>Statement</strong></td>
+                                <td colspan="2"><strong>Evidence</strong></td>
+                            </tr>
+                            <tr ng-show="vm.showClaimStatements && vm.showTeacherInput"  ng-repeat="s in vm.getClaimStatementsAlignedToRubricRowForEvaluatee(r)">
+                                <td>
+                                    <ul class="rubric-artifact-list">
+                                        <li><label>Author:</label><span>{{s.getAuthor().DisplayName}}</span></li>
+                                        <li><span class="fa {{s.getEvidenceCollection().Icon}}">{{s.getEvidenceCollection().Title}}</span></li>
+                                    </ul>
+                                </td>
+                                <td>{{s.Statement}}</td>
+                                <td>{{s.Evidence}}</td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

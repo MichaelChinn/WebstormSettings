@@ -1,0 +1,11 @@
+IF EXISTS ( SELECT  TABLE_NAME
+            FROM    INFORMATION_SCHEMA.VIEWS
+            WHERE   TABLE_NAME = N'vEDSroles' ) 
+    DROP VIEW dbo.vEDSroles
+GO
+
+CREATE VIEW dbo.vEDSroles
+AS
+    SELECT  *
+	FROM EDSRolesV1
+ 

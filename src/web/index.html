@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>eVAL</title>
+
+    <link rel="stylesheet" href="lib/kendo/styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="lib/kendo/styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/summernote/dist/summernote.css" />
+    <link rel="stylesheet" href="lib/summernote/dist/summernote-bs3.css"/>
+    <link rel="stylesheet" href="lib/angular-toastr/dist/angular-toastr.css" />
+    <link rel="stylesheet" href="lib/metisMenu/dist/metisMenu.css" />
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="lib/inspinia/css/style.css" />
+    <link rel="stylesheet" href="lib/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"/>
+    <link rel="stylesheet" href="lib/nouislider/nouislider.min.css"/>
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link href="styles/observation.css" rel="stylesheet" />
+</head>
+<body ng-app="stateeval" ng-controller="globalController as vm">
+<div style="background-color:white">{{vm.errorMessage}}</div>
+<div ui-view></div>
+
+<script src="lib/jquery/dist/jquery.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-cookies/angular-cookies.js"></script>
+<script src="lib/angular-animate/angular-animate.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="lib/lodash/lodash.js"></script>
+<script src="lib/angular-lodash-module/angular-lodash-module.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/summernote/dist/summernote.js"></script>
+<script src="lib/angular-summernote/dist/angular-summernote.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="lib/angular-toastr/dist/angular-toastr.tpls.js"></script>
+<script src="lib/metisMenu/dist/metisMenu.js"></script>
+<script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
+<script src="lib/kendo/kendo.all.min.js"></script>
+<script src="lib/checklist-model/checklist-model.js"></script>
+<script src="lib/angular-utils-ui-breadcrumbs/uiBreadcrumbs.js"></script>
+<script src="lib/iCheck/icheck.min.js"></script>
+<script src="lib/angular-confirm/confirm.js"></script>
+<script src="lib/angular-messages/angular-messages.js"></script>
+<script src="lib/nouislider/nouislider.js"></script>
+<script src="lib/nouislider-angular/nouislider.js"></script>
+
+<script charset="utf-8" src="//ucarecdn.com/widget/2.3.4/uploadcare/uploadcare.full.min.js"></script>
+
+
+<script src="app/app.module.js"></script>
+
+
+<script src="app/artifacts/artifacts.module.js"></script>
+<script src="app/artifacts/artifact.route.js"></script>
+<script src="app/artifacts/controllers/artifact-builder.controller.js"></script>
+<script src="app/artifacts/controllers/artifact-info.controller.js"></script>
+<script src="app/artifacts/controllers/artifacts.controller.js"></script>
+<script src="app/artifacts/services/artifact.service.js"></script>
+<script src="app/artifacts/controllers/professional-practice-modal.controller.js"></script>
+<script src="app/artifacts/directives/artifact-libitems.directive.js"></script>
+<script src="app/artifacts/directives/artifact-builder-libitems.directive.js"></script>
+<script src="app/artifacts/directives/artifact-builder-edit-libitem.directive.js"></script>
+<script src="app/artifacts/directives/artifact-summary.directive.js"></script>
+<script src="app/artifacts/controllers/submitted-artifact-summary.controller.js"></script>
+<script src="app/artifacts/controllers/reject-artifact-modal.controller.js"></script>
+<script src="app/artifacts/directives/artifact-rejection.directive.js"></script>
+<script src="app/artifacts/controllers/artifacts-private.controller.js"></script>
+<script src="app/artifacts/controllers/artifacts-submitted.controller.js"></script>
+<script src="app/artifacts/controllers/artifacts-rejected.controller.js"></script>
+<script src="app/artifacts/controllers/other-evidence.controller.js"></script>
+<script src="app/artifacts/directives/artifact-evidence-summary.directive.js"></script>
+<script src="app/artifacts/directives/linked-object-selector.directive.js"></script>
+<script src="app/artifacts/directives/artifact-builder-linked-objects.directive.js"></script>
+<script src="app/artifacts/directives/artifact-alignment.directive.js"></script>
+
+<script src="app/assignments/assignments.module.js"></script>
+<script src="app/assignments/assignments.route.js"></script>
+<script src="app/assignments/controllers/assignments.controller.js"></script>
+<script src="app/assignments/services/assignments.service.js"></script>
+<script src="app/assignments/controllers/selectFocusModalController.js"></script>
+<script src="app/assignments/controllers/dte-request-assignment.controller.js"></script>
+<script src="app/assignments/directives/assignments-grid-editable.directive.js"></script>
+<script src="app/assignments/directives/assignments-grid-readonly.directive.js"></script>
+<script src="app/assignments/directives/dte-requests-grid-editable.directive.js"></script>
+<script src="app/assignments/directives/dte-requests-grid-read-only.directive.js"></script>
+<script src="app/assignments/services/assignments-model.service.js"></script>
+
+<script src="app/blocks/exception/exception.module.js"></script>
+<script src="app/blocks/exception/exception-handler.provider.js"></script>
+<script src="app/blocks/exception/exception.js"></script>
+<script src="app/blocks/logger/logger.module.js"></script>
+<script src="app/blocks/logger/logger.js"></script>
+<script src="app/blocks/router/router.module.js"></script>
+<script src="app/blocks/router/router-helper.provider.js"></script>
+
+<script src="app/core/core.module.js"></script>
+<script src="app/core/services/apiInterceptor.service.js"></script>
+<script src="app/core/services/startup.service.js"></script>
+<script src="app/core/config.js"></script>
+<script src="app/core/config.route.js"></script>
+<script src="app/core/directives/summer-note.directive.js"></script>
+<script src="app/core/directives/rubric-coder.directive.js"></script>
+<script src="app/core/controllers/global.controller.js"></script>
+<script src="app/core/controllers/select-work-area.controller.js"></script>
+<script src="app/core/services/httpErrorResponseInterceptor.service.js"></script>
+<script src="app/core/services/evidenceCollection.service.js"></script>
+<script src="app/core/services/evaluation.service.js"></script>
+<script src="app/core/services/framework.service.js"></script>
+<script src="app/core/services/notification.service.js"></script>
+<script src="app/core/services/evalSession.service.js"></script>
+<script src="app/core/services/utils.service.js"></script>
+<script src="app/core/directives/se-panel.directive.js"></script>
+<script src="app/core/services/authentication.service.js"></script>
+<script src="app/core/services/active-user-context.service.js"></script>
+<script src="app/core/services/work-area.service.js"></script>
+<script src="app/core/controllers/base.controller.js"></script>
+<script src="app/core/controllers/generic-dashboard.controller.js"></script>
+<script src="app/core/services/user.service.js"></script>
+<script src="app/core/directives/node-title.directive.js"></script>
+<script src="app/core/directives/score-button-group.directive.js"></script>
+<script src="app/core/directives/nothing-here.js"></script>
+<script src="app/core/directives/available-evidence.directive.js"></script>
+<script src="app/core/directives/rubric-row-selector.directive.js"></script>
+<script src="app/core/directives/show-alignment.directive.js"></script>
+<script src="app/core/directives/node.directive.js"></script>
+<script src="app/core/services/rubricRowEvaluation.service.js"></script>
+<script src="app/core/services/rubric-utils.service.js"></script>
+<script src="app/core/services/userActivity.service.js"></script>
+<script src="app/core/directives/collection-row.directive.js"></script>
+<script src="app/core/directives/row-title.directive.js"></script>
+<script src="app/core/directives/non-summative-score-display.directive.js"></script>
+<script src="app/core/services/location.service.js"></script>
+<script src="app/core/directives/rubric-helper.directive.js"></script>
+<script src="app/core/directives/framework-node-style.directive.js"></script>
+<script src="app/core/directives/rubric-row-attatchment.directive.js"></script>
+<script src="app/core/directives/show-rubric-row-evaluations.directive.js"></script>
+<script src="app/core/directives/convert-to-number.directive.js"></script>
+<script src="app/core/directives/rubric-row-evaluation.directive.js"></script>
+<script src="app/core/directives/rubric-row.directive.js"></script>
+<script src="app/core/directives/coverage-table.directive.js"></script>
+<script src="app/core/directives/evidence-collection.directive.js"></script>
+<script src="app/core/directives/evidence-item-summary.directive.js"></script>
+<script src="app/core/directives/read-only-area.directive.js" type="text/javascript"></script>
+<script src="app/district-admin/district-admin.module.js"></script>
+<script src="app/district-admin/district-admin.route.js"></script>
+<script src="app/district-admin/controllers/edit-framework.controller.js"></script>
+<script src="app/district-admin/directives/coverage.directive.js"></script>
+<script src="app/district-admin/directives/coverage-single.directive.js"></script>
+<script src="app/district-admin/controllers/select-framework.controller.js"></script>
+<script src="app/district-admin/services/district-admin.service.js"></script>
+<script src="app/district-admin/controllers/modify-framework.controller.js"></script>
+<script src="app/district-admin/controllers/daDashboard.controller.js"></script>
+
+<script src="app/layout/layout.module.js"></script>
+<script src="app/layout/layout.route.js"></script>
+<script src="app/layout/directives/links-menu.directive.js"></script>
+<script src="app/layout/controllers/evaluatee-dashboard.controller.js"></script>
+<script src="app/layout/controllers/evaluator-dashboard.controller.js"></script>
+<script src="app/layout/controllers/notifications.controller.js"></script>
+<script src="app/layout/controllers/recently-worked-on.controller.js"></script>
+<script src="app/layout/controllers/general-info.controller.js"></script>
+<script src="app/layout/controllers/evaluating-user-profile.controller.js"></script>
+<script src="app/layout/controllers/top-navbar.controller.js"></script>
+<script src="app/layout/controllers/impersonateSettingsModalController.js"></script>
+<script src="app/layout/controllers/left-navbar.controller.js"></script>
+<script src="app/layout/controllers/user-orientation-setup-modal.controller.js"></script>
+<script src="app/layout/controllers/framework-evidence-view.controller.js"></script>
+<script src="app/layout/controllers/evaluatee-coverage.controller.js"></script>
+
+<script src="app/login/login.module.js"></script>
+<script src="app/login/login.controller.js"></script>
+
+<script src="app/observation/observation.module.js"></script>
+<script src="app/observation/controllers/observation.controller.js"></script>
+<script src="app/observation/services/observation.service.js"></script>
+<script src="app/observation/controllers/observation-list.controller.js"></script>
+<script src="app/observation/controllers/observation-setup.controller.js"></script>
+<script src="app/observation/controllers/observation-base.controller.js"></script>
+<script src="app/observation/controllers/pre-conference.controller.js"></script>
+<script src="app/observation/controllers/pre-conference-teacher.controller.js"></script>
+<script src="app/observation/controllers/observation-artifact.controller.js"></script>
+<script src="app/observation/controllers/post-conference.controller.js"></script>
+<script src="app/observation/directives/prompt-selector.directive.js"></script>
+<script src="app/observation/observation.route.js"></script>
+
+<script src="app/prompt/prompt.module.js"></script>
+<script src="app/prompt/prompt.route.js"></script>
+<script src="app/prompt/controllers/prompt-bank.controller.js"></script>
+<script src="app/prompt/controllers/edit-prompt.controller.js"></script>
+<script src="app/prompt/services/user-prompt.service.js"></script>
+<script src="app/prompt/directives/prompt-grid.directive.js"></script>
+<script src="app/prompt/directives/framework-tree.directive.js"></script>
+
+<script src="app/reports/reports.module.js"></script>
+<script src="app/reports/reports.route.js"></script>
+<script src="app/reports/services/report.service.js"></script>
+<script src="app/reports/controllers/evaluatee-reports.controller.js"></script>
+<script src="app/reports/controllers/evaluator-reports.controller.js"></script>
+<script src="app/reports/controllers/summative-report.controller.js"></script>
+
+<script src="app/resources/resource.module.js"></script>
+<script src="app/resources/resource.route.js"></script>
+<script src="app/resources/controllers/resource-builder.controller.js"></script>
+<script src="app/resources/controllers/resource-list.controller.js"></script>
+<script src="app/resources/services/resource.service.js"></script>
+<script src="app/resources/controllers/resource-view.controller.js"></script>
+
+<script src="app/school-admin/school-admin.module.js"></script>
+<script src="app/school-admin/school-admin.route.js"></script>
+<script src="app/school-admin/controllers/sa-left-navbar.controller.js"></script>
+<script src="app/school-admin/controllers/saDashboard.controller.js"></script>
+
+<script src="app/self-assessment/self-assessment.module.js"></script>
+<script src="app/self-assessment/self-assessment.route.js"></script>
+<script src="app/self-assessment/controllers/self-assessment-list.controller.js"></script>
+<script src="app/self-assessment/controllers/self-assessment.controller.js"></script>
+<script src="app/self-assessment/services/self-assessment.service.js"></script>
+
+<script src="app/student-growth-admin/student-growth-admin.module.js"></script>
+<script src="app/student-growth-admin/student-growth-admin.route.js"></script>
+<script src="app/student-growth-admin/controllers/setup-student-growth.controller.js"></script>
+<script src="app/student-growth-admin/services/student-growth-admin.service.js"></script>
+<script src="app/student-growth-admin/directives/prompts.directive.js"></script>
+
+<script src="app/student-growth-goals/student-growth-goals.module.js"></script>
+<script src="app/student-growth-goals/student-growth-goals.route.js"></script>
+<script src="app/student-growth-goals/controllers/sg-goals.controller.js"></script>
+<script src="app/student-growth-goals/controllers/sg-goals-private.controller.js"></script>
+<script src="app/student-growth-goals/controllers/sg-goals-submitted.controller.js"></script>
+<script src="app/student-growth-goals/services/student-growth-build.service.js"></script>
+<script src="app/student-growth-goals/controllers/bundle.controller.js"></script>
+<script src="app/student-growth-goals/controllers/sg-bundle-setup.controller.js"></script>
+<script src="app/student-growth-goals/directives/sg-goal-planning.directive.js"></script>
+
+<script src="app/summative-eval/summative-eval.module.js"></script>
+<script src="app/summative-eval/summative-eval.route.js"></script>
+<script src="app/summative-eval/controllers/summative-eval.js"></script>
+
+<script src="app/super-admin/super-admin.module.js"></script>
+<script src="app/super-admin/super-admin.route.js"></script>
+<script src="app/super-admin/services/super-admin.service.js"></script>
+<script src="app/super-admin/controllers/import-errors.controller.js"></script>
+
+<script src="app/training-protocols/training-protocols.module.js"></script>
+<script src="app/training-protocols/training-protocols.route.js"></script>
+<script src="app/training-protocols/controllers/training-protocol.controller.js"></script>
+<script src="app/training-protocols/controllers/training-protocol-list.controller.js"></script>
+<script src="app/training-protocols/services/training-protocol.service.js"></script>
+
+<script src="app/configuration/configuration.module.js"></script>
+<script src="app/configuration/configuration.route.js"></script>
+<script src="app/configuration/services/email-recipient.service.js"></script>
+<script src="app/configuration/controllers/email-recipient.controller.js"></script>
+    
+    <script src="lib/inspinia/js/module.js"></script>
+<script src="lib/inspinia/js/directives.js"></script>
+<script src="lib/inspinia/js/inspinia.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+c1--Continuous growth  
+Embeds a shared vision for the continuous growth of the whole student and lifelong learning within the school community.  
+Articulates a vision for the continuous growth of the whole student and lifelong learning within the school community.  
+Recognizes the importance of a shared vision for the continuous growth of the whole student and lifelong learning but may not consistently articulate this throughout the school community.  
+Does not uphold a shared vision for continuous growth of the whole student and lifelong learning within the school community.  
+c1--Relationships  
+Cultivates an atmosphere throughout the school community built upon a commitment to personal responsibility, trust and collaboration.  
+Develops and models relationships between individuals and groups based upon personal responsibility, trust and collaboration.  
+Communicates the importance of personal responsibility, trust and collaboration, but may not cultivate those values consistently in the school community.  
+Does not convey the importance of personal responsibility, trust or collaboration through words and/or action.  
+c1--Building capacity  
+Builds capacity in self and staff to explore authentic data and indicators of school climate in the spirit of continuous growth.  
+Works effectively with staff to explore authentic data and indicators of school climate to create positive change.  
+When necessary, works with staff to explore data that supports change or only explores data that supports predetermined changes.  
+Rarely or never works with staff to explore data that supports change or endorses change not supported by data.  
+c1--Celebrating achievement  
+Fosters an appreciation or recognition of group and individual accomplishments as part of the ongoing collaborative process.  
+Recognizes group and individual accomplishments in a variety of ways.  
+Sometimes recognizes group and individual accomplishments.  
+Rarely or never recognizes group and individual accomplishments  
+c1--Addressing challenges  
+Addresses difficult issues with students, parents and staff in a manner that invites problem-solving and input from the parties involved, bringing a sense of closure.  
+Addresses difficult issues with students, parents and staff in a prompt and compassionate manner that brings closure.  
+Addresses difficult issues with students, parents and staff, but may not do so promptly or in a manner that brings closure.  
+Avoids or ignores difficult issues with students, parents and staff, or addresses them in a way that creates conflict 
+
+c2--Safety plan & procedures  
+Maintains effective systems within the school community to create, monitor and adjust safety plans and procedures through regular collaboration of staff, inclusion of outside agencies, and/or employing students and parents in safety plans.  
+Maintains effective systems within the school community to create, monitor and adjust safety plans and procedures.  
+Maintains safety plans and procedures within the school community that may not be monitored or adjusted on a regular basis.  
+Does not provide adequate safety plans and procedures within the school community.  
+c2--Discipline plan & procedures  
+Utilizes a collaborative process in order to create, monitor and adjust discipline plans and procedures consistent with the school?s philosophy.  
+Maintains effective systems within the school community to create, monitor and adjust discipline plans and procedures.  
+Enacts disciplinary steps within the school community that may be inconsistently applied or not aligned with a building philosophy.  
+Does not address discipline consistently and/or demonstrate a commitment to any particular philosophy. Students may be running the school.  
+c2--Legal 
+_BLANK_ 
+Applies legal and district policy requirements regarding discipline and safety, including special education and 504 procedures.  
+_BLANK_ 
+Does not regularly apply legal and district policy requirements regarding discipline and safety, including special education and 504 procedures.  
+
+c2--Emotional safety  
+Facilitates a collaborative culture that embraces practices across the school which consistently provides a physically and emotionally safe environment that optimizes learning.  
+Monitors classroom practices across the school in order to consistently provide a physically and emotionally safe environment that optimizes learning.  
+Recognizes the importance of a physically and emotionally safe environment to learning but may not monitor classroom practices consistently across the school.  
+Does not monitor classroom practices across the school or demonstrate a concern for the emotional and physical safety of students. 
+
+c3--Creating SIP 
+Ensures the creation of a collaboratively developed, focused, feasible SIP. Provides frequent opportunity for staff reflection regarding progress of SIP in order to modify targets and action plans based upon data. 
+Ensures the creation of a school improvement plan that is collaboratively developed, focused, feasible and uses data to monitor continuous improvement 
+Leads the creation of a SIP that includes all required components. 
+Leadership for creation of SIP is not evident; plan is vague and lacks attention to data. Collaboration for development is not evident, or action plans are not feasible. 
+c3--Implementing SIP 
+Develops and supports staff leadership to implement the SIP and develops/uses specific effective structures and protocols for ongoing collaboration, problem-solving, and consensus. Assesses knowledge/skills and professional development that are needed in the school for implementation of SIP. 
+Mobilizes staff to implement the SIP through collaboration, problem solving and consensus building. Arranges for professional development when requested in order to implement SIP. 
+Encourages staff to implement SIP and to participate in professional development that is available. 
+Principal and staff lack consistent attention to SIP once created. Professional development to implement SIP is sporadic and not focused. 
+c3--Communicating SIP 
+Clearly communicates the elements of the SIP with staff, parents, board and community and supports articulation of SIP goals between levels. 
+Clearly communicates the elements of the SIP with staff, parents, board and community. 
+Communicates some elements of the SIP with staff, parents, board, and community. 
+Communication about SIP is infrequent and unclear to staff, parents, board, and community.
+
+c4--Best instructional practices 
+Demonstrates and discusses knowledge of best practices in instruction and assessment and provides staff access to research and resources in relevant areas. 
+Demonstrates and discusses knowledge of best practices in instruction and assessment. 
+Demonstrates functional knowledge of best practices in instruction and assessment. 
+Demonstrates limited or no knowledge of best practices in instruction and/or assessment. 
+c4--Curriculum alignment 
+Demonstrates knowledge of aligned curriculum sequence in various curriculum areas and grade levels. Mobilizes staff to align curriculum in areas where alignment is lacking. 
+Guides staff in aligning curriculum with state performance expectations within and across curriculum areas and grade levels. 
+Encourages staff in their work toward aligning curriculum with performance expectations in some areas and/or levels. 
+Delivery of curriculum is poorly aligned with performance expectations and principal has limited knowledge of the curriculum sequence. 
+c4--Assessment Practice 
+Identifies, articulates and values a variety of assessments to diagnose learner needs and to design appropriate learning interventions to improve success on state, local and classroom measures. 
+Identifies and utilizes a variety of assessments to diagnose learner needs and to design appropriate learning interventions to improve success on state, local and classroom measures. 
+Uses a limited set of assessments consistently to diagnose learner needs and to design appropriate learning interventions to improve success on state, local, and classroom measures. 
+Uses of assessment is sporadic and not clearly aligned to purposes of the assessments or to diagnosing learner needs or monitor learning progress. 
+c4--Staff focus 
+Develops teacher leaders to lead conversation and reflection on teaching and learning priorities and classroom practice with peers. Monitors to see that instruction consistently utilizes adopted materials that are aligned to performance expectations. 
+Consistently focuses staff conversations and reflections on teaching and learning priorities through frequent conversations/reflection about classroom practice. 
+Occasionally focuses staff conversations and reflection on teaching and learning priorities and classroom practice. 
+Staff members are not clearly focused on teaching and learning priorities and rarely converse about classroom practice. 
+
+
+c5--Teacher leaders 
+Capitalizes on the strengths of teacher leaders to focus and model the improvement of practice. 
+Utilizes teacher leaders to focus and model the improvement of practice. 
+Recognizes the role of teacher leaders to focus and model the improvement of practice but is unsure of how to engage them in the process. 
+Is unaware or ignores the role that teacher leaders play in the improvement of practice. 
+c5--Evaluation 
+_BLANK_
+Evaluates in a way that distinguishes effective staff from ineffective staff by creating plans and implementing processes to increase staff effectiveness. 
+Evaluates in a way that distinguishes effective staff from ineffective staff. Is unsure how to increase staff effectiveness and seeks support accordingly. 
+Is unaware or ignores ineffective staff in the evaluation process. 
+c5--Staff self-evaluation 
+Assists staff in self-evaluation leading to effective practice by supporting and encouraging individuals on their journey. 
+Assists staff in self-evaluation leading to effective practice. 
+Assists staff in recognizing the value self-evaluation leading to effective practice but is unsure how to individualize the process. 
+Does not participate in or recognize the importance of assisting staff in self-evaluation leading to effective practice. 
+c5--Use of Data 
+Uses a variety of data to inform and support decisions about learning and takes active steps to make the data public to increase overall school success. 
+Uses a variety of data to inform and support decisions about learning. 
+Understands the importance of using a variety of data to inform and support decisions about learning, but is unsure how to proceed. 
+Does not take steps to or does not understand the importance of using a variety of data to inform and support decisions about learning. 
+c5--Communicating effective practice 
+Clearly communicates, supports, and seeks opportunities for implementation of effective instructional and assessment practices as related to school improvement. 
+Clearly communicates effective instructional and assessment practices as related to school improvement. 
+Has a limited ability to communicate effective instructional and assessment practices. 
+Does not take steps to communicate effective instructional and assessment practices. 
+c5--Collaboration & mentoring 
+Recognizes and takes active steps in continually increasing collaboration and peer mentoring among staff, including an induction process for new staff. 
+Develops collaboration and peer mentoring among staff, including an induction process for new staff. 
+Understands the importance of but has limited success in developing collaboration and peer mentoring among staff, including an induction process for new staff. 
+Does not develop or recognize the importance of in the development of collaboration and peer mentoring among staff, including an induction process for new staff
+c6--Budget 
+Develops and manages an effective school budget, involving staff in the process to maximize the success of the learning community. 
+Develops and manages an effective school budget, involving staff in the process. 
+Develops and manages an effective school budget, but does not involve staff in the process. 
+Does not develop or manages an effective school budget, and does not involve staff in the process. 
+c6--Adheres to laws 
+_BLANK_
+Adheres to laws pertaining to all aspects of school governance.
+_BLANK_ 
+Does not adhere to laws pertaining to all aspects of school governance. 
+c6--Recruiting & Hiring 
+Consistently recruits and hires effective staff member who will advance the vision of the school and district. 
+Recruits and hires effective staff member who will advance the vision of the school and district. 
+Recruits and hires effective staff member who will advance the vision of the school and district. 
+Consistently hires poorly. 
+c6--Supervision & Evaluation 
+_BLANK_ 
+Adheres to rules & regulations in regards to supervision & evaluation, including probation and non renewal 
+_BLANK_ 
+Does not adhere to rules & regulations in regards to supervision & evaluation, including probation and non renewal 
+c6--Improvement plans & probation 
+Possesses the skills and knowledge to guide a staff member through an improvement plan or probation process with dignity and a realistic hope for their success. 
+Possesses the skills and knowledge to guide a staff member through an improvement plan or probation process. 
+Possesses some of the skills and knowledge necessary to guide a staff member through an improvement plan or probation process but is unsure how to proceed. 
+Does not possess the skills or chose to participate in the process of guiding a staff member through an improvement plan or probation process. 
+c6--Human resources 
+Balances human resources within the building to facilitate success for all, maximizing learning, knowing where people are best suited and is willing to make the appropriate changes to facilitate this in the best interest of their school. 
+Manages human resources within the building to facilitate success for all, maximize learning, knowing where people are best suited. 
+Is aware of the human resources within the building but is not always willing to see or seize the opportunity to facilitate success for all, maximize learning, knowing where people are best suited. 
+Does not manage human resources within the building well and is unwilling to make decisions regarding issues that surround success for all members of the learning community.
+
+c7--Tools 
+Utilizes a variety of tools (print, electronic, phone, social media) to communicate with families and the community, and seeks new and different opportunities for communication. 
+Utilizes a variety of tools (print, electronic, phone, social media) to communicate with families and the community. 
+Utilizes some of tools (print, electronic, phone, social media) to communicate with families and the community, but is not open to new or different opportunities for communication or utilized communication tools regularly miss some audiences. 
+Does not utilize a variety of tools (print, electronic, phone, social media) to communicate with families and the community. 
+c7--Communicating in the school 
+Consistently communicates relevant information to staff, students and parents utilizing a clear communication plan. 
+Generally communicates relevant information to staff, students and parents. 
+Sometimes communicates relevant information to staff, students and parents and/or does not have a communication plan. 
+Rarely or never communicates with staff, students or parents on a regular basis. 
+c7--Communicating in the community 
+Communicates key school information to the community at large and is actively involved in community activities involving the schools. 
+Communicates key school information to the community at large. 
+Communicates occasional school information to the community at large. 
+Rarely or never communicates with the community at large. 
+c7--Purpose 
+Consistently communicates with key stakeholders for the purpose of increasing student learning, sharing the school focus, resolving conflict and building good will in the community about the school. 
+Generally communicates with key stakeholders for the purpose of increasing student learning, sharing the school focus, resolving conflict and building good will in the community about the school. 
+Sometimes communicates with key stakeholders for the purpose of increasing student learning, sharing the school focus, resolving conflict and building good will in the community about the school. 
+Communication with key stake holders lacks clear purpose. 
+c7--Communication skills 
+Consistently demonstrates effective communication skills and strategies that enhance the school communication plan. 
+Generally demonstrates effective communication skills and strategies. 
+Sometimes demonstrates effective communication skills and strategies. 
+Rarely or never demonstrates effective communication skills and strategies. 
+c7--Timing 
+Consistently communicates in a timely manner with key stakeholders and anticipates areas of need. 
+Communicates in a timely manner with key stakeholders and generally anticipates areas of need. 
+Communication is irregular and does not anticipate areas of need. 
+Rarely or never communicates in a timely manner. 
+
+c8--Use of Data 
+Seeks out data to identify and address patterns of student achievement. 
+Uses data to identify and address patterns of student achievement. 
+Possesses knowledge of data to identify and address patterns of student achievement, but is unsure of implementation strategies. 
+Is unaware of or does not use data to identify and address patterns of student achievement. 
+c8--Collaborative Planning 
+Engages in collaborative planning and instruction that maximizes differentiation inside and outside of classroom. 
+Supports collaborative planning and instruction that maximizes differentiation inside and outside of classroom. 
+Possesses knowledge of collaborative planning strategies and instruction that increases differentiation inside and outside of classroom. 
+Is unaware of or does not support collaborative planning and instruction that increases differentiation inside and outside of classroom. 
+c8--Professional Development 
+Leads and facilitates delivery of effective, needs-based professional development that increases student achievement as identified in the SIP. 
+Facilitates the delivery of professional development that increases student achievement as identified in the SIP. 
+Supports professional development intended to increase student achievement as identified in the SIP. 
+Is unaware of or does not support professional development intended to increase student achievement as identified in the SIP. 
+c8--Inclusiveness 
+Promotes and models an atmosphere of inclusiveness, equity and respect among students, staff and community. 
+Models an atmosphere of inclusiveness, equity and respect among students, staff and community. 
+Communicates the importance of inclusiveness, equity and respect to students, staff and community. 
+Is unaware of inclusiveness, equity and respect issues among students, staff and community or may not know how to address such issues. 
+c8--Resource Management 
+Advocates for and targets resources towards increasing student achievement. 
+Targets resources towards increasing student achievement. 
+Manages resources that may or may not be focused on increasing student achievement. 
+Increasing student achievement is not a consideration in managing resources. 
+c8--Community Resources 
+Develops and communicates community resources to meet the needs of students and families. 
+Identifies and communicates community resources available to students and families. 
+Communicates community resources available to students and families. 
+Is unaware of or does not communicate community resources available to students and families.

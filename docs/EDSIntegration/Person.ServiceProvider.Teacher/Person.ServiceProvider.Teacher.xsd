@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Person.ServiceProvider.Teacher" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Person.ServiceProvider.Teacher" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" />
+  <xs:complexType name="ArrayOfTeacher">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Teacher" nillable="true" type="tns:Teacher" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTeacher" nillable="true" type="tns:ArrayOfTeacher" />
+  <xs:complexType name="Teacher">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q1:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BirthDay" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BirthMonth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="BirthYear" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CertificateNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Certificates" nillable="true" type="tns:ArrayOfCertificate" />
+          <xs:element minOccurs="0" name="EthnicCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsActive" type="xs:int" />
+          <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PersonnelAssignments" nillable="true" type="tns:ArrayOfTeacherAssignment" />
+          <xs:element minOccurs="0" name="PersonnelId" type="xs:int" />
+          <xs:element minOccurs="0" name="SexCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Teacher" nillable="true" type="tns:Teacher" />
+  <xs:complexType name="ArrayOfCertificate">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Certificate" nillable="true" type="tns:Certificate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCertificate" nillable="true" type="tns:ArrayOfCertificate" />
+  <xs:complexType name="Certificate">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q2:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ActionCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Area" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CBTRNCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CreditsAcademic" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CreditsExcess" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CreditsInService" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CreditsNonDegree" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="DegreeType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DegreeYear" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Experience" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
+          <xs:element minOccurs="0" name="PersonnelDegreeAndCertificationId" type="xs:int" />
+          <xs:element minOccurs="0" name="PersonnelId" type="xs:int" />
+          <xs:element minOccurs="0" name="SchoolYearCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="TStamp" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Teacher" nillable="true" type="tns:Teacher" />
+          <xs:element minOccurs="0" name="TeacherReference" nillable="true" type="q2:EntityReferenceOfTeacherfF_SMqKcs" />
+          <xs:element minOccurs="0" name="UpdatedBy" type="xs:int" />
+          <xs:element minOccurs="0" name="YearCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Certificate" nillable="true" type="tns:Certificate" />
+  <xs:complexType name="ArrayOfTeacherAssignment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TeacherAssignment" nillable="true" type="tns:TeacherAssignment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTeacherAssignment" nillable="true" type="tns:ArrayOfTeacherAssignment" />
+  <xs:complexType name="TeacherAssignment">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/System.Data.Objects.DataClasses" base="q3:EntityObject">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AssignCodeActivity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AssignCodeDuty" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AssignCodeProgram" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AssignmentGradeGroup" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DistrictOrganizationId" type="xs:int" />
+          <xs:element minOccurs="0" name="HoursPerYear" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="PercentTime" nillable="true" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Personnel" nillable="true" type="tns:Teacher" />
+          <xs:element minOccurs="0" name="PersonnelAssignmentId" type="xs:int" />
+          <xs:element minOccurs="0" name="PersonnelReference" nillable="true" type="q3:EntityReferenceOfTeacherfF_SMqKcs" />
+          <xs:element minOccurs="0" name="SchoolCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SchoolYearCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TeacherAssignment" nillable="true" type="tns:TeacherAssignment" />
+</xs:schema>

@@ -1,0 +1,35 @@
+<li class="left-nav-eval-dropdown">
+    <span>District</span>
+    <p ng-show="vm.districtsLength === 1">{{vm.district.districtName}}</p>
+    <select ng-model="vm.district" ng-hide="vm.districtsLength === 1" ng-change="vm.changeDistrict()"
+            ng-options="district.districtName for district in vm.context.districts track by district.districtName">
+    </select>
+
+</li>
+<li class="left-nav-eval-dropdown" ng-hide="vm.school.schoolCode===''">
+    <span>School</span>
+    <p ng-show="vm.district.schools.length === 1">{{vm.school.schoolName}}</p>
+    <select ng-model="vm.school" ng-hide="vm.district.schools.length === 1" ng-change="vm.changeSchool()"
+            ng-options="school.schoolName for school in vm.district.schools track by school.schoolName">
+    </select>
+</li>
+
+
+<li class="left-nav-eval-dropdown">
+    <span>Role</span>
+    <p ng-show="vm.school.roles.length  === 1">{{vm.role.title}}</p>
+    <select ng-model="vm.role"  ng-hide="vm.school.roles.length  === 1" ng-change="vm.changeRole()"
+            ng-options="role.title for role in vm.school.roles track by role.title">
+    </select>
+</li>
+
+
+<li class="left-nav-eval-dropdown">
+    <span>Work Area</span>
+    <p ng-show="vm.role.workAreaTags.length  === 1">{{vm.workAreaTag}}</p>
+    <select ng-model="vm.workAreaTag" ng-hide="vm.role.workAreaTags.length  === 1"
+            ng-change="vm.changeWorkArea()"
+            ng-options="vm.workAreaService[workAreaTag].title for workAreaTag in vm.role.workAreaTags">
+
+    </select>
+</li>

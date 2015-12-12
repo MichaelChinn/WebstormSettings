@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>{{vm.assignmentsModel.evaluateeTerm}} Evaluators</h5>
+                <div ibox-tools></div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div ng-if="vm.assignmentsModel.evaluationType===enums.EvaluationType.TEACHER">
+
+                            <div ng-if="!vm.assignmentsModel.userIsSchoolAdmin">
+                                <label>Select school:</label>
+                                <select class="form-control" ng-model="vm.assignmentsModel.schoolCode" ng-change="vm.assignmentsModel.changeSchool()">
+                                    <option ng-repeat="school in vm.assignmentsModel.schools"
+                                            value="{{school.schoolCode}}">{{school.name}}</option>
+                                </select>
+                                <input type="checkbox"  id="cbDelegate"
+                                       ng-model="vm.assignmentsModel.delegates[vm.assignmentsModel.schoolCode]"
+                                       ng-change="vm.assignmentsModel.toggleDelegate()">
+                                <label for="cbDelegate">
+                                    <span >Allow this school to perform principal assignments.
+                                    </span>
+                                </label>
+                            </div>
+
+                            <dte-requests-grid-editable ng-if="!vm.assignmentsModel.dteGridIsReadOnly &&
+                                                                vm.assignmentsModel.dteAssignmentRequests.length>0"
+                                                        assignments-model="vm.assignmentsModel">
+                            </dte-requests-grid-editable>
+
+                            <dte-requests-grid-read-only ng-if="vm.assignmentsModel.dteGridIsReadOnly &&
+                                                                vm.assignmentsModel.acceptedDTEAssignmentRequests.length>0"
+                                                         assignments-model="vm.assignmentsModel">
+                            </dte-requests-grid-read-only>
+                        </div>
+
+                        <br/><br/>
+                        <assignments-grid-read-only ng-if="vm.assignmentsModel.assignmentGridIsReadOnly"
+                                                    assignments-model="vm.assignmentsModel">
+                        </assignments-grid-read-only>
+
+                        <assignments-grid-editable ng-if="!vm.assignmentsModel.assignmentGridIsReadOnly"
+                                                   assignments-model="vm.assignmentsModel">
+                        </assignments-grid-editable>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

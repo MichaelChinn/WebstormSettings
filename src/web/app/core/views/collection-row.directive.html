@@ -1,0 +1,17 @@
+<available-evidence ng-init="selected = []"
+        row="vm.row"
+        selected="selected">
+</available-evidence>
+<rubric-row
+        row="vm.row"
+        toggle="vm.toggle"
+        selected="selected">
+</rubric-row>
+
+<div ng-repeat="rrEval in vm.row.evaluations">
+    <rubric-row-evaluation
+            eval="rrEval"
+            delete-fcn="vm.evidenceCollection.deleteEvaluation(rrEval)"
+            update-fcn="vm.evidenceCollection.updateEvaluation(rrEval)">
+    </rubric-row-evaluation>
+</div>

@@ -1,0 +1,24 @@
+﻿<div style="font-weight:bold;width:100%;background-color:#=color#; padding:5px;">
+    <a style="width:100%" data-role="button" onclick="score(#=performanceLevel#);">#=performanceLevelTitle#</a>
+</div>
+<div class="descriptor">#=descriptorText#</div>
+
+<script>
+    function score(pl) {
+        if (pl == 4) {
+            App.models.scoringElement.onScoreDIS();
+        }
+        else if (pl == 3)
+        {
+            App.models.scoringElement.onScorePRO();
+        }
+        else if (pl == 2)
+        {
+            App.models.scoringElement.onScoreBAS();
+        }
+        else if (pl == 1)
+        {
+            App.models.scoringElement.onScoreUNS();
+        }
+    }
+</script>

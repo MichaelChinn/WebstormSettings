@@ -1,0 +1,46 @@
+<div class="tabs-container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div >
+                <!-- NOTE: this is necessary to work around problem with angular tab not allowing non-assignable
+                expression for the value of 'active' property on tab.
+                https://github.com/angular-ui/bootstrap/issues/611 -->
+                <span ng-init="privateTabSelected = vm.selectedTab===0"></span>
+                <span ng-init="submittedTabSelected = vm.selectedTab===1"></span>
+                <span ng-init="otherEvidenceTabSelected = vm.selectedTab===2"></span>
+                <span ng-init="rejectedTabSelected = vm.selectedTab===3"></span>
+                <tabset>
+                    <tab heading="My Artifacts" ui-sref="artifacts-private" active="privateTabSelected">
+                        <div class="tab-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ui-view="artifacts-private"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                   <!-- <tab heading="Submitted Evidence" ui-sref="artifacts-submitted" active="submittedTabSelected">
+                        <div class="tab-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ui-view="artifacts-submitted"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Request for Further Input" ui-sref="artifacts-rejected" ng-if="vm.isEvaluatee" active="rejectedTabSelected">
+                        <div class="tab-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ui-view="artifacts-rejected"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </tab>-->
+                </tabset>
+            </div>
+        </div>
+    </div>
+</div>
+

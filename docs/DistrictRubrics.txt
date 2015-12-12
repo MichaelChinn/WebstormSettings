@@ -1,0 +1,81 @@
+Tailoring the Evaluation Experience to a District
+
+The main purpose of this document is to give more background on the application, and provide a mapping between the rubrics on the observe screen for different districts, and the underlying documents.
+
+Some definitions (repeated, and added to from the Observation overview):
+
+State: governing body responsible for all of the districts  (as in, Washington State)
+School District: governing body responsible for all the schools in the district
+District Evaluator: someone at the district level responsible for the performance of principals
+Prinicpal: person in charge of a school; responsible for the performance of teachers
+Teacher: a teacher in a school
+Performance Level:: a measurement... i.e. Not Good, Okay, Good, Very GOod
+Rubric: an axis of measurement, and the observable characteristics defining the Performance Levels
+Framework: a collection of rubrics
+State Criteria: high level standards created by the state.
+Instructional Framework: a framework devised by an expert in the field, as
+
+All districts must submit scores of their teachers and principals according to eight broadly defined state criteria.  This law will take effect sometime in the next year. These criteria are:
+
+For principals... 
+
+C1  Creating a school culture that promotes the ongoing improvement of learning and teaching for students and staff.
+C2  Providing for school safety.                  
+C3  Leads development, implementation and evaluation of a data-driven plan for increasing student achievement, including the use of multiple student data elements.
+C4  Assisting instructional staff with alignment of curriculum, instruction and assessment with state and local district learning goals.  
+C5  Monitoring, assisting and evaluating effective instruction and assessment practices. 
+C6  Manage human and fiscal resources to accomplish student achievement goals.     
+C7  Partnering with the school community to promote student learning.     
+C8  Demonstrate commitment to closing achievement gaps.                                                                                                            
+
+For teachers:
+
+C1  Centering instruction on high expectations for student achievement
+C2  Demonstrating effective teaching practices
+C3  Recognizing individual student learning needs and developing strategies to address those needs
+C4  Providing clear and intentional focus on subject matter content and curriculum
+C5  Fostering and managing a safe, positive learning environment
+C6  Using multiple student data elements to modify instruction and improve student learning
+C7  Communicating and collaborating with parents and school community
+C8  Exhibiting collaborative and collegial practices focused on improving instructional practice and student learning
+
+Of course, the criteria are rather broad.  How does one know when one's teacher is "Demonstrating effective teaching practices"?  or when a principal is "Providing for School Safety"?.  This is the reason behind the rubrics associated with the criteria.  Together, the criteria from the state, and the rubrics describing the observable details of the criteria, make up the State Framework.
+
+There is flexibility.  The state recognizes that what is appropriate in one distict may not be in another.  Demographics, ethnicity, financial resources all vary widely throughout the state.  So the state allows that, though they want scores of educational staff (teachers, principals) to be reported according to the criteria above, how those scores are arrived at are up to the discretion of the districts.  As long as (whatever criteria is used to do the scoring) is "reasonable", and can be mapped back to the state criteria.
+
+Hence the raison' detre of the application (we call it StatEval).
+
+The challenge is that districts may use the above criteria exclusively (Othello School District); some may use a version of the criteria re-worded or re-ordered (Kennewick) to accommodate regional emphasis.  Some districts have a long history with a particular instructional framework, and so want to use that for the actual evaluation (North Mason School District).  There are a number of very small districts who don't have the resources to research the best alternatives; these have banded together into a consortia, have decided as a group.  StateEval (our application) accommodates all of those.
+
+That is why, as you log in to schools from different districts, the rubric rows don't all look the same.
+
+Take a look at the spreadsheet; this has all the frameworks available in the application.  The frameworks are accessed by logging in with different district accounts.
+
+As an example, you can login as "North Mason Senior High School PR", and do an observation. You'll notice that both a "State Rubric" tab, as well as an "Instructional Rubrics" tab.  If you compare rubrics on both the tabs, you'll notice that some of the rubrics on the one tab are the same as on the other tab.  This is how we enable North Mason to score their teachers using their own intructional framework, yet still be able to fulfill state reporting requirements.
+
+An example of something different... login in as "Kennewick High School Pr", you'll only have a "State Rubrics" tab.  This district is an example of a district who decided to re-order and re-word their criteria.  
+
+So, the point of all this is that the different frameworks look different, and we need to make sure that the site reflects accurately the documents that were given to us.
+
+To define some terminology... refer to the screenshot 'KennewickDocument.jpg':
+
+ - the number marked 'PL' in blue is referered to as the "Performance Level"
+ - the black circled item marked 'RR' is a "Rubric Row"
+ - the blue circled item marked 'Title' is a "Rubric Row Title", or "title" for short
+ - the blue circled item under the '4' and marked 'PLD' is a "Performance Level Descriptor", or "Descriptor" for short
+ - the blue circled item marked 'EVI' is not actually part of the rubric... it is referred to as "Evidence"
+ - the red circled item is a 'framework node title'
+ 
+As an aside, not every district uses evidence.
+
+Now see the screenshot "kennewick". On the top half of the screenshot is what you see in the application; the bottom half is the district's documentation.  Clearly you can see how each row in the application corresponds to a row in the document.  The linked, red circled items show you where the title, performance level descriptor, and framework node title show up.  In addition to that, the areas highlighted by yellow show you where tool tips should show up.  I.e.  if you roll over 'PRO' in the application, a tool tip should show up displaying the text 'Teacher demonstrates consistent understanding and application of the criteria'.
+
+So, what has to be done is for a set of test cases to be written to verify the frameworks as seen in the application against the documents.
+The documents are in 'ForMohammed.7z'.
+
+We feel at this time it is not necessary to actually execute those tests, only that they be entered into the test case manager.  We've been over the content quite a bit, and so has the customer, so things should be okay.  However, we want them set up so that when another set of frameworks are to be entered, or the current frameworks are revised, the test case manager will have cases to validate.
+
+Any questions, feel free to ask.
+
+david
+

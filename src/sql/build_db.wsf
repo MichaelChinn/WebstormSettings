@@ -1,0 +1,503 @@
+<job id="Build Database">
+  <?Job debug="true"?>
+
+  <runtime>
+    <description>This script rebuilds a database</description>
+    <named name="run"
+      helpstring= "Required option to make sure it doesn't run by opening"
+      type = "simple"
+      required="true"
+    />
+    <named name="db"
+      helpstring= "Application database name"
+      type = "simple"
+      required="false"
+    />
+    <named name="sqldir"
+      helpstring= "Path to root of SQL scripts."
+      type = "simple"
+      required="false"
+    />
+    <named name="server"
+      helpstring= "Database server"
+      type = "simple"
+      required="false"
+    />
+    <named name="verbose"
+      helpstring= "Verbose status reporting"
+      type = "simple"
+      required="false"
+    />
+     <named name="backup"
+      helpstring= "Create a backup in sql directory"
+      type = "simple"
+      required="false"
+    />
+    <named name="customization"
+      helpstring= "specifies the custom data to load"
+      type = "simple"
+      required="false"
+    />
+
+    <example>Example: cscript build_db.wsf /run /db:stateeval /server:localhost /sqldir:d:\dev\stateeval\src\sql /verbose</example>
+  </runtime>
+
+  <object id="shell" progid="WScript.Shell"/>
+  <object id="fs" progid="Scripting.FileSystemObject"/>
+
+  <script language="JScript">
+
+    var g_sqldir;
+    var g_cmdfile = "cmd.txt";
+    var g_summary_log = "";          // summary log file name
+    var g_appendflag = 8;            // flag to OpenTextFile
+    var g_readflag = 1;              // flag to OpenTextFile
+    var g_log_opened = false;        // set to true in start_log, used in case of unhandled error
+    var g_log_closed = false;        // set to true in end_log, used in case of unhandled errors
+    var g_database = "";             // the name of the database
+    var g_server = "";               // the name of the database server
+    var g_verbose = false;           // verbose option for displaying status
+    var g_quiet = false;             // quiet option to skip all message popups
+    var g_rebuild = false;           // rebuild the database
+    var g_customization = "";        // location of custom scripts
+    var g_backup = "";
+    var g_user = "";        		 // user name to login to database used to create database and users
+    var g_password = "";       		 // user password to login to database used to create database and users
+    var g_app_user = "webApplication";   // user name to login to database used by application
+    var g_app_password = "fingleGommit"; // user password to login to database used by application
+    var g_owner_user = "";   		// user name to login to database used for running db scripts
+    var g_owner_password = ""; 		// user password to login to database used for running db scripts
+
+    function log(msg)
+    {
+      var logfile = fs.OpenTextFile(g_summary_log, g_appendflag);
+      logfile.WriteLine(msg);
+      logfile.Close();
+      if (g_verbose)
+      {
+        WScript.Echo("*** Log: " + msg);
+      }
+    }
+
+    function pad_left_zeros(value, width)
+    {
+      var str = "";
+      
+      str += value;
+      while (str.length < width)
+      {
+        str = "0" + str;
+      }
+      
+      return str;
+    }
+    
+    function get_timestamp()
+    {
+      var d, s = "";
+      var n = 0;
+      
+      d = new Date();
+      s += d.getYear();
+      s += "-" + pad_left_zeros(d.getMonth() + 1, 2);
+      s += "-" + pad_left_zeros(d.getDate(), 2);
+      
+      s += " " + pad_left_zeros(d.getHours(), 2);
+      s += ":" + pad_left_zeros(d.getMinutes(), 2);
+      s += ":" + pad_left_zeros(d.getSeconds(), 2);
+      
+      return(s);
+    }
+
+    function start_log()
+    {
+      fs.CreateTextFile(g_summary_log, true);
+
+      log("enter start_log");
+
+      fs.CreateTextFile(g_cmdfile, true);
+      var logfile = fs.OpenTextFile(g_summary_log, g_appendflag);
+      logfile.WriteLine("START DATABASE BUILD (" + get_timestamp() + ")\r\n");
+      logfile.Close();
+      g_log_opened = true;
+    }
+
+    function end_log()
+    {
+      log("enter end_log");
+
+      var logfile = fs.OpenTextFile(g_summary_log, g_appendflag);
+      logfile.WriteLine("END DATABASE BUILD (" + get_timestamp() + ")\r\n");
+      logfile.Close();
+      g_log_closed = true;
+    }
+
+    function process_params()
+    {
+	
+      if (WScript.Arguments.Named.Exists("summary_log"))
+      {
+        g_summary_log = WScript.Arguments.Named("summary_log");
+      }
+      else
+      {
+        g_summary_log = "summary.txt";
+      }	 
+
+      start_log();
+
+      if (!WScript.Arguments.Named.Exists("run"))
+      {
+        throw "must specify a /run parameter";
+      }
+
+      if (WScript.Arguments.Named.Exists("sqldir"))
+      {
+        g_sqldir = WScript.Arguments.Named("sqldir") + "\\";
+        log("option sqldir");
+      }
+      else
+      {
+        g_sqldir = shell.CurrentDirectory + "\\";
+      }
+
+      if (WScript.Arguments.Named.Exists("server"))
+      {
+        log("option server");
+        g_server = WScript.Arguments.Named("server");
+      }
+      else
+      {
+        g_server = ".";
+      }
+
+      if (WScript.Arguments.Named.Exists("db"))
+      {
+        log("option db");
+        g_database = WScript.Arguments.Named("db");
+      }
+      else
+      {
+        g_database = "stateeval";
+      }
+
+      if (WScript.Arguments.Named.Exists("verbose"))
+      {
+        log("option verbose");
+        g_verbose = true;
+      }
+
+      if (WScript.Arguments.Named.Exists("quiet"))
+      {
+        log("option quiet");
+        g_quiet = true;
+      }
+
+      if (WScript.Arguments.Named.Exists("rebuild"))
+      {
+        log("option rebuild");
+        g_rebuild = true;
+      }
+
+      if (WScript.Arguments.Named.Exists("customization")) {
+          log("option customization");
+          g_customization = WScript.Arguments.Named("customization") + "\\";
+      }
+ 
+
+      if (WScript.Arguments.Named.Exists("backup")) {
+            log("option backup");
+            g_backup = shell.CurrentDirectory + "\\" + WScript.Arguments.Named("backup");
+      } 
+      if (WScript.Arguments.Named.Exists("user"))
+      {
+        log("option user");
+        g_user = WScript.Arguments.Named("user");
+      }
+	  
+      if (WScript.Arguments.Named.Exists("password"))
+      {
+        log("option password");
+        g_password = WScript.Arguments.Named("password");
+      }
+	  
+      if (WScript.Arguments.Named.Exists("app_user"))
+      {
+        log("option app_user");
+        g_app_user = WScript.Arguments.Named("app_user");
+    }
+	  
+      if (WScript.Arguments.Named.Exists("app_password"))
+      {
+        log("option app_password");
+        g_app_password = WScript.Arguments.Named("app_password");
+      }
+	  
+    }
+
+    function append_to_log(filepath)
+    {
+      var srcfile = fs.OpenTextFile(filepath, g_readflag);
+      var dstfile = fs.OpenTextFile(g_summary_log, g_appendflag);
+
+      while (!srcfile.AtEndOfStream)
+      {
+        dstfile.WriteLine(srcfile.ReadLine());
+      }
+
+      srcfile.Close();
+      dstfile.Close();
+    }
+
+    function errors_in_log(filepath)
+    {
+      var errors = false;
+      var logfile = fs.OpenTextFile(filepath, g_readflag);
+      var line, index_start;
+      while (!logfile.AtEndOfStream)
+      {
+        line = logfile.ReadLine().toUpperCase();
+        if (line.indexOf("MSG")!=-1 || line.indexOf("ERROR")!=-1)
+        {
+          errors = true;
+          break;
+        }
+      }
+      return errors;
+    }
+
+    function run_inner(desc, cmd, wait)
+    {
+      log(desc + " (" + cmd + ")");
+
+      var retval;
+
+      // first just echo the command
+      retval = shell.Run("%COMSPEC% /c Echo " + cmd + " > " + g_cmdfile + " 2>&1", 0, wait);
+
+      // next run the command and redirect command output to file
+      retval = shell.Run("%COMSPEC% /c " + cmd + " > " + g_cmdfile + " 2>&1", 0, wait);
+
+      // append cmd output to logfile
+      append_to_log(g_cmdfile);
+
+      if (errors_in_log(g_cmdfile) || retval != 0)
+      {
+        throw "run(" + cmd + ") failed.  See logfile: " + g_summary_log;
+      }
+    }
+
+    function run(desc, cmd)
+    {
+      run_inner(desc, cmd, true);
+  }
+
+    function do_script(script)
+    {
+	  
+      if (fs.FileExists(g_sqldir + g_customization + script))
+      {
+        script = g_customization + script;
+      }
+
+      log("enter do_script: " + script);
+      run("run script: " + script, "sqlcmd " + g_db_login + " -S " + g_server + " -d " + g_database + " -i \"" + g_sqldir + script + "\" -v RepoDatabaseName=" + g_database + "_repo");
+    }
+
+    function backup() {
+
+        script = g_customization + "init\\BackupBuildDb.sql";
+
+        log("enter do_script: " + script);
+        run("run script: " + script, "sqlcmd -E -S " + g_server + " -d " + g_database + " -i \"" + g_sqldir + script + "\" -v BackupDatabasePath=\"" + g_backup + "\"");
+   }
+
+    function do__scripts()
+    {  
+	  g_owner_user = g_app_user + "_owner";   		
+	  g_owner_password = g_app_password + "Own3r"; 	
+
+	  if (g_user != "" && g_password != "")
+		  {
+		  g_db_login = "-U " + g_user + " -P " + g_password;
+		  } else
+		  {
+		  g_db_login = "-E";
+		  }
+		  if (g_rebuild)
+		  {
+		  log("enter do_script: init\\RecreateDatabase.sql");
+		  log("Parameter DatabaseName is equal: " + g_database);
+		  run("run script: init\\RecreateDatabase.sql" , "sqlcmd " + g_db_login + " -S " + g_server + " -d master -i \"" + g_sqldir + "init\\RecreateDatabase.sql\" -v DatabaseName=\"" + g_database + "\"");
+
+		  run("run file: aspnet_regsql" , "C:\\WINDOWS\\Microsoft.NET\\Framework\\v4.0.30319\\aspnet_regsql -S " + g_server + " -d " + g_database + " " + g_db_login + " -A mrp");
+		  run("run file: aspnet_regsql" , "C:\\WINDOWS\\Microsoft.NET\\Framework\\v4.0.30319\\aspnet_regsql -S " + g_server + " " + g_db_login + " -ssadd -sstype p");
+		  }
+
+		  log("enter do_script: init\\CreateDatabaseOwnerUser.sql");
+		  log("Parameter UserName is equal: " + g_owner_user);
+		  log("Parameter UserPassword is equal: " + g_owner_password);
+		  run("run script: init\\CreateDatabaseOwnerUser.sql" , "sqlcmd " + g_db_login + " -S " + g_server + " -d " + g_database + " -i \"" + g_sqldir  + "init\\CreateDatabaseOwnerUser.sql\" -v UserName=\"" + g_owner_user + "\" -v UserPassword=\"" + g_owner_password + "\"");
+
+		  log("enter do_script: init\\CreateDatabaseAppUser.sql");
+		  log("Parameter UserName is equal: " + g_app_user);
+		  log("Parameter UserPassword is equal: " + g_app_password);
+		  run("run script: init\\CreateDatabaseAppUser.sql" , "sqlcmd " + g_db_login + " -S " + g_server + " -d " + g_database + " -i \"" + g_sqldir + "init\\CreateDatabaseAppUser.sql\" -v UserName=\"" + g_app_user + "\" -v UserPassword=\"" + g_app_password + "\"");
+
+		  log("enter do_script: init\\CreateDatabaseAppUser.sql");
+		  log("Parameter UserName is equal: " + g_app_user);
+		  log("Parameter UserPassword is equal: " + g_app_password);
+		  run("run script: init\\CreateDatabaseAppUser.sql" , "sqlcmd " + g_db_login + " -S " + g_server + " -d ASPState -i \"" + g_sqldir + "init\\CreateDatabaseAppUser.sql\" -v UserName=\"" + g_app_user + "\" -v UserPassword=\"" + g_app_password + "\"");
+
+		  g_db_login = "-U " + g_owner_user + " -P " + g_owner_password;
+
+		  do_script("tools\\cur_ForEachFunction_Drop.sql");
+		  do_script("tools\\cur_ForEachView_Drop.sql");
+		  do_script("tools\\cur_ForEachProcedure_Drop.sql");
+
+		  if (g_rebuild)
+		  {
+		  do_script("init\\SchemaCreate.sql");
+		  do_script("init\\FlushASPNetTables.sql");
+		  do_script("init\\InitDistrictsAndSchools.sql");
+		  do_script("init\\InitBaseStuff.sql");
+		  do_script("init\\InitRoles.sql");
+		  }
+
+		  // Prior patches were done in both schemaCreate and patches
+		  // moving forward we are only doing updates for all changes and they
+		  // will always remain in this file and all patches contain a bug#
+		  // instead of a patch#. The UpdateLog table now has a bugnumber
+		  // column
+
+		  do_script("views\\vSchoolName.sql");
+		  do_script("views\\vDistrictName.sql");
+		  do_script("views\\vUserOrientation.sql");
+		  do_script("views\\vPrototypeFrameworkContext.sql");
+		  do_script("views\\vEDSUsers.sql");
+		  do_script("views\\vEDSRoles.sql");
+
+		  do_script("sprocs\\AssignEvaluatorToEvaluatee.sql");
+		  do_script("sprocs\\EDSExport_InsertEvaluation.sql");
+		  do_script("sprocs\\EDSExport_ProcessMergedUsers.sql");
+		  do_script("sprocs\\EDSExport_PruneStaging.sql");
+		  do_script("sprocs\\EDSExport_RemoveMissing.sql");
+		  do_script("sprocs\\EDSExport_ReplaceProperties.sql");
+		  do_script("sprocs\\EDSExport_SetupNew.sql");
+		  do_script("sprocs\\EDSExport_SetupStaging.sql");
+		  do_script("sprocs\\FetchMembershipPW.sql");
+		  do_script("sprocs\\FetchOTPW.sql");
+		  do_script("sprocs\\FindInsertUpdateSEUser.sql");
+		  do_script("sprocs\\InsertEvaluation.sql");
+		  do_script("sprocs\\InsertSEUser.sql");
+		  do_script("sprocs\\InsertUserReferenceTables.sql");
+		  do_script("sprocs\\LoadFrameworkContext.sql");
+		  do_script("sprocs\\ProcessOSPIUserExport.sql");
+		  do_script("sprocs\\RemoveOTPW.sql");
+		  do_script("sprocs\\SaveOTPW.sql");
+
+
+
+
+
+		  // TODO: need to fix to get it to rundo_script("sprocs\\SetupAnnualRollover.sql");
+
+		  if (g_rebuild) {
+		      do_script("init\\InitUsers.sql");
+		      do_script("init\\InitFrameworks2Load.sql");
+		  }
+
+		  if (g_rebuild) {
+		      do_script("init\\LoadTestData.sql");
+		      do_script("init\\LoadCustomTestData.sql");
+		      do_script("init\\InitEDSExportTables.sql");
+		  //    do_script("init\\InitTrainingProtocols.sql");
+		  }
+
+        
+		  do_script("updates\\37533827_trainingProtocolsData.sql");
+		  do_script("updates\\60345690_trainingProtocolsOverviews.sql");
+		  do_script("updates\\66740308_Resources_VideoInstanceChanges.sql");
+		  do_script("updates\\68945748_trainingProtocolsData.sql");
+		  do_script("updates\\90551102_trainingProtocolsData.sql");
+		
+		  do_script("updates\\103824006_fixFormattingDanielsonDescriptor.sql");
+
+		  do_script("updates\\99759090_sggoals_data.sql");
+
+		  // Create backup for nunit tests
+		  if (g_backup) {
+		  backup();
+		  }
+
+		  }
+
+		  function do_build()
+		  {
+		  log("enter do_build");
+		  do__scripts();
+		  }
+
+		  function get_log_status(filepath)
+		  {
+		  var status = "PASSED";
+
+		  if (fs.FileExists(filepath))
+		  {
+		  if (errors_in_log(filepath))
+		  {
+		  status = "FAILED";
+		  }
+		  }
+
+		  return status;
+		  }
+
+		  function main()
+		  {
+		  process_params();
+		  do_build();
+
+		  if (!g_quiet)
+		  {
+		  WScript.Echo("BUILD SUCCESSFUL.");
+		  }
+
+		  end_log();
+		  }
+
+		  //
+		  // *** EXECUTION BEGINS HERE ***
+		  //
+		  try
+		  {
+		  main();
+		  WScript.Quit (0);
+		  }
+		  catch (e)
+		  {
+		  var msg = "ERROR: ";
+		  if (typeof(e) == "object")
+		  {
+		  msg += e.description;
+		  }
+		  else
+		  {
+		  msg += e;
+		  }
+
+		  if (g_log_opened)
+		  {
+		  log(msg);
+		  }
+
+		  if (!g_quiet)
+		  {
+		  WScript.Echo(msg);
+		  }
+		  end_log();
+		  WScript.Quit (1);
+		  }
+
+	  </script>
+</job>

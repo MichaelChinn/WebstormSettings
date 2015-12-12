@@ -1,0 +1,112 @@
+<div data-role="view" id="observationDetailView" data-title="Observation Detail" data-layout="main" data-model="App.models.observeObservation" data-init="App.views.observeObservation.onInit" data-show="App.views.observeObservation.onShow">
+
+     <ul data-role="listview" data-style="inset">
+         <li class="subtoolbar" style="text-align: center;">
+             <span class="observationTitle"></span>
+         </li>
+    </ul>
+
+        <ul data-role="listview" data-style="inset">
+            <li class="listtitle">
+                <span class="title"> <b> Artifacts </b> </span>
+            </li>
+    </ul>
+    
+  
+
+        <ul class="listview"></ul>
+
+
+    <ul class="listtitle" style="margin:0px; padding:0 20px;">
+
+        <li style="padding:10px 0   ">
+            <span class="title"> <b> Notes </b> </span>
+
+</li>
+    </ul>
+
+    <div style="background:#fff; padding: 10px 20px;">
+        <table>
+            <tr>
+                <td width="80%">  Lorem Ipsum is simply dummy text of the printing and typesetting industry.  </td>
+                <td width="20%" align="right">
+
+                    <a data-role="button" data-rel="modalview" href="#modalview-new1" id="modalview-open-button">
+                        <img width="20" src="images/Edit.png" />
+                    </a>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div data-role="modalview" id="modalview-new1" style="width: 90%;" class="modalview">
+        <div data-role="header">
+            <div data-role="navbar">
+                <span>Add Notes</span>
+                <a data-click="closeModalView" class="close_btn" data-role="button" data-align="right">
+                    <img width="24" src="images/close_btn.png" />
+
+                </a>
+            </div>
+        </div>
+
+        <ul class="newpopup">
+            <li>
+                <select id="size" onchange="test_ondrop(this.value)">
+                    <option value="text">text</option>
+                    <option value="voice">voice</option>
+                </select>
+            </li>
+
+            <li>
+                <textarea data-bind="value: textareaValue"></textarea>
+            </li>
+
+            <!-- data-bind="click: joinSession" -->
+            <a data-click="closeModalView" id="modalview-new-button" type="button" class="button_g" data-role="button" style="text-align: center;">Done</a>
+
+        </ul>
+    </div>
+
+    <a data-role="button" data-rel="modalview" href="#modalview-new1" class="button_g" id="modalview-open-button">Add Notes</a>
+
+    <script>
+    function closeModalView() {
+        $("#modalview-new1").kendoMobileModalView("close");
+    }
+
+    function test_ondrop(id) {
+        if (id == "text") {
+            $("#voice_rec").hide();
+            $("#text_area").show();
+        }
+
+        if (id == "voice") {
+            $("#text_area").hide();
+            $("#voice_rec").show();
+        }
+        //text_area voice_rec
+
+    }
+</script>
+
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <div style="text-align: center;">
+                <!--<a data-role="button" data-rel="actionsheet" href="#observe_actionsheet">New Artifact</a>-->
+                <ul id="observe_actionsheet" data-role="actionsheet" data-cancel="Cancel" data-open="onOpen" data-popup='{"direction": "left"}'>
+                    <li><a href="#" data-action="App.models.observeObservation.onCapturePhoto">Capture Photo</a></li>
+                    <li><a href="#" data-action="App.models.observeObservation.onUploadPhoto">Upload Photo From Gallery</a></li>
+                    <li><a href="#" data-action="App.models.observeObservation.onUploadVideo">Upload Video From Gallery</a></li>
+                    <li><a href="#" data-action="App.models.observeObservation.onCaptureVideo">Capture Video</a></li>
+                    <li><a href="#" data-action="App.models.observeObservation.onCaptureAudio">Capture Audio</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+
