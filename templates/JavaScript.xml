@@ -21,9 +21,6 @@
     <variable name="VAR" expression="jsSuggestVariableName()" defaultValue="&quot;o&quot;" alwaysStopAt="true" />
     <context />
   </template>
-  <template name="us" value="&quot;use strict&quot;;&#10;$END$" description="Inserts 'use strict' statement" toReformat="true" toShortenFQNames="true" deactivated="true">
-    <context />
-  </template>
   <template name="func" value="function($PARAM$) {&#10;  $END$&#10;}" description="Inserts function expression" toReformat="true" toShortenFQNames="true" deactivated="true">
     <variable name="PARAM" expression="" defaultValue="&quot;&quot;" alwaysStopAt="true" />
     <context />

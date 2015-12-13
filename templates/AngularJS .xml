@@ -106,10 +106,6 @@
     <variable name="variable" expression="" defaultValue="" alwaysStopAt="true" />
     <context />
   </template>
-  <template name="$w" value="$scope.$watch('$watchExpr$',function(newValue, oldValue){&#10;  $END$&#10;});" description="Define a $watch for an expression. You can change the expression  to be watched." toReformat="true" toShortenFQNames="true" deactivated="true">
-    <variable name="watchExpr" expression="" defaultValue="" alwaysStopAt="true" />
-    <context />
-  </template>
   <template name="$on" value="$scope.$on('$eventName$', function(event, $args$) {&#10;    $END$&#10;});" description="Define a $on for a $broadcast/$emit on the $scope inside an Angular Controller. You can change the event name to listen on." toReformat="true" toShortenFQNames="true" deactivated="true">
     <variable name="eventName" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="args" expression="" defaultValue="" alwaysStopAt="true" />
