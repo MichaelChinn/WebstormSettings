@@ -1,0 +1,5 @@
+<templateSet group="user">
+  <template name="fn" value="function() {&#10;}" description="function" toReformat="false" toShortenFQNames="true">
+    <context />
+  </template>
+</templateSet>
