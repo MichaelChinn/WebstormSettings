@@ -9,7 +9,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="directivectrl" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive)&#10;    .controller('$dir$Controller', $dir$Controller);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;        restrict: '$r$',&#10;        controller: '$con$',&#10;        bindToController: true,&#10;        templateUrl: $url$&#10;    }&#10;    &#10;    $dir$Controller.$inject = [];&#10;    function $dir$Controller() {&#10;    var vm = this;&#10;    $END$&#10;    }&#10;}) ();" description="directive with controller" toReformat="false" toShortenFQNames="true">
+  <template name="directivectrl" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive)&#10;    .controller('$dir$Controller', $dir$Controller);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;        restrict: '$r$',&#10;        controller: '$con$',&#10;        bindToController: true,&#10;        templateUrl: $url$&#10;    }&#10;    $dir$Controller.$inject = [];&#10;    function $dir$Controller() {&#10;    var vm = this;&#10;    $END$&#10;    }&#10;}) ();" description="directive with controller" toReformat="false" toShortenFQNames="true">
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="dir" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="r" expression="" defaultValue="" alwaysStopAt="true" />
@@ -22,7 +22,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="directive" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;        restrict: '$r$',&#10;        templateUrl: '$url$'&#10;        $END$&#10;        }&#10;        &#10;    }&#10;}) ();" description="directive with shared scope" toReformat="false" toShortenFQNames="true">
+  <template name="directive" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;        restrict: '$r$',&#10;        templateUrl: '$url$'&#10;        $END$&#10;        &#10;    }&#10;}) ();" description="directive with shared scope" toReformat="false" toShortenFQNames="true">
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="dir" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="r" expression="" defaultValue="" alwaysStopAt="true" />
