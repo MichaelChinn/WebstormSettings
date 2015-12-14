@@ -1,5 +1,0 @@
-INSERT SEIFWType (Name, Description, ShortName) values ('Danielson', '', '')
-INSERT SEIFWType (Name, Description, ShortName) values ('Marzano', '', '')
-INSERT SEIFWType (Name, Description, ShortName) values ('UW 5 Dimensions', '', '')
-INSERT SEIFWType (Name, Description, ShortName) values ('McKrel', '', '')
-INSERT SEIFWType (Name, Description, ShortName) values ('Custom', '', '')
