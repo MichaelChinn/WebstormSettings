@@ -36,7 +36,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="afterEach" value="afterEach(function{&#10;$END$&#10;})" description="afterEach jasmine" toReformat="false" toShortenFQNames="true">
+  <template name="afterEach" value="afterEach(function{&#10;$END$&#10;});" description="afterEach jasmine" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -71,7 +71,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="beforeEach" value="beforeEach(function() {&#10;$END$&#10;})&#10;" description="jasmine beforeEach" toReformat="false" toShortenFQNames="true">
+  <template name="beforeEach" value="beforeEach(function() {&#10;$END$&#10;});&#10;" description="jasmine beforeEach" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -79,7 +79,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="describe" value="describe('$name$', fnunction () {&#10;$END$&#10;}" description="describe for jasmine" toReformat="false" toShortenFQNames="true">
+  <template name="describe" value="describe('$name$', function () {&#10;$END$&#10;});" description="describe for jasmine" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
