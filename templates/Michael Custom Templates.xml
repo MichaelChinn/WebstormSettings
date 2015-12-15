@@ -1,5 +1,5 @@
 <templateSet group="Michael Custom Templates">
-  <template name="fn" value="function $name$($param$) {&#10;$END$&#10;}" description="function" toReformat="false" toShortenFQNames="true">
+  <template name="fn" value="function $name$($param$) {&#10;    $END$&#10;}" description="function" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="param" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -34,7 +34,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="iffy" value="(function () {&#10;    'use strict';&#10;$END$&#10;}) ();" description="immediately invoked function" toReformat="false" toShortenFQNames="true">
+  <template name="iffy" value="(function () {&#10;    'use strict';&#10;    $END$&#10;}) ();" description="immediately invoked function" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -91,7 +91,7 @@
       <option name="HTML" value="true" />
     </context>
   </template>
-  <template name="fori" value="for(var $v$ = 0; $v$ &#10;&gt;= $s$; $v$+=1) {&#10;$END$&#10;}" description="for i iterator" toReformat="false" toShortenFQNames="true">
+  <template name="fori" value="for(var $v$ = 0; $v$ &gt;= $s$; $v$+=1) {&#10;    $END$&#10;}" description="for i iterator" toReformat="false" toShortenFQNames="true">
     <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="s" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -101,7 +101,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="for" value="for(var $v$ in $obj${&#10;$obj$[$v$]&#10;$END$&#10;}" description="for loop across obj/arr" toReformat="false" toShortenFQNames="true">
+  <template name="for" value="for(var $v$ in $obj${&#10;    $obj$[$v$]&#10;    $END$&#10;}" description="for loop across obj/arr" toReformat="false" toShortenFQNames="true">
     <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -111,7 +111,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="if" value="if($cond$) {&#10;$END$&#10;&#10;}" description="if statement" toReformat="false" toShortenFQNames="true">
+  <template name="if" value="if($cond$) {&#10;    $END$&#10;}" description="if statement" toReformat="false" toShortenFQNames="true">
     <variable name="cond" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -120,7 +120,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="else" value="else {&#10;$END$&#10;&#10;}" description="else clause" toReformat="false" toShortenFQNames="true">
+  <template name="else" value="else {&#10;    $END$&#10;}" description="else clause" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -128,7 +128,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="else if" value="else if($cond$) {&#10;$END$&#10;}" description="else if clause" toReformat="false" toShortenFQNames="true">
+  <template name="else if" value="else if($cond$) {&#10;    $END$&#10;}" description="else if clause" toReformat="false" toShortenFQNames="true">
     <variable name="cond" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
