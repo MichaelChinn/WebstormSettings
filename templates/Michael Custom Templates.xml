@@ -90,7 +90,7 @@
       <option name="HTML" value="true" />
     </context>
   </template>
-  <template name="fori" value="for(var $v$ = 0; $v$ &gt;= $s$; $v$+=1) {&#10;    $END$&#10;}" description="for i iterator" toReformat="false" toShortenFQNames="true">
+  <template name="fori" value="for(var $v$ = 0; $v$ &lt;= $s$; $v$+=1) {&#10;    $END$&#10;}" description="for i iterator" toReformat="false" toShortenFQNames="true">
     <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="s" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
