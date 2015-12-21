@@ -90,16 +90,6 @@
       <option name="HTML" value="true" />
     </context>
   </template>
-  <template name="fori" value="for(var $v$ = 0; $v$ &lt;= $s$; $v$+=1) {&#10;    $END$&#10;}" description="for i iterator" toReformat="false" toShortenFQNames="true">
-    <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="s" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
-    </context>
-  </template>
   <template name="for" value="for(var $v$ in $obj$) {&#10;    $obj$[$v$]&#10;    $END$&#10;}" description="for loop across obj/arr" toReformat="false" toShortenFQNames="true">
     <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
@@ -175,6 +165,24 @@
   </template>
   <template name="co" value="console.log($e$);$END$" description="console object" toReformat="false" toShortenFQNames="true">
     <variable name="e" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="$watch" value="$scope.$watch('$thing$' function(newValue, oldValue) {&#10;    $END$&#10;});" description="controller watcher" toReformat="false" toShortenFQNames="true">
+    <variable name="thing" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="$on" value="$rootScope.$on('$thing$', function() {&#10;    $END$&#10;});" description="$rootWatcher" toReformat="false" toShortenFQNames="true">
+    <variable name="thing" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
