@@ -62,7 +62,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="views" value=",&#10;views: {&#10;    '$place$': {&#10;        controller: '$con$',&#10;        templateUrl: '$place$/views/$file$.html'&#10;    }$END$&#10;}" description="ui router views" toReformat="false" toShortenFQNames="true">
+  <template name="views" value=",&#10;views: {&#10;    '$place$': {&#10;        controller: '$con$ as vm',&#10;        templateUrl: '$place$/views/$file$.html'&#10;    }$END$&#10;}" description="ui router views" toReformat="false" toShortenFQNames="true">
     <variable name="place" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="file" expression="" defaultValue="" alwaysStopAt="true" />
