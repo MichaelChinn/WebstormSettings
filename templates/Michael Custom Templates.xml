@@ -73,7 +73,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="ctrlfn" value="vm.$fn$ = $fn$;&#10;&#10;function $fn$ ($param$) {&#10;$END$&#10;}" description="function for controller" toReformat="false" toShortenFQNames="true">
+  <template name="ctrlfn" value="vm.$fn$ = $fn$;&#10;&#10;function $fn$ ($param$) {&#10;    $END$&#10;}" description="function for controller" toReformat="false" toShortenFQNames="true">
     <variable name="fn" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="param" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
