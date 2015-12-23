@@ -172,7 +172,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="$watch" value="$scope.$watch('$thing$' function(newValue, oldValue) {&#10;    $END$&#10;});" description="controller watcher" toReformat="false" toShortenFQNames="true">
+  <template name="$watch" value="$scope.$watch('$thing$', function(newValue, oldValue) {&#10;    $END$&#10;});" description="controller watcher" toReformat="false" toShortenFQNames="true">
     <variable name="thing" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
