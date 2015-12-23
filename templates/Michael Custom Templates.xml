@@ -1,5 +1,5 @@
 <templateSet group="Michael Custom Templates">
-  <template name="fn" value="function $name$($param$) {&#10;$END$&#10;}" description="function" toReformat="false" toShortenFQNames="true">
+  <template name="fn" value="function $name$($param$) {&#10;    $END$&#10;}" description="function" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="param" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -9,7 +9,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="directivectrl" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive)&#10;    .controller('$dir$Controller', $dir$Controller);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;        restrict: '$r$',&#10;        controller: '$con$',&#10;        bindToController: true,&#10;        templateUrl: $url$&#10;    }&#10;    &#10;    $dir$Controller.$inject = [];&#10;    function $dir$Controller() {&#10;    var vm = this;&#10;    $END$&#10;    }&#10;}) ();" description="directive with controller" toReformat="false" toShortenFQNames="true">
+  <template name="directivectrl" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive)&#10;    .controller('$dir$Controller', $dir$Controller);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;            restrict: '$r$',&#10;            controller: '$con$',&#10;            bindToController: true,&#10;            templateUrl: $url$&#10;        }&#10;    }&#10;    $dir$Controller.$inject = [];&#10;    function $dir$Controller() {&#10;    var vm = this;&#10;    $END$&#10;    }&#10;}) ();" description="directive with controller" toReformat="false" toShortenFQNames="true">
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="dir" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="r" expression="" defaultValue="" alwaysStopAt="true" />
@@ -22,7 +22,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="directive" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;        restrict: '$r$',&#10;        templateUrl: '$url$'&#10;        $END$&#10;        }&#10;        &#10;    }&#10;}) ();" description="directive with shared scope" toReformat="false" toShortenFQNames="true">
+  <template name="directive" value="(function() {&#10;    'use strict';&#10;&#10;    angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive);&#10;    &#10;    $dir$Directive.$inject = [];&#10;    function $dir$Directive() {&#10;        return {&#10;            restrict: '$r$',&#10;            templateUrl: '$url$'&#10;            $END$&#10;        }&#10;        &#10;    }&#10;}) ();" description="directive with shared scope" toReformat="false" toShortenFQNames="true">
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="dir" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="r" expression="" defaultValue="" alwaysStopAt="true" />
@@ -34,7 +34,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="iffy" value="(function () {&#10;    'use strict';&#10;$END$&#10;}) ();" description="immediately invoked function" toReformat="false" toShortenFQNames="true">
+  <template name="iffy" value="(function () {&#10;    'use strict';&#10;    $END$&#10;}) ();" description="immediately invoked function" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -91,7 +91,7 @@
       <option name="HTML" value="true" />
     </context>
   </template>
-  <template name="fori" value="for(var $v$ = 0; $v$ &#10;&gt;= $s$; $v$+=1) {&#10;$END$&#10;}" description="for i iterator" toReformat="false" toShortenFQNames="true">
+  <template name="fori" value="for(var $v$ = 0; $v$ &gt;= $s$; $v$+=1) {&#10;    $END$&#10;}" description="for i iterator" toReformat="false" toShortenFQNames="true">
     <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="s" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -101,7 +101,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="for" value="for(var $v$ in $obj${&#10;$obj$[$v$]&#10;$END$&#10;}" description="for loop across obj/arr" toReformat="false" toShortenFQNames="true">
+  <template name="for" value="for(var $v$ in $obj$) {&#10;    $obj$[$v$]&#10;    $END$&#10;}" description="for loop across obj/arr" toReformat="false" toShortenFQNames="true">
     <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -111,7 +111,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="if" value="if($cond$) {&#10;$END$&#10;&#10;}" description="if statement" toReformat="false" toShortenFQNames="true">
+  <template name="if" value="if($cond$) {&#10;    $END$&#10;}" description="if statement" toReformat="false" toShortenFQNames="true">
     <variable name="cond" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -120,7 +120,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="else" value="else {&#10;$END$&#10;&#10;}" description="else clause" toReformat="false" toShortenFQNames="true">
+  <template name="else" value="else {&#10;    $END$&#10;}" description="else clause" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -128,7 +128,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="else if" value="else if($cond$) {&#10;$END$&#10;}" description="else if clause" toReformat="false" toShortenFQNames="true">
+  <template name="else if" value="else if($cond$) {&#10;    $END$&#10;}" description="else if clause" toReformat="false" toShortenFQNames="true">
     <variable name="cond" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -167,6 +167,15 @@
   </template>
   <template name="nsfn" value=",&#10;$serve$: $serve$&#10;$END$" description="new service function" toReformat="false" toShortenFQNames="true">
     <variable name="serve" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="co" value="console.log($e$);$END$" description="console object" toReformat="false" toShortenFQNames="true">
+    <variable name="e" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
