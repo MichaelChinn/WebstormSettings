@@ -90,7 +90,7 @@
       <option name="HTML" value="true" />
     </context>
   </template>
-  <template name="for" value="for(var $v$ in $obj$) {&#10;    $obj$[$v$]&#10;    $END$&#10;}" description="for loop across obj/arr" toReformat="false" toShortenFQNames="true">
+  <template name="for" value="for(var $v$ in $obj$) {&#10;    $END$&#10;}" description="for loop across obj/arr" toReformat="false" toShortenFQNames="true">
     <variable name="v" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
