@@ -64,4 +64,7 @@
     <option name="SEND_ENVIRONMENT_VARIABLES_TO_SERVER" value="false" />
     <option name="SHOW_PATH" value="true" />
   </component>
+  <component name="NodeLocalInterpreterManager">
+    <node-interpreter path="C:/Program Files/nodejs/node.exe" version="4.2.5" last-modified="1454186514342" />
+  </component>
 </application>
