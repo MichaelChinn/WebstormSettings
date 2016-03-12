@@ -1,18 +1,19 @@
 <application>
   <component name="FindSettings">
-    <option name="caseSensitive" value="true" />
+    <option name="customScope" value="File 'D:\dev\SE\trunk\src\web\app\test.html'" />
+    <option name="defaultScopeName" value="File 'D:\dev\SE\trunk\src\web\app\test.html'" />
     <option name="regularExpressions" value="true" />
-    <option name="CASE_SENSITIVE_SEARCH" value="true" />
     <option name="REGULAR_EXPRESSIONS" value="true" />
+    <option name="SEARCH_SCOPE" value="File 'D:\dev\SE\trunk\src\web\app\test.html'" />
     <recentFileMasks>
       <mask>*.properties</mask>
       <mask>*.jsp</mask>
       <mask>*.xml</mask>
       <mask>*.java</mask>
-      <mask>*.js</mask>
       <mask>*.as</mask>
       <mask>*.css</mask>
       <mask>*.mxml</mask>
+      <mask>*.js</mask>
       <mask>*.html</mask>
     </recentFileMasks>
   </component>
