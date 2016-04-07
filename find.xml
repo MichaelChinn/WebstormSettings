@@ -5,6 +5,7 @@
     <option name="regularExpressions" value="true" />
     <option name="REGULAR_EXPRESSIONS" value="true" />
     <option name="SEARCH_SCOPE" value="Project Files" />
+    <option name="FILE_MASK" value="*.html" />
     <recentFileMasks>
       <mask>*.properties</mask>
       <mask>*.jsp</mask>
@@ -14,9 +15,9 @@
       <mask>*.css</mask>
       <mask>*.mxml</mask>
       <mask>*.js</mask>
-      <mask>*.html</mask>
       <mask>*.spec.ts</mask>
       <mask>*.spec.css</mask>
+      <mask>*.html</mask>
     </recentFileMasks>
   </component>
 </application>
