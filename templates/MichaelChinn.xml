@@ -1,5 +1,5 @@
 <templateSet group="MichaelChinn">
-  <template name="gulptask" value="var gulp = require('gulp');&#10;&#10;gulp.task('$task$', [], function() {&#10;$end$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
+  <template name="gulptask" value="var gulp = require('gulp');&#10;&#10;gulp.task('$task$', [], function() {&#10;    $end$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -39,5 +39,10 @@
       <option name="JSX_HTML" value="true" />
       <option name="JS_STATEMENT" value="true" />
     </context>
+  </template>
+  <template name="var" value="var $start$ = $end$;" description="variable" toReformat="false" toShortenFQNames="true">
+    <variable name="start" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
+    <context />
   </template>
 </templateSet>
