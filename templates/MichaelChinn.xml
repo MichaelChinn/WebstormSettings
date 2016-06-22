@@ -1,7 +1,6 @@
 <templateSet group="MichaelChinn">
-  <template name="gulptask" value="'use strict';&#10;var gulp = require('gulp');&#10;&#10;gulp.task('$task$', [], function() {&#10;    $end$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
+  <template name="gulptask" value="'use strict';&#10;var gulp = require('gulp');&#10;&#10;gulp.task('$task$', [], function() {&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -9,8 +8,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="iffy" value="(function() {&#10;    $end$&#10;}) ();" description="immediately invoked function" toReformat="false" toShortenFQNames="true">
-    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="iffy" value="(function() {&#10;    $END$&#10;}) ();" description="immediately invoked function" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JSON" value="false" />
       <option name="JAVA_SCRIPT" value="true" />
@@ -19,7 +17,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="us" value="'use strict';" description="use strict" toReformat="false" toShortenFQNames="true">
+  <template name="us" value="'use strict';$END$" description="use strict" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -27,12 +25,10 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="co" value="console.log($end$);" description="console log object" toReformat="false" toShortenFQNames="true">
-    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="co" value="console.log($END$);" description="console log object" toReformat="false" toShortenFQNames="true">
     <context />
   </template>
-  <template name="ct" value="console.log('$end$');" description="console log text" toReformat="false" toShortenFQNames="true">
-    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="ct" value="console.log('$END$');" description="console log text" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -40,9 +36,8 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="var" value="var $start$ = $end$;" description="variable" toReformat="false" toShortenFQNames="true">
+  <template name="var" value="var $start$ = $END$;" description="variable" toReformat="false" toShortenFQNames="true">
     <variable name="start" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JSON" value="false" />
       <option name="JAVA_SCRIPT" value="true" />
@@ -51,9 +46,8 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="req" value="require('$npm$')$end$" description="npm require" toReformat="false" toShortenFQNames="true">
+  <template name="req" value="require('$npm$')$END$" description="npm require" toReformat="false" toShortenFQNames="true">
     <variable name="npm" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -61,9 +55,8 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="func" value="function ($params$) {$end$}" description="function" toReformat="false" toShortenFQNames="true">
+  <template name="func" value="function ($params$) {$END$}" description="function" toReformat="false" toShortenFQNames="true">
     <variable name="params" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
