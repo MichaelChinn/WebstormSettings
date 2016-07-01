@@ -64,4 +64,22 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="$watch" value="$scope.$watch('$string$', function(newValue, oldValue){&#10;    $END$&#10;});" description="scope watch" toReformat="false" toShortenFQNames="true">
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="$on" value="$rootScope.$on('$string$', function() {&#10;    $END$&#10;});" description="rootscope on" toReformat="false" toShortenFQNames="true">
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
