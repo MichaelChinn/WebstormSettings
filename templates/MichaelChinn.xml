@@ -82,4 +82,32 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="task" value="gulp.task('$name$', [$depend$], function() {&#10;    $END$&#10;});" description="gulp task" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="depend" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gsrc" value="gulp.src($src$)$END$" description="gulp.src" toReformat="false" toShortenFQNames="true">
+    <variable name="src" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gdest" value=".pipe(gulp.dest($where$))$END$" description="gulp.dest" toReformat="false" toShortenFQNames="true">
+    <variable name="where" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
