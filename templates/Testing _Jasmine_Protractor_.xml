@@ -77,4 +77,14 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="el" value="element(by.$locator$($string$))$END$" description="get element by" toReformat="false" toShortenFQNames="true">
+    <variable name="locator" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
