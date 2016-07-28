@@ -31,7 +31,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="browserpause" value="browser.pause();$END$" description="ptor pause" toReformat="false" toShortenFQNames="true">
+  <template name="pause" value="browser.pause();$END$" description="ptor pause" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -204,6 +204,15 @@
   </template>
   <template name="byxpath" value="by.xpath('$x$')" description="by.xpath()" toReformat="false" toShortenFQNames="true">
     <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="sleep" value="browser.sleep($time$);$END$" description="browser.sleep()" toReformat="false" toShortenFQNames="true">
+    <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
