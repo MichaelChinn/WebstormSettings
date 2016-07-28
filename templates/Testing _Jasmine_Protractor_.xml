@@ -31,7 +31,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="pause" value="browser.pause();$END$" description="ptor pause" toReformat="false" toShortenFQNames="true">
+  <template name="browserpause" value="browser.pause();$END$" description="ptor pause" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -104,7 +104,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="byr" value="by.repeater('$repeat$')" description="by repeater" toReformat="false" toShortenFQNames="true">
+  <template name="byrepeater" value="by.repeater('$repeat$')" description="by repeater" toReformat="false" toShortenFQNames="true">
     <variable name="repeat" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -113,7 +113,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="bybt" value="by.buttonText('$btn$')" description="by button text" toReformat="false" toShortenFQNames="true">
+  <template name="bybuttontext" value="by.buttonText('$btn$')" description="by button text" toReformat="false" toShortenFQNames="true">
     <variable name="btn" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -122,7 +122,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="bylt" value="by.linkText('$link$')" description="by link text" toReformat="false" toShortenFQNames="true">
+  <template name="bylinktext" value="by.linkText('$link$')" description="by link text" toReformat="false" toShortenFQNames="true">
     <variable name="link" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -139,7 +139,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="bym" value="by.model('$model$')" description="bymodel" toReformat="false" toShortenFQNames="true">
+  <template name="bymodel" value="by.model('$model$')" description="bymodel" toReformat="false" toShortenFQNames="true">
     <variable name="model" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -148,7 +148,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="byb" value="by.binding('$binding$')" description="by binding" toReformat="false" toShortenFQNames="true">
+  <template name="bybinding" value="by.binding('$binding$')" description="by binding" toReformat="false" toShortenFQNames="true">
     <variable name="binding" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -177,6 +177,33 @@
   </template>
   <template name="bycss" value="by.css('$a$')$END$" description="by.css ptor" toReformat="false" toShortenFQNames="true">
     <variable name="a" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="bycsscontainingtext" value="by.cssContainingText('.$class$', '$text$')$END$" description="by.cssContainingText" toReformat="false" toShortenFQNames="true">
+    <variable name="class" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="text" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name=".each" value=".each(function (el, index) {&#10;    $END$&#10;});" description=".each ptor iterator" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="byxpath" value="by.xpath('$x$')" description="by.xpath()" toReformat="false" toShortenFQNames="true">
+    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
