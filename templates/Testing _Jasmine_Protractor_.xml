@@ -77,7 +77,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="el" value="element($loc$);" description="get element by" toReformat="false" toShortenFQNames="true">
+  <template name="element" value="element($loc$);" description="get element by" toReformat="false" toShortenFQNames="true">
     <variable name="loc" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -86,7 +86,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="ela" value="element.all($loc$);$END$" description="element all" toReformat="false" toShortenFQNames="true">
+  <template name="element.all" value="element.all($loc$);$END$" description="element all" toReformat="false" toShortenFQNames="true">
     <variable name="loc" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
