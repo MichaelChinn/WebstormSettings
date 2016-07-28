@@ -229,4 +229,12 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="waitForAngular" value="browser.waitForAngular();" description="wait for angular browser()" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
