@@ -163,4 +163,10 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="index.html" value="&lt;!doctype html&gt;&#10;&lt;html&gt;&#10;    &lt;head&gt;&#10;        &lt;meta charset=&quot;utf-8&quot;&gt;&#10;        &lt;title&gt;Hello World&lt;/title&gt;&#10;        &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;&#10;    &lt;/head&gt;&#10;    &lt;body&gt;&#10;    $END$&#10;        &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;&#10;    &lt;/body&gt;&#10;&lt;/html&gt;" description="blank starter to remember position of html parts" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML_TEXT" value="true" />
+      <option name="HTML" value="true" />
+    </context>
+  </template>
 </templateSet>
