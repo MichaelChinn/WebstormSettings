@@ -114,4 +114,11 @@
       <option name="HTML" value="true" />
     </context>
   </template>
+  <template name="src" value="&lt;script src=&quot;$src$&quot;&gt;&lt;/script&gt;&#10;$END$" description="script tag" toReformat="false" toShortenFQNames="true">
+    <variable name="src" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML_TEXT" value="true" />
+      <option name="HTML" value="true" />
+    </context>
+  </template>
 </templateSet>

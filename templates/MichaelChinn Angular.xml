@@ -69,7 +69,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="routes" value="angular.module('$mod$')&#10;    .config(configureRoutes);&#10;    &#10;function configureRoutes($stateProvider, $urlRouterProvider) {&#10;    $$stateProvider$END$&#10;}" description="add configureRoutes" toReformat="false" toShortenFQNames="true">
+  <template name="ngroutes" value="angular.module('$mod$')&#10;    .config(configureRoutes);&#10;    &#10;function configureRoutes($stateProvider, $urlRouterProvider) {&#10;    $$stateProvider$END$&#10;}" description="add configureRoutes" toReformat="false" toShortenFQNames="true">
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -78,7 +78,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="state" value="state('$name$', {&#10;    url: '/$name$',&#10;    parent: '$parent$',&#10;    resolve: {},&#10;    params: {},&#10;    views: {&#10;        '$loc$': {&#10;            templateUrl: '$whr$',&#10;            controller: '$con$Controller as vm'&#10;        }&#10;    }&#10;    })" description=".state" toReformat="false" toShortenFQNames="true">
+  <template name="state" value="state('$name$', {&#10;    url: '/$name$',&#10;    parent: '$parent$',&#10;    views: {&#10;        '$loc$': {&#10;            templateUrl: '$whr$',&#10;            controller: '$con$Controller as vm'&#10;        }&#10;    }&#10;    })" description=".state" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="parent" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="loc" expression="" defaultValue="" alwaysStopAt="true" />
