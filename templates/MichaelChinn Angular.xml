@@ -78,7 +78,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="state" value="state('$name$', {&#10;    url: '/$name$',&#10;    parent: '$parent$',&#10;    views: {&#10;        '$loc$': {&#10;            templateUrl: '$whr$',&#10;            controller: '$con$Controller as vm'&#10;        }&#10;    }&#10;    })" description=".state" toReformat="false" toShortenFQNames="true">
+  <template name=".state" value="state('$name$', {&#10;    url: '/$name$',&#10;    parent: '$parent$',&#10;    views: {&#10;        '$loc$': {&#10;            templateUrl: '$whr$',&#10;            controller: '$con$Controller as vm'&#10;        }&#10;    }&#10;    })" description=".state" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="parent" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="loc" expression="" defaultValue="" alwaysStopAt="true" />
