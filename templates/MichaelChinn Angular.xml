@@ -46,7 +46,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="ngdirective" value="angular.module('$mod$')&#10;    .directive('$dir$Directive', $dir$Directive)&#10;    .controller('$con$Controller', $con$Controller);&#10;    &#10;function $dir$Directive() {&#10;    return {&#10;        restrict: '$el$',&#10;        link: function(scope, el, attrs, ctrl, transclude) {&#10;        },&#10;        scope: {},&#10;        templateUrl: '$tem$',&#10;        controller: '$con$Controller as vm',&#10;        bindToController: true&#10;    }&#10;}&#10;&#10;function $con$Controller() {&#10;    var vm = this;&#10;    $END$&#10;}" description="1 angular.directive" toReformat="false" toShortenFQNames="true">
+  <template name="ngdirective" value="angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive)&#10;    .controller('$dir$Controller', $dir$Controller);&#10;    &#10;function $dir$Directive() {&#10;    return {&#10;        restrict: '$el$',&#10;        link: function(scope, el, attrs, ctrl, transclude) {&#10;        },&#10;        scope: {},&#10;        templateUrl: '$tem$',&#10;        controller: '$con$Controller as vm',&#10;        bindToController: true&#10;    }&#10;}&#10;&#10;function $dir$Controller() {&#10;    var vm = this;&#10;    $END$&#10;}" description="1 angular.directive" toReformat="false" toShortenFQNames="true">
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="dir" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
