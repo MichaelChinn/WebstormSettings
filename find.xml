@@ -7,6 +7,7 @@
     <option name="REGULAR_EXPRESSIONS" value="true" />
     <option name="LOCAL_REGULAR_EXPRESSIONS" value="true" />
     <option name="SEARCH_SCOPE" value="Project Files" />
+    <option name="FILE_MASK" value="*.service.ts" />
     <recentFileMasks>
       <mask>*.properties</mask>
       <mask>*.jsp</mask>
@@ -20,8 +21,8 @@
       <mask>*.spec.css</mask>
       <mask>*.scss</mask>
       <mask>*.html</mask>
-      <mask>*.service.ts</mask>
       <mask>*.route.ts</mask>
+      <mask>*.service.ts</mask>
     </recentFileMasks>
   </component>
 </application>
