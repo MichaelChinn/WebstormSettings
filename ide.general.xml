@@ -9,5 +9,6 @@
     <entry key="search.everywhere.configurations" value="false" />
     <entry key="search.everywhere.actions" value="false" />
     <entry key="search.everywhere.symbols" value="false" />
+    <entry key="search.everywhere.files" value="false" />
   </component>
 </application>
