@@ -7,6 +7,7 @@
     <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
     <option name="LOCAL_REGULAR_EXPRESSIONS" value="true" />
     <option name="SEARCH_SCOPE" value="Project Files" />
+    <option name="FILE_MASK" value="*.ts" />
     <recentFileMasks>
       <mask>*.properties</mask>
       <mask>*.jsp</mask>
@@ -21,8 +22,8 @@
       <mask>*.scss</mask>
       <mask>*.service.ts</mask>
       <mask>*service.ts</mask>
-      <mask>*.route.ts</mask>
       <mask>*.html</mask>
+      <mask>*.route.ts</mask>
       <mask>*.ts</mask>
     </recentFileMasks>
   </component>
