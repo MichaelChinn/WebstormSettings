@@ -130,4 +130,24 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="prop" value="$first$.$x$ = $second$.$x$;&#10;$END$" description="object property" toReformat="false" toShortenFQNames="true">
+    <variable name="first" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="second" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="p" value="this.$prop$ = data.$prop$;&#10;$END$" description="temp" toReformat="false" toShortenFQNames="true">
+    <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
