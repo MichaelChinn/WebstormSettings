@@ -246,4 +246,23 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="xtruthy" value="expect($cond$).toBeTruthy($cond2$);$END$" description="expect to by truthy" toReformat="false" toShortenFQNames="true">
+    <variable name="cond" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="cond2" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="xfalsey" value="expect($cond$).toBeFalsey($cond$);$END$" description="expect to be falsey" toReformat="false" toShortenFQNames="true">
+    <variable name="cond" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
