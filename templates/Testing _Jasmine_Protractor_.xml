@@ -264,4 +264,12 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="back" value="browser.navigate().back();$END$" description="ptor browser back" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
