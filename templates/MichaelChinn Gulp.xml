@@ -16,7 +16,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
+  <template name="gulptask" value="//src folder is web/ &#10;//access workAreaService - ./app/core/services/work-area.service.ts&#10;gulp.task('$task$', [], function() {&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
