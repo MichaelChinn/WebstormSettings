@@ -150,4 +150,13 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="thisp" value="this.$x$ = $x$;&#10;$END$" description="this.p = p;" toReformat="false" toShortenFQNames="true">
+    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
