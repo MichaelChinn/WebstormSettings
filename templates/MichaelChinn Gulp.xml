@@ -8,15 +8,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="gulpstart" value="'use strict';&#10;var gulp = require('gulp);&#10;$END$" description="starter for gulp" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
-    </context>
-  </template>
-  <template name="gulptask" value="//src folder is web/ &#10;//access workAreaService - ./app/core/services/work-area.service.ts&#10;gulp.task('$task$', [], function() {&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
+  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    gulp.src()&#10;    .pipe(gulp.dest());&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -34,7 +26,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="rgulp" value="var gulp = require('gulp');&#10;$END$" description="var gulp = require('gulp');" toReformat="false" toShortenFQNames="true">
+  <template name="reqgulp" value="var gulp = require('gulp');&#10;$END$" description="var gulp = require('gulp');" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
