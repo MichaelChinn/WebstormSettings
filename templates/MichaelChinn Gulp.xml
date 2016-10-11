@@ -34,4 +34,21 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="gulploadplugins" value="var $ = require('gulp-load-plugins')({&quot;lazy&quot;: true});$END$" description="gulp-load-plugins" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gulpslimtask" value="gulp.task('$name$', [$END$]);" description="gulp task for joining tasks" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
