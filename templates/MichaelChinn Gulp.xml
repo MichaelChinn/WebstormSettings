@@ -8,7 +8,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    gulp.src()&#10;    .pipe(gulp.dest());&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
+  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    return gulp.src()&#10;    .pipe(gulp.dest());&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
