@@ -34,13 +34,4 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="greq" value="var $thing$ = require('gulp-$thing$');&#10;$END$" description="creates a variable for gulp functions" toReformat="false" toShortenFQNames="true">
-    <variable name="thing" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
-    </context>
-  </template>
 </templateSet>
