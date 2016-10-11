@@ -160,7 +160,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="require" value="require($npm$)$END$" description="longer node require for non variable use" toReformat="false" toShortenFQNames="true">
+  <template name="require" value="require('$npm$')$END$" description="longer node require for non variable use" toReformat="false" toShortenFQNames="true">
     <variable name="npm" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
