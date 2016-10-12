@@ -16,6 +16,7 @@
       <mask>*.mxml</mask>
       <mask>*.ts</mask>
       <mask>./**/cordova.js</mask>
+      <mask>*.png</mask>
     </recentFileMasks>
   </component>
 </application>
