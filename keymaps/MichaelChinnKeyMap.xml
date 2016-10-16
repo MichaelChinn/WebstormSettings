@@ -11,8 +11,11 @@
     <keyboard-shortcut first-keystroke="ctrl f4" />
     <keyboard-shortcut first-keystroke="alt d" />
   </action>
-  <action id="SplitVertically">
+  <action id="Macro.SplitVerticalRemoveOld">
     <keyboard-shortcut first-keystroke="alt s" />
+  </action>
+  <action id="SplitVertically">
+    <keyboard-shortcut first-keystroke="alt v" />
   </action>
   <action id="SwitchApply">
     <keyboard-shortcut first-keystroke="shift alt enter" />

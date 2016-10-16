@@ -1,0 +1,10 @@
+<application>
+  <component name="ActionMacroManager">
+    <macro name="SplitVerticalRemoveOld">
+      <action id="SplitVertically" />
+      <action id="Switcher" />
+      <shortuct text="alt D" />
+      <action id="Switcher" />
+    </macro>
+  </component>
+</application>

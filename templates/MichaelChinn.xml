@@ -42,7 +42,8 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="req" value="require('$npm$')$END$" description="npm require" toReformat="false" toShortenFQNames="true">
+  <template name="req" value="var $variable$ = require('$npm$');$END$" description="npm require" toReformat="false" toShortenFQNames="true">
+    <variable name="variable" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="npm" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -143,6 +144,24 @@
   </template>
   <template name="p" value="this.$prop$ = data.$prop$;&#10;$END$" description="temp" toReformat="false" toShortenFQNames="true">
     <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="thisp" value="this.$x$ = $x$;&#10;$END$" description="this.p = p;" toReformat="false" toShortenFQNames="true">
+    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="require" value="require('$npm$')$END$" description="longer node require for non variable use" toReformat="false" toShortenFQNames="true">
+    <variable name="npm" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
