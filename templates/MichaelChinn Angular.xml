@@ -97,7 +97,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="templateroute" value="templateUrl: '$dest$',&#10;controller: '$con$Controller as vm'" description="templateUrl and controller" toReformat="false" toShortenFQNames="true">
+  <template name="templateroute" value="templateUrl: '$dest$',&#10;controller: '$con$Controller as vm'" description="templateUrl and controller" toReformat="false" toShortenFQNames="true" deactivated="true">
     <variable name="dest" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -110,6 +110,15 @@
   <template name="views" value="views: {&#10;    '$name$@$location$' :{$END$}&#10;}" description="views state object" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="location" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="controller" value="controller: '$ctrl$Controller as vm'$END$" description="controller string" toReformat="false" toShortenFQNames="true">
+    <variable name="ctrl" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />

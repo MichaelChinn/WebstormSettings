@@ -178,4 +178,13 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="templateUrl" value="templateUrl: '$url$'$END$" description="templateUrl string" toReformat="false" toShortenFQNames="true">
+    <variable name="url" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
