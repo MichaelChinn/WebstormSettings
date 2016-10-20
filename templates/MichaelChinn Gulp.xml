@@ -67,4 +67,15 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="gulpinject" value="gulp.task('inject', [], function() {&#10;    var files = gulp.src('$files$');&#10;    return gulp.src('$index$')&#10;        .pipe($.inject(files, {relative: true}))&#10;        .pipe(gulp.dest('$endpoint$'));$END$&#10;});" description="inject task" toReformat="false" toShortenFQNames="true">
+    <variable name="files" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="index" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="endpoint" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
