@@ -59,4 +59,12 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="gulpstandard" value="var gulp = require('gulp');&#10;var $ = require('gulp-load-plugins')({&quot;lazy&quot;: true});&#10;var config = require('../config.js');&#10;var paths = config.paths;&#10;$END$" description="convential gulp plugins and config" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
