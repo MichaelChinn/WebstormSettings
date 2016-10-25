@@ -4,6 +4,7 @@
     <option name="localRegularExpressions" value="true" />
     <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
     <option name="LOCAL_REGULAR_EXPRESSIONS" value="true" />
+    <option name="FILE_MASK" value="*.route.mobile.js" />
     <recentFileMasks>
       <mask>*.properties</mask>
       <mask>*.html</mask>
@@ -17,6 +18,7 @@
       <mask>*.png</mask>
       <mask>*.ts</mask>
       <mask>*.js</mask>
+      <mask>*.route.mobile.js</mask>
     </recentFileMasks>
   </component>
 </application>
