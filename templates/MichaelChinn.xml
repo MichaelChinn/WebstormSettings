@@ -70,7 +70,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="case" value="case $con$:&#10;    $act$&#10;    break;&#10;$END$" description="case for switch" toReformat="false" toShortenFQNames="true">
+  <template name="case" value="case $con$:&#10;    $act$&#10;    break;$END$" description="case for switch" toReformat="false" toShortenFQNames="true">
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="act" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -99,7 +99,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="ife" value="if($cond$) {&#10;    $first$&#10;} else if {&#10;    $END$&#10;}" description="else if statement" toReformat="false" toShortenFQNames="true">
+  <template name="ife" value="if($cond$) {$first$&#10;} else if {$END$&#10;}" description="else if statement" toReformat="false" toShortenFQNames="true">
     <variable name="cond" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="first" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -109,26 +109,11 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="index.html" value="&lt;!doctype html&gt;&#10;&lt;html&gt;&#10;    &lt;head&gt;&#10;        &lt;meta charset=&quot;utf-8&quot;&gt;&#10;        &lt;title&gt;Hello World&lt;/title&gt;&#10;        &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;&#10;    &lt;/head&gt;&#10;    &lt;body&gt;&#10;    $END$&#10;        &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;&#10;    &lt;/body&gt;&#10;&lt;/html&gt;" description="blank starter to remember position of html parts" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="HTML_TEXT" value="true" />
-      <option name="HTML" value="true" />
-    </context>
-  </template>
   <template name="src" value="&lt;script src=&quot;$src$&quot;&gt;&lt;/script&gt;&#10;$END$" description="script tag" toReformat="false" toShortenFQNames="true">
     <variable name="src" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="HTML_TEXT" value="true" />
       <option name="HTML" value="true" />
-    </context>
-  </template>
-  <template name="_.mixin" value="_.mixin({'$name$': $name$}, {'chain': true});&#10;&#10;function $name$(array, fn){&#10;    $END$&#10;}" description="a lodash mixin template" toReformat="false" toShortenFQNames="true">
-    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="prop" value="$first$.$x$ = $second$.$x$;&#10;$END$" description="object property" toReformat="false" toShortenFQNames="true">
@@ -142,7 +127,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="p" value="this.$prop$ = data.$prop$;&#10;$END$" description="temp" toReformat="false" toShortenFQNames="true">
+  <template name="p" value="this.$prop$ = data.$prop$;$END$" description="temp" toReformat="false" toShortenFQNames="true">
     <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -195,7 +180,17 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="mockData" value="if(config.mockData) {&#10;    return $END$;&#10;}" description="mock data for my apps" toReformat="false" toShortenFQNames="true">
+  <template name="substring" value="$string$.substring(start, end $END$);" description="string.substring" toReformat="false" toShortenFQNames="true">
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="substr" value="$string$.substring(start, length $END$);" description="string.substrung" toReformat="false" toShortenFQNames="true">
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
