@@ -198,4 +198,13 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="getConstructor" value="var $name$ = classes.getConstructor('$name$');$END$" description="classes.getConstructor" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
