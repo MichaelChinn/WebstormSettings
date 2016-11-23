@@ -1,9 +1,8 @@
 <application>
   <component name="FindSettings">
-    <option name="localCaseSensitive" value="true" />
     <option name="localRegularExpressions" value="true" />
-    <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
     <option name="LOCAL_REGULAR_EXPRESSIONS" value="true" />
+    <option name="FILE_MASK" value="*.ts" />
     <recentFileMasks>
       <mask>*.properties</mask>
       <mask>*.html</mask>
@@ -15,9 +14,9 @@
       <mask>*.mxml</mask>
       <mask>./**/cordova.js</mask>
       <mask>*.png</mask>
-      <mask>*.ts</mask>
       <mask>*.js</mask>
       <mask>*.route.mobile.js</mask>
+      <mask>*.ts</mask>
     </recentFileMasks>
   </component>
 </application>
