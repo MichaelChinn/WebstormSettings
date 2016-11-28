@@ -207,4 +207,13 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="getset" value="function get$prop$() {&#10;    return $prop$;&#10;} &#10;&#10;function set$prop$(input) {&#10;    service.$prop$ = input;&#10;}&#10;&#10;$END$" description="getter and setter method for service" toReformat="false" toShortenFQNames="true">
+    <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
