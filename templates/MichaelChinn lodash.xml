@@ -82,4 +82,22 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="_.mapKeys" value="_.mapKeys($obj$, function(key){&#10;    return $END$//returns object of mapped keys; values unchanged&#10;});" description="lodash mapKeys" toReformat="false" toShortenFQNames="true">
+    <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="_.mapValues" value="_.mapValues($obj$, function(values){&#10;    return $END$//returns object of mapped values; keys unchanged&#10;});" description="lodash mapValues" toReformat="false" toShortenFQNames="true">
+    <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
