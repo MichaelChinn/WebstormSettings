@@ -16,15 +16,8 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="co" value="console.log($END$);" description="console log object" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
-    </context>
-  </template>
-  <template name="ct" value="console.log('$END$');" description="console log text" toReformat="false" toShortenFQNames="true">
+  <template name="con" value="console.log($message$);$END$" description="console log" toReformat="false" toShortenFQNames="true">
+    <variable name="message" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -218,6 +211,15 @@
     </context>
   </template>
   <template name="capitalize" value="$string$.charAt(0).toUpperCase() + $string$.slice(1);" description="return string with capitalized first letter" toReformat="false" toShortenFQNames="true">
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="alert" value="alert($string$);$END$" description="es5 window.alert('');" toReformat="false" toShortenFQNames="true">
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />

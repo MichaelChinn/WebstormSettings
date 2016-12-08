@@ -155,4 +155,13 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
+  <template name="$timeout" value="$timeout(function() {&#10;    $END$&#10;}$time$);" description="angular setTimeout()" toReformat="false" toShortenFQNames="true">
+    <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
 </templateSet>
