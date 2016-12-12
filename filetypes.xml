@@ -1,6 +1,8 @@
 <application>
   <component name="FileTypeManager" version="16">
     <extensionMap>
+      <mapping pattern="placeholder" type="PLAIN_TEXT" />
+      <mapping ext="md" type="PLAIN_TEXT" />
       <mapping ext="exe" type="PLAIN_TEXT" />
     </extensionMap>
   </component>

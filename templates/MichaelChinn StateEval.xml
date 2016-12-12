@@ -1,0 +1,11 @@
+<templateSet group="MichaelChinn StateEval">
+  <template name="navobj" value="{&#10;schoolYear: $origin$.schoolYear,&#10;districtName: $origin$.districtName,&#10;schoolName: $origin$.schoolName,&#10;workAreaTag: $origin$.workAreaTag$END$}" description="a four-piece nav object" toReformat="false" toShortenFQNames="true">
+    <variable name="origin" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>

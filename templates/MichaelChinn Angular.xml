@@ -1,6 +1,6 @@
 <templateSet group="MichaelChinn Angular">
-  <template name="$watch" value="$scope.$watch('$string$', function(newValue, oldValue){&#10;    $END$&#10;});" description="scope watch" toReformat="false" toShortenFQNames="true">
-    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="$watch" value="$scope.$watch(function () {&#10;    return $watch$;&#10;}, function(newValue, oldValue){&#10;    $END$&#10;});" description="scope watch" toReformat="false" toShortenFQNames="true">
+    <variable name="watch" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
@@ -129,6 +129,34 @@
   <template name="$httpget" value="function get$thing$(request) {&#10;    return $http.get(config.apiUrl + '/$url$', {params: request$END$})&#10;        .then(function (response) {&#10;            return response.data;&#10;        });&#10;}" description="get request" toReformat="false" toShortenFQNames="true">
     <variable name="thing" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="url" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="$uibModalOpen" value="$uibModal.open({&#10;templaeUrl: '$url$',&#10;controller: '$con$ as vm',&#10;resolve: {}&#10;});" description="modal creation angular bootstrap" toReformat="false" toShortenFQNames="true">
+    <variable name="url" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="$time" value="$timeout(function() {&#10;    $END$&#10;}, $time$);" description="$timeout - angular" toReformat="false" toShortenFQNames="true">
+    <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="JS_EXPRESSION" value="true" />
+      <option name="JSX_HTML" value="true" />
+      <option name="JS_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="$timeout" value="$timeout(function() {&#10;    $END$&#10;}$time$);" description="angular setTimeout()" toReformat="false" toShortenFQNames="true">
+    <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="JS_EXPRESSION" value="true" />
