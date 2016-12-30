@@ -16,7 +16,7 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="c" value="console.log($message$);$END$" description="console log" toReformat="false" toShortenFQNames="true">
+  <template name="cl" value="console.log($message$);$END$" description="console log" toReformat="false" toShortenFQNames="true">
     <variable name="message" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
