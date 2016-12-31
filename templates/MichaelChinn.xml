@@ -25,16 +25,6 @@
       <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
-  <template name="var" value="var $start$ = $END$;" description="variable" toReformat="false" toShortenFQNames="true">
-    <variable name="start" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JSON" value="false" />
-      <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
-    </context>
-  </template>
   <template name="req" value="var $variable$ = require('$npm$');$END$" description="npm require" toReformat="false" toShortenFQNames="true">
     <variable name="variable" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="npm" expression="" defaultValue="" alwaysStopAt="true" />
