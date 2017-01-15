@@ -2,23 +2,16 @@
   <template name="gulpRename-doc" value="//path = './src/sub1/hello.txt'&#10;//.pipe($.rename(function(path){&#10;//    path.dirname += 'next-dir/';&#10;//    path.basename += '+file-name';&#10;//    path.extname = '.md'&#10;//));&#10;//path = './src/sub1/next-dir/hello+file-name.md'&#10;$END$" description="gulp.rename example" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="index-doc" value="&lt;!doctype html&gt;&#10;&lt;html&gt;&#10;    &lt;head&gt;&#10;        &lt;meta charset=&quot;utf-8&quot;&gt;&#10;        &lt;title&gt;Hello World&lt;/title&gt;&#10;        &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot;&gt;&#10;        &lt;!--styles:css--&gt;&#10;        &lt;!--endinject--&gt;&#10;        &lt;!--vendor:js--&gt;&#10;        &lt;!--endinject--&gt;&#10;    &lt;/head&gt;&#10;    &lt;body&gt;&#10;    $END$&#10;        &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;&#10;        &lt;!--app:js--&gt;&#10;        &lt;!--endinject--&gt;&#10;    &lt;/body&gt;&#10;&lt;/html&gt;" description="blank starter to remember position of html parts" toReformat="false" toShortenFQNames="true">
     <context>
-      <option name="HTML_TEXT" value="true" />
       <option name="HTML" value="true" />
     </context>
   </template>
   <template name="substr-doc" value="//string.substring(startIndex, length);&#10;//negative startIndex begins from end&#10;//omitted length goes to end" description="subtr exampl" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
 </templateSet>

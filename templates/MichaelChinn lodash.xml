@@ -3,26 +3,17 @@
     <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.map" value="_.map($collection$, function(value, index, array) {&#10;    $END$&#10;    return;&#10;});" description="lodash map" toReformat="false" toShortenFQNames="true">
     <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.keys" value="_.keys($END$);" description="lodash keys" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.groupBy" value="_.groupBy($collection$, $string$);&#10;$END$" description="lodash groupBy" toReformat="false" toShortenFQNames="true">
@@ -30,18 +21,12 @@
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.filter" value="_.filter($collection$, function(value, index, array) {&#10;    $END$&#10;    return true;&#10;})" description="lodash filter" toReformat="false" toShortenFQNames="true">
     <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.sortBy" value="_.sortBy($collection$, $_$);&#10;$END$" description="lodash sortBy" toReformat="false" toShortenFQNames="true">
@@ -49,27 +34,18 @@
     <variable name="_" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.mixin" value="_.mixin({'$name$': $name$}, {'chain': true});&#10;&#10;function $name$(array, fn){&#10;    $END$&#10;}" description="a lodash mixin template" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.findfunc" value="_.find($collection$, function(n){&#10;    return $END$;&#10;});" description="lodash find function" toReformat="false" toShortenFQNames="true">
     <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.findprop" value="_.find($collection$, {$prop$: $prop$});" description="lodash find object shorthand" toReformat="false" toShortenFQNames="true">
@@ -77,27 +53,18 @@
     <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.mapKeys" value="_.mapKeys($obj$, function(key){&#10;    return $END$//returns object of mapped keys; values unchanged&#10;});" description="lodash mapKeys" toReformat="false" toShortenFQNames="true">
     <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="_.mapValues" value="_.mapValues($obj$, function(values){&#10;    return $END$//returns object of mapped values; keys unchanged&#10;});" description="lodash mapValues" toReformat="false" toShortenFQNames="true">
     <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
 </templateSet>

@@ -3,27 +3,18 @@
     <variable name="watch" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="$on" value="$rootScope.$on('$string$', function() {&#10;    $END$&#10;});" description="rootscope on" toReformat="false" toShortenFQNames="true">
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="ngconfig" value="angular.module('$name$')&#10;    .config(configure)&#10;    .run(run);&#10;    &#10;function configure() {&#10;    $END$&#10;}&#10;&#10;function run() {&#10;}&#10;" description="1 angular.module().config" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="ngmodule" value="angular.module('$name$', ['$dep$']);" description="1 angular.module" toReformat="false" toShortenFQNames="true">
@@ -31,9 +22,6 @@
     <variable name="dep" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="ngcontroller" value="angular.module('$name$')&#10;    .controller('$con$Controller', $con$Controller);&#10;    &#10;function $con$Controller() {&#10;    var vm = this;&#10;    $END$&#10;}" description="1 angular.controller" toReformat="false" toShortenFQNames="true">
@@ -41,9 +29,6 @@
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="ngdirective" value="angular.module('$mod$')&#10;    .directive('$dir$', $dir$Directive)&#10;    .controller('$dir$Controller', $dir$Controller);&#10;    &#10;function $dir$Directive() {&#10;    return {&#10;        restrict: '$el$',&#10;        link: function(scope, el, attrs, ctrl, transclude) {&#10;        },&#10;        scope: {},&#10;        templateUrl: '$tem$',&#10;        controller: '$dir$Controller as vm',&#10;        bindToController: true&#10;    }&#10;}&#10;&#10;function $dir$Controller() {&#10;    var vm = this;&#10;    $END$&#10;}" description="1 angular.directive" toReformat="false" toShortenFQNames="true">
@@ -53,9 +38,6 @@
     <variable name="tem" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="ngfactory" value="angular.module('$name$')&#10;    .factory('$fact$Service', $fact$Service);&#10;    &#10;function $fact$Service() {&#10;    var service = {};&#10;    return service;&#10;}" description="1. angular.factory" toReformat="false" toShortenFQNames="true">
@@ -63,18 +45,12 @@
     <variable name="fact" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="ngroutes" value="angular.module('$mod$')&#10;    .config(configureRoutes);&#10;    &#10;function configureRoutes($stateProvider, $urlRouterProvider) {&#10;    $$stateProvider$END$&#10;}" description="add configureRoutes" toReformat="false" toShortenFQNames="true">
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name=".state" value=".state('$name$', {&#10;    url: '/$name$',&#10;    parent: '$parent$',&#10;    resolve: {}&#10;    templateUrl: '$url$/$name$.html',&#10;    controller: '$name$Controller as vm'&#10;})" description=".state" toReformat="false" toShortenFQNames="true">
@@ -83,18 +59,12 @@
     <variable name="url" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="ctrlfunction" value="vm.$name$ = $name$;&#10;&#10;function $name$() {&#10;    $END$&#10;}" description="function inside controller with vm convention" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="templateroute" value="templateUrl: '$dest$',&#10;controller: '$con$Controller as vm'" description="templateUrl and controller" toReformat="false" toShortenFQNames="true" deactivated="true">
@@ -102,9 +72,6 @@
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="views" value="views: {&#10;    '$name$@$location$' :{$END$}&#10;}" description="views state object" toReformat="false" toShortenFQNames="true">
@@ -112,18 +79,12 @@
     <variable name="location" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="controller" value="controller: '$ctrl$Controller as vm'$END$" description="controller string" toReformat="false" toShortenFQNames="true">
     <variable name="ctrl" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="$httpget" value="function get$thing$(request) {&#10;    return $http.get(config.apiUrl + '/$url$', {params: request$END$})&#10;        .then(function (response) {&#10;            return response.data;&#10;        });&#10;}" description="get request" toReformat="false" toShortenFQNames="true">
@@ -131,9 +92,6 @@
     <variable name="url" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="$uibModalOpen" value="$uibModal.open({&#10;templaeUrl: '$url$',&#10;controller: '$con$ as vm',&#10;resolve: {}&#10;});" description="modal creation angular bootstrap" toReformat="false" toShortenFQNames="true">
@@ -141,27 +99,18 @@
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="$time" value="$timeout(function() {&#10;    $END$&#10;}, $time$);" description="$timeout - angular" toReformat="false" toShortenFQNames="true">
     <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
   <template name="$timeout" value="$timeout(function() {&#10;    $END$&#10;}$time$);" description="angular setTimeout()" toReformat="false" toShortenFQNames="true">
     <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
-      <option name="JS_EXPRESSION" value="true" />
-      <option name="JSX_HTML" value="true" />
-      <option name="JS_STATEMENT" value="true" />
     </context>
   </template>
 </templateSet>
