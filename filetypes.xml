@@ -1,9 +1,8 @@
 <application>
-  <component name="FileTypeManager" version="16">
+  <component name="FileTypeManager" version="17">
     <extensionMap>
-      <mapping pattern="package2,json" type="PLAIN_TEXT" />
       <mapping pattern="placeholder" type="PLAIN_TEXT" />
-      <mapping ext="md" type="PLAIN_TEXT" />
+      <mapping pattern="package2,json" type="PLAIN_TEXT" />
       <mapping ext="exe" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
