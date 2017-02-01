@@ -114,4 +114,9 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="ngOptions" value="ng-options=&quot;valueUsed as stringShown for iteratee in collection&quot;" description="html ng-options for select box" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
 </templateSet>
