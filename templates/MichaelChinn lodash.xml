@@ -48,7 +48,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="_.findprop" value="_.find($collection$, {$prop$: $prop$});" description="lodash find object shorthand" toReformat="false" toShortenFQNames="true">
+  <template name="_.findprop" value="_.find($collection$, {$prop$: $END$$prop$});" description="lodash find object shorthand" toReformat="false" toShortenFQNames="true">
     <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
