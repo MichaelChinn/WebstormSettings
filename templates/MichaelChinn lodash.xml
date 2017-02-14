@@ -67,4 +67,11 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="_.findIndex" value="_.findIndex($collection$, {$prop$: $END$$prop$});" description="lodash by index finder" toReformat="false" toShortenFQNames="true">
+    <variable name="collection" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
