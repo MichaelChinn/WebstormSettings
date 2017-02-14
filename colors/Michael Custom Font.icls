@@ -1,6 +1,9 @@
 <scheme name="Michael Custom Font" version="142" parent_scheme="Darcula">
   <option name="EDITOR_FONT_SIZE" value="14" />
   <option name="EDITOR_FONT_NAME" value="Monospaced" />
+  <colors>
+    <option name="METHOD_SEPARATORS_COLOR" value="" />
+  </colors>
   <attributes>
     <option name="WARNING_ATTRIBUTES">
       <value>
