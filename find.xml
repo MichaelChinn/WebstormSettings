@@ -2,6 +2,7 @@
   <component name="FindSettings">
     <option name="caseSensitive" value="true" />
     <option name="CASE_SENSITIVE_SEARCH" value="true" />
+    <option name="FILE_MASK" value="**/*.scss" />
     <recentFileMasks>
       <mask>*.properties</mask>
       <mask>*.html</mask>
@@ -17,6 +18,7 @@
       <mask>*.route.mobile.js</mask>
       <mask>*.ts</mask>
       <mask>**/ng-cordova.js</mask>
+      <mask>**/*.scss</mask>
     </recentFileMasks>
   </component>
 </application>
