@@ -9,7 +9,12 @@
       <option name="HTML" value="true" />
     </context>
   </template>
-  <template name="substr-doc" value="//string.substring(startIndex, length);&#10;//negative startIndex begins from end&#10;//omitted length goes to end" description="subtr exampl" toReformat="false" toShortenFQNames="true">
+  <template name=".substr" value="//str.substr(start, length)&#10;'hello'.substr(1, 2); // = 'el'&#10;'hello'.substr(1); // = 'o' :: x to end&#10;'hello'.substr(-3); // = 'llo' :: x from end&#10;'hello'.substr(0, 4); // 'hell' :: x from beginning" description="subtr examples" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name=".substring" value="//str.substring(indexStart, indexEnd); last index exclusive&#10;'hello'.substring(4, 5); // = 'o'&#10;'hello'.substring(3, 1); // = 'el'" description=".substring examples" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
