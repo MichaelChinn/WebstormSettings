@@ -17,49 +17,13 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="reqgulp" value="var gulp = require('gulp');&#10;$END$" description="var gulp = require('gulp');" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
-  <template name="gulploadplugins" value="var $ = require('gulp-load-plugins')({&quot;lazy&quot;: true});$END$" description="gulp-load-plugins" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
   <template name="gulpslimtask" value="gulp.task('$name$', [$END$]);" description="gulp task for joining tasks" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name=".pipe" value=".pipe($END$)" description=".pipe()" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
   <template name="gulpstandard" value="var gulp = require('gulp');&#10;var $ = require('gulp-load-plugins')({&quot;lazy&quot;: true});&#10;var config = require('../config.js');$END$" description="convential gulp plugins and config" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
-  <template name="gulpinject" value="gulp.task('inject', [], function() {&#10;    var files = gulp.src($files$)&#10;        .pipe(gulp.dest($dest$));&#10;        &#10;    return gulp.src($index$)&#10;        .pipe($.inject(files, {relative: true, ignorePath: ''}))&#10;        .pipe(gulp.dest($endpoint$));$END$&#10;});" description="inject task" toReformat="false" toShortenFQNames="true">
-    <variable name="files" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="dest" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="index" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="endpoint" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
-  <template name="gulpdelete" value="gulp.task($name$, [], function() {&#10;    return del($END$);&#10;});" description="del function for gulp" toReformat="false" toShortenFQNames="true">
-    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
-  <template name="gulp$" value=".pipe($.$plugin$)$END$" description="gulp pipe function for plugin loader" toReformat="false" toShortenFQNames="true">
-    <variable name="plugin" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>

@@ -1,0 +1,52 @@
+<templateSet group="MichaelChinn GulpPipe">
+  <template name="gulpinject" value=".pipe($.inject($src$, {name: $name$, relative: true})&#10;$END$" description="gulp inject" toReformat="false" toShortenFQNames="true">
+    <variable name="src" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpflatten" value=".pipe($.flatten())&#10;$END$" description="gulp flatten" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulptemplatecache" value=".pipe($.angularTemplatecache({standalone: true})&#10;$END$" description="gulp angular templatecache" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpdelete" value="gulp.task($name$, [], function() {&#10;    return del($END$);&#10;});" description="del function for gulp" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpcount" value=".pipe($.count({&#10;    message: '&lt;%= files %&gt; $message$',&#10;    logEmpty: true&#10;})&#10;$END$" description="gulp count" toReformat="false" toShortenFQNames="true">
+    <variable name="message" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpangularfilesort" value=".pipe($.angularFilesort())&#10;$END$" description="gulp angular filesort" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulprename" value=".pipe($.rename({basename: '$rename$'})&#10;$END$" description="gulp rename" toReformat="false" toShortenFQNames="true">
+    <variable name="rename" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpngannotate" value=".pipe($.ngAnnotate())&#10;$END$" description="gulp ng annotate" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulptypescript" value=".pipe($.typescript({}, $.typescript.reporter.nullReporter()))&#10;$END$" description="gulp typescript" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+</templateSet>
