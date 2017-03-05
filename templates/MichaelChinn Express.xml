@@ -23,4 +23,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="expserver" value="var config = require('../config.node.js');&#10;var express = require('express');&#10;var bodyParser = require('body-parser');&#10;var app = express();&#10;var mongoose = require('mongoose');&#10;mongoose.connect('mongodb://localhost/$db$');&#10;app.use(bodyParser.json());&#10;app.use(bodyParser.urlencoded({extended: true}));&#10;var port = config.nextPort();&#10;&#10;&#10;var server = app.listen(port, function () {&#10;    console.log('Server running on ' + port + ' ...');&#10;});" description="express server template" toReformat="false" toShortenFQNames="true">
+    <variable name="db" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
