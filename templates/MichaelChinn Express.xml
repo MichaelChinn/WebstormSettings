@@ -1,0 +1,26 @@
+<templateSet group="MichaelChinn Express">
+  <template name="expput" value="app.put('$route$', function(req, res) {&#10;    $END$&#10;   res.json({info: ''}); &#10;});" description="express app put" toReformat="false" toShortenFQNames="true">
+    <variable name="route" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="expdelete" value="app.delete('$route$', function(req, res) {&#10;    $END$&#10;   res.json({info: ''}); &#10;});" description="express app delete" toReformat="false" toShortenFQNames="true">
+    <variable name="route" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="exppost" value="app.post('$route$', function(req, res) {&#10;    $END$&#10;   res.json({info: ''}); &#10;});" description="express app post" toReformat="false" toShortenFQNames="true">
+    <variable name="route" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="expget" value="app.get('$route$', function(req, res) {&#10;    $END$&#10;   res.json({info: ''}); &#10;});" description="express app get" toReformat="false" toShortenFQNames="true">
+    <variable name="route" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+</templateSet>
