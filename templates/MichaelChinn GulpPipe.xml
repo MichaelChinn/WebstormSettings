@@ -55,4 +55,16 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="pipedest" value=".pipe(gulp.dest($where$))$END$" description="gulp.dest" toReformat="false" toShortenFQNames="true">
+    <variable name="where" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpdest" value="gulp.dest($where$);&#10;$END$" description="gulp destination solo" toReformat="false" toShortenFQNames="true">
+    <variable name="where" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>

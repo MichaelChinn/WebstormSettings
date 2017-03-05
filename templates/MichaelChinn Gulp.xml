@@ -1,17 +1,11 @@
 <templateSet group="MichaelChinn Gulp">
-  <template name="gdest" value=".pipe(gulp.dest($where$))$END$" description="gulp.dest" toReformat="false" toShortenFQNames="true">
-    <variable name="where" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
   <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="gulpsrc" value="return gulp.src($src$)&#10;    $END$&#10;    .pipe(gulp.dest());" description="gulp.src and gulp.dest" toReformat="false" toShortenFQNames="true">
+  <template name="gulpsrc" value="gulp.src($src$)&#10;    $END$" description="gulp.src and gulp.dest" toReformat="false" toShortenFQNames="true">
     <variable name="src" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />

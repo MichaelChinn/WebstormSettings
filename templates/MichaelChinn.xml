@@ -158,4 +158,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="ofunction" value="function ($param$) {&#10;    $END$&#10;}," description="function in object literal" toReformat="false" toShortenFQNames="true">
+    <variable name="param" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
