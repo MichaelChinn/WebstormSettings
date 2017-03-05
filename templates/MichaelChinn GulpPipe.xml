@@ -1,5 +1,5 @@
 <templateSet group="MichaelChinn GulpPipe">
-  <template name="gulpinject" value=".pipe($.inject($src$, {name: $name$, relative: true})&#10;$END$" description="gulp inject" toReformat="false" toShortenFQNames="true">
+  <template name="gulpinject" value=".pipe($.inject($src$, {name: $name$, relative: true}))&#10;$END$" description="gulp inject" toReformat="false" toShortenFQNames="true">
     <variable name="src" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -33,7 +33,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="gulprename" value=".pipe($.rename({basename: '$rename$'})&#10;$END$" description="gulp rename" toReformat="false" toShortenFQNames="true">
+  <template name="gulprename" value=".pipe($.rename({basename: '$rename$'}))&#10;$END$" description="gulp rename" toReformat="false" toShortenFQNames="true">
     <variable name="rename" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
