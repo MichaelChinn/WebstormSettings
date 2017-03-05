@@ -49,4 +49,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="gulpchanged" value=".pipe($.changed($dest$))&#10;$END$" description="gulp changed" toReformat="false" toShortenFQNames="true">
+    <variable name="dest" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
