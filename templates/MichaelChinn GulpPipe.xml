@@ -67,4 +67,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="gulpexec" value=".pipe($.exec('$HERE$'))&#10;.pipe($.exec.reporter({&#10;        err: true,&#10;        stderr: true,&#10;        stdout: true&#10;    }))$END$" description="gulp exec pipe" toReformat="false" toShortenFQNames="true">
+    <variable name="HERE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
