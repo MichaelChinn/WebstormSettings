@@ -89,4 +89,11 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="$replace" value=".pipe($.replace($regex$, '$substitute$'))" description="gulp pipe replace" toReformat="false" toShortenFQNames="true">
+    <variable name="regex" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="substitute" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
