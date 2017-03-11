@@ -1,5 +1,5 @@
 <templateSet group="MichaelChinn Gulp">
-  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
+  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    return $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
