@@ -73,4 +73,15 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="$concat" value=".pipe($.concat('$file$'))$END$" description="gulp pipe concat" toReformat="false" toShortenFQNames="true">
+    <variable name="file" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="$sass" value=".pipe($.sass.sync().on('error', $.sass.logError))$END$" description="gulp pipe sass" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
