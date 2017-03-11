@@ -22,7 +22,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="gulpcount" value=".pipe($.count({&#10;    message: '&lt;%= files %&gt; $message$',&#10;    logEmpty: true&#10;}))$END$" description="gulp count" toReformat="false" toShortenFQNames="true">
+  <template name="gulpcount" value=".pipe($.count({message: '&lt;%= files %&gt; $message$', logEmpty: true}))$END$" description="gulp count" toReformat="false" toShortenFQNames="true">
     <variable name="message" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -69,6 +69,12 @@
   </template>
   <template name="gulpexec" value=".pipe($.exec('$HERE$'))&#10;.pipe($.exec.reporter({&#10;        err: true,&#10;        stderr: true,&#10;        stdout: true&#10;    }))$END$" description="gulp exec pipe" toReformat="false" toShortenFQNames="true">
     <variable name="HERE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpfilter" value=".pipe($.filter('$filter$'))$END$" description="gulp pipe filter" toReformat="false" toShortenFQNames="true">
+    <variable name="filter" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
