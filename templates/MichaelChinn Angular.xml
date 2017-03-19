@@ -68,7 +68,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="$httpresp" value="    .then(function (response) {&#10;        return response.data;&#10;    });$END$&#10;" description="response.data end to $http request" toReformat="false" toShortenFQNames="true">
+  <template name="$httpresp" value="    .then(function (response) {&#10;        return response.data;&#10;    });$END$" description="response.data end to $http request" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
