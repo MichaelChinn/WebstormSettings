@@ -5,6 +5,7 @@
       <mapping pattern="placeholder" type="PLAIN_TEXT" />
       <mapping ext="wav" type="PLAIN_TEXT" />
       <mapping ext="md" type="PLAIN_TEXT" />
+      <mapping ext="mp3" type="PLAIN_TEXT" />
       <mapping ext="2html" type="PLAIN_TEXT" />
       <mapping ext="exe" type="PLAIN_TEXT" />
     </extensionMap>
