@@ -96,4 +96,12 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="ngtscontroller" value="(function () {&#10;    'use strict';&#10;    class $name$Controller {&#10;        constructor() {&#10;            $END$&#10;        }&#10;    }&#10;    &#10;    angular.module('$module$')&#10;        .controller('$name$Controller', $name$Controller);&#10;}) ();" description="angular typescript controller" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
 </templateSet>
