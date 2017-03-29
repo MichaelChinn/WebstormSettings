@@ -100,8 +100,8 @@
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
-      <option name="TypeScript" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
+      <option name="TypeScript" value="true" />
     </context>
   </template>
   <template name="ngtsdirective" value="(function() {&#10;    'use strict';&#10;    function $dirname$Directive() {&#10;        return {&#10;            restrict: '$el$',&#10;            link: function(scope, el, attrs, ctrl, transclude) {},&#10;            scope: {},&#10;            templateUrl: '$tem$',&#10;            controller: '$dirname$Controller as vm',&#10;            bindToController: true&#10;        }&#10;    }&#10;    &#10;    class $dirname$Controller{&#10;        constructor() {}&#10;        $END$&#10;    }&#10;    &#10;    angular.module('$mod$')&#10;    .directive('$dirname$', $dirname$Directive)&#10;    .controller('$dirname$Controller', $dirname$Controller);&#10;    &#10;}) ();" description="1 angular.directive" toReformat="false" toShortenFQNames="true">
@@ -110,8 +110,8 @@
     <variable name="tem" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="mod" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
-      <option name="TypeScript" value="true" />
       <option name="JAVA_SCRIPT" value="true" />
+      <option name="TypeScript" value="true" />
     </context>
   </template>
 </templateSet>

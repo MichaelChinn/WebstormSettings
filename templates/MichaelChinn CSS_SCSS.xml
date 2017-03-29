@@ -1,0 +1,12 @@
+<templateSet group="MichaelChinn CSS/SCSS">
+  <template name="tborder" value="border: 1px solid black;$END$" description="test border black" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="CSS" value="true" />
+    </context>
+  </template>
+  <template name="tbackground" value="background-color: #E785D6;$END$" description="test background light" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="CSS" value="true" />
+    </context>
+  </template>
+</templateSet>
