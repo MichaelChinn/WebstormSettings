@@ -189,4 +189,10 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="xbrowserurl" value="expect(browser.getCurrentUrl()).toContain('$urlfragment$');$END$" description="expect browser url to contain" toReformat="false" toShortenFQNames="true">
+    <variable name="urlfragment" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>
