@@ -53,11 +53,12 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name=".state" value=".state('$name$', {&#10;    url: '/$name$',&#10;    parent: '$parent$',&#10;    resolve: {},&#10;    views: {&#10;        '$view$': {&#10;            templateUrl: '$url$/$name$.html',&#10;            controller: '$name$Controller as vm'&#10;        }&#10;    }$END$&#10;})" description=".state" toReformat="false" toShortenFQNames="true">
+  <template name=".state" value=".state('$name$', {&#10;    url: '/$name$',&#10;    parent: '$parent$',&#10;    resolve: {},&#10;    views: {&#10;        '$view$': {&#10;            templateUrl: '$url$/$name$.html',&#10;            controller: '$ctrl$Controller as vm'&#10;        }&#10;    }&#10;})$END$" description=".state" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="parent" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="view" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="url" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ctrl" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
