@@ -1,0 +1,9 @@
+<templateSet group="MichaelChinn Mongoose">
+  <template name="mongooseschema" value="var mongoose = require('mongoose');&#10;var config = require('../config.node.js');&#10;&#10;var $title$Schema = mongoose.Schema({$END$});&#10;module.exports = mongoose.model('$name$', $title$Schema);" description="new mongoose schema" toReformat="false" toShortenFQNames="true">
+    <variable name="title" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+</templateSet>
