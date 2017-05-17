@@ -1,34 +1,6 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="Web" />
-    <option name="defaultScopeName" value="Web" />
-    <option name="WITH_SUBDIRECTORIES" value="false" />
-    <option name="SEARCH_SCOPE" value="Web" />
-    <recentFileMasks>
-      <mask>*.properties</mask>
-      <mask>*.html</mask>
-      <mask>*.jsp</mask>
-      <mask>*.xml</mask>
-      <mask>*.java</mask>
-      <mask>*.as</mask>
-      <mask>*.css</mask>
-      <mask>*.mxml</mask>
-      <mask>./**/cordova.js</mask>
-      <mask>*.png</mask>
-      <mask>*.js</mask>
-      <mask>*.route.mobile.js</mask>
-      <mask>*.ts</mask>
-      <mask>**/ng-cordova.js</mask>
-      <mask>**/*.scss</mask>
-      <mask>**/*.s</mask>
-      <mask>**/*.ts</mask>
-      <mask>**/*.t</mask>
-      <mask>**/*.html</mask>
-      <mask>**/*.htm</mask>
-      <mask>**/*.ht</mask>
-      <mask>**/*.h</mask>
-      <mask>**/*.</mask>
-      <mask>**/*</mask>
-    </recentFileMasks>
+    <option name="localCaseSensitive" value="true" />
+    <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
   </component>
 </application>
