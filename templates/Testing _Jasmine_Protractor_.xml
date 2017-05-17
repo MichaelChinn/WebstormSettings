@@ -189,4 +189,22 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
+  <template name="xbrowserurl" value="expect(browser.getCurrentUrl()).toContain('$urlfragment$');$END$" description="expect browser url to contain" toReformat="false" toShortenFQNames="true">
+    <variable name="urlfragment" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="xbef" value="expect($x$.).toBe(false);" description="expect false" toReformat="false" toShortenFQNames="true">
+    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="xbet" value="expect($x$).toBe(true);" description="expect true" toReformat="false" toShortenFQNames="true">
+    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
 </templateSet>

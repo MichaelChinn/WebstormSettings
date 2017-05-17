@@ -1,11 +1,11 @@
 <templateSet group="MichaelChinn Gulp">
-  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
+  <template name="gulptask" value="gulp.task('$task$', [], function() {&#10;    return $END$&#10;}); " description="creates a gulp task" toReformat="false" toShortenFQNames="true">
     <variable name="task" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="gulpsrc" value="gulp.src($src$)&#10;    $END$" description="gulp.src and gulp.dest" toReformat="false" toShortenFQNames="true">
+  <template name="gulpsrc" value="gulp.src($src$)$END$" description="gulp.src and gulp.dest" toReformat="false" toShortenFQNames="true">
     <variable name="src" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
@@ -23,6 +23,12 @@
     </context>
   </template>
   <template name="gulpwatch" value="gulp.task('watch-$name$', [], function() {&#10;    console.log('watching $name$');&#10;    return gulp.watch('$name$/**/*', ['$name$']);$END$&#10;});" description="gulp watch function" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+    </context>
+  </template>
+  <template name="gulpdelete" value="gulp.task($name$, [], function() {&#10;    return del($END$);&#10;});" description="del function for gulp" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
