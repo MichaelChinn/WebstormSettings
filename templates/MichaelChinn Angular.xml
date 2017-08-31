@@ -74,7 +74,7 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="$uibModalOpen" value="$uibModal.open({&#10;templaeUrl: '$url$',&#10;controller: '$con$ as vm',&#10;resolve: {}&#10;});" description="modal creation angular bootstrap" toReformat="false" toShortenFQNames="true">
+  <template name="$uibModalOpen" value="$uibModal.open({&#10;templateUrl: '$url$',&#10;controller: '$con$ as vm',&#10;resolve: {}&#10;});" description="modal creation angular bootstrap" toReformat="false" toShortenFQNames="true">
     <variable name="url" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="con" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
