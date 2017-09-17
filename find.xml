@@ -6,7 +6,6 @@
     <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
     <option name="SEARCH_SCOPE" value="All Places" />
     <recentFileMasks>
-      <mask>*.properties</mask>
       <mask>*.jsp</mask>
       <mask>*.xml</mask>
       <mask>*.java</mask>
@@ -24,6 +23,19 @@
       <mask>*.sc</mask>
       <mask>*.scs</mask>
       <mask>*.scss</mask>
+      <mask>a</mask>
+      <mask>ap</mask>
+      <mask>app</mask>
+      <mask>app/</mask>
+      <mask>app/*</mask>
+      <mask>app/**</mask>
+      <mask>*app/**</mask>
+      <mask>**app/**</mask>
+      <mask>**/app/**</mask>
+      <mask>***/app/**</mask>
+      <mask>*/**/app/**</mask>
+      <mask>*/**/app/**/*</mask>
+      <mask>*/**/app/**/</mask>
     </recentFileMasks>
   </component>
 </application>
