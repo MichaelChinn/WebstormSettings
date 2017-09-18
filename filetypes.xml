@@ -7,6 +7,7 @@
       <mapping ext="md" type="PLAIN_TEXT" />
       <mapping ext="mp4" type="PLAIN_TEXT" />
       <mapping ext="mp3" type="PLAIN_TEXT" />
+      <mapping ext="2017" type="PLAIN_TEXT" />
       <mapping ext="2html" type="PLAIN_TEXT" />
       <mapping ext="exe" type="PLAIN_TEXT" />
       <mapping ext="py" type="PLAIN_TEXT" />
