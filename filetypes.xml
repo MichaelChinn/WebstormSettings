@@ -3,6 +3,7 @@
     <extensionMap>
       <mapping pattern="videogular_video" type="PLAIN_TEXT" />
       <mapping pattern="package2,json" type="PLAIN_TEXT" />
+      <mapping pattern="videogular_test" type="PLAIN_TEXT" />
       <mapping pattern="placeholder" type="PLAIN_TEXT" />
       <mapping pattern="test_file" type="PLAIN_TEXT" />
       <mapping pattern="videogular_test_video" type="PLAIN_TEXT" />
