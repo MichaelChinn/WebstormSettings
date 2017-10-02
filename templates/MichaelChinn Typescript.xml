@@ -21,4 +21,10 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
+  <template name="tsthen" value=".then(($param$) =&gt; {&#10;    $END$&#10;});" description="promise then for typescript" toReformat="false" toShortenFQNames="true">
+    <variable name="param" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
 </templateSet>
