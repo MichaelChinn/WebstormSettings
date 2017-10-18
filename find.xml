@@ -14,7 +14,6 @@
       <mask>*.css</mask>
       <mask>*.mxml</mask>
       <mask>*.h</mask>
-      <mask>*.html</mask>
       <mask>*.ts</mask>
       <mask>.</mask>
       <mask>*.</mask>
@@ -36,6 +35,7 @@
       <mask>*/**/app/**/</mask>
       <mask>*</mask>
       <mask>*.scss</mask>
+      <mask>*.html</mask>
     </recentFileMasks>
   </component>
 </application>
