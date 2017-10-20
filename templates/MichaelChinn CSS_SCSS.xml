@@ -15,4 +15,16 @@
       <option name="CSS" value="true" />
     </context>
   </template>
+  <template name="animation-params" value=".$className$ {&#10;    animation-name: $name$;&#10;    animation-duration: $duration$;&#10;    animation-delay: $delay$;&#10;    animation-iteration-count: $count$;&#10;    animation-direction: $direction$;&#10;    animation-timing-function: $timing$;&#10;}&#10;$END$&#10;&#10;&#10;" description="CSS3 animation fields" toReformat="false" toShortenFQNames="true">
+    <variable name="className" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="duration" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="delay" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="count" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="direction" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="timing" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="CSS" value="true" />
+    </context>
+  </template>
 </templateSet>
