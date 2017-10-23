@@ -67,26 +67,6 @@
       <option name="HTML" value="true" />
     </context>
   </template>
-  <template name="prop" value="$first$.$x$ = $second$.$x$;&#10;$END$" description="object property" toReformat="false" toShortenFQNames="true">
-    <variable name="first" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="second" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
-  <template name="p" value="this.$prop$ = data.$prop$;$END$" description="temp" toReformat="false" toShortenFQNames="true">
-    <variable name="prop" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
-  <template name="thisp" value="this.$x$ = $x$;&#10;$END$" description="this.p = p;" toReformat="false" toShortenFQNames="true">
-    <variable name="x" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
   <template name="require" value="require('$npm$')$END$" description="longer node require for non variable use" toReformat="false" toShortenFQNames="true">
     <variable name="npm" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -128,13 +108,6 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="getset" value="function get$capital$() {&#10;    return $lower$;&#10;} &#10;&#10;function set$capital$(input) {&#10;    $lower$ = input;&#10;}&#10;&#10;$END$" description="getter and setter method for service" toReformat="false" toShortenFQNames="true">
-    <variable name="capital" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="lower" expression="" defaultValue="" alwaysStopAt="true" />
-    <context>
-      <option name="JAVA_SCRIPT" value="true" />
-    </context>
-  </template>
   <template name="capitalize" value="$string$.charAt(0).toUpperCase() + $string$.slice(1);" description="return string with capitalized first letter" toReformat="false" toShortenFQNames="true">
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -170,9 +143,12 @@
       <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
-  <template name="nodeconfig" value="var config = require('../_core/config.node.js');$END$" description="node config for chinn proj" toReformat="false" toShortenFQNames="true">
+  <template name="pr" value="'$key$': $value$$END$" description="object property" toReformat="false" toShortenFQNames="true">
+    <variable name="key" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
+      <option name="TypeScript" value="true" />
     </context>
   </template>
 </templateSet>
