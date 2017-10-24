@@ -34,7 +34,7 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="animtransition" value="transition('$start$ &lt;=&gt; $end$', animate('$time$ms ease-in-out'))" description="animation transition" toReformat="false" toShortenFQNames="true">
+  <template name="animtransition" value="transition('$start$ &lt;=&gt; $end$', animate('$time$ms 0s ease-in-out'))" description="animation transition" toReformat="false" toShortenFQNames="true">
     <variable name="start" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="end" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
@@ -43,9 +43,8 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="animanimate" value="animate('$time$ms ease-$type$', $END$)" description="animations timing object" toReformat="false" toShortenFQNames="true">
+  <template name="animanimate" value="animate('$time$ms 0s ease-in-out', $END$)" description="animations timing object" toReformat="false" toShortenFQNames="true">
     <variable name="time" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="type" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="JAVA_SCRIPT" value="true" />
       <option name="TypeScript" value="true" />
