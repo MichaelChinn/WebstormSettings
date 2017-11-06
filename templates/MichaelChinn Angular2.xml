@@ -56,4 +56,11 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
+  <template name="path" value="{&#10;    path: '$name$',&#10;    component: $comp$,&#10;    children: [],&#10;    resolve: {}&#10;},$END$" description="angular 2 route" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="comp" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
 </templateSet>

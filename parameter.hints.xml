@@ -1,0 +1,9 @@
+<application>
+  <component name="ParameterNameHintsSettings">
+    <blacklists>
+      <blacklist language="TypeScript">
+        <added pattern="InMemoryWebApiModule.forRoot(dbCreator,options)" />
+      </blacklist>
+    </blacklists>
+  </component>
+</application>
