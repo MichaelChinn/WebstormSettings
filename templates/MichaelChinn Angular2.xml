@@ -12,10 +12,9 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="ngOutput" value="@Output() $name$ = new EventEmitter$type$();&#10;&#10;on$event$($event) {&#10;    this.$name$.emit($END$);&#10;}" description="component output" toReformat="false" toShortenFQNames="true">
+  <template name="ngOutput" value="@Output() $name$ = new EventEmitter$type$();&#10;&#10;on$name$Inner($event) {&#10;    this.$name$.emit($END$);&#10;}" description="component output" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="type" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="event" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="TypeScript" value="true" />
     </context>
