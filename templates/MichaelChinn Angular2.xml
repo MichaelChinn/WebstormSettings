@@ -6,7 +6,7 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="ngInputFull" value="private _$name$;&#10;&#10;@Input()&#10;set $name$($name$: any) {&#10;    this._$name$ = $name$;&#10;}&#10;get $name$() {&#10;    return this._$name$;&#10;}&#10;$END$" description="input component with getter/setter" toReformat="false" toShortenFQNames="true">
+  <template name="ngInputFull" value="private _$name$;&#10;&#10;@Input()&#10;set $name$(value) {&#10;    this._$name$ = value;&#10;}&#10;get $name$() {&#10;    return this._$name$;&#10;}&#10;$END$" description="input component with getter/setter" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="TypeScript" value="true" />
