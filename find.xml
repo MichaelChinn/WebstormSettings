@@ -1,11 +1,11 @@
 <application>
   <component name="FindSettings">
+    <option name="caseSensitive" value="true" />
     <option name="customScope" value="All Places" />
     <option name="defaultScopeName" value="All Places" />
     <option name="localCaseSensitive" value="true" />
-    <option name="regularExpressions" value="true" />
+    <option name="CASE_SENSITIVE_SEARCH" value="true" />
     <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
-    <option name="REGULAR_EXPRESSIONS" value="true" />
     <option name="SEARCH_SCOPE" value="All Places" />
     <recentFileMasks>
       <mask>*.sc</mask>
@@ -25,9 +25,6 @@
       <mask>*/**/app/**/</mask>
       <mask>*</mask>
       <mask>*.html</mask>
-      <mask>**.html</mask>
-      <mask>**..html</mask>
-      <mask>**.s.html</mask>
       <mask>**.sc.html</mask>
       <mask>**.scss.html</mask>
       <mask>**.scs.html</mask>
@@ -38,6 +35,9 @@
       <mask>**.scs</mask>
       <mask>**.scss</mask>
       <mask>*.scss</mask>
+      <mask>**.s.html</mask>
+      <mask>**..html</mask>
+      <mask>**.html</mask>
     </recentFileMasks>
   </component>
 </application>
