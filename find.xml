@@ -33,11 +33,11 @@
       <mask>**.scsml</mask>
       <mask>**.scsl</mask>
       <mask>**.scs</mask>
-      <mask>**.scss</mask>
       <mask>*.scss</mask>
       <mask>**.s.html</mask>
       <mask>**..html</mask>
       <mask>**.html</mask>
+      <mask>**.scss</mask>
     </recentFileMasks>
   </component>
 </application>
