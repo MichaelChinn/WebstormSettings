@@ -6,9 +6,6 @@
     <option name="CASE_SENSITIVE_SEARCH" value="true" />
     <option name="SEARCH_SCOPE" value="All Places" />
     <recentFileMasks>
-      <mask>*.sc</mask>
-      <mask>*.scs</mask>
-      <mask>a</mask>
       <mask>ap</mask>
       <mask>app</mask>
       <mask>app/</mask>
@@ -21,7 +18,6 @@
       <mask>*/**/app/**</mask>
       <mask>*/**/app/**/*</mask>
       <mask>*/**/app/**/</mask>
-      <mask>*</mask>
       <mask>*.html</mask>
       <mask>**.sc.html</mask>
       <mask>**.scss.html</mask>
@@ -34,8 +30,12 @@
       <mask>*.scss</mask>
       <mask>**.s.html</mask>
       <mask>**..html</mask>
-      <mask>**.html</mask>
       <mask>**.scss</mask>
+      <mask>*</mask>
+      <mask>**</mask>
+      <mask>**.</mask>
+      <mask>**.h</mask>
+      <mask>**.html</mask>
     </recentFileMasks>
   </component>
 </application>
