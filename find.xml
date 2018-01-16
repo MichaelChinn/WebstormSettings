@@ -4,7 +4,6 @@
     <option name="defaultScopeName" value="All Places" />
     <option name="SEARCH_SCOPE" value="All Places" />
     <recentFileMasks>
-      <mask>*/**/app/**/*</mask>
       <mask>*/**/app/**/</mask>
       <mask>*.html</mask>
       <mask>**.sc.html</mask>
@@ -15,7 +14,6 @@
       <mask>**.scsml</mask>
       <mask>**.scsl</mask>
       <mask>**.scs</mask>
-      <mask>*.scss</mask>
       <mask>**.s.html</mask>
       <mask>**..html</mask>
       <mask>**.scss</mask>
@@ -34,6 +32,8 @@
       <mask>**..js</mask>
       <mask>*..js</mask>
       <mask>*.js</mask>
+      <mask>*.css</mask>
+      <mask>*.scss</mask>
     </recentFileMasks>
   </component>
 </application>
