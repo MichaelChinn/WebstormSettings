@@ -12,9 +12,10 @@
       <mapping ext="mp4" type="PLAIN_TEXT" />
       <mapping ext="mp3" type="PLAIN_TEXT" />
       <mapping ext="2017" type="PLAIN_TEXT" />
-      <mapping ext="wav" type="PLAIN_TEXT" />
+      <mapping ext="tvd" type="PLAIN_TEXT" />
       <mapping ext="exe" type="PLAIN_TEXT" />
       <mapping ext="py" type="PLAIN_TEXT" />
+      <mapping ext="wav" type="PLAIN_TEXT" />
       <mapping ext="eot" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
