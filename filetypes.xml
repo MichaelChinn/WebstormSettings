@@ -7,6 +7,7 @@
       <mapping pattern="videogular_test" type="PLAIN_TEXT" />
       <mapping pattern="placeholder" type="PLAIN_TEXT" />
       <mapping pattern="test_file" type="PLAIN_TEXT" />
+      <mapping pattern="post3.md" type="PLAIN_TEXT" />
       <mapping pattern="videogular_test_video" type="PLAIN_TEXT" />
       <mapping ext="2html" type="PLAIN_TEXT" />
       <mapping ext="mp4" type="PLAIN_TEXT" />
