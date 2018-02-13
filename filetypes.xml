@@ -18,6 +18,7 @@
       <mapping ext="py" type="PLAIN_TEXT" />
       <mapping ext="wav" type="PLAIN_TEXT" />
       <mapping ext="eot" type="PLAIN_TEXT" />
+      <mapping ext="website" type="PLAIN_TEXT" />
     </extensionMap>
   </component>
 </application>
