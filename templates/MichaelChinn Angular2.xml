@@ -6,13 +6,13 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="ngInputFull" value="private _$name$;&#10;&#10;@Input()&#10;set $name$($name$: any) {&#10;    this._$name$ = $name$;&#10;}&#10;get $name$() {&#10;    return this._$name$;&#10;}&#10;$END$" description="input component with getter/setter" toReformat="false" toShortenFQNames="true">
+  <template name="ngInputFull" value="private _$name$;&#10;&#10;@Input()&#10;set $name$(value) {&#10;    this._$name$ = value;&#10;}&#10;get $name$() {&#10;    return this._$name$;&#10;}&#10;$END$" description="input component with getter/setter" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="ngOutput" value="@Output() $name$ = new EventEmitter$type$();&#10;&#10;on$name$Inner($event) {&#10;    this.$name$.emit($END$);&#10;}" description="component output" toReformat="false" toShortenFQNames="true">
+  <template name="ngOutput" value="@Output() on$name$ = new EventEmitter$type$();&#10;&#10;on$name$Inner($event) {&#10;    this.on$name$.emit($END$);&#10;}" description="component output" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="type" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -58,6 +58,17 @@
   <template name="path" value="{&#10;    path: '$name$',&#10;    component: $comp$,&#10;    children: [],&#10;    resolve: {}&#10;},$END$" description="angular 2 route" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="comp" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
+  <template name="ngBindTwoWay" value="private _$name$;&#10;@Output() $name$Change = new EventEmitter();&#10;@Input() &#10;set $name$(value) {&#10;    this._$name$ = value;&#10;    this. $name$Change.emit(this._$name$);    &#10;}&#10;get $name$() {&#10;    return this._$name$;&#10;}" description="angular 2 two way component binding" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
+  <template name="inoutevent" value=", Input, Output, EventEmitter" description="standard imports for new component" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="TypeScript" value="true" />
     </context>
