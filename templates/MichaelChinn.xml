@@ -158,4 +158,10 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
+  <template name="clt" value="console.log('breakpoint.\n');" description="console log test" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
 </templateSet>
