@@ -2,38 +2,8 @@
   <component name="FindSettings">
     <option name="customScope" value="All Places" />
     <option name="defaultScopeName" value="All Places" />
+    <option name="localCaseSensitive" value="true" />
+    <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
     <option name="SEARCH_SCOPE" value="All Places" />
-    <recentFileMasks>
-      <mask>*.html</mask>
-      <mask>**.sc.html</mask>
-      <mask>**.scss.html</mask>
-      <mask>**.scs.html</mask>
-      <mask>**.scshtml</mask>
-      <mask>**.scstml</mask>
-      <mask>**.scsml</mask>
-      <mask>**.scsl</mask>
-      <mask>**.scs</mask>
-      <mask>**.s.html</mask>
-      <mask>**..html</mask>
-      <mask>**.scss</mask>
-      <mask>*</mask>
-      <mask>**</mask>
-      <mask>**.h</mask>
-      <mask>**.html</mask>
-      <mask>**.htl</mask>
-      <mask>**.hl</mask>
-      <mask>**.l</mask>
-      <mask>**.</mask>
-      <mask>**..</mask>
-      <mask>**..jks</mask>
-      <mask>**..jk</mask>
-      <mask>**..j</mask>
-      <mask>**..js</mask>
-      <mask>*..js</mask>
-      <mask>*.js</mask>
-      <mask>*.css</mask>
-      <mask>*.scss</mask>
-      <mask>*.jade</mask>
-    </recentFileMasks>
   </component>
 </application>
