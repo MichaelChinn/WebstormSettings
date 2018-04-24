@@ -1,6 +1,7 @@
 <application>
   <component name="GeneralSettings">
     <option name="confirmExit" value="false" />
+    <option name="processCloseConfirmation" value="TERMINATE" />
     <option name="showTipsOnStartup" value="false" />
   </component>
   <component name="Registry">
@@ -9,5 +10,6 @@
     <entry key="search.everywhere.configurations" value="false" />
     <entry key="search.everywhere.actions" value="false" />
     <entry key="search.everywhere.symbols" value="false" />
+    <entry key="debugger.watches.in.variables" value="false" />
   </component>
 </application>
