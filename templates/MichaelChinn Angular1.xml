@@ -1,4 +1,4 @@
-<templateSet group="MichaelChinn Angular">
+<templateSet group="MichaelChinn Angular1">
   <template name="$watch" value="$scope.$watch(function () {&#10;    return $watch$;&#10;}, function(newValue, oldValue){&#10;    $END$&#10;});" description="scope watch" toReformat="false" toShortenFQNames="true">
     <variable name="watch" expression="" defaultValue="" alwaysStopAt="true" />
     <context>

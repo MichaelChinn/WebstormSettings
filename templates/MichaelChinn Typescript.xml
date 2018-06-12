@@ -21,8 +21,15 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name=".tsthen" value=".then(($param$) =&gt; {&#10;    $END$&#10;})" description="tsthen" toReformat="false" toShortenFQNames="true">
+  <template name=".then" value=".then(($param$) =&gt; {&#10;    $END$&#10;})" description="typescript then" toReformat="false" toShortenFQNames="true">
     <variable name="param" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
+  <template name="ar" value="$param$ =&gt; $response$" description="arrow function direct return" toReformat="false" toShortenFQNames="true">
+    <variable name="param" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="response" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="TypeScript" value="true" />
     </context>
