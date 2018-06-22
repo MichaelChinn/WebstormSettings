@@ -1,7 +1,6 @@
 <keymap version="1" name="Default copy" parent="$default">
   <action id="ActivateTerminalToolWindow">
-    <keyboard-shortcut first-keystroke="alt f12" />
-    <keyboard-shortcut first-keystroke="alt f12" second-keystroke="alt c" />
+    <keyboard-shortcut first-keystroke="alt c" />
   </action>
   <action id="CloseAllEditorsButActive">
     <keyboard-shortcut first-keystroke="ctrl alt d" />
