@@ -73,4 +73,16 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
+  <template name="ngVC" value="@ViewChild('$name$') $name$;$END$" description="ViewChild" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
+  <template name="ngVCn" value="@ViewChildren('$name$') $name$;$END$" description="ViewChildren" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="TypeScript" value="true" />
+    </context>
+  </template>
 </templateSet>
