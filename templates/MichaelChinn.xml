@@ -164,4 +164,9 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
+  <template name="html" value="&lt;!doctype html&gt;&#10;&lt;html lang=&quot;en&quot;&gt;&#10;&lt;head&gt;&#10;  &lt;meta charset=&quot;utf-8&quot;&gt;&#10;  &lt;title&gt;HTML Template&lt;/title&gt;&#10;&lt;/head&gt;&#10;&lt;body&gt;&#10;&lt;/body&gt;&#10;&lt;/html&gt;" description="Basic HTML" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
 </templateSet>
