@@ -2,6 +2,9 @@
   <action id="MoveTabRight">
     <keyboard-shortcut first-keystroke="alt v" />
   </action>
+  <action id="NewDir">
+    <keyboard-shortcut first-keystroke="alt back_slash" />
+  </action>
   <action id="NewFile">
     <keyboard-shortcut first-keystroke="alt end" />
   </action>
