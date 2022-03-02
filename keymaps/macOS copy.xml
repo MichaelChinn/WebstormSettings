@@ -1,0 +1,8 @@
+<keymap version="1" name="macOS copy" parent="Mac OS X 10.5+">
+  <action id="MoveTabRight">
+    <keyboard-shortcut first-keystroke="alt v" />
+  </action>
+  <action id="NewFile">
+    <keyboard-shortcut first-keystroke="alt end" />
+  </action>
+</keymap>
