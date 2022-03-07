@@ -10,5 +10,6 @@
   </action>
   <action id="NewFile">
     <keyboard-shortcut first-keystroke="alt end" />
+    <keyboard-shortcut first-keystroke="alt close_bracket" />
   </action>
 </keymap>
