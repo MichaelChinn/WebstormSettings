@@ -1,6 +1,7 @@
 <application>
   <component name="FileTypeManager" version="18">
     <extensionMap>
+      <removed_mapping pattern=".env" type=".env file" />
       <mapping pattern="Jenkinsfile" type="JavaFX" />
       <mapping pattern="Jenkinsfile-v2" type="JavaFX" />
       <mapping pattern="videogular_test_video" type="PLAIN_TEXT" />
@@ -14,6 +15,7 @@
       <mapping pattern="(use" type="PLAIN_TEXT" />
       <mapping pattern="placeholder" type="PLAIN_TEXT" />
       <mapping pattern="post3.md" type="PLAIN_TEXT" />
+      <mapping pattern=".env" type="PLAIN_TEXT" />
       <mapping pattern="store" type="PLAIN_TEXT" />
       <mapping pattern="clouddns-dev-500.txt" type="PLAIN_TEXT" />
       <mapping pattern="package2,json" type="PLAIN_TEXT" />
@@ -34,6 +36,8 @@
       <mapping ext="website" type="PLAIN_TEXT" />
       <removed_mapping ext="apk" approved="true" type="ARCHIVE" />
       <removed_mapping ext="psd" approved="true" type="Image" />
+      <removed_mapping pattern=".env" approved="true" type="Env File" />
+      <removed_mapping pattern=".env.*" approved="true" type="Env File" />
       <mapping pattern="Jenkinsfile" type="JavaFX" />
       <mapping pattern="Jenkinsfile-v2" type="JavaFX" />
       <mapping pattern="install" type="Bash" />
