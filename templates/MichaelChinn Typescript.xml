@@ -5,14 +5,14 @@
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="ngtscontroller" value="(function () {&#10;    'use strict';&#10;    class $name$Controller {&#10;        constructor() {&#10;            $END$&#10;        }&#10;    }&#10;    &#10;    angular.module('$module$')&#10;        .controller('$name$Controller', $name$Controller);&#10;}) ();" description="angular typescript controller" toReformat="false" toShortenFQNames="true">
+  <template name="ngtscontroller" value="(function () {&#10;    'use strict';&#10;    class $name$Controller {&#10;        constructor() {&#10;            $END$&#10;        }&#10;    }&#10;    &#10;    angular.module('$module$')&#10;        .controller('$name$Controller', $name$Controller);&#10;}) ();" description="angular typescript controller" toReformat="false" toShortenFQNames="true" deactivated="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="module" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="TypeScript" value="true" />
     </context>
   </template>
-  <template name="ngtsdirective" value="(function() {&#10;    'use strict';&#10;    function $dirname$Directive() {&#10;        return {&#10;            restrict: '$el$',&#10;            link: function(scope, el, attrs, ctrl, transclude) {},&#10;            scope: {},&#10;            templateUrl: '$tem$',&#10;            controller: '$dirname$Controller as vm',&#10;            bindToController: true&#10;        }&#10;    }&#10;    &#10;    class $dirname$Controller{&#10;        constructor() {}&#10;        $END$&#10;    }&#10;    &#10;    angular.module('$mod$')&#10;    .directive('$dirname$', $dirname$Directive)&#10;    .controller('$dirname$Controller', $dirname$Controller);&#10;    &#10;}) ();" description="1 angular.directive" toReformat="false" toShortenFQNames="true">
+  <template name="ngtsdirective" value="(function() {&#10;    'use strict';&#10;    function $dirname$Directive() {&#10;        return {&#10;            restrict: '$el$',&#10;            link: function(scope, el, attrs, ctrl, transclude) {},&#10;            scope: {},&#10;            templateUrl: '$tem$',&#10;            controller: '$dirname$Controller as vm',&#10;            bindToController: true&#10;        }&#10;    }&#10;    &#10;    class $dirname$Controller{&#10;        constructor() {}&#10;        $END$&#10;    }&#10;    &#10;    angular.module('$mod$')&#10;    .directive('$dirname$', $dirname$Directive)&#10;    .controller('$dirname$Controller', $dirname$Controller);&#10;    &#10;}) ();" description="1 angular.directive" toReformat="false" toShortenFQNames="true" deactivated="true">
     <variable name="dirname" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="el" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="tem" expression="" defaultValue="" alwaysStopAt="true" />
@@ -32,6 +32,12 @@
     <variable name="response" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="TypeScript" value="true" />
+    </context>
+  </template>
+  <template name="compf" value="import React from &quot;react&quot;&#10;&#10;export interface $name$Props {}&#10;&#10;export const $name$: React.FC&lt;$name$Props&gt; = (props): JSX.Element =&gt; {&#10;  return (&#10;    $END$&#10;  )&#10;} " description="React component typescript in a file" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_SCRIPT" value="true" />
     </context>
   </template>
 </templateSet>
