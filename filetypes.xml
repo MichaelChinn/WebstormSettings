@@ -2,6 +2,7 @@
   <component name="FileTypeManager" version="18">
     <extensionMap>
       <mapping pattern="oauth-secret" type="AUTO_DETECTED" />
+      <mapping pattern="testing-links" type="AUTO_DETECTED" />
       <mapping pattern="Jenkinsfile" type="JavaFX" />
       <mapping pattern="Jenkinsfile-v2" type="JavaFX" />
       <mapping pattern="videogular_test_video" type="PLAIN_TEXT" />
