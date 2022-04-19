@@ -1,5 +1,6 @@
 <application>
   <component name="OverrideFileTypeManager">
     <file url="file://$USER_HOME$/Development/disc/lando/services/graphql/.env" value="Shell Script" />
+    <file url="file://$USER_HOME$/Development/pdp/chewy-pdp-ui/.env" value="Shell Script" />
   </component>
 </application>
