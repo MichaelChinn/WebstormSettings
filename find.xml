@@ -3,6 +3,7 @@
     <option name="customScope" value="All Places" />
     <option name="defaultScopeName" value="All Places" />
     <option name="SEARCH_SCOPE" value="All Places" />
+    <option name="FILE_MASK" value="!*.d.ts, !.ts.html" />
     <mask>*.properties</mask>
     <mask>*.html</mask>
     <mask>*.jsp</mask>
@@ -22,5 +23,6 @@
     <mask>!package-lock.json,!dist/*, !*.spec.ts, !*.ts.html, !**/dist/**/*</mask>
     <mask>package.json</mask>
     <mask>package.json, !node_modules/**/*</mask>
+    <mask>!*.d.ts, !.ts.html</mask>
   </component>
 </application>
