@@ -5,7 +5,7 @@
     <option name="defaultScopeName" value="All Places" />
     <option name="CASE_SENSITIVE_SEARCH" value="true" />
     <option name="SEARCH_SCOPE" value="All Places" />
-    <option name="FILE_MASK" value="!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts" />
+    <option name="FILE_MASK" value="!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts, !package.json, !README, !LICENSE, !*.json, !*.md, !*.ejs" />
     <mask>*.properties</mask>
     <mask>*.html</mask>
     <mask>*.jsp</mask>
@@ -29,5 +29,6 @@
     <mask>!*.d.ts, !.ts.html, !**.js</mask>
     <mask>!*.d.ts, !.ts.html, !**.js, !*.log</mask>
     <mask>!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts</mask>
+    <mask>!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts, !package.json, !README, !LICENSE, !*.json, !*.md, !*.ejs</mask>
   </component>
 </application>
