@@ -9,7 +9,7 @@
     <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
     <option name="SHOW_RESULTS_IN_SEPARATE_VIEW" value="true" />
     <option name="SEARCH_SCOPE" value="All Places" />
-    <option name="FILE_MASK" value="!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts, !package.json, !README, !LICENSE, !*.json, !*.md, !*.ejs, !*.ts.html" />
+    <option name="FILE_MASK" value="package.json" />
     <mask>*.properties</mask>
     <mask>*.html</mask>
     <mask>*.jsp</mask>
@@ -27,7 +27,6 @@
     <mask>!package-lock.json,!dist/*, !*.spec.ts</mask>
     <mask>!package-lock.json,!dist/*, !*.spec.ts, !*.ts.html</mask>
     <mask>!package-lock.json,!dist/*, !*.spec.ts, !*.ts.html, !**/dist/**/*</mask>
-    <mask>package.json</mask>
     <mask>package.json, !node_modules/**/*</mask>
     <mask>!*.d.ts, !.ts.html</mask>
     <mask>!*.d.ts, !.ts.html, !**.js</mask>
@@ -35,5 +34,6 @@
     <mask>!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts</mask>
     <mask>!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts, !package.json, !README, !LICENSE, !*.json, !*.md, !*.ejs</mask>
     <mask>!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts, !package.json, !README, !LICENSE, !*.json, !*.md, !*.ejs, !*.ts.html</mask>
+    <mask>package.json</mask>
   </component>
 </application>
