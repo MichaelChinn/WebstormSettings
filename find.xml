@@ -32,5 +32,6 @@
     <mask>!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts, !package.json, !README, !LICENSE, !*.json, !*.md, !*.ejs</mask>
     <mask>!*.d.ts, !.ts.html, !**.js, !*.log, !*.spec.ts, !package.json, !README, !LICENSE, !*.json, !*.md, !*.ejs, !*.ts.html</mask>
     <mask>package.json</mask>
+    <mask>!chinn/**</mask>
   </component>
 </application>
