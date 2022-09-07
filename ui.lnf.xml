@@ -3,11 +3,9 @@
     <option name="SCOPE_TYPE" value="file" />
   </component>
   <component name="UISettings">
-    <option name="FONT_SIZE" value="14" />
     <option name="EDITOR_TAB_LIMIT" value="6" />
-    <option name="HIDE_TOOL_STRIPES" value="false" />
-    <option name="SHOW_MAIN_TOOLBAR" value="true" />
-    <option name="SCROLL_TAB_LAYOUT_IN_EDITOR" value="false" />
     <option name="OVERRIDE_NONIDEA_LAF_FONTS" value="true" />
+    <option name="SCROLL_TAB_LAYOUT_IN_EDITOR" value="false" />
+    <option name="SHOW_MAIN_TOOLBAR" value="true" />
   </component>
 </application>
