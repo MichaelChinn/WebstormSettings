@@ -9,8 +9,7 @@
     <option name="LOCAL_CASE_SENSITIVE_SEARCH" value="true" />
     <option name="SHOW_RESULTS_IN_SEPARATE_VIEW" value="true" />
     <option name="SEARCH_SCOPE" value="All Places" />
-    <option name="FILE_MASK" value="*.ts,*.tsx, !*.spec.tsx" />
-    <mask>*.properties</mask>
+    <option name="FILE_MASK" value="*.ts,*.tsx, !*.spec.ts*" />
     <mask>*.html</mask>
     <mask>*.jsp</mask>
     <mask>*.xml</mask>
@@ -40,5 +39,6 @@
     <mask>*.tsx, !*.spec.tsx</mask>
     <mask>*.ts, !*.spec.tsx</mask>
     <mask>*.ts,*.tsx, !*.spec.tsx</mask>
+    <mask>*.ts,*.tsx, !*.spec.ts*</mask>
   </component>
 </application>
